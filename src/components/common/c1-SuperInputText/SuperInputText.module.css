@@ -1,0 +1,12 @@
+.superInput {
+
+}
+
+.errorInput {
+    border: 1px solid black;
+    background: none;
+}
+
+.error {
+    color: inherit;
+}
