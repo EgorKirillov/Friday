@@ -2,7 +2,7 @@ import React from 'react';
 
 const Error404Page = () => {
     return (
-        <div>
+        <div style={{fontSize:"40px"}}>
             error 404
         </div>
     );
