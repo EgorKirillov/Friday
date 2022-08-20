@@ -1,0 +1,38 @@
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { Registration } from '../../../features/auth/register/Registration'
+import { Login } from '../../../features/auth/login/Login'
+import { Profile } from '../../../features/auth/profile/Profile'
+import { PasswordRecovery } from '../../../features/auth/forgotPassword/PasswordRecovery'
+import { PasswordNew } from '../../../features/auth/setPassword/PasswordNew'
+import { TastsPage } from '../TesPage/TestsPage'
+import Error404Page from '../PageNotFound/Error404Page'
+
+export const PATH = {
+  LOGIN: '/login', //логинизация
+  REGISTRATION: '/reg', //регистрация
+  PROFILE: '/profile', //профайл
+  ERROR404: '/error404', // не найдено
+  RECOVERY_PASSWORD: '/password_recovery', //восстановление пароля
+  NEW_PASSWORD: '/new_password', //ввод нового пароля
+  TESTS: '/tests', //тестовая -отобразить / продемонстрировать все SuperКопмоненты
+}
+
+function SwitchRoutes() {
+  return (
+    <div>
+      <Routes>
+        <Route path={'/'} element={<Login />} />
+        <Route path={PATH.LOGIN} element={<Login />} />
+        <Route path={PATH.REGISTRATION} element={<Registration />} />
+        <Route path={PATH.PROFILE} element={<Profile />} />
+        <Route path={PATH.RECOVERY_PASSWORD} element={<PasswordRecovery />} />
+        <Route path={PATH.NEW_PASSWORD} element={<PasswordNew />} />
+        <Route path={PATH.TESTS} element={<TastsPage />} />
+        <Route path={'/*'} element={<Error404Page />} />
+      </Routes>
+    </div>
+  )
+}
+
+export default SwitchRoutes
