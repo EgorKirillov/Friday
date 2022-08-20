@@ -1,7 +1,7 @@
 import React from 'react'
-import logo from '../../assets/img/itIncubatorLOGO.png'
+import logo from '../../../assets/img/itIncubatorLOGO.png'
 import s from './Header.module.css'
-import SuperButton from '../../common/components/c2-SuperButton/SuperButton'
+import SuperButton from '../c2-SuperButton/SuperButton'
 
 export function Header() {
   return (
