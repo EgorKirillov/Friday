@@ -1,3 +1,7 @@
+import { AppThunk } from '../../../app/store'
+import axios, { AxiosError } from 'axios'
+import { ForgotAPI } from './forgotPassAPI'
+
 const initialState = {
   isLoading: false,
   success: false,
@@ -28,11 +32,32 @@ export const setSuccess = (success: boolean) =>
 export const setError = (error: string) => ({ type: 'forgotPass/SET-ERROR', error } as const)
 
 // thunks
+export const sendEmail =
+  (email: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(setError(''))
+      dispatch(setIsLoading(true))
+      const res = await ForgotAPI.forgot(email)
+      console.log(res)
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
+      if (axios.isAxiosError(err)) {
+        const error = err.response?.data ? err.response.data.error : err.message
+        dispatch(setError(error))
+      } else {
+        dispatch(setError(`Native error ${err.message}`))
+      }
+    } finally {
+      console.log('end')
+      dispatch(setIsLoading(false))
+    }
+  }
 
 // types
 type SetIsLoadingType = ReturnType<typeof setIsLoading>
 type SetSuccessType = ReturnType<typeof setSuccess>
 type SetErrorType = ReturnType<typeof setError>
 
-type ForgotPasswordActionsType = SetIsLoadingType | SetSuccessType | SetErrorType
+export type ForgotPasswordActionsType = SetIsLoadingType | SetSuccessType | SetErrorType
 type InitialStateType = typeof initialState

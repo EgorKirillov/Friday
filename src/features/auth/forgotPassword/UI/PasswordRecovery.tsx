@@ -4,12 +4,15 @@ import SuperButton from '../../../../common/components/c2-SuperButton/SuperButto
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useAppDispatch } from '../../../../common/hooks/hooks'
+import { sendEmail } from '../forgotPassReducer'
 
 type ForgotInputs = {
   email: string
 }
 
 export function PasswordRecovery() {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const {
     register,
@@ -18,7 +21,9 @@ export function PasswordRecovery() {
   } = useForm<ForgotInputs>()
 
   const onSubmit: SubmitHandler<ForgotInputs> = (data) => {
-    console.log(data)
+    console.log(data.email)
+    dispatch(sendEmail(data.email))
+    console.log(data.email)
   }
 
   const onClickLogin = () => {
