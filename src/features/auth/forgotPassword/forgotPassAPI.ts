@@ -5,10 +5,16 @@ export type ForgotDataType = {
   from: string
   message: string
 }
+export type ResponseForgotDataType = {
+  info: string
+  success: boolean
+  answer: boolean
+  html: boolean
+}
 
 export const ForgotAPI = {
   forgot: (email: string) => {
-    return instance.post<ForgotDataType>('/auth/forgot', {
+    return instance.post<ResponseForgotDataType>('/auth/forgot', {
       email: email,
       from: 'test-front-admin <ai73a@yandex.by>',
       message:

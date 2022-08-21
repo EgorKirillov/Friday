@@ -36,10 +36,17 @@ export const sendEmail =
   (email: string): AppThunk =>
   async (dispatch) => {
     try {
+      // зануляем ошибки и статус
       dispatch(setError(''))
+      dispatch(setSuccess(false))
+      // активация крутилки
       dispatch(setIsLoading(true))
       const res = await ForgotAPI.forgot(email)
-      console.log(res)
+      // нужно проверить есть ли почта в базе
+      // если успешно - зафиксировать
+      if (res.data.success) {
+        dispatch(setSuccess(true))
+      }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
@@ -50,6 +57,7 @@ export const sendEmail =
       }
     } finally {
       console.log('end')
+      // де-активация крутилки
       dispatch(setIsLoading(false))
     }
   }

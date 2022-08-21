@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import s from './PasswordRecovery.module.css'
 import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useAppDispatch } from '../../../../common/hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { sendEmail } from '../forgotPassReducer'
 
 type ForgotInputs = {
@@ -13,6 +13,10 @@ type ForgotInputs = {
 
 export function PasswordRecovery() {
   const dispatch = useAppDispatch()
+  const isLoading = useAppSelector((state) => state.forgotPass.isLoading)
+  const successSendEmail = useAppSelector((state) => state.forgotPass.success)
+  const error = useAppSelector((state) => state.forgotPass.error)
+
   const navigate = useNavigate()
   const {
     register,
@@ -30,6 +34,7 @@ export function PasswordRecovery() {
     navigate(PATH.LOGIN)
   }
 
+  useEffect(() => {}, [])
   return (
     <div className={s.conteiner}>
       <div className={s.title}> It-incubator</div>
@@ -46,7 +51,14 @@ export function PasswordRecovery() {
         <div className={s.discription}>
           <p>Enter your email address and we will send you further instructions </p>
         </div>
-        <SuperButton type={'submit'}>Send Instruction</SuperButton>
+        {isLoading ? (
+          <div>...крутилка....</div>
+        ) : (
+          <SuperButton type={'submit'}>Send Instruction</SuperButton>
+        )}
+
+        {successSendEmail ? <div>сообщение отправлено</div> : <div>сообщение НЕ отправлено</div>}
+        {error ? <div>{error}</div> : <div>ошибок нет</div>}
         <div className={s.discription}>
           <p>Did you remember your password?</p>
         </div>
