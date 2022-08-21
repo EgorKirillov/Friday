@@ -1,8 +1,8 @@
 import React from 'react'
 import s from './PasswordRecovery.module.css'
-import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
+import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
 import { useNavigate } from 'react-router-dom'
-import { PATH } from '../../../common/components/Routing/SwitchRoutes'
+import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 type ForgotInputs = {
