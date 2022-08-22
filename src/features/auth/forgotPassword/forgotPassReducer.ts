@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
   success: false,
   error: '',
+  email: 'test@test.test',
 }
 
 export const forgotPassReducer = (
@@ -19,6 +20,8 @@ export const forgotPassReducer = (
       return { ...state, success: action.success }
     case 'forgotPass/SET-ERROR':
       return { ...state, error: action.error }
+    case 'forgotPass/SET-EMAIL':
+      return { ...state, email: action.email }
     default:
       return state
   }
@@ -30,6 +33,7 @@ export const setIsLoading = (isLoading: boolean) =>
 export const setSuccess = (success: boolean) =>
   ({ type: 'forgotPass/SET-SUCCESS', success } as const)
 export const setError = (error: string) => ({ type: 'forgotPass/SET-ERROR', error } as const)
+export const setEmail = (email: string) => ({ type: 'forgotPass/SET-EMAIL', email } as const)
 
 // thunks
 export const sendEmail =
@@ -42,9 +46,10 @@ export const sendEmail =
       // активация крутилки
       dispatch(setIsLoading(true))
       const res = await ForgotAPI.forgot(email)
-      // нужно проверить есть ли почта в базе
+      // нужно проверить есть ли почта в базе    <---- отдельный запрос нужен или нет ?
       // если успешно - зафиксировать
       if (res.data.success) {
+        dispatch(setEmail(email))
         dispatch(setSuccess(true))
       }
     } catch (e) {
@@ -56,7 +61,6 @@ export const sendEmail =
         dispatch(setError(`Native error ${err.message}`))
       }
     } finally {
-      console.log('end')
       // де-активация крутилки
       dispatch(setIsLoading(false))
     }
@@ -66,6 +70,11 @@ export const sendEmail =
 type SetIsLoadingType = ReturnType<typeof setIsLoading>
 type SetSuccessType = ReturnType<typeof setSuccess>
 type SetErrorType = ReturnType<typeof setError>
+type SetEmailType = ReturnType<typeof setEmail>
 
-export type ForgotPasswordActionsType = SetIsLoadingType | SetSuccessType | SetErrorType
+export type ForgotPasswordActionsType =
+  | SetIsLoadingType
+  | SetSuccessType
+  | SetErrorType
+  | SetEmailType
 type InitialStateType = typeof initialState
