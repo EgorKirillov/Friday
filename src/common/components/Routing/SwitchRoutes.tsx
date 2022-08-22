@@ -14,7 +14,7 @@ export const PATH = {
   PROFILE: '/profile', //профайл
   ERROR404: '/error404', // не найдено
   RECOVERY_PASSWORD: '/password_recovery', //восстановление пароля
-  NEW_PASSWORD: '/new_password', //ввод нового пароля
+  NEW_PASSWORD: '/new_password/*', //ввод нового пароля
   TESTS: '/tests', //тестовая -отобразить / продемонстрировать все SuperКопмоненты
 }
 

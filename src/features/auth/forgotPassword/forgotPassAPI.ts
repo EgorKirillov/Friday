@@ -18,7 +18,7 @@ export const ForgotAPI = {
       email: email,
       from: 'test-front-admin <ai73a@yandex.by>',
       message:
-        '`<div style="color: red; padding: 15px"> password recovery link: <a href=\'http://localhost:3000/#/set-new-password/$token$\'> link</a> </div>`',
+        '`<div style="color: red; padding: 15px"> password recovery link: <a href=\'http://localhost:3000/new_password/$token$\'> link</a> </div>`',
     })
   },
 }
