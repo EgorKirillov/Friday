@@ -1,5 +1,6 @@
 import { AppThunk } from '../../../app/store'
 import axios, { AxiosError } from 'axios'
+import { PasswordNewAPI } from './passwordNewAPI'
 
 const initialState = {
   isLoading: false,
@@ -37,7 +38,7 @@ export const setPassword = (password: string) =>
 
 // thunks
 export const setNewPassword =
-  (password: string): AppThunk =>
+  (password: string, token: string): AppThunk =>
   async (dispatch) => {
     try {
       // зануляем ошибки и статус
@@ -45,6 +46,9 @@ export const setNewPassword =
       dispatch(setSuccess(false))
       // активация крутилки
       dispatch(setIsLoading(true))
+      const d = { password: password, resetPasswordToken: token }
+      const res = await PasswordNewAPI.setNewPassword(d)
+      dispatch(setSuccess(true))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {

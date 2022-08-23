@@ -4,6 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { sendEmail } from '../forgotPassword/forgotPassReducer'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import s from './PasswordNew.module.css'
+import { PasswordNewAPI } from './passwordNewAPI'
+import { setNewPassword } from './PasswordNewReducer'
 
 type NewPassInputs = {
   password: string
@@ -20,7 +22,14 @@ export function PasswordNew() {
   } = useForm<NewPassInputs>()
 
   const onSubmit: SubmitHandler<NewPassInputs> = (data) => {
+    const pathname = document.location.pathname.split('/')
+    const token = pathname[pathname.length - 1]
+
+    console.log(token)
+
+    // alert(data.password)
     // dispatch(sendEmail(data.password))
+    dispatch(setNewPassword(data.password, token))
   }
   return (
     <div className={s.conteiner}>
