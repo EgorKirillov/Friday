@@ -27,6 +27,6 @@ export type ResponsePasswordNewDataType = {
 
 export const PasswordNewAPI = {
   setNewPassword: (data: PasswordNewType) => {
-    return instance.post<ResponsePasswordNewDataType>('/auth/set-new-password', { ...data })
+    return instance.post<ResponsePasswordNewDataType>('/auth/set-new-password', data)
   },
 }

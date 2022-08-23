@@ -6,7 +6,6 @@ const initialState = {
   isLoading: false,
   success: false,
   error: '',
-  password: 'testtesttest',
 }
 
 export const passwordNewReducer = (
@@ -20,8 +19,6 @@ export const passwordNewReducer = (
       return { ...state, success: action.success }
     case 'passwordNew/SET-ERROR':
       return { ...state, error: action.error }
-    case 'passwordNew/SET-PASSWORD':
-      return { ...state, password: action.password }
     default:
       return state
   }
@@ -33,8 +30,6 @@ export const setIsLoading = (isLoading: boolean) =>
 export const setSuccess = (success: boolean) =>
   ({ type: 'passwordNew/SET-SUCCESS', success } as const)
 export const setError = (error: string) => ({ type: 'passwordNew/SET-ERROR', error } as const)
-export const setPassword = (password: string) =>
-  ({ type: 'passwordNew/SET-PASSWORD', password } as const)
 
 // thunks
 export const setNewPassword =
@@ -46,8 +41,10 @@ export const setNewPassword =
       dispatch(setSuccess(false))
       // активация крутилки
       dispatch(setIsLoading(true))
-      const d = { password: password, resetPasswordToken: token }
-      const res = await PasswordNewAPI.setNewPassword(d)
+      const res = await PasswordNewAPI.setNewPassword({
+        password: password,
+        resetPasswordToken: token,
+      })
       dispatch(setSuccess(true))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
@@ -67,11 +64,7 @@ export const setNewPassword =
 type SetIsLoadingType = ReturnType<typeof setIsLoading>
 type SetSuccessType = ReturnType<typeof setSuccess>
 type SetErrorType = ReturnType<typeof setError>
-type SetPasswordType = ReturnType<typeof setPassword>
 
-export type PasswordNewActionsType =
-  | SetIsLoadingType
-  | SetSuccessType
-  | SetErrorType
-  | SetPasswordType
+export type PasswordNewActionsType = SetIsLoadingType | SetSuccessType | SetErrorType
+
 type InitialStateType = typeof initialState

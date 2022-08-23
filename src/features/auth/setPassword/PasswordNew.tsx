@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { sendEmail } from '../forgotPassword/forgotPassReducer'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import s from './PasswordNew.module.css'
-import { PasswordNewAPI } from './passwordNewAPI'
 import { setNewPassword } from './PasswordNewReducer'
+import { PATH } from '../../../common/components/Routing/SwitchRoutes'
+import { useNavigate } from 'react-router-dom'
 
 type NewPassInputs = {
   password: string
@@ -13,7 +13,10 @@ type NewPassInputs = {
 
 export function PasswordNew() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const isLoading = useAppSelector((state) => state.newPass.isLoading)
+  const error = useAppSelector((state) => state.newPass.error)
+  const success = useAppSelector((state) => state.newPass.success)
 
   const {
     register,
@@ -22,15 +25,21 @@ export function PasswordNew() {
   } = useForm<NewPassInputs>()
 
   const onSubmit: SubmitHandler<NewPassInputs> = (data) => {
+    // take token from URL
     const pathname = document.location.pathname.split('/')
     const token = pathname[pathname.length - 1]
-
-    console.log(token)
-
-    // alert(data.password)
-    // dispatch(sendEmail(data.password))
+    //set new pass
     dispatch(setNewPassword(data.password, token))
   }
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        navigate(PATH.LOGIN)
+      }, 1000)
+    }
+  }, [success])
+
   return (
     <div className={s.conteiner}>
       <h1 className={s.title}>Create new password</h1>
@@ -42,13 +51,18 @@ export function PasswordNew() {
           {...register('password', { required: true, maxLength: 100 })}
         />
         <div className={s.error}>
-          {/*{error ? <span>{error}</span> : errors.email && <span>This field is required</span>}*/}
+          {error ? <span>{error}</span> : errors.password && <span>This field is required</span>}
         </div>
         <div className={s.discription}>
-          <p>Create new password and we will send you further instructions to email</p>
+          <p>
+            Create new password (min 8 characters ) and we will send you further instructions to
+            email
+          </p>
         </div>
         {isLoading ? (
           <div>.крутилка.</div>
+        ) : success ? (
+          <div style={{ color: 'green' }}>password accepted</div>
         ) : (
           <SuperButton type={'submit'}>Create new password</SuperButton>
         )}
