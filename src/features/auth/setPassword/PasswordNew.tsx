@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
@@ -6,6 +6,8 @@ import s from './PasswordNew.module.css'
 import { setNewPassword } from './PasswordNewReducer'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
 import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
 
 type NewPassInputs = {
   password: string
@@ -17,12 +19,17 @@ export function PasswordNew() {
   const isLoading = useAppSelector((state) => state.newPass.isLoading)
   const error = useAppSelector((state) => state.newPass.error)
   const success = useAppSelector((state) => state.newPass.success)
+  const [inputType, setInputType] = useState<string>('password')
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<NewPassInputs>()
+
+  const togglePasswordViewType = () => {
+    setInputType(inputType === 'password' ? 'text' : 'password')
+  }
 
   const onSubmit: SubmitHandler<NewPassInputs> = (data) => {
     // take token from URL
@@ -46,9 +53,16 @@ export function PasswordNew() {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          type="password"
+          type={inputType}
           placeholder={'password'}
           {...register('password', { required: true, maxLength: 100 })}
+        />
+        {/*иконка глаз*/}
+        <FontAwesomeIcon
+          className={s.eye}
+          onClick={togglePasswordViewType}
+          icon={faEye}
+          title={inputType === 'password' ? 'see password' : 'hide password'}
         />
         <div className={s.error}>
           {error ? <span>{error}</span> : errors.password && <span>This field is required</span>}
