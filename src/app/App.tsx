@@ -1,4 +1,5 @@
 import React from 'react'
+
 import './App.css'
 import { StartPage } from '../features/mainPage/UI/StartPage'
 

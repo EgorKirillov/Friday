@@ -16,9 +16,9 @@ type NewPassInputs = {
 export function PasswordNew() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const isLoading = useAppSelector((state) => state.newPass.isLoading)
-  const error = useAppSelector((state) => state.newPass.error)
-  const success = useAppSelector((state) => state.newPass.success)
+  const isLoading = useAppSelector(state => state.newPass.isLoading)
+  const error = useAppSelector(state => state.newPass.error)
+  const success = useAppSelector(state => state.newPass.success)
   const [inputType, setInputType] = useState<string>('password')
   const { token } = useParams()
 
@@ -32,7 +32,7 @@ export function PasswordNew() {
     setInputType(inputType === 'password' ? 'text' : 'password')
   }
 
-  const onSubmit: SubmitHandler<NewPassInputs> = (data) => {
+  const onSubmit: SubmitHandler<NewPassInputs> = data => {
     if (token) {
       dispatch(setNewPassword(data.password, token))
     } else {

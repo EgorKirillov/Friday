@@ -17,7 +17,7 @@ type RegistrationType = {
 
 export function Registration() {
   const dispatch = useAppDispatch()
-  const isRegistered = useAppSelector((state) => state.register.isRegistered)
+  const isRegistered = useAppSelector(state => state.register.isRegistered)
   const navigate = useNavigate()
   const {
     register,
@@ -31,7 +31,7 @@ export function Registration() {
     },
   })
 
-  const onSubmit: SubmitHandler<RegistrationType> = (data) => {
+  const onSubmit: SubmitHandler<RegistrationType> = data => {
     dispatch(registerTC(data))
     if (data) {
       alert(JSON.stringify(data))

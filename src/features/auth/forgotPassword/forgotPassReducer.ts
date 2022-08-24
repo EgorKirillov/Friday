@@ -38,7 +38,7 @@ export const setEmail = (email: string) => ({ type: 'forgotPass/SET-EMAIL', emai
 // thunks
 export const sendEmail =
   (email: string): AppThunk =>
-  async (dispatch) => {
+  async dispatch => {
     try {
       // зануляем ошибки и статус
       dispatch(setError(''))

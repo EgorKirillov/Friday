@@ -34,7 +34,7 @@ export const setError = (error: string) => ({ type: 'passwordNew/SET-ERROR', err
 // thunks
 export const setNewPassword =
   (password: string, token: string): AppThunk =>
-  async (dispatch) => {
+  async dispatch => {
     try {
       // зануляем ошибки и статус
       dispatch(setError(''))

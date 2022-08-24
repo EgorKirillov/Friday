@@ -6,8 +6,8 @@ import { PasswordRecoveryPage } from './PasswordRecoveryPage'
 import { CheckEmailPage } from './CheckEmailPage'
 
 export function PasswordRecovery() {
-  const successSendEmail = useAppSelector((state) => state.forgotPass.success)
-  const error = useAppSelector((state) => state.forgotPass.error)
+  const successSendEmail = useAppSelector(state => state.forgotPass.success)
+  const error = useAppSelector(state => state.forgotPass.error)
   const dispatch = useAppDispatch()
 
   useEffect(() => {

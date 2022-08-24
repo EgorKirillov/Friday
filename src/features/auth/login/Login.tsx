@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { Navigate } from 'react-router-dom'
 
 export const Login = () => {
-  const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn)
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
   const dispatch = useAppDispatch()
   const {
     register,

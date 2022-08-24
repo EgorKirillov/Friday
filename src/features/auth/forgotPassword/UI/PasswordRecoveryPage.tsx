@@ -13,8 +13,8 @@ type ForgotInputs = {
 
 export function PasswordRecoveryPage() {
   const dispatch = useAppDispatch()
-  const isLoading = useAppSelector((state) => state.forgotPass.isLoading)
-  const error = useAppSelector((state) => state.forgotPass.error)
+  const isLoading = useAppSelector(state => state.forgotPass.isLoading)
+  const error = useAppSelector(state => state.forgotPass.error)
 
   const navigate = useNavigate()
   const {
@@ -23,7 +23,7 @@ export function PasswordRecoveryPage() {
     formState: { errors },
   } = useForm<ForgotInputs>()
 
-  const onSubmit: SubmitHandler<ForgotInputs> = (data) => {
+  const onSubmit: SubmitHandler<ForgotInputs> = data => {
     dispatch(sendEmail(data.email))
   }
 

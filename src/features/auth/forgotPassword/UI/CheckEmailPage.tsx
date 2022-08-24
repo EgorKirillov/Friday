@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../../common/hooks/hooks'
 import imgEmail from '../../../../assets/img/emailSend.svg'
 
 export function CheckEmailPage() {
-  const email = useAppSelector((state) => state.forgotPass.email)
+  const email = useAppSelector(state => state.forgotPass.email)
   const navigate = useNavigate()
 
   const onClickHandler = () => {

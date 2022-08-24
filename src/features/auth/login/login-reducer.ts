@@ -61,14 +61,14 @@ export const createUserAC = (data: LoginType) => {
 //thunk creators
 export const createUserTC =
   (data: LoginDataType): AppThunk =>
-  (dispatch) => {
+  dispatch => {
     //крутелочка включилась
     loginAPI
       .login(data)
-      .then((res) => {
+      .then(res => {
         dispatch(createUserAC(res.data))
       })
-      .catch((e) => {
+      .catch(e => {
         const error = e.response
           ? e.response.data.error
           : e.message + ', more details in the console'

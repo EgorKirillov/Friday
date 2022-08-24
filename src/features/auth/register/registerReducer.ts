@@ -33,12 +33,12 @@ export const registerTC = (data: any) => (dispatch: Dispatch<RegisterActionsType
   dispatch(registerAC(true))
   authAPI
     .register(data)
-    .then((res) => {
+    .then(res => {
       if (!res.data.error) {
         dispatch(registerAC(true))
       }
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch(registerAC(false))
       {
         // error.message ? error.message : 'Some error occurred'
