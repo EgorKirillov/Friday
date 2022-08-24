@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Registration } from '../../../features/auth/register/Registration'
 import { Login } from '../../../features/auth/login/Login'
 import { Profile } from '../../../features/auth/profile/Profile'
-import { PasswordRecovery } from '../../../features/auth/forgotPassword/PasswordRecovery'
+import { PasswordRecovery } from '../../../features/auth/forgotPassword/UI/PasswordRecovery'
 import { PasswordNew } from '../../../features/auth/setPassword/PasswordNew'
 import { TastsPage } from '../TesPage/TestsPage'
 import Error404Page from '../PageNotFound/Error404Page'
@@ -14,7 +14,7 @@ export const PATH = {
   PROFILE: '/profile', //профайл
   ERROR404: '/error404', // не найдено
   RECOVERY_PASSWORD: '/password_recovery', //восстановление пароля
-  NEW_PASSWORD: '/new_password', //ввод нового пароля
+  NEW_PASSWORD: '/new_password/:token', //ввод нового пароля
   TESTS: '/tests', //тестовая -отобразить / продемонстрировать все SuperКопмоненты
 }
 

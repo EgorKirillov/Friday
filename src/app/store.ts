@@ -3,6 +3,14 @@ import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { useDispatch } from 'react-redux'
 import { LoginActionsType, loginReducer } from '../features/auth/login/login-reducer'
 import { ProfileActionsType, profileReducer } from '../features/auth/profile/profile-reducer'
+import {
+  forgotPassReducer,
+  ForgotPasswordActionsType,
+} from '../features/auth/forgotPassword/forgotPassReducer'
+import {
+  PasswordNewActionsType,
+  passwordNewReducer,
+} from '../features/auth/setPassword/PasswordNewReducer'
 
 // необходимо для работы расширения Redux
 //             v
@@ -21,6 +29,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
   login: loginReducer, // login and registration, recovery and change password
   profile: profileReducer, // create/change profile data
+  forgotPass: forgotPassReducer,
+  newPass: passwordNewReducer,
 })
 
 export const store = legacy_createStore(
@@ -33,7 +43,11 @@ export const store = legacy_createStore(
 export type AppRootStateType = ReturnType<typeof store.getState>
 
 // Общий Action Type
-export type AppActionType = LoginActionsType | ProfileActionsType
+export type AppActionType =
+  | LoginActionsType
+  | ProfileActionsType
+  | ForgotPasswordActionsType
+  | PasswordNewActionsType
 
 // Dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppActionType>
