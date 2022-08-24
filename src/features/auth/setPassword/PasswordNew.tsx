@@ -3,9 +3,9 @@ import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import s from './PasswordNew.module.css'
-import { setNewPassword } from './PasswordNewReducer'
+import { setError, setNewPassword } from './PasswordNewReducer'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 
@@ -20,6 +20,7 @@ export function PasswordNew() {
   const error = useAppSelector((state) => state.newPass.error)
   const success = useAppSelector((state) => state.newPass.success)
   const [inputType, setInputType] = useState<string>('password')
+  const { token } = useParams()
 
   const {
     register,
@@ -32,11 +33,11 @@ export function PasswordNew() {
   }
 
   const onSubmit: SubmitHandler<NewPassInputs> = (data) => {
-    // take token from URL
-    const pathname = document.location.pathname.split('/')
-    const token = pathname[pathname.length - 1]
-    //set new pass
-    dispatch(setNewPassword(data.password, token))
+    if (token) {
+      dispatch(setNewPassword(data.password, token))
+    } else {
+      dispatch(setError('не верная ссылка'))
+    }
   }
 
   useEffect(() => {
