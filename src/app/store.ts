@@ -11,6 +11,7 @@ import {
   PasswordNewActionsType,
   passwordNewReducer,
 } from '../features/auth/setPassword/PasswordNewReducer'
+import { RegisterActionsType, registerReducer } from '../features/auth/register/registerReducer'
 
 // необходимо для работы расширения Redux
 //             v
@@ -29,6 +30,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
   login: loginReducer, // login and registration, recovery and change password
   profile: profileReducer, // create/change profile data
+  register: registerReducer, // registration
   forgotPass: forgotPassReducer,
   newPass: passwordNewReducer,
 })
@@ -48,10 +50,11 @@ export type AppActionType =
   | ProfileActionsType
   | ForgotPasswordActionsType
   | PasswordNewActionsType
+  | RegisterActionsType
 
 // Dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppActionType>
-export const useAppDispatch: () => AppDispatch = useDispatch
+// export const useAppDispatch: () => AppDispatch = useDispatch
 
 // типизация Thunk Action для всего объекта
 export type AppThunk<ReturnType = void> = ThunkAction<
