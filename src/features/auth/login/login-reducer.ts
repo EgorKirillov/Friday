@@ -1,5 +1,6 @@
-import { loginAPI, LoginDataType } from './loginAPI'
 import { AppThunk } from '../../../app/store'
+
+import { loginAPI, LoginDataType } from './loginAPI'
 
 const initialState: LoginType = {
   _id: '',
@@ -72,6 +73,7 @@ export const createUserTC =
         const error = e.response
           ? e.response.data.error
           : e.message + ', more details in the console'
+
         console.log('Error: ', { ...e })
         console.log(error) //временная заглушка
       })

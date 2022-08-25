@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
-import s from './PasswordRecovery.module.css'
+
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { setSuccess } from '../forgotPassReducer'
-import { PasswordRecoveryPage } from './PasswordRecoveryPage'
+
 import { CheckEmailPage } from './CheckEmailPage'
+import s from './PasswordRecovery.module.css'
+import { PasswordRecoveryPage } from './PasswordRecoveryPage'
 
 export function PasswordRecovery() {
   const successSendEmail = useAppSelector(state => state.forgotPass.success)

@@ -1,12 +1,14 @@
 import React from 'react'
+
 import { Route, Routes } from 'react-router-dom'
-import { Registration } from '../../../features/auth/register/Registration'
+
+import { PasswordRecovery } from '../../../features/auth/forgotPassword/UI/PasswordRecovery'
 import { Login } from '../../../features/auth/login/Login'
 import { Profile } from '../../../features/auth/profile/Profile'
-import { PasswordRecovery } from '../../../features/auth/forgotPassword/UI/PasswordRecovery'
+import { Registration } from '../../../features/auth/register/Registration'
 import { PasswordNew } from '../../../features/auth/setPassword/PasswordNew'
-import { TastsPage } from '../TesPage/TestsPage'
 import Error404Page from '../PageNotFound/Error404Page'
+import { TastsPage } from '../TesPage/TestsPage'
 
 export const PATH = {
   LOGIN: '/login', //логинизация

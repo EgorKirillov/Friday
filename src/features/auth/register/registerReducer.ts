@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux'
+
 import { authAPI } from './registeAPI'
 
 const initialState: InitialStateType = {

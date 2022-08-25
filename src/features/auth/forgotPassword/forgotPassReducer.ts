@@ -1,5 +1,7 @@
-import { AppThunk } from '../../../app/store'
 import axios, { AxiosError } from 'axios'
+
+import { AppThunk } from '../../../app/store'
+
 import { ForgotAPI } from './forgotPassAPI'
 
 const initialState = {
@@ -46,6 +48,7 @@ export const sendEmail =
       // активация крутилки
       dispatch(setIsLoading(true))
       const res = await ForgotAPI.forgot(email)
+
       // нужно проверить есть ли почта в базе    <---- отдельный запрос нужен или нет ?
       // если успешно - зафиксировать
       if (res.data.success) {
@@ -54,8 +57,10 @@ export const sendEmail =
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
+
       if (axios.isAxiosError(err)) {
         const error = err.response?.data ? err.response.data.error : err.message
+
         dispatch(setError(error))
       } else {
         dispatch(setError(`Native error ${err.message}`))

@@ -1,5 +1,7 @@
-import { AppThunk } from '../../../app/store'
 import axios, { AxiosError } from 'axios'
+
+import { AppThunk } from '../../../app/store'
+
 import { PasswordNewAPI } from './passwordNewAPI'
 
 const initialState = {
@@ -45,11 +47,14 @@ export const setNewPassword =
         password: password,
         resetPasswordToken: token,
       })
+
       dispatch(setSuccess(true))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
+
       if (axios.isAxiosError(err)) {
         const error = err.response?.data ? err.response.data.error : err.message
+
         dispatch(setError(error))
       } else {
         dispatch(setError(`Native error ${err.message}`))

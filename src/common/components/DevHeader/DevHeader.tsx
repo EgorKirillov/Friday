@@ -1,7 +1,10 @@
 import React from 'react'
+
 import { NavLink } from 'react-router-dom'
-import s from './DevHeader.module.css'
+
 import { PATH } from '../Routing/SwitchRoutes'
+
+import s from './DevHeader.module.css'
 
 // export const PATH = {
 //     LOGIN: '/login', //логинизация

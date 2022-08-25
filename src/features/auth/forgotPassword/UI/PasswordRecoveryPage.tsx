@@ -1,11 +1,14 @@
 import React from 'react'
-import s from './PasswordRecovery.module.css'
-import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
-import { useNavigate } from 'react-router-dom'
-import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+
+import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
+import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { sendEmail } from '../forgotPassReducer'
+
+import s from './PasswordRecovery.module.css'
 
 type ForgotInputs = {
   email: string
@@ -30,6 +33,7 @@ export function PasswordRecoveryPage() {
   const onClickLogin = () => {
     navigate(PATH.LOGIN)
   }
+
   return (
     <>
       <h1 className={s.title}>Forgot your password?</h1>
