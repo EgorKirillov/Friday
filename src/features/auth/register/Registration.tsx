@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
-import style from './registation.module.css'
+
+import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
 import s from '../../../common/components/DevHeader/DevHeader.module.css'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
-import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
-import { useDispatch } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { registerAC, registerTC } from './registerReducer'
+
+import style from './registation.module.css'
+import { registerTC, setRegisterErrorAC } from './registerReducer'
 
 type RegistrationType = {
   email?: string
@@ -17,8 +19,10 @@ type RegistrationType = {
 
 export function Registration() {
   const dispatch = useAppDispatch()
-  const isRegistered = useAppSelector(state => state.register.isRegistered)
   const navigate = useNavigate()
+  const isRegistered = useAppSelector(state => state.register.isRegistered) // зарегестрированы мы или нет
+  const errorMessage = useAppSelector(state => state.register.error)
+
   const {
     register,
     handleSubmit,
@@ -32,11 +36,15 @@ export function Registration() {
   })
 
   const onSubmit: SubmitHandler<RegistrationType> = data => {
-    dispatch(registerTC(data))
-    if (data) {
-      alert(JSON.stringify(data))
+    if (data.email && data.password1 && data.password2) {
+      if (data.password1 === data.password2) {
+        const res = { email: data.email, password: data.password1 }
+
+        dispatch(registerTC(res))
+      } else {
+        dispatch(setRegisterErrorAC('Passwords must match'))
+      }
     }
-    return <h1>none</h1>
   }
 
   useEffect(() => {
@@ -58,6 +66,7 @@ export function Registration() {
             </div>
             <div>
               <input {...register('email')} defaultValue="test" />
+              {errors?.email && <p>{errors.email.message}</p>}
             </div>
           </div>
           <div>
@@ -76,6 +85,8 @@ export function Registration() {
             </div>
             {errors.password2 && <p>This field is required</p>}
           </div>
+
+          {errorMessage && <div>{errorMessage}</div>}
 
           <SuperButton type="submit">Sing Up</SuperButton>
           <div>Already have an account?</div>
