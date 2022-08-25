@@ -1,4 +1,5 @@
 import { AppThunk } from '../../../app/store'
+import { setStatusLoadingAC } from '../../mainPage/UI/startPage-reducer'
 
 import { loginAPI, LoginDataType } from './loginAPI'
 
@@ -19,29 +20,28 @@ const initialState: LoginType = {
   error: '',
   isLoggedIn: false,
 }
-//reducer
 
-const REED_USER = 'REED_USER'
-const CREATE_USER = 'CREATE_USER'
-const UPDATE_USER = 'UPDATE_USER'
-const DELETE_USER = 'DELETE_USER'
+const SET_IS_LOGGED_IN = 'LOGIN/SET_IS_LOGGED_IN'
+const SET_IS_LOGGED_OUT = 'LOGIN/SET_IS_LOGGED_OUT'
 
 export const loginReducer = (
   state: LoginType = initialState,
   action: LoginActionsType
 ): LoginType => {
   switch (action.type) {
-    case CREATE_USER:
-      return { ...state, ...action.payload, isLoggedIn: true }
+    case SET_IS_LOGGED_IN:
+      return { ...state, ...action.payload }
+    case SET_IS_LOGGED_OUT:
+      return { ...state, isLoggedIn: action.payload.value }
     default:
       return state
   }
 }
 
 // action creators
-export const createUserAC = (data: LoginType) => {
+export const setIsLoggedInAC = (data: LoginType, value: boolean) => {
   return {
-    type: CREATE_USER,
+    type: SET_IS_LOGGED_IN,
     payload: {
       _id: data._id,
       email: data.email,
@@ -55,19 +55,28 @@ export const createUserAC = (data: LoginType) => {
       rememberMe: data.rememberMe,
 
       error: data.error,
+      isLoggedIn: value,
+    },
+  } as const
+}
+export const setIsLoggedOutAC = (value: boolean) => {
+  return {
+    type: SET_IS_LOGGED_OUT,
+    payload: {
+      value,
     },
   } as const
 }
 
 //thunk creators
-export const createUserTC =
+export const setIsLoggedInTC =
   (data: LoginDataType): AppThunk =>
   dispatch => {
-    //крутелочка включилась
+    dispatch(setStatusLoadingAC('loading'))
     loginAPI
       .login(data)
       .then(res => {
-        dispatch(createUserAC(res.data))
+        dispatch(setIsLoggedInAC(res.data, true))
       })
       .catch(e => {
         const error = e.response
@@ -78,13 +87,32 @@ export const createUserTC =
         console.log(error) //временная заглушка
       })
       .finally(() => {
-        //крутелочка выключилась
+        dispatch(setStatusLoadingAC('idle'))
       })
   }
-//types
-type createUserTypeAC = ReturnType<typeof createUserAC>
+export const setIsLoggedOutTC = (): AppThunk => dispatch => {
+  dispatch(setStatusLoadingAC('loading'))
+  loginAPI
+    .logout()
+    .then(res => {
+      dispatch(setIsLoggedOutAC(false))
+    })
+    .catch(e => {
+      const error = e.response ? e.response.data.error : e.message + ', more details in the console'
 
-export type LoginActionsType = createUserTypeAC
+      console.log('Error: ', { ...e })
+      console.log(error) //временная заглушка
+    })
+    .finally(() => {
+      dispatch(setStatusLoadingAC('idle'))
+    })
+}
+
+//types
+type setIsLoggedInTypeAC = ReturnType<typeof setIsLoggedInAC>
+type setIsLoggedOutTypeAC = ReturnType<typeof setIsLoggedOutAC>
+
+export type LoginActionsType = setIsLoggedInTypeAC | setIsLoggedOutTypeAC
 
 type LoginType = {
   _id: string
