@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
+
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import style from './registation.module.css'
+
+import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
 import s from '../../../common/components/DevHeader/DevHeader.module.css'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
-import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
-import { useDispatch } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+
+import style from './registation.module.css'
 import { registerAC, registerTC } from './registerReducer'
 
 type RegistrationType = {
@@ -36,6 +39,7 @@ export function Registration() {
     if (data) {
       alert(JSON.stringify(data))
     }
+
     return <h1>none</h1>
   }
 

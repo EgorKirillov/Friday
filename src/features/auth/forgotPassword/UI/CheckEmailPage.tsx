@@ -1,10 +1,13 @@
 import React from 'react'
-import s from './PasswordRecovery.module.css'
-import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
+
 import { useNavigate } from 'react-router-dom'
+
+import imgEmail from '../../../../assets/img/emailSend.svg'
+import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
 import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
 import { useAppSelector } from '../../../../common/hooks/hooks'
-import imgEmail from '../../../../assets/img/emailSend.svg'
+
+import s from './PasswordRecovery.module.css'
 
 export function CheckEmailPage() {
   const email = useAppSelector(state => state.forgotPass.email)

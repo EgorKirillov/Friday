@@ -1,10 +1,13 @@
 import React from 'react'
+
 import { useForm } from 'react-hook-form'
-import { LoginDataType } from './loginAPI'
-import { createUserTC } from './login-reducer'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { Navigate } from 'react-router-dom'
+
+import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+
+import { createUserTC } from './login-reducer'
 import style from './Login.module.css'
+import { LoginDataType } from './loginAPI'
 
 export const Login = () => {
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)

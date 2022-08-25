@@ -1,5 +1,6 @@
-import { RegisterParamsType } from './registerReducer'
 import { instance } from '../../mainPage/instanceAPI'
+
+import { RegisterParamsType } from './registerReducer'
 
 export const authAPI = {
   register(data: RegisterParamsType) {

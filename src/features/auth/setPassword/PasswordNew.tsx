@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
+
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
+import { PATH } from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+
 import s from './PasswordNew.module.css'
 import { setError, setNewPassword } from './PasswordNewReducer'
-import { PATH } from '../../../common/components/Routing/SwitchRoutes'
-import { useNavigate, useParams } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
 
 type NewPassInputs = {
   password: string
@@ -47,6 +50,7 @@ export function PasswordNew() {
       }, 1000)
     }
   }, [success])
+  if (isLoading) return <div>.крутилка.</div>
 
   return (
     <div className={s.conteiner}>
@@ -74,9 +78,7 @@ export function PasswordNew() {
             email
           </p>
         </div>
-        {isLoading ? (
-          <div>.крутилка.</div>
-        ) : success ? (
+        {success ? (
           <div style={{ color: 'green' }}>password accepted</div>
         ) : (
           <SuperButton type={'submit'}>Create new password</SuperButton>

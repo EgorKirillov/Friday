@@ -1,13 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import App from './app/App'
-import reportWebVitals from './reportWebVitals'
-import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { store } from './app/store'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+import { createRoot } from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+
+import App from './app/App'
+import { store } from './app/store'
+import reportWebVitals from './reportWebVitals'
+import './index.css'
+
+const root = createRoot(document.getElementById('root') as HTMLElement)
+
 root.render(
   <BrowserRouter>
     <Provider store={store}>
