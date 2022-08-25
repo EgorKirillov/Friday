@@ -6,6 +6,12 @@ export const loginAPI = {
   login(data: LoginDataType) {
     return instance.post<LoginDataType, AxiosResponse<ResponseLoginDataType>>('/auth/login', data)
   },
+  logout() {
+    return instance.delete<{}, AxiosResponse<ResponseLogoutDataType>>('/auth/me')
+  },
+  autMe() {
+    return instance.post<{}, AxiosResponse<ResponseLoginDataType>>('/auth/me')
+  },
 }
 
 export type LoginDataType = {
@@ -13,7 +19,6 @@ export type LoginDataType = {
   password: string
   rememberMe: boolean
 }
-
 export type ResponseLoginDataType = {
   _id: string
   email: string
@@ -28,4 +33,9 @@ export type ResponseLoginDataType = {
   rememberMe: boolean
 
   error?: string
+}
+
+export type ResponseLogoutDataType = {
+  info: 'logOut success —ฅ/ᐠ.̫ .ᐟฅ—'
+  error: string
 }
