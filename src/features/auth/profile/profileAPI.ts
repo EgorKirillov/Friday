@@ -7,7 +7,7 @@ export const profileAPI = {
     return instance.post<ResponseProfileDataType>('/auth/me', {})
   },
   update(data: ChangeProfileDataType) {
-    return instance.put<ChangeProfileDataType, AxiosResponse<ResponseProfileDataType>>(
+    return instance.put<ChangeProfileDataType, AxiosResponse<ResponseUpdateProfileDataType>>(
       '/auth/me',
       data
     )
@@ -35,6 +35,10 @@ export type ResponseProfileDataType = {
   verified: boolean // подтвердил ли почту
   rememberMe: boolean
 
+  error?: string
+}
+export type ResponseUpdateProfileDataType = {
+  updatedUser: ResponseProfileDataType
   error?: string
 }
 
