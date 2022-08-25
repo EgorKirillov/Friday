@@ -4,6 +4,7 @@ import { LoginDataType } from './loginAPI'
 import { createUserTC } from './login-reducer'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { Navigate } from 'react-router-dom'
+import style from './Login.module.css'
 
 export const Login = () => {
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
@@ -23,23 +24,26 @@ export const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Email</label>
-        <input {...register('email')} placeholder="Email" type={'email'} />
-        {errors?.email && <p>{errors.email.message}</p>}
-      </div>
+    <div className={style.loginWrapper}>
+      <div className={style.loginName}>Sign in</div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Email</label>
+          <input {...register('email')} placeholder="Email" type={'email'} />
+          {errors?.email && <p>{errors.email.message}</p>}
+        </div>
 
-      <div>
-        <label>Password</label>
-        <input {...register('password')} placeholder="Password" type={'password'} />
-      </div>
+        <div>
+          <label>Password</label>
+          <input {...register('password')} placeholder="Password" type={'password'} />
+        </div>
 
-      <div>
-        <label>Remember me</label>
-        <input type="checkbox" {...register('rememberMe')} />
-      </div>
-      <input type="submit" value={'Sign in'} />
-    </form>
+        <div>
+          <label>Remember me</label>
+          <input type="checkbox" {...register('rememberMe')} />
+        </div>
+        <input type="submit" value={'Sign in'} />
+      </form>
+    </div>
   )
 }
