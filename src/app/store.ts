@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux'
 import { combineReducers, applyMiddleware, compose, legacy_createStore } from 'redux'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
