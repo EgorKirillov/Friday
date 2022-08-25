@@ -22,6 +22,7 @@ export function Registration() {
   const navigate = useNavigate()
   const isRegistered = useAppSelector(state => state.register.isRegistered) // зарегестрированы мы или нет
   const errorMessage = useAppSelector(state => state.register.error)
+  const isLoading = useAppSelector(state => state.register.isLoading)
 
   const {
     register,
@@ -85,10 +86,13 @@ export function Registration() {
             </div>
             {errors.password2 && <p>This field is required</p>}
           </div>
+          <div className={style.error}> {errorMessage && <div>{errorMessage}</div>}</div>
 
-          {errorMessage && <div>{errorMessage}</div>}
+          <div>
+            {' '}
+            {isLoading ? <div>КРУТИЛКА</div> : <SuperButton type="submit">Sing Up</SuperButton>}
+          </div>
 
-          <SuperButton type="submit">Sing Up</SuperButton>
           <div>Already have an account?</div>
           <NavLink className={s.link} to={PATH.LOGIN}>
             Sing In{' '}
