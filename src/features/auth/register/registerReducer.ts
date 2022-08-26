@@ -39,10 +39,10 @@ export const setRegisterErrorAC = (error: string) =>
 // thunks
 export const registerTC =
   (data: RegisterParamsType) => (dispatch: Dispatch<RegisterActionsType>) => {
+    dispatch(setIsLoadingAC(true))
     authAPI
       .register(data)
       .then(res => {
-        dispatch(setIsLoadingAC(true))
         if (!res.data.error) {
           dispatch(registerAC(true))
           dispatch(setRegisterErrorAC(''))
