@@ -1,11 +1,14 @@
-import { RegisterParamsType } from './registerReducer'
+import { AxiosResponse } from 'axios'
+
 import { instance } from '../../mainPage/instanceAPI'
+
+import { RegisterParamsType, RegisterResponseType } from './registerReducer'
 
 export const authAPI = {
   register(data: RegisterParamsType) {
-    let email = data.addedUser.email
-    let password = data.addedUser.password
-
-    return instance.post<RegisterParamsType>('/auth/register', { email, password })
+    return instance.post<RegisterParamsType, AxiosResponse<RegisterResponseType>>(
+      '/auth/register',
+      data
+    )
   },
 }
