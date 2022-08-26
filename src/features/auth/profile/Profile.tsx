@@ -16,7 +16,7 @@ import { logoutProfile, setProfile, updateProfileName } from './profileReducer'
 export function Profile() {
   const profileName = useAppSelector(state => state.profile.name)
   const email = useAppSelector(state => state.profile.email)
-  const isAuth = useAppSelector(state => state.profile.isAuth)
+  const isAuth = useAppSelector(state => state.login.isLoggedIn)
   const isInitialised = useAppSelector(state => state.profile.isInitialised)
   const isLoading = useAppSelector(state => state.profile.isLoading)
   const navigate = useNavigate()

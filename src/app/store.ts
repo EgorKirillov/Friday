@@ -5,14 +5,14 @@ import {
   forgotPassReducer,
   ForgotPasswordActionsType,
 } from '../features/auth/forgotPassword/forgotPassReducer'
-import { LoginActionsType, loginReducer } from '../features/auth/login/login-reducer'
+import { LoginActionsType, loginReducer } from '../features/auth/login/loginReducer'
 import { ProfileActionsType, profileReducer } from '../features/auth/profile/profileReducer'
 import { RegisterActionsType, registerReducer } from '../features/auth/register/registerReducer'
 import {
   PasswordNewActionsType,
   passwordNewReducer,
 } from '../features/auth/setPassword/PasswordNewReducer'
-import { StartPageActionType, StartPageReducer } from '../features/mainPage/UI/startPage-reducer'
+import { StartPageActionType, StartPageReducer } from '../features/mainPage/UI/startPageReducer'
 
 // необходимо для работы расширения Redux
 //             v

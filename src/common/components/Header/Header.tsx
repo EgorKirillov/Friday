@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import logo from '../../../assets/img/itIncubatorLOGO.png'
-import { setIsLoggedOutTC } from '../../../features/auth/login/login-reducer'
+import { setIsLoggedOutTC } from '../../../features/auth/login/loginReducer'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import SuperButton from '../c2-SuperButton/SuperButton'
 import { PATH } from '../Routing/SwitchRoutes'

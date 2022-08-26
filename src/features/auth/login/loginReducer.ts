@@ -1,5 +1,5 @@
 import { AppThunk } from '../../../app/store'
-import { setStatusLoadingAC } from '../../mainPage/UI/startPage-reducer'
+import { setStatusLoadingAC } from '../../mainPage/UI/startPageReducer'
 
 import { loginAPI, LoginDataType } from './loginAPI'
 

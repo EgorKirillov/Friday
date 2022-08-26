@@ -6,9 +6,9 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
-import { setIsLoggedInTC } from './login-reducer'
 import style from './Login.module.css'
 import { LoginDataType } from './loginAPI'
+import { setIsLoggedInTC } from './loginReducer'
 
 export const Login = () => {
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)

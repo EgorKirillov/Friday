@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="main + profile">
+    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="main + profile + login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/login-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/startPage-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +51,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Git.Branch.Popup.ShowAllRemotes": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "prettierjs.PrettierConfiguration.Package": "D:\\it_incubator\\friday\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "actions.on.save",
     "ts.external.directory.path": "D:\\it_incubator\\friday\\node_modules\\typescript\\lib"
   }
 }]]></component>
@@ -126,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661496835539</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="main + profile + login">
+      <created>1661498095908</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1661498095908</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +170,8 @@
     <MESSAGE value="ADD profileAPI" />
     <MESSAGE value="ADD loader, checking initialization and authorization, changeName and logout functions" />
     <MESSAGE value="main + profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="main + profile" />
+    <MESSAGE value="main + profile + login" />
+    <option name="LAST_COMMIT_MESSAGE" value="main + profile + login" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

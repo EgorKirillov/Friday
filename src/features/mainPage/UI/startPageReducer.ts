@@ -1,7 +1,7 @@
 //initial state
 import { AppThunk } from '../../../app/store'
-import { setIsLoggedInAC } from '../../auth/login/login-reducer'
 import { loginAPI } from '../../auth/login/loginAPI'
+import { setIsLoggedInAC } from '../../auth/login/loginReducer'
 
 //constants
 const SET_INITIALIZE = 'SET_INITIALIZE'

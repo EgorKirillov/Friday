@@ -8,7 +8,7 @@ import { Header } from '../../../common/components/Header/Header'
 import SwitchRoutes from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
-import { initializeTC } from './startPage-reducer'
+import { initializeTC } from './startPageReducer'
 
 export function StartPage() {
   const status = useAppSelector(state => state.startPage.status)
@@ -19,20 +19,19 @@ export function StartPage() {
     dispatch(initializeTC())
   }, [])
 
-  if (!isInitialize) {
-    return (
-      <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
-        <CircularProgress />
-      </div>
-    )
-  }
-
   return (
     <div>
       <DevHeader />
       <Header />
       {status === 'loading' && <LinearProgress color="inherit" />}
-      <SwitchRoutes />
+
+      {!isInitialize ? (
+        <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
+          <CircularProgress />
+        </div>
+      ) : (
+        <SwitchRoutes />
+      )}
     </div>
   )
 }
