@@ -48,10 +48,10 @@ export const registerTC =
           dispatch(setRegisterErrorAC(''))
         } else {
           dispatch(registerAC(false))
+          dispatch(setRegisterErrorAC(res.data.error))
         }
       })
       .catch(error => {
-        dispatch(setIsLoadingAC(true))
         dispatch(registerAC(false))
         const err = error as Error | AxiosError<{ error: string }>
 

@@ -52,7 +52,7 @@ export function Registration() {
     if (isRegistered) {
       setTimeout(() => {
         navigate(PATH.LOGIN)
-      }, 1000)
+      }, 6000)
     }
   }, [isRegistered])
 
@@ -104,7 +104,8 @@ export function Registration() {
           <div className={style.error}> {errorMessage && <div>{errorMessage}</div>}</div>
 
           <div>
-            {isLoading ? <div>КРУТИЛКА</div> : <SuperButton type="submit">Sing Up</SuperButton>}
+            {isLoading ? <div>КРУТИЛКА</div> : isRegistered && <div>Вы зарегистрированы </div>}
+            <SuperButton type="submit">Sing Up</SuperButton>
           </div>
 
           <div>Already have an account?</div>

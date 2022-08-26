@@ -1,17 +1,17 @@
-import { combineReducers, applyMiddleware, compose, legacy_createStore } from 'redux'
+import { applyMiddleware, combineReducers, compose, legacy_createStore } from 'redux'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
-import { useDispatch } from 'react-redux'
-import { LoginActionsType, loginReducer } from '../features/auth/login/login-reducer'
-import { ProfileActionsType, profileReducer } from '../features/auth/profile/profile-reducer'
+
 import {
   forgotPassReducer,
   ForgotPasswordActionsType,
 } from '../features/auth/forgotPassword/forgotPassReducer'
+import { LoginActionsType, loginReducer } from '../features/auth/login/login-reducer'
+import { ProfileActionsType, profileReducer } from '../features/auth/profile/profile-reducer'
+import { RegisterActionsType, registerReducer } from '../features/auth/register/registerReducer'
 import {
   PasswordNewActionsType,
   passwordNewReducer,
 } from '../features/auth/setPassword/PasswordNewReducer'
-import { RegisterActionsType, registerReducer } from '../features/auth/register/registerReducer'
 
 // необходимо для работы расширения Redux
 //             v
