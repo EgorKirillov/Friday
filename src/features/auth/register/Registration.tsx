@@ -66,7 +66,7 @@ export function Registration() {
               <label className={style.nameForm}>Email</label>
             </div>
             <div>
-              <input {...register('email')} defaultValue="test" />
+              <input {...register('email')} placeholder="Email" type={'email'} />
               {errors?.email && <p>{errors.email.message}</p>}
             </div>
           </div>
@@ -75,21 +75,35 @@ export function Registration() {
               <label className={style.nameForm}>Password</label>
             </div>
             <div>
-              <input {...register('password1', { required: true, maxLength: 10 })} />
+              <input
+                {...register('password1', {
+                  required: true,
+                  minLength: {
+                    value: 8,
+                    message: 'Minimum length of password should be 8', // JS only: <p>error message</p> TS only support string
+                  },
+                })}
+                placeholder="password"
+                type={'password'}
+              />
             </div>
-            {errors.password1 && <p>This field is required</p>}
+            {errors.password1 && <p>{errors.password1.message}</p>}
+            {/*{errors.password1 && <p>This field is required</p>}*/}
           </div>
           <div>
             <label className={style.nameForm}>Confirm password</label>
             <div>
-              <input {...register('password2', { required: true, maxLength: 10 })} />
+              <input
+                {...register('password2', { required: true, minLength: 8 })}
+                placeholder="repeat password"
+                type={'password'}
+              />
             </div>
             {errors.password2 && <p>This field is required</p>}
           </div>
           <div className={style.error}> {errorMessage && <div>{errorMessage}</div>}</div>
 
           <div>
-            {' '}
             {isLoading ? <div>КРУТИЛКА</div> : <SuperButton type="submit">Sing Up</SuperButton>}
           </div>
 
