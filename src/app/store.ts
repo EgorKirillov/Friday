@@ -12,6 +12,7 @@ import {
   PasswordNewActionsType,
   passwordNewReducer,
 } from '../features/auth/setPassword/PasswordNewReducer'
+import { StartPageActionType, StartPageReducer } from '../features/mainPage/UI/startPage-reducer'
 
 // необходимо для работы расширения Redux
 //             v
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   register: registerReducer, // registration
   forgotPass: forgotPassReducer,
   newPass: passwordNewReducer,
+  startPage: StartPageReducer,
 })
 
 export const store = legacy_createStore(
@@ -51,6 +53,7 @@ export type AppActionType =
   | ForgotPasswordActionsType
   | PasswordNewActionsType
   | RegisterActionsType
+  | StartPageActionType
 
 // Dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppActionType>

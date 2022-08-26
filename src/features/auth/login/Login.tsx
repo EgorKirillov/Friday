@@ -1,16 +1,21 @@
 import React from 'react'
 
 import { useForm } from 'react-hook-form'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
+import { PATH } from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
-import { createUserTC } from './login-reducer'
+import { setIsLoggedInTC } from './login-reducer'
 import style from './Login.module.css'
 import { LoginDataType } from './loginAPI'
 
 export const Login = () => {
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+  const status = useAppSelector(state => state.startPage.status)
+  const error = useAppSelector(state => state.startPage.error)
+  const navigate = useNavigate()
+
   const dispatch = useAppDispatch()
   const {
     register,
@@ -19,7 +24,14 @@ export const Login = () => {
   } = useForm<LoginDataType>()
 
   const onSubmit = (data: LoginDataType) => {
-    dispatch(createUserTC(data))
+    dispatch(setIsLoggedInTC(data))
+  }
+
+  const onClickNavigateForgotPassword = () => {
+    navigate(PATH.RECOVERY_PASSWORD)
+  }
+  const onClickNavigateRegistration = () => {
+    navigate(PATH.REGISTRATION)
   }
 
   if (isLoggedIn) {
@@ -28,25 +40,58 @@ export const Login = () => {
 
   return (
     <div className={style.loginWrapper}>
-      <div className={style.loginName}>Sign in</div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email</label>
-          <input {...register('email')} placeholder="Email" type={'email'} />
+      <h2>Sign in</h2>
+      <div className={style.loginForms}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={style.loginInputForm}>
+            <div className={style.loginLabel}>
+              <label>Email</label>
+            </div>
+            <input
+              style={{ width: '80%' }}
+              {...register('email')}
+              placeholder="Email"
+              type={'email'}
+              disabled={status === 'loading'}
+            />
+            <hr />
+          </div>
+
           {errors?.email && <p>{errors.email.message}</p>}
-        </div>
+          <div style={{ color: 'red' }}>{error}</div>
 
-        <div>
-          <label>Password</label>
-          <input {...register('password')} placeholder="Password" type={'password'} />
-        </div>
+          <div className={style.loginInputForm}>
+            <div className={style.loginLabel}>
+              <label>Password</label>
+            </div>
+            <input
+              {...register('password')}
+              placeholder="Password"
+              type={'password'}
+              disabled={status === 'loading'}
+            />
+            <hr />
+          </div>
 
-        <div>
-          <label>Remember me</label>
-          <input type="checkbox" {...register('rememberMe')} />
-        </div>
-        <input type="submit" value={'Sign in'} />
-      </form>
+          <div className={style.loginInputFormCheckbox}>
+            <input type="checkbox" {...register('rememberMe')} disabled={status === 'loading'} />
+            <label>Remember me</label>
+          </div>
+          <div className={style.navigate}>
+            <a onClick={onClickNavigateForgotPassword}>Forgot Password?</a>
+          </div>
+          <input
+            className={style.button}
+            type="submit"
+            value={'Sign in'}
+            disabled={status === 'loading'}
+          />
+          <p>Already have an account?</p>
+          <a className={style.navigateToRegistration} onClick={onClickNavigateRegistration}>
+            Sign Up
+          </a>
+        </form>
+      </div>
     </div>
   )
 }
