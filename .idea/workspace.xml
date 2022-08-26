@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="main + profile + login">
+    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="Merge remote-tracking branch 'origin/main'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/Header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Preloader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/Preloader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +46,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -145,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661498095908</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="main + profile + login">
+      <created>1661517075404</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1661517075404</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
