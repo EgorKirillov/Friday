@@ -4,7 +4,6 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
-import s from '../../../common/components/DevHeader/DevHeader.module.css'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
@@ -57,59 +56,61 @@ export function Registration() {
   }, [isRegistered])
 
   return (
-    <div className={style.container}>
-      <div className={style.form}>
-        <h2>Sing Up</h2>
+    <div className={style.registerWrapper}>
+      <h2>Sing Up</h2>
+      <div className={style.registerForms}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <div>
-              <label className={style.nameForm}>Email</label>
+          <div className={style.registerInputForm}>
+            <div className={style.registerLabel}>
+              <label>Email</label>
             </div>
-            <div>
-              <input {...register('email')} placeholder="Email" type={'email'} />
-              {errors?.email && <p>{errors.email.message}</p>}
-            </div>
+            <input {...register('email')} placeholder="Email" type={'email'} />
+            <hr />
           </div>
-          <div>
-            <div>
-              <label className={style.nameForm}>Password</label>
+          {errors?.email && <p>{errors.email.message}</p>}
+          <div className={style.registerInputForm}>
+            <div className={style.registerLabel}>
+              <label>Password</label>
             </div>
-            <div>
-              <input
-                {...register('password1', {
-                  required: true,
-                  minLength: {
-                    value: 8,
-                    message: 'Minimum length of password should be 8', // JS only: <p>error message</p> TS only support string
-                  },
-                })}
-                placeholder="password"
-                type={'password'}
-              />
-            </div>
-            {errors.password1 && <p>{errors.password1.message}</p>}
-            {/*{errors.password1 && <p>This field is required</p>}*/}
+            <input
+              {...register('password1', {
+                required: true,
+                minLength: {
+                  value: 8,
+                  message: 'Minimum length of password should be 8', // JS only: <p>error message</p> TS only support string
+                },
+              })}
+              placeholder="password"
+              type={'password'}
+            />
+            <hr />
           </div>
-          <div>
-            <label className={style.nameForm}>Confirm password</label>
-            <div>
-              <input
-                {...register('password2', { required: true, minLength: 8 })}
-                placeholder="repeat password"
-                type={'password'}
-              />
+          {errors.password1 && <p>{errors.password1.message}</p>}
+          {/*{errors.password1 && <p>This field is required</p>}*/}
+
+          <div className={style.registerInputForm}>
+            <div className={style.registerLabel}>
+              <label>Confirm password</label>
             </div>
-            {errors.password2 && <p>This field is required</p>}
+            <input
+              {...register('password2', { required: true, minLength: 8 })}
+              placeholder="confirm password"
+              type={'password'}
+            />
+            <hr />
           </div>
+          {errors.password2 && <p>This field is required</p>}
           <div className={style.error}> {errorMessage && <div>{errorMessage}</div>}</div>
 
           <div>
             {isLoading ? <div>КРУТИЛКА</div> : isRegistered && <div>Вы зарегистрированы </div>}
-            <SuperButton type="submit">Sing Up</SuperButton>
+            <SuperButton className={style.button} type="submit">
+              Sing Up
+            </SuperButton>
           </div>
 
           <div>Already have an account?</div>
-          <NavLink className={s.link} to={PATH.LOGIN}>
+          <NavLink className={style.navigateToLogin} to={PATH.LOGIN}>
             Sing In{' '}
           </NavLink>
         </form>
