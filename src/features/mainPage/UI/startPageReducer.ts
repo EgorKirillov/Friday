@@ -1,7 +1,7 @@
 //initial state
 import { AppThunk } from '../../../app/store'
 import { loginAPI } from '../../auth/login/loginAPI'
-import { setIsLoggedInAC } from '../../auth/login/loginReducer'
+import { setIsAuthMeAC } from '../../auth/login/loginReducer'
 
 //constants
 const SET_INITIALIZE = 'SET_INITIALIZE'
@@ -63,18 +63,10 @@ export const initializeTC = (): AppThunk => dispatch => {
   loginAPI
     .autMe()
     .then(res => {
-      dispatch(setIsLoggedInAC(res.data, true))
+      dispatch(setIsAuthMeAC(true))
       dispatch(setErrorAC(null))
     })
-    .catch(e => {
-      // const error = e.response ? e.response.data.error : e.message + ', more details in the console'
-      // if (e.response.status === 401) {
-      //   dispatch(setErrorAC('ты не залогинен!'))
-      // }
-      if (e.response.status === 400) {
-        dispatch(setErrorAC('Email or password is incorrect'))
-      }
-    })
+    .catch(e => {})
     .finally(() => {
       dispatch(setIsInitializeAC(true))
       dispatch(setStatusLoadingAC('idle'))

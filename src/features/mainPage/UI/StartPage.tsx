@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 
-import { CircularProgress } from '@mui/material'
 import LinearProgress from '@mui/material/LinearProgress'
 
 import DevHeader from '../../../common/components/DevHeader/DevHeader'
@@ -8,6 +7,7 @@ import { Header } from '../../../common/components/Header/Header'
 import SwitchRoutes from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
+import { Preloader } from './Preloader'
 import { initializeTC } from './startPageReducer'
 
 export function StartPage() {
@@ -25,13 +25,7 @@ export function StartPage() {
       <Header />
       {status === 'loading' && <LinearProgress color="inherit" />}
 
-      {!isInitialize ? (
-        <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
-          <CircularProgress />
-        </div>
-      ) : (
-        <SwitchRoutes />
-      )}
+      {!isInitialize ? <Preloader /> : <SwitchRoutes />}
     </div>
   )
 }

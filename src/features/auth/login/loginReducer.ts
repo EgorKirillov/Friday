@@ -1,67 +1,31 @@
 import { AppThunk } from '../../../app/store'
-import { setStatusLoadingAC } from '../../mainPage/UI/startPageReducer'
+import { setErrorAC, setStatusLoadingAC } from '../../mainPage/UI/startPageReducer'
+import { setUserAC } from '../profile/profileReducer'
 
 import { loginAPI, LoginDataType } from './loginAPI'
 
 const initialState: LoginType = {
-  _id: '',
-  email: '',
-  name: '',
-  avatar: '',
-  publicCardPacksCount: null,
-  // количество колод
-
-  created: null,
-  updated: null,
-  isAdmin: false,
-  verified: false, // подтвердил ли почту
-  rememberMe: false,
-
-  error: '',
-  isLoggedIn: false,
+  isAuthMe: false,
 }
 
-const SET_IS_LOGGED_IN = 'LOGIN/SET_IS_LOGGED_IN'
-const SET_IS_LOGGED_OUT = 'LOGIN/SET_IS_LOGGED_OUT'
+const SET_IS_AUTH_ME = 'LOGIN/SET_IS_AUTH_ME'
 
 export const loginReducer = (
   state: LoginType = initialState,
   action: LoginActionsType
 ): LoginType => {
   switch (action.type) {
-    case SET_IS_LOGGED_IN:
-      return { ...state, ...action.payload }
-    case SET_IS_LOGGED_OUT:
-      return { ...state, isLoggedIn: action.payload.value }
+    case SET_IS_AUTH_ME:
+      return { ...state, isAuthMe: action.payload.value }
     default:
       return state
   }
 }
 
 // action creators
-export const setIsLoggedInAC = (data: LoginType, value: boolean) => {
+export const setIsAuthMeAC = (value: boolean) => {
   return {
-    type: SET_IS_LOGGED_IN,
-    payload: {
-      _id: data._id,
-      email: data.email,
-      name: data.name,
-      avatar: data.avatar,
-      publicCardPacksCount: data.publicCardPacksCount,
-      created: data.created,
-      updated: data.updated,
-      isAdmin: data.isAdmin,
-      verified: data.verified,
-      rememberMe: data.rememberMe,
-
-      error: data.error,
-      isLoggedIn: value,
-    },
-  } as const
-}
-export const setIsLoggedOutAC = (value: boolean) => {
-  return {
-    type: SET_IS_LOGGED_OUT,
+    type: SET_IS_AUTH_ME,
     payload: {
       value,
     },
@@ -69,22 +33,18 @@ export const setIsLoggedOutAC = (value: boolean) => {
 }
 
 //thunk creators
-export const setIsLoggedInTC =
+export const setUserTC =
   (data: LoginDataType): AppThunk =>
   dispatch => {
     dispatch(setStatusLoadingAC('loading'))
     loginAPI
       .login(data)
       .then(res => {
-        dispatch(setIsLoggedInAC(res.data, true))
+        dispatch(setIsAuthMeAC(true))
+        dispatch(setUserAC(res.data))
       })
       .catch(e => {
-        const error = e.response
-          ? e.response.data.error
-          : e.message + ', more details in the console'
-
-        console.log('Error: ', { ...e })
-        console.log(error) //временная заглушка
+        dispatch(setErrorAC(e.response.data.error))
       })
       .finally(() => {
         dispatch(setStatusLoadingAC('idle'))
@@ -95,13 +55,10 @@ export const setIsLoggedOutTC = (): AppThunk => dispatch => {
   loginAPI
     .logout()
     .then(res => {
-      dispatch(setIsLoggedOutAC(false))
+      dispatch(setIsAuthMeAC(false))
     })
     .catch(e => {
-      const error = e.response ? e.response.data.error : e.message + ', more details in the console'
-
-      console.log('Error: ', { ...e })
-      console.log(error) //временная заглушка
+      dispatch(setErrorAC(e.response.data.error))
     })
     .finally(() => {
       dispatch(setStatusLoadingAC('idle'))
@@ -109,25 +66,10 @@ export const setIsLoggedOutTC = (): AppThunk => dispatch => {
 }
 
 //types
-type setIsLoggedInTypeAC = ReturnType<typeof setIsLoggedInAC>
-type setIsLoggedOutTypeAC = ReturnType<typeof setIsLoggedOutAC>
+type setIsLoggedInTypeAC = ReturnType<typeof setIsAuthMeAC>
 
-export type LoginActionsType = setIsLoggedInTypeAC | setIsLoggedOutTypeAC
+export type LoginActionsType = setIsLoggedInTypeAC
 
 type LoginType = {
-  _id: string
-  email: string
-  name: string
-  avatar?: string
-  publicCardPacksCount: number | null
-  // количество колод
-
-  created: Date | null
-  updated: Date | null
-  isAdmin: boolean
-  verified: boolean // подтвердил ли почту
-  rememberMe: boolean
-
-  error?: string
-  isLoggedIn?: boolean
+  isAuthMe?: boolean
 }

@@ -1,18 +1,33 @@
 import axios, { AxiosError } from 'axios'
 
 import { AppThunk } from '../../../app/store'
+import { setStatusLoadingAC } from '../../mainPage/UI/startPageReducer'
+import { ResponseLoginDataType } from '../login/loginAPI'
 
 import { profileAPI } from './profileAPI'
 
 const initialState = {
   isLoading: false,
-  isAuth: false,
   isInitialised: false,
-  error: '',
-  name: '111',
-  email: 'testEmail-noAuth',
   //добавить аватарку
+
+  _id: '',
+  email: '',
+  name: '',
+  avatar: null,
+  publicCardPacksCount: null,
+  // количество колод
+
+  created: null,
+  updated: null,
+  isAdmin: false,
+  verified: false, // подтвердил ли почту
+  rememberMe: false,
+
+  error: '',
 }
+
+const SET_USER = 'PROFILE/SET_USER'
 
 export const profileReducer = (
   state: InitialStateProfileType = initialState,
@@ -29,8 +44,22 @@ export const profileReducer = (
       return { ...state, name: action.name }
     case 'profile/SET-EMAIL':
       return { ...state, email: action.email }
-    case 'profile/SET-IS-AUTH':
-      return { ...state, isAuth: action.isAuth }
+    case SET_USER:
+      return {
+        ...state,
+        _id: action.payload._id,
+        email: action.payload.email,
+        name: action.payload.name,
+        avatar: action.payload.avatar,
+        publicCardPacksCount: action.payload.publicCardPacksCount,
+        created: action.payload.created,
+        updated: action.payload.updated,
+        isAdmin: action.payload.isAdmin,
+        verified: action.payload.verified,
+        rememberMe: action.payload.rememberMe,
+
+        error: action.payload.error,
+      }
     default:
       return state
   }
@@ -41,10 +70,16 @@ export const setIsLoading = (isLoading: boolean) =>
   ({ type: 'profile/SET-IS-LOADING', isLoading } as const)
 export const setIsInitialised = (isInitialised: boolean) =>
   ({ type: 'profile/SET-IS-INITIALISED', isInitialised } as const)
-export const setIsAuth = (isAuth: boolean) => ({ type: 'profile/SET-IS-AUTH', isAuth } as const)
 export const setError = (error: string) => ({ type: 'profile/SET-ERROR', error } as const)
 export const setName = (name: string) => ({ type: 'profile/SET-NAME', name } as const)
 export const setEmail = (email: string) => ({ type: 'profile/SET-EMAIL', email } as const)
+
+export const setUserAC = (data: ResponseLoginDataType) => {
+  return {
+    type: SET_USER,
+    payload: data,
+  } as const
+}
 
 // thunks
 
@@ -59,7 +94,6 @@ export const setProfile = (): AppThunk => async dispatch => {
 
     dispatch(setName(res.data.name))
     dispatch(setEmail(res.data.email))
-    dispatch(setIsAuth(true))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
@@ -85,7 +119,8 @@ export const updateProfileName =
       // зануляем ошибки и статус
       dispatch(setError(''))
       // активация крутилки
-      dispatch(setIsLoading(true))
+      dispatch(setStatusLoadingAC('loading')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+      // dispatch(setIsLoading(true))               /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
       //доработать при добавлении аватарки
       const data = { name: name, avatar: '' }
       const res = await profileAPI.update(data)
@@ -103,7 +138,8 @@ export const updateProfileName =
       }
     } finally {
       // де-активация крутилки
-      dispatch(setIsLoading(false))
+      dispatch(setStatusLoadingAC('idle')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+      // dispatch(setIsLoading(false))            /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     }
   }
 
@@ -117,7 +153,6 @@ export const logoutProfile = (): AppThunk => async dispatch => {
 
     dispatch(setName(''))
     dispatch(setEmail(''))
-    dispatch(setIsAuth(false))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
@@ -140,7 +175,8 @@ type SetIsInitialisedType = ReturnType<typeof setIsInitialised>
 type SetErrorType = ReturnType<typeof setError>
 type SetNameType = ReturnType<typeof setName>
 type SetEmailType = ReturnType<typeof setEmail>
-type SetIsAuthType = ReturnType<typeof setIsAuth>
+
+type SetUserAC = ReturnType<typeof setUserAC>
 
 export type ProfileActionsType =
   | SetIsLoadingType
@@ -148,6 +184,25 @@ export type ProfileActionsType =
   | SetErrorType
   | SetNameType
   | SetEmailType
-  | SetIsAuthType
+  | SetUserAC
 
-type InitialStateProfileType = typeof initialState
+type InitialStateProfileType = {
+  isLoading: boolean
+  isInitialised: boolean
+  //добавить аватарку
+
+  _id: string
+  email: string
+  name: string
+  avatar: null | string
+  publicCardPacksCount: null | number
+  // количество колод
+
+  created: Date | null
+  updated: Date | null
+  isAdmin: boolean
+  verified: boolean // подтвердил ли почту
+  rememberMe: boolean
+
+  error?: null | string
+}

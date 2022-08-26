@@ -16,7 +16,7 @@ import { logoutProfile, setProfile, updateProfileName } from './profileReducer'
 export function Profile() {
   const profileName = useAppSelector(state => state.profile.name)
   const email = useAppSelector(state => state.profile.email)
-  const isAuth = useAppSelector(state => state.login.isLoggedIn)
+  const isAuthMe = useAppSelector(state => state.login.isAuthMe)
   const isInitialised = useAppSelector(state => state.profile.isInitialised)
   const isLoading = useAppSelector(state => state.profile.isLoading)
   const navigate = useNavigate()
@@ -42,12 +42,12 @@ export function Profile() {
     if (!isInitialised) {
       dispatch(setProfile())
     } else {
-      if (!isAuth) {
+      if (!isAuthMe) {
         alert('перейти в логин')
         navigate(PATH.LOGIN)
       }
     }
-  }, [isAuth])
+  }, [isAuthMe])
 
   // пока не ясно залогинен или нет показывать крутилку
   if (!isInitialised) return <div>крутилка</div>

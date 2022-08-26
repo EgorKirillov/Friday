@@ -23,7 +23,7 @@ export type ResponseLoginDataType = {
   _id: string
   email: string
   name: string
-  avatar?: string
+  avatar: string | null
   publicCardPacksCount: number
 
   created: Date

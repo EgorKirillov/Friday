@@ -11,7 +11,7 @@ import { PATH } from '../Routing/SwitchRoutes'
 import s from './Header.module.css'
 
 export function Header() {
-  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+  const isAuthMe = useAppSelector(state => state.login.isAuthMe)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const onClickHandlerNavigateToLogin = () => {
@@ -24,7 +24,7 @@ export function Header() {
   return (
     <div className={s.headerContainer}>
       <img className={s.logo} src={logo} alt="" />
-      {!isLoggedIn ? (
+      {!isAuthMe ? (
         <SuperButton onClick={() => onClickHandlerNavigateToLogin()}>Sigh in</SuperButton>
       ) : (
         <SuperButton onClick={() => onClickHandlerLogOut()}>Sigh out</SuperButton>

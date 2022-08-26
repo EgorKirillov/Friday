@@ -3,13 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="main + profile + login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/Header/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/login-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Preloader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/Preloader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/startPage-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Login_2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,27 +44,24 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="2DqSaKh7DZL9rTdIWVEQ9hTQw4a" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "prettierjs.PrettierConfiguration.Package": "D:\\it_incubator\\friday\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "D:\\it_incubator\\friday\\node_modules\\typescript\\lib"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\it_incubator\friday\src\features\auth\profile" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/features/mainPage/UI" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -162,6 +161,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="linters setup" />
@@ -172,6 +172,30 @@
     <MESSAGE value="main + profile" />
     <MESSAGE value="main + profile + login" />
     <option name="LAST_COMMIT_MESSAGE" value="main + profile + login" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts</url>
+          <line>186</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts</url>
+          <line>179</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts</url>
+          <line>76</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

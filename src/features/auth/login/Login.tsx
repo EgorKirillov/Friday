@@ -8,10 +8,10 @@ import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
 import style from './Login.module.css'
 import { LoginDataType } from './loginAPI'
-import { setIsLoggedInTC } from './loginReducer'
+import { setUserTC } from './loginReducer'
 
 export const Login = () => {
-  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+  const isAuthMe = useAppSelector(state => state.login.isAuthMe)
   const status = useAppSelector(state => state.startPage.status)
   const error = useAppSelector(state => state.startPage.error)
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export const Login = () => {
   } = useForm<LoginDataType>()
 
   const onSubmit = (data: LoginDataType) => {
-    dispatch(setIsLoggedInTC(data))
+    dispatch(setUserTC(data))
   }
 
   const onClickNavigateForgotPassword = () => {
@@ -34,7 +34,7 @@ export const Login = () => {
     navigate(PATH.REGISTRATION)
   }
 
-  if (isLoggedIn) {
+  if (isAuthMe) {
     return <Navigate to={'/profile'} />
   }
 
@@ -57,8 +57,9 @@ export const Login = () => {
             <hr />
           </div>
 
-          {errors?.email && <p>{errors.email.message}</p>}
-          <div style={{ color: 'red' }}>{error}</div>
+          {/*{error?.email && <p>{errors.email.message}</p>}*/}
+          {/*<div style={{ color: 'red' }}>{error}</div>*/}
+          {error}
 
           <div className={style.loginInputForm}>
             <div className={style.loginLabel}>
@@ -81,7 +82,7 @@ export const Login = () => {
             <a onClick={onClickNavigateForgotPassword}>Forgot Password?</a>
           </div>
           <input
-            className={style.button}
+            className={status !== 'loading' ? style.button : style.buttonDisabled}
             type="submit"
             value={'Sign in'}
             disabled={status === 'loading'}

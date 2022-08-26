@@ -87,6 +87,18 @@
   border-radius: 5px;
 }
 
+.buttonDisabled{
+  width: 80%;
+  height: 30px;
+  margin: 100px 0 35px;
+
+  color: white;
+
+  background-color: #7e7e7e;
+  border: none;
+  border-radius: 5px;
+}
+
 .navigateToRegistration {
   color: #366eff;
 }
