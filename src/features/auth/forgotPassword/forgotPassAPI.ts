@@ -1,3 +1,4 @@
+import { DEV_VERSION } from '../../../config'
 import { instance } from '../../mainPage/instanceAPI'
 
 export type ForgotDataType = {
@@ -17,8 +18,9 @@ export const ForgotAPI = {
     return instance.post<ResponseForgotDataType>('/auth/forgot', {
       email: email,
       from: 'test-front-admin <ai73a@yandex.by>',
-      message:
-        '`<div style="color: red; padding: 15px"> password recovery link: <a href=\'http://localhost:3000/new_password/$token$\'> link</a> </div>`',
+      message: !DEV_VERSION
+        ? '`<div style="color: red; padding: 15px"> password recovery link: <a href=\'http://localhost:3000/new_password/$token$\'> link</a> </div>`'
+        : '`<div style="color: red; padding: 15px"> password recovery link: <a href=\'https://egorkirillov.github.io/new_password/$token$\'> link</a> </div>`',
     })
   },
 }
