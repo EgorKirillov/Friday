@@ -6,7 +6,7 @@ import {
   ForgotPasswordActionsType,
 } from '../features/auth/forgotPassword/forgotPassReducer'
 import { LoginActionsType, loginReducer } from '../features/auth/login/login-reducer'
-import { ProfileActionsType, profileReducer } from '../features/auth/profile/profile-reducer'
+import { ProfileActionsType, profileReducer } from '../features/auth/profile/profileReducer'
 import { RegisterActionsType, registerReducer } from '../features/auth/register/registerReducer'
 import {
   PasswordNewActionsType,
