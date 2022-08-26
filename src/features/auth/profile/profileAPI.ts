@@ -3,18 +3,18 @@ import { AxiosResponse } from 'axios'
 import { instance } from '../../mainPage/instanceAPI'
 
 export const profileAPI = {
-  auth() {
-    return instance.post<ResponseProfileDataType>('/auth/me', {})
-  },
+  // auth() {
+  //   return instance.post<ResponseProfileDataType>('/auth/me', {})
+  // },
   update(data: ChangeProfileDataType) {
     return instance.put<ChangeProfileDataType, AxiosResponse<ResponseUpdateProfileDataType>>(
       '/auth/me',
       data
     )
   },
-  logout() {
-    return instance.delete<ResponseLogoutDataType>('/auth/me', {})
-  },
+  // logout() {
+  //   return instance.delete<ResponseLogoutDataType>('/auth/me', {})
+  // },
 }
 
 export type ChangeProfileDataType = {
@@ -40,9 +40,4 @@ export type ResponseProfileDataType = {
 export type ResponseUpdateProfileDataType = {
   updatedUser: ResponseProfileDataType
   error?: string
-}
-
-export type ResponseLogoutDataType = {
-  info: string
-  error: string
 }

@@ -8,17 +8,18 @@ import avatar from '../../../assets/img/avatar.jpg'
 import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+import { setIsLoggedOutTC } from '../login/loginReducer'
 
 import { EditableSpan } from './EditableSpan'
 import s from './Profile.module.css'
-import { logoutProfile, setProfile, updateProfileName } from './profileReducer'
+import { updateProfileName } from './profileReducer'
 
 export function Profile() {
-  const profileName = useAppSelector(state => state.profile.name)
-  const email = useAppSelector(state => state.profile.email)
+  const profileName = useAppSelector<string>(state => state.profile.name)
+  const email = useAppSelector<string>(state => state.profile.email)
   const isAuthMe = useAppSelector(state => state.login.isAuthMe)
-  const isInitialised = useAppSelector(state => state.profile.isInitialised)
-  const isLoading = useAppSelector(state => state.profile.isLoading)
+  const isInitialised = useAppSelector<boolean>(state => state.startPage.isInitialize)
+  const profileIsLoading = useAppSelector<boolean>(state => state.profile.isLoading)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -34,18 +35,13 @@ export function Profile() {
 
   //logout on button
   const logoutButtonHandler = () => {
-    dispatch(logoutProfile())
+    dispatch(setIsLoggedOutTC())
   }
 
   // если не проинициализирован установить данные,  не залогинен то перейти в логин
   useEffect(() => {
-    if (!isInitialised) {
-      dispatch(setProfile())
-    } else {
-      if (!isAuthMe) {
-        alert('перейти в логин')
-        navigate(PATH.LOGIN)
-      }
+    if (!isAuthMe) {
+      navigate(PATH.LOGIN)
     }
   }, [isAuthMe])
 
@@ -56,9 +52,9 @@ export function Profile() {
     <div className={s.container}>
       <div className={s.title}> It-incubator</div>
       <h1 className={s.title}>Personal Infomation</h1>
-      {isLoading && <div>крутилка</div>}
-
-      {!isLoading && (
+      {profileIsLoading ? (
+        <div>крутилка</div>
+      ) : (
         <div>
           <div className={s.avatarContainer}>
             <img className={s.avatar} src={avatar} alt="" />
@@ -75,7 +71,7 @@ export function Profile() {
             <EditableSpan
               value={profileName}
               onChange={name => changeNameHandler(name)}
-              disableEditMode={isLoading}
+              disableEditMode={profileIsLoading}
             />
           </div>
           <div>{email}</div>

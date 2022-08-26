@@ -2,6 +2,7 @@
 import { AppThunk } from '../../../app/store'
 import { loginAPI } from '../../auth/login/loginAPI'
 import { setIsAuthMeAC } from '../../auth/login/loginReducer'
+import { setUser } from '../../auth/profile/profileReducer'
 
 //constants
 const SET_INITIALIZE = 'SET_INITIALIZE'
@@ -65,6 +66,7 @@ export const initializeTC = (): AppThunk => dispatch => {
     .then(res => {
       dispatch(setIsAuthMeAC(true))
       dispatch(setErrorAC(null))
+      dispatch(setUser(res.data))
     })
     .catch(e => {})
     .finally(() => {

@@ -8,7 +8,6 @@ import { profileAPI } from './profileAPI'
 
 const initialState = {
   isLoading: false,
-  isInitialised: false,
   //добавить аватарку
 
   _id: '',
@@ -27,8 +26,6 @@ const initialState = {
   error: '',
 }
 
-const SET_USER = 'PROFILE/SET_USER'
-
 export const profileReducer = (
   state: InitialStateProfileType = initialState,
   action: ProfileActionsType
@@ -36,15 +33,13 @@ export const profileReducer = (
   switch (action.type) {
     case 'profile/SET-IS-LOADING':
       return { ...state, isLoading: action.isLoading }
-    case 'profile/SET-IS-INITIALISED':
-      return { ...state, isInitialised: action.isInitialised }
     case 'profile/SET-ERROR':
       return { ...state, error: action.error }
     case 'profile/SET-NAME':
       return { ...state, name: action.name }
     case 'profile/SET-EMAIL':
       return { ...state, email: action.email }
-    case SET_USER:
+    case 'profile/SET-USER':
       return {
         ...state,
         _id: action.payload._id,
@@ -68,49 +63,14 @@ export const profileReducer = (
 // actions
 export const setIsLoading = (isLoading: boolean) =>
   ({ type: 'profile/SET-IS-LOADING', isLoading } as const)
-export const setIsInitialised = (isInitialised: boolean) =>
-  ({ type: 'profile/SET-IS-INITIALISED', isInitialised } as const)
 export const setError = (error: string) => ({ type: 'profile/SET-ERROR', error } as const)
 export const setName = (name: string) => ({ type: 'profile/SET-NAME', name } as const)
 export const setEmail = (email: string) => ({ type: 'profile/SET-EMAIL', email } as const)
-
-export const setUserAC = (data: ResponseLoginDataType) => {
-  return {
-    type: SET_USER,
-    payload: data,
-  } as const
+export const setUser = (data: ResponseLoginDataType) => {
+  return { type: 'profile/SET-USER', payload: data } as const
 }
 
 // thunks
-
-export const setProfile = (): AppThunk => async dispatch => {
-  try {
-    // зануляем ошибки и статус
-    dispatch(setError(''))
-
-    // активация крутилки не требуется
-    // dispatch(setIsLoading(true))
-    const res = await profileAPI.auth()
-
-    dispatch(setName(res.data.name))
-    dispatch(setEmail(res.data.email))
-  } catch (e) {
-    const err = e as Error | AxiosError<{ error: string }>
-
-    if (axios.isAxiosError(err)) {
-      const error = err.response?.data ? err.response.data.error : err.message
-
-      dispatch(setError(error))
-    } else {
-      dispatch(setError(`Native error ${err.message}`))
-    }
-  } finally {
-    //инициализация прошла
-    dispatch(setIsInitialised(true))
-    // де-активация крутилки не требуется
-    // dispatch(setIsLoading(false))
-  }
-}
 
 export const updateProfileName =
   (name: string): AppThunk =>
@@ -120,7 +80,7 @@ export const updateProfileName =
       dispatch(setError(''))
       // активация крутилки
       dispatch(setStatusLoadingAC('loading')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-      // dispatch(setIsLoading(true))               /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+      dispatch(setIsLoading(true)) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
       //доработать при добавлении аватарки
       const data = { name: name, avatar: '' }
       const res = await profileAPI.update(data)
@@ -139,56 +99,26 @@ export const updateProfileName =
     } finally {
       // де-активация крутилки
       dispatch(setStatusLoadingAC('idle')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-      // dispatch(setIsLoading(false))            /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+      dispatch(setIsLoading(false)) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     }
   }
-
-export const logoutProfile = (): AppThunk => async dispatch => {
-  try {
-    // зануляем ошибки и статус
-    dispatch(setError(''))
-    // активация крутилки
-    dispatch(setIsLoading(true))
-    await profileAPI.logout()
-
-    dispatch(setName(''))
-    dispatch(setEmail(''))
-  } catch (e) {
-    const err = e as Error | AxiosError<{ error: string }>
-
-    if (axios.isAxiosError(err)) {
-      const error = err.response?.data ? err.response.data.error : err.message
-
-      dispatch(setError(error))
-    } else {
-      dispatch(setError(`Native error ${err.message}`))
-    }
-  } finally {
-    // де-активация крутилки
-    dispatch(setIsLoading(false))
-  }
-}
 
 // types
 type SetIsLoadingType = ReturnType<typeof setIsLoading>
-type SetIsInitialisedType = ReturnType<typeof setIsInitialised>
 type SetErrorType = ReturnType<typeof setError>
 type SetNameType = ReturnType<typeof setName>
 type SetEmailType = ReturnType<typeof setEmail>
-
-type SetUserAC = ReturnType<typeof setUserAC>
+type SetUserType = ReturnType<typeof setUser>
 
 export type ProfileActionsType =
   | SetIsLoadingType
-  | SetIsInitialisedType
   | SetErrorType
   | SetNameType
   | SetEmailType
-  | SetUserAC
+  | SetUserType
 
 type InitialStateProfileType = {
   isLoading: boolean
-  isInitialised: boolean
   //добавить аватарку
 
   _id: string

@@ -1,6 +1,6 @@
 import { AppThunk } from '../../../app/store'
 import { setErrorAC, setStatusLoadingAC } from '../../mainPage/UI/startPageReducer'
-import { setUserAC } from '../profile/profileReducer'
+import { setUser } from '../profile/profileReducer'
 
 import { loginAPI, LoginDataType } from './loginAPI'
 
@@ -41,7 +41,7 @@ export const setUserTC =
       .login(data)
       .then(res => {
         dispatch(setIsAuthMeAC(true))
-        dispatch(setUserAC(res.data))
+        dispatch(setUser(res.data))
       })
       .catch(e => {
         dispatch(setErrorAC(e.response.data.error))
