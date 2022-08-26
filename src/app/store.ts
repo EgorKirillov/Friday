@@ -1,18 +1,17 @@
-import { combineReducers, applyMiddleware, compose, legacy_createStore } from 'redux'
+import { applyMiddleware, combineReducers, compose, legacy_createStore } from 'redux'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
 import {
   forgotPassReducer,
   ForgotPasswordActionsType,
 } from '../features/auth/forgotPassword/forgotPassReducer'
-import { LoginActionsType, loginReducer } from '../features/auth/login/loginReducer'
-import { ProfileActionsType, profileReducer } from '../features/auth/profile/profileReducer'
+import { LoginActionsType, loginReducer } from '../features/auth/login/login-reducer'
+import { ProfileActionsType, profileReducer } from '../features/auth/profile/profile-reducer'
 import { RegisterActionsType, registerReducer } from '../features/auth/register/registerReducer'
 import {
   PasswordNewActionsType,
   passwordNewReducer,
 } from '../features/auth/setPassword/PasswordNewReducer'
-import { StartPageActionType, StartPageReducer } from '../features/mainPage/UI/startPageReducer'
 
 // необходимо для работы расширения Redux
 //             v
@@ -34,7 +33,6 @@ const rootReducer = combineReducers({
   register: registerReducer, // registration
   forgotPass: forgotPassReducer,
   newPass: passwordNewReducer,
-  startPage: StartPageReducer,
 })
 
 export const store = legacy_createStore(
@@ -53,7 +51,6 @@ export type AppActionType =
   | ForgotPasswordActionsType
   | PasswordNewActionsType
   | RegisterActionsType
-  | StartPageActionType
 
 // Dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppActionType>

@@ -1,3 +1,4 @@
+import axios, { AxiosError } from 'axios'
 import { Dispatch } from 'redux'
 
 import { authAPI } from './registeAPI'
@@ -5,6 +6,7 @@ import { authAPI } from './registeAPI'
 const initialState: InitialStateType = {
   isRegistered: false,
   isLoading: false,
+  error: '',
 }
 
 export const registerReducer = (
@@ -18,6 +20,9 @@ export const registerReducer = (
     case 'register/SET-IS-LOADING': {
       return { ...state, isLoading: action.isLoading }
     }
+    case 'register/SET-ERROR': {
+      return { ...state, error: action.error }
+    }
     default: {
       return state
     }
@@ -26,38 +31,58 @@ export const registerReducer = (
 
 export const registerAC = (isRegistered: boolean) =>
   ({ type: 'register/SET-IS-REGISTER', isRegistered } as const)
-export const setIsLoading = (isLoading: boolean) =>
+export const setIsLoadingAC = (isLoading: boolean) =>
   ({ type: 'register/SET-IS-LOADING', isLoading } as const)
+export const setRegisterErrorAC = (error: string) =>
+  ({ type: 'register/SET-ERROR', error } as const)
 
 // thunks
-export const registerTC = (data: any) => (dispatch: Dispatch<RegisterActionsType>) => {
-  dispatch(registerAC(true))
-  authAPI
-    .register(data)
-    .then(res => {
-      if (!res.data.error) {
-        dispatch(registerAC(true))
-      }
-    })
-    .catch(error => {
-      dispatch(registerAC(false))
-      {
-        // error.message ? error.message : 'Some error occurred'
-      }
-    })
-}
+export const registerTC =
+  (data: RegisterParamsType) => (dispatch: Dispatch<RegisterActionsType>) => {
+    dispatch(setIsLoadingAC(true))
+    authAPI
+      .register(data)
+      .then(res => {
+        if (!res.data.error) {
+          dispatch(registerAC(true))
+          dispatch(setRegisterErrorAC(''))
+        } else {
+          dispatch(registerAC(false))
+          dispatch(setRegisterErrorAC(res.data.error))
+        }
+      })
+      .catch(error => {
+        dispatch(registerAC(false))
+        const err = error as Error | AxiosError<{ error: string }>
+
+        if (axios.isAxiosError(err)) {
+          const error = err.response?.data ? err.response.data.error : err.message
+
+          dispatch(setRegisterErrorAC(error))
+        } else {
+          dispatch(setRegisterErrorAC(`Native error ${err.message}`))
+        }
+      })
+      .finally(() => dispatch(setIsLoadingAC(false)))
+  }
 
 // types
 type InitialStateType = {
   isRegistered: boolean
   isLoading: boolean
+  error: string
 }
 type SetIsRegisterActionType = ReturnType<typeof registerAC>
-type SetIsLoadingType = ReturnType<typeof setIsLoading>
+type SetIsLoadingType = ReturnType<typeof setIsLoadingAC>
+type SetRegisterErrorType = ReturnType<typeof setRegisterErrorAC>
 
-export type RegisterActionsType = SetIsRegisterActionType | SetIsLoadingType
+export type RegisterActionsType = SetIsRegisterActionType | SetIsLoadingType | SetRegisterErrorType
 
 export type RegisterParamsType = {
+  email: string
+  password: string
+}
+export type RegisterResponseType = {
   addedUser: {
     email: string
     password: string
