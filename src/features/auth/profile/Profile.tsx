@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
 import { useNavigate } from 'react-router-dom'
 
 import avatar from '../../../assets/img/avatar.jpg'
@@ -53,7 +54,7 @@ export function Profile() {
       <div className={s.title}> It-incubator</div>
       <h1 className={s.title}>Personal Infomation</h1>
       {profileIsLoading ? (
-        <div>крутилка</div>
+        <CircularProgress />
       ) : (
         <div>
           <div className={s.avatarContainer}>
