@@ -54,7 +54,7 @@ export function PasswordNew() {
 
   return (
     <div className={s.conteiner}>
-      <h1 className={s.title}>Create new password</h1>
+      <h2>Create new password</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <input

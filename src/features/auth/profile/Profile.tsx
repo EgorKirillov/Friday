@@ -52,7 +52,7 @@ export function Profile() {
   return (
     <div className={s.container}>
       <div className={s.title}> It-incubator</div>
-      <h1 className={s.title}>Personal Infomation</h1>
+      <h2 className={s.title}>Personal Infomation</h2>
       {profileIsLoading ? (
         <CircularProgress />
       ) : (
@@ -68,16 +68,21 @@ export function Profile() {
           </div>
 
           <div>
-            <div>Nickname</div>
+            <div className={s.minititle}>Nickname</div>
+
             <EditableSpan
               value={profileName}
               onChange={name => changeNameHandler(name)}
               disableEditMode={profileIsLoading}
             />
+
+            <div className={s.minititle}>e-mail</div>
+            <div>{email}</div>
           </div>
-          <div>{email}</div>
           <div>
-            <SuperButton onClick={logoutButtonHandler}>logout button</SuperButton>
+            <SuperButton onClick={logoutButtonHandler} className={s.logoutButton}>
+              logout я пшел
+            </SuperButton>
           </div>
         </div>
       )}
