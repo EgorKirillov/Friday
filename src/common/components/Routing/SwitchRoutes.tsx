@@ -25,6 +25,7 @@ function SwitchRoutes() {
     <div>
       <Routes>
         <Route path={'/'} element={<Login />} />
+        <Route path={'/Friday'} element={<Login />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
