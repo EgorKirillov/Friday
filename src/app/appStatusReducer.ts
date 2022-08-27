@@ -1,4 +1,3 @@
-//initial state
 import { loginAPI } from '../features/auth/login/loginAPI'
 import { setIsAuthMeAC } from '../features/auth/login/loginReducer'
 import { setUser } from '../features/auth/profile/profileReducer'
@@ -17,11 +16,11 @@ export const appStatusReducer = (
   action: AppStatusActionType
 ) => {
   switch (action.type) {
-    case 'SET-INITIALIZE':
+    case 'app/SET-INITIALIZE':
       return { ...state, isInitialize: action.payload.value }
-    case 'SET-STATUS-LOADING':
+    case 'app/SET-STATUS-LOADING':
       return { ...state, status: action.payload.status }
-    case 'SET-ERROR':
+    case 'app/SET-ERROR':
       return { ...state, error: action.payload.errorValue }
     default:
       return state
@@ -31,14 +30,14 @@ export const appStatusReducer = (
 //action creators
 const setIsInitializeAC = (value: boolean) => {
   return {
-    type: 'SET-INITIALIZE',
+    type: 'app/SET-INITIALIZE',
     payload: { value },
   } as const
 }
 
 export const setStatusLoadingAC = (status: RequestStatusType) => {
   return {
-    type: 'SET-STATUS-LOADING',
+    type: 'app/SET-STATUS-LOADING',
     payload: {
       status,
     },
@@ -47,7 +46,7 @@ export const setStatusLoadingAC = (status: RequestStatusType) => {
 
 export const setErrorAC = (errorValue: string | null) => {
   return {
-    type: 'SET-ERROR',
+    type: 'app/SET-ERROR',
     payload: {
       errorValue,
     },
