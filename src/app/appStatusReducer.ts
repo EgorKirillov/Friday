@@ -1,3 +1,4 @@
+import { handleError } from '../common/utils/handleError'
 import { loginAPI } from '../features/auth/login/loginAPI'
 import { setIsAuthMeAC } from '../features/auth/login/loginReducer'
 import { setUser } from '../features/auth/profile/profileReducer'
@@ -28,46 +29,42 @@ export const appStatusReducer = (
 }
 
 //action creators
-const setIsInitializeAC = (value: boolean) => {
+const setIsInitialize = (value: boolean) => {
   return {
     type: 'app/SET-INITIALIZE',
     payload: { value },
   } as const
 }
 
-export const setStatusLoadingAC = (status: RequestStatusType) => {
+export const setStatusLoading = (status: RequestStatusType) => {
   return {
     type: 'app/SET-STATUS-LOADING',
-    payload: {
-      status,
-    },
+    payload: { status },
   } as const
 }
 
-export const setErrorAC = (errorValue: string | null) => {
+export const setError = (errorValue: string | null) => {
   return {
     type: 'app/SET-ERROR',
-    payload: {
-      errorValue,
-    },
+    payload: { errorValue },
   } as const
 }
 
 // thunk creators
-export const initializeTC = (): AppThunk => dispatch => {
-  dispatch(setStatusLoadingAC('loading'))
-  loginAPI
-    .autMe()
-    .then(res => {
-      dispatch(setIsAuthMeAC(true))
-      dispatch(setErrorAC(null))
-      dispatch(setUser(res.data))
-    })
-    .catch(e => {})
-    .finally(() => {
-      dispatch(setIsInitializeAC(true))
-      dispatch(setStatusLoadingAC('idle'))
-    })
+export const initializeApp = (): AppThunk => async dispatch => {
+  try {
+    dispatch(setStatusLoading('loading'))
+    dispatch(setError(null))
+    const res = await loginAPI.autMe()
+
+    dispatch(setIsAuthMeAC(true))
+    dispatch(setStatusLoading('succeeded'))
+    dispatch(setUser(res.data))
+  } catch (e) {
+    handleError(e, dispatch)
+  } finally {
+    dispatch(setIsInitialize(true))
+  }
 }
 //type
 export type InitialStateType = {
@@ -77,8 +74,8 @@ export type InitialStateType = {
 }
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
-type SetIsInitializeTypeAC = ReturnType<typeof setIsInitializeAC>
-type SetStatusLoadingTypeAC = ReturnType<typeof setStatusLoadingAC>
-type SetErrorTypeAC = ReturnType<typeof setErrorAC>
+type SetIsInitializeTypeAC = ReturnType<typeof setIsInitialize>
+type SetStatusLoadingTypeAC = ReturnType<typeof setStatusLoading>
+type SetErrorTypeAC = ReturnType<typeof setError>
 
 export type AppStatusActionType = SetIsInitializeTypeAC | SetStatusLoadingTypeAC | SetErrorTypeAC

@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify'
 
-import { setErrorAC, setStatusLoadingAC } from '../../../app/appStatusReducer'
+import { setError, setStatusLoading } from '../../../app/appStatusReducer'
 import { AppThunk } from '../../../app/store'
+import { handleError } from '../../../common/utils/handleError'
 import { setUser } from '../profile/profileReducer'
 
 import { loginAPI, LoginDataType } from './loginAPI'
@@ -38,7 +39,7 @@ export const setIsAuthMeAC = (value: boolean) => {
 export const setUserTC =
   (data: LoginDataType): AppThunk =>
   dispatch => {
-    dispatch(setStatusLoadingAC('loading'))
+    dispatch(setStatusLoading('loading'))
     loginAPI
       .login(data)
       .then(res => {
@@ -47,25 +48,24 @@ export const setUserTC =
         toast.info(`${res.data.name}, you are logged in`)
       })
       .catch(e => {
-        dispatch(setErrorAC(e.response.data.error))
-        toast.error(`ERROR: ${e.response.data.error}`)
+        handleError(e, dispatch)
       })
       .finally(() => {
-        dispatch(setStatusLoadingAC('idle'))
+        dispatch(setStatusLoading('idle'))
       })
   }
 export const setIsLoggedOutTC = (): AppThunk => dispatch => {
-  dispatch(setStatusLoadingAC('loading'))
+  dispatch(setStatusLoading('loading'))
   loginAPI
     .logout()
     .then(res => {
       dispatch(setIsAuthMeAC(false))
     })
     .catch(e => {
-      dispatch(setErrorAC(e.response.data.error))
+      dispatch(setError(e.response.data.error))
     })
     .finally(() => {
-      dispatch(setStatusLoadingAC('idle'))
+      dispatch(setStatusLoading('idle'))
     })
 }
 

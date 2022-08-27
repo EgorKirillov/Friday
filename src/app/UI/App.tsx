@@ -3,13 +3,13 @@ import React, { useEffect } from 'react'
 import './App.css'
 import LinearProgress from '@mui/material/LinearProgress'
 
-import DevHeader from '../../common/components/devHeader/DevHeader'
+import { DevHeader } from '../../common/components/devHeader/DevHeader'
 import { Header } from '../../common/components/header/Header'
 import { Preloader } from '../../common/components/loaderCircle/Preloader'
-import SwitchRoutes from '../../common/components/routing/SwitchRoutes'
+import { SwitchRoutes } from '../../common/components/routing/SwitchRoutes'
 import { ToastMesssage } from '../../common/components/toast/ToastMesssage'
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks'
-import { initializeTC } from '../appStatusReducer'
+import { initializeApp } from '../appStatusReducer'
 
 const App = () => {
   const status = useAppSelector(state => state.app.status)
@@ -18,7 +18,7 @@ const App = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(initializeTC())
+    dispatch(initializeApp())
   }, [])
 
   return (

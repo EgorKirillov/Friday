@@ -1,35 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="refactor rebase from startPage to app">
+    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="some refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/UI/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UI/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/appStatusReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/appStatusReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/instanceAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/instanceAPI.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/ButtonWithLoader/ButtonWithLoader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/buttonWithLoader/ButtonWithLoader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/DevHeader/DevHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/devHeader/DevHeader.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/DevHeader/DevHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/devHeader/DevHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Header/Header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/header/Header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/LoaderCircle/Preloader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/loaderCircle/Preloader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/PageNotFound/Error404Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/pageNotFound/Error404Page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Routing/SwitchRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/routing/SwitchRoutes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/TesPage/TestsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/testPage/TestsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Toast/ToastMesssage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/toast/ToastMesssage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/c1-SuperInputText/SuperInputText.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/superInputText/SuperInputText.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/c1-SuperInputText/SuperInputText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/superInputText/SuperInputText.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/c2-SuperButton/SuperButton.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/superButton/SuperButton.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/c2-SuperButton/SuperButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/superButton/SuperButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/c3-SuperCheckbox/SuperCheckbox.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/superCheckbox/SuperCheckbox.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/c3-SuperCheckbox/SuperCheckbox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/superCheckbox/SuperCheckbox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/CheckEmailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/CheckEmailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/components/devHeader/DevHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/devHeader/DevHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/components/routing/SwitchRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/routing/SwitchRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/handleError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/handleError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecoveryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecoveryPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/UI/login.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/UI/Login.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/UI/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/UI/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/UI/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/UI/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/register/UI/Registration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/register/UI/Registration.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNewReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/passwordNewReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/UI/PasswordNew.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/UI/PasswordNew.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/passwordNewReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/passwordNewReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +111,7 @@
       <workItem from="1661425184866" duration="471000" />
       <workItem from="1661425672390" duration="17107000" />
       <workItem from="1661597327619" duration="6951000" />
+      <workItem from="1661618960720" duration="1742000" />
     </task>
     <task id="LOCAL-00001" summary="linters setup">
       <created>1661425968135</created>
@@ -289,7 +277,8 @@
     <MESSAGE value="add component ButtonWithLoader" />
     <MESSAGE value="refactor rebase preloader" />
     <MESSAGE value="refactor rebase from startPage to app" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor rebase from startPage to app" />
+    <MESSAGE value="some refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="some refactoring" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

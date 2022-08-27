@@ -30,9 +30,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 // объединяем рутовый Reducer
 const rootReducer = combineReducers({
-  login: loginReducer, // login and registration, recovery and change password
-  profile: profileReducer, // create/change profile data
-  register: registerReducer, // registration
+  login: loginReducer,
+  profile: profileReducer,
+  register: registerReducer,
   forgotPass: forgotPassReducer,
   newPass: passwordNewReducer,
   // startPage: appStatusReducer,

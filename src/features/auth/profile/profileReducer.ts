@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 
-import { setStatusLoadingAC } from '../../../app/appStatusReducer'
+import { setStatusLoading } from '../../../app/appStatusReducer'
 import { AppThunk } from '../../../app/store'
 import { ResponseLoginDataType } from '../login/loginAPI'
 
@@ -79,7 +79,7 @@ export const updateProfileName =
       // зануляем ошибки и статус
       dispatch(setError(''))
       // активация крутилки
-      dispatch(setStatusLoadingAC('loading')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+      dispatch(setStatusLoading('loading')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
       dispatch(setIsLoading(true)) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
       //доработать при добавлении аватарки
       const data = { name: name, avatar: '' }
@@ -98,7 +98,7 @@ export const updateProfileName =
       }
     } finally {
       // де-активация крутилки
-      dispatch(setStatusLoadingAC('idle')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+      dispatch(setStatusLoading('idle')) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
       dispatch(setIsLoading(false)) /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     }
   }

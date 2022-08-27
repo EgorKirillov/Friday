@@ -9,7 +9,6 @@ import { PasswordRecoveryPage } from './PasswordRecoveryPage'
 
 export function PasswordRecovery() {
   const successSendEmail = useAppSelector(state => state.forgotPass.success)
-  const error = useAppSelector(state => state.forgotPass.error)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -19,7 +18,7 @@ export function PasswordRecovery() {
   return (
     <div className={s.conteiner}>
       <div className={s.title}> It-incubator</div>
-      {successSendEmail && !error ? <CheckEmailPage /> : <PasswordRecoveryPage />}
+      {successSendEmail ? <CheckEmailPage /> : <PasswordRecoveryPage />}
     </div>
   )
 }

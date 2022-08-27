@@ -16,7 +16,7 @@ import s from './DevHeader.module.css'
 //     TESTS: '/tests',  //тестовая -отобразить / продемонстрировать все SuperКопмоненты
 //}
 
-function DevHeader() {
+export const DevHeader = () => {
   return (
     <div className={s.conteiner}>
       <NavLink className={s.link} to={PATH.LOGIN}>
@@ -40,5 +40,3 @@ function DevHeader() {
     </div>
   )
 }
-
-export default DevHeader

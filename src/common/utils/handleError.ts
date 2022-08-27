@@ -1,9 +1,25 @@
+import axios, { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
 import { Dispatch } from 'redux'
 
-import { setErrorAC } from '../../app/appStatusReducer'
+import { setError, setStatusLoading } from '../../app/appStatusReducer'
 import { AppActionType } from '../../app/store'
 
-// generic function
+export const handleError = (error: any, dispatch: Dispatch<AppActionType>) => {
+  const err = error as Error | AxiosError<{ error: string }>
+  let errorMessage: string
+
+  if (axios.isAxiosError(err)) {
+    errorMessage = err.response?.data ? err.response.data.error : err.message
+  } else {
+    errorMessage = `Native error ${err.message}`
+  }
+  dispatch(setError(errorMessage))
+  dispatch(setStatusLoading('failed'))
+  toast.error(errorMessage)
+}
+/*
+
 export const handleServerAppError = <T>(
   data: any, //ResponseType<T>,
   dispatch: Dispatch<AppActionType>
@@ -23,3 +39,4 @@ export const handleServerNetworkError = (
   dispatch(setErrorAC(error.message ? error.message : 'some unknown error'))
   dispatch(setErrorAC('failed'))
 }
+*/

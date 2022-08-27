@@ -1,6 +1,5 @@
-import axios, { AxiosError } from 'axios'
-
 import { AppThunk } from '../../../app/store'
+import { handleError } from '../../../common/utils/handleError'
 
 import { PasswordNewAPI } from './passwordNewAPI'
 
@@ -43,22 +42,14 @@ export const setNewPassword =
       dispatch(setSuccess(false))
       // активация крутилки
       dispatch(setIsLoading(true))
-      const res = await PasswordNewAPI.setNewPassword({
+      await PasswordNewAPI.setNewPassword({
         password: password,
         resetPasswordToken: token,
       })
 
       dispatch(setSuccess(true))
     } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>
-
-      if (axios.isAxiosError(err)) {
-        const error = err.response?.data ? err.response.data.error : err.message
-
-        dispatch(setError(error))
-      } else {
-        dispatch(setError(`Native error ${err.message}`))
-      }
+      handleError(e, dispatch)
     } finally {
       // де-активация крутилки
       dispatch(setIsLoading(false))
