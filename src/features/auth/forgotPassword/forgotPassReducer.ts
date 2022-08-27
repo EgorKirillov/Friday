@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
 
 import { AppThunk } from '../../../app/store'
 
@@ -59,8 +60,10 @@ export const sendEmail =
         const error = err.response?.data ? err.response.data.error : err.message
 
         dispatch(setError(error))
+        toast.error(error)
       } else {
         dispatch(setError(`Native error ${err.message}`))
+        toast.error(err.message)
       }
     } finally {
       dispatch(setIsLoading(false))

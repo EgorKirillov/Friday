@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { setErrorAC, setStatusLoadingAC } from '../../../app/appStatusReducer'
 import { AppThunk } from '../../../app/store'
 import { setUser } from '../profile/profileReducer'
@@ -42,9 +44,11 @@ export const setUserTC =
       .then(res => {
         dispatch(setIsAuthMeAC(true))
         dispatch(setUser(res.data))
+        toast.info(`${res.data.name}, you are logged in`)
       })
       .catch(e => {
         dispatch(setErrorAC(e.response.data.error))
+        toast.error(`ERROR: ${e.response.data.error}`)
       })
       .finally(() => {
         dispatch(setStatusLoadingAC('idle'))
