@@ -1,14 +1,8 @@
-//initial state
 import { loginAPI } from '../features/auth/login/loginAPI'
 import { setIsAuthMeAC } from '../features/auth/login/loginReducer'
 import { setUser } from '../features/auth/profile/profileReducer'
 
 import { AppThunk } from './store'
-
-//constants
-const SET_INITIALIZE = 'SET_INITIALIZE'
-const SET_STATUS_LOADING = 'SET_STATUS_LOADING'
-const SET_ERROR = 'SET_ERROR'
 
 const initialState: InitialStateType = {
   isInitialize: false,
@@ -22,11 +16,11 @@ export const appStatusReducer = (
   action: AppStatusActionType
 ) => {
   switch (action.type) {
-    case SET_INITIALIZE:
+    case 'app/SET-INITIALIZE':
       return { ...state, isInitialize: action.payload.value }
-    case SET_STATUS_LOADING:
+    case 'app/SET-STATUS-LOADING':
       return { ...state, status: action.payload.status }
-    case SET_ERROR:
+    case 'app/SET-ERROR':
       return { ...state, error: action.payload.errorValue }
     default:
       return state
@@ -36,14 +30,14 @@ export const appStatusReducer = (
 //action creators
 const setIsInitializeAC = (value: boolean) => {
   return {
-    type: SET_INITIALIZE,
+    type: 'app/SET-INITIALIZE',
     payload: { value },
   } as const
 }
 
 export const setStatusLoadingAC = (status: RequestStatusType) => {
   return {
-    type: SET_STATUS_LOADING,
+    type: 'app/SET-STATUS-LOADING',
     payload: {
       status,
     },
@@ -52,7 +46,7 @@ export const setStatusLoadingAC = (status: RequestStatusType) => {
 
 export const setErrorAC = (errorValue: string | null) => {
   return {
-    type: SET_ERROR,
+    type: 'app/SET-ERROR',
     payload: {
       errorValue,
     },
