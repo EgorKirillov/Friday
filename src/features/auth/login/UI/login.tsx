@@ -3,12 +3,12 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 
-import { PATH } from '../../../common/components/Routing/SwitchRoutes'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { LoginDataType } from '../loginAPI'
+import { setUserTC } from '../loginReducer'
 
-import style from './Login.module.css'
-import { LoginDataType } from './loginAPI'
-import { setUserTC } from './loginReducer'
+import style from './login.module.css'
 
 export const Login = () => {
   const isAuthMe = useAppSelector(state => state.login.isAuthMe)
@@ -78,9 +78,11 @@ export const Login = () => {
             <input type="checkbox" {...register('rememberMe')} disabled={status === 'loading'} />
             <label>Remember me</label>
           </div>
+
           <div className={style.navigate}>
             <a onClick={onClickNavigateForgotPassword}>Forgot Password?</a>
           </div>
+
           <input
             className={status !== 'loading' ? style.button : style.buttonDisabled}
             type="submit"

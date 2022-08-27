@@ -5,15 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
 import { useNavigate } from 'react-router-dom'
 
-import avatar from '../../../assets/img/avatar.jpg'
-import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
-import { PATH } from '../../../common/components/Routing/SwitchRoutes'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { setIsLoggedOutTC } from '../login/loginReducer'
+import avatar from '../../../../assets/img/avatar.jpg'
+import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
+import { EditableSpan } from '../../../../common/components/editableSpan/EditableSpan'
+import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { setIsLoggedOutTC } from '../../login/loginReducer'
+import { updateProfileName } from '../profileReducer'
 
-import { EditableSpan } from './EditableSpan'
 import s from './Profile.module.css'
-import { updateProfileName } from './profileReducer'
 
 export function Profile() {
   const profileName = useAppSelector<string>(state => state.profile.name)

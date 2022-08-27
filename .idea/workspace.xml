@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="refactor rebase preloader">
+    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="refactor rebase from startPage to app">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UI/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UI/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/profileAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/profileAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/register/registeAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/register/registeAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/passwordNewAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/passwordNewAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UI/StartPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/appStatusReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/instanceAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/instanceAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/components/Routing/SwitchRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/Routing/SwitchRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Login.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/UI/login.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/UI/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/EditableSpan.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/editableSpan/EditableSpan.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/Profile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/UI/Profile.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/UI/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/register/Registration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/register/UI/Registration.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/register/registation.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/register/UI/registation.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/UI/PasswordNew.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/UI/PasswordNew.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,10 +73,11 @@
       <recent name="D:\it_incubator\friday\src\features\auth\profile" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\it_incubator\friday\src\app" />
-      <recent name="D:\it_incubator\friday\src\app\UI" />
-      <recent name="D:\it_incubator\friday\src\common\components\LoaderCircle" />
-      <recent name="$PROJECT_DIR$/src/features/mainPage/UI" />
+      <recent name="D:\it_incubator\friday\src\features\auth\setPassword\UI" />
+      <recent name="D:\it_incubator\friday\src\features\auth\register\UI" />
+      <recent name="D:\it_incubator\friday\src\features\auth\profile\UI" />
+      <recent name="D:\it_incubator\friday\src\common\components\editableSpan" />
+      <recent name="D:\it_incubator\friday\src\features\auth\login\UI" />
     </key>
   </component>
   <component name="RunManager">
@@ -111,7 +107,7 @@
       <updated>1661425183281</updated>
       <workItem from="1661425184866" duration="471000" />
       <workItem from="1661425672390" duration="17107000" />
-      <workItem from="1661597327619" duration="5809000" />
+      <workItem from="1661597327619" duration="6951000" />
     </task>
     <task id="LOCAL-00001" summary="linters setup">
       <created>1661425968135</created>
@@ -239,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661601642034</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="refactor rebase from startPage to app">
+      <created>1661603229180</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1661603229180</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +272,8 @@
     <MESSAGE value="hashrouter" />
     <MESSAGE value="add component ButtonWithLoader" />
     <MESSAGE value="refactor rebase preloader" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor rebase preloader" />
+    <MESSAGE value="refactor rebase from startPage to app" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor rebase from startPage to app" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

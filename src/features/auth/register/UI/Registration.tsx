@@ -3,12 +3,12 @@ import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
 
-import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
-import { PATH } from '../../../common/components/Routing/SwitchRoutes'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
+import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { registerTC, setRegisterErrorAC } from '../registerReducer'
 
 import style from './registation.module.css'
-import { registerTC, setRegisterErrorAC } from './registerReducer'
 
 type RegistrationType = {
   email?: string
