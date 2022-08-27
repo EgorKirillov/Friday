@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { ButtonWithLoader } from '../../../../common/components/ButtonWithLoader/ButtonWithLoader'
-import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
+import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { setError, setNewPassword } from '../PasswordNewReducer'
+import { setError, setNewPassword } from '../passwordNewReducer'
 
 import s from './PasswordNew.module.css'
 

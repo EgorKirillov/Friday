@@ -3,8 +3,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import imgEmail from '../../../../assets/img/emailSend.svg'
-import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
-import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { PATH } from '../../../../common/components/routing/SwitchRoutes'
+import SuperButton from '../../../../common/components/superButton/SuperButton'
 import { useAppSelector } from '../../../../common/hooks/hooks'
 
 import s from './PasswordRecovery.module.css'

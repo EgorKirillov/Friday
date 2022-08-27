@@ -3,12 +3,12 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 
-import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { LoginDataType } from '../loginAPI'
 import { setUserTC } from '../loginReducer'
 
-import style from './login.module.css'
+import style from './Login.module.css'
 
 export const Login = () => {
   const isAuthMe = useAppSelector(state => state.login.isAuthMe)

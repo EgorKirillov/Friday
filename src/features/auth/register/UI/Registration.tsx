@@ -3,8 +3,8 @@ import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
 
-import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
-import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { PATH } from '../../../../common/components/routing/SwitchRoutes'
+import SuperButton from '../../../../common/components/superButton/SuperButton'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { registerTC, setRegisterErrorAC } from '../registerReducer'
 

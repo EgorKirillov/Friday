@@ -5,11 +5,6 @@ import { setUser } from '../features/auth/profile/profileReducer'
 
 import { AppThunk } from './store'
 
-//constants
-const SET_INITIALIZE = 'SET_INITIALIZE'
-const SET_STATUS_LOADING = 'SET_STATUS_LOADING'
-const SET_ERROR = 'SET_ERROR'
-
 const initialState: InitialStateType = {
   isInitialize: false,
   status: 'idle',
@@ -22,11 +17,11 @@ export const appStatusReducer = (
   action: AppStatusActionType
 ) => {
   switch (action.type) {
-    case SET_INITIALIZE:
+    case 'SET-INITIALIZE':
       return { ...state, isInitialize: action.payload.value }
-    case SET_STATUS_LOADING:
+    case 'SET-STATUS-LOADING':
       return { ...state, status: action.payload.status }
-    case SET_ERROR:
+    case 'SET-ERROR':
       return { ...state, error: action.payload.errorValue }
     default:
       return state
@@ -36,14 +31,14 @@ export const appStatusReducer = (
 //action creators
 const setIsInitializeAC = (value: boolean) => {
   return {
-    type: SET_INITIALIZE,
+    type: 'SET-INITIALIZE',
     payload: { value },
   } as const
 }
 
 export const setStatusLoadingAC = (status: RequestStatusType) => {
   return {
-    type: SET_STATUS_LOADING,
+    type: 'SET-STATUS-LOADING',
     payload: {
       status,
     },
@@ -52,7 +47,7 @@ export const setStatusLoadingAC = (status: RequestStatusType) => {
 
 export const setErrorAC = (errorValue: string | null) => {
   return {
-    type: SET_ERROR,
+    type: 'SET-ERROR',
     payload: {
       errorValue,
     },
@@ -83,8 +78,8 @@ export type InitialStateType = {
 }
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
-type setIsInitializeTypeAC = ReturnType<typeof setIsInitializeAC>
-type setStatusLoadingTypeAC = ReturnType<typeof setStatusLoadingAC>
-type setErrorTypeAC = ReturnType<typeof setErrorAC>
+type SetIsInitializeTypeAC = ReturnType<typeof setIsInitializeAC>
+type SetStatusLoadingTypeAC = ReturnType<typeof setStatusLoadingAC>
+type SetErrorTypeAC = ReturnType<typeof setErrorAC>
 
-export type AppStatusActionType = setIsInitializeTypeAC | setStatusLoadingTypeAC | setErrorTypeAC
+export type AppStatusActionType = SetIsInitializeTypeAC | SetStatusLoadingTypeAC | SetErrorTypeAC

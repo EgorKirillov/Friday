@@ -3,8 +3,8 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { ButtonWithLoader } from '../../../../common/components/ButtonWithLoader/ButtonWithLoader'
-import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
+import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
+import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { sendEmail } from '../forgotPassReducer'
 

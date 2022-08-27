@@ -2,7 +2,7 @@ import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-import { PATH } from '../Routing/SwitchRoutes'
+import { PATH } from '../routing/SwitchRoutes'
 
 import s from './DevHeader.module.css'
 

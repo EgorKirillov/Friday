@@ -11,7 +11,7 @@ import { RegisterActionsType, registerReducer } from '../features/auth/register/
 import {
   PasswordNewActionsType,
   passwordNewReducer,
-} from '../features/auth/setPassword/PasswordNewReducer'
+} from '../features/auth/setPassword/passwordNewReducer'
 
 import { AppStatusActionType, appStatusReducer } from './appStatusReducer'
 

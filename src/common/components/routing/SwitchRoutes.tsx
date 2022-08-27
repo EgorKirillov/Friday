@@ -3,12 +3,12 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { PasswordRecovery } from '../../../features/auth/forgotPassword/UI/PasswordRecovery'
-import { Login } from '../../../features/auth/login/UI/login'
+import { Login } from '../../../features/auth/login/UI/Login'
 import { Profile } from '../../../features/auth/profile/UI/Profile'
 import { Registration } from '../../../features/auth/register/UI/Registration'
 import { PasswordNew } from '../../../features/auth/setPassword/UI/PasswordNew'
-import Error404Page from '../PageNotFound/Error404Page'
-import { TastsPage } from '../TesPage/TestsPage'
+import Error404Page from '../pageNotFound/Error404Page'
+import { TastsPage } from '../testPage/TestsPage'
 
 export const PATH = {
   LOGIN: '/login', //логинизация

@@ -2,11 +2,11 @@ import React from 'react'
 
 import { toast } from 'react-toastify'
 
-import { ButtonWithLoader } from '../ButtonWithLoader/ButtonWithLoader'
-import SuperInputText from '../c1-SuperInputText/SuperInputText'
-import SuperButton from '../c2-SuperButton/SuperButton'
-import SuperCheckbox from '../c3-SuperCheckbox/SuperCheckbox'
-import { ToastMesssage } from '../Toast/ToastMesssage'
+import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
+import SuperButton from '../superButton/SuperButton'
+import SuperCheckbox from '../superCheckbox/SuperCheckbox'
+import SuperInputText from '../superInputText/SuperInputText'
+import { ToastMesssage } from '../toast/ToastMesssage'
 
 export function TastsPage() {
   return (
