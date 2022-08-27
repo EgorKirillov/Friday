@@ -42,15 +42,12 @@ export const sendEmail =
   (email: string): AppThunk =>
   async dispatch => {
     try {
-      // зануляем ошибки и статус
       dispatch(setError(''))
       dispatch(setSuccess(false))
-      // активация крутилки
       dispatch(setIsLoading(true))
       const res = await ForgotAPI.forgot(email)
 
       // нужно проверить есть ли почта в базе    <---- отдельный запрос нужен или нет ?
-      // если успешно - зафиксировать
       if (res.data.success) {
         dispatch(setEmail(email))
         dispatch(setSuccess(true))
@@ -66,7 +63,6 @@ export const sendEmail =
         dispatch(setError(`Native error ${err.message}`))
       }
     } finally {
-      // де-активация крутилки
       dispatch(setIsLoading(false))
     }
   }

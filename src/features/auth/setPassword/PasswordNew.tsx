@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import SuperButton from '../../../common/components/c2-SuperButton/SuperButton'
+import { ButtonWithLoader } from '../../../common/components/ButtonWithLoader/ButtonWithLoader'
 import { PATH } from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
@@ -50,25 +50,27 @@ export function PasswordNew() {
       }, 1000)
     }
   }, [success])
-  if (isLoading) return <div>.крутилка.</div>
+  // if (isLoading) return <div>.крутилка.</div>
 
   return (
     <div className={s.conteiner}>
       <h2>Create new password</h2>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type={inputType}
-          placeholder={'password'}
-          {...register('password', { required: true, maxLength: 100 })}
-        />
-        {/*иконка глаз*/}
-        <FontAwesomeIcon
-          className={s.eye}
-          onClick={togglePasswordViewType}
-          icon={faEye}
-          title={inputType === 'password' ? 'see password' : 'hide password'}
-        />
+      <form className={s.newPasswordForm} onSubmit={handleSubmit(onSubmit)}>
+        <div className={s.inputPassword}>
+          <input
+            type={inputType}
+            placeholder={'password'}
+            {...register('password', { required: true, maxLength: 100 })}
+          />
+          {/*иконка глаз*/}
+          <FontAwesomeIcon
+            className={s.eye}
+            onClick={togglePasswordViewType}
+            icon={faEye}
+            title={inputType === 'password' ? 'see password' : 'hide password'}
+          />
+        </div>
         <div className={s.error}>
           {error ? <span>{error}</span> : errors.password && <span>This field is required</span>}
         </div>
@@ -81,7 +83,8 @@ export function PasswordNew() {
         {success ? (
           <div style={{ color: 'green' }}>password accepted</div>
         ) : (
-          <SuperButton type={'submit'}>Create new password</SuperButton>
+          <ButtonWithLoader name={'Create new password'} isLoading={isLoading} type={'submit'} />
+          // <SuperButton type={'submit'}>Create new password</SuperButton>
         )}
       </form>
     </div>

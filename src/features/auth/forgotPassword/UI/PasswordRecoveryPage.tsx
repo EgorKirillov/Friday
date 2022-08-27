@@ -3,7 +3,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import SuperButton from '../../../../common/components/c2-SuperButton/SuperButton'
+import { ButtonWithLoader } from '../../../../common/components/ButtonWithLoader/ButtonWithLoader'
 import { PATH } from '../../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { sendEmail } from '../forgotPassReducer'
@@ -35,10 +35,10 @@ export function PasswordRecoveryPage() {
   }
 
   return (
-    <>
+    <div>
       <h1 className={s.title}>Forgot your password?</h1>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.formForgotPassword} onSubmit={handleSubmit(onSubmit)}>
         <input
           type="email"
           placeholder={'email'}
@@ -51,11 +51,15 @@ export function PasswordRecoveryPage() {
         <div className={s.discription}>
           <p>Enter your email address and we will send you further instructions </p>
         </div>
-        {isLoading ? (
-          <div>.крутилка.</div>
-        ) : (
-          <SuperButton type={'submit'}>Send Instruction</SuperButton>
-        )}
+        <div>
+          <ButtonWithLoader name={'Send Instruction'} isLoading={isLoading} type={'submit'} />
+        </div>
+
+        {/*{isLoading ? (*/}
+        {/*  <div>.крутилка.</div>*/}
+        {/*) : (*/}
+        {/*  //<SuperButton type={'submit'}>Send Instruction</SuperButton>*/}
+        {/*)}*/}
         <div className={s.discription}>
           <p>Did you remember your password?</p>
         </div>
@@ -64,6 +68,6 @@ export function PasswordRecoveryPage() {
       <a href={''} onClick={onClickLogin}>
         try login
       </a>
-    </>
+    </div>
   )
 }

@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="change link">
+    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="add component ButtonWithLoader">
+      <change afterPath="$PROJECT_DIR$/src/common/components/ButtonWithLoader/ButtonWithLoader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/components/TesPage/TestsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/TesPage/TestsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecoveryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecoveryPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -46,7 +56,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.stylelint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.stylelint" value="D:\it_incubator\friday\node_modules\stylelint" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -83,6 +100,7 @@
       <updated>1661425183281</updated>
       <workItem from="1661425184866" duration="471000" />
       <workItem from="1661425672390" duration="17107000" />
+      <workItem from="1661597327619" duration="3852000" />
     </task>
     <task id="LOCAL-00001" summary="linters setup">
       <created>1661425968135</created>
@@ -182,7 +200,21 @@
       <option name="project" value="LOCAL" />
       <updated>1661528156603</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="hashrouter">
+      <created>1661532901347</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1661532901347</updated>
+    </task>
+    <task id="LOCAL-00016" summary="hashrouter">
+      <created>1661533026476</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1661533026476</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,7 +241,9 @@
     <MESSAGE value="main + profile + login" />
     <MESSAGE value="config" />
     <MESSAGE value="change link" />
-    <option name="LAST_COMMIT_MESSAGE" value="change link" />
+    <MESSAGE value="hashrouter" />
+    <MESSAGE value="add component ButtonWithLoader" />
+    <option name="LAST_COMMIT_MESSAGE" value="add component ButtonWithLoader" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -223,11 +257,6 @@
           <url>file://$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts</url>
           <line>179</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts</url>
-          <line>76</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
