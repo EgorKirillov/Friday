@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="add component ButtonWithLoader">
-      <change afterPath="$PROJECT_DIR$/src/common/components/ButtonWithLoader/ButtonWithLoader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/TesPage/TestsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/TesPage/TestsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecovery.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecoveryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/UI/PasswordRecoveryPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/PasswordNew.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/Preloader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/LoaderCircle/Preloader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +62,7 @@
       <recent name="D:\it_incubator\friday\src\features\auth\profile" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\it_incubator\friday\src\common\components\LoaderCircle" />
       <recent name="$PROJECT_DIR$/src/features/mainPage/UI" />
     </key>
   </component>
@@ -100,7 +93,7 @@
       <updated>1661425183281</updated>
       <workItem from="1661425184866" duration="471000" />
       <workItem from="1661425672390" duration="17107000" />
-      <workItem from="1661597327619" duration="3852000" />
+      <workItem from="1661597327619" duration="4131000" />
     </task>
     <task id="LOCAL-00001" summary="linters setup">
       <created>1661425968135</created>
@@ -214,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661533026476</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add component ButtonWithLoader">
+      <created>1661601347491</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1661601347491</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

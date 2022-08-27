@@ -4,10 +4,10 @@ import LinearProgress from '@mui/material/LinearProgress'
 
 import DevHeader from '../../../common/components/DevHeader/DevHeader'
 import { Header } from '../../../common/components/Header/Header'
+import { Preloader } from '../../../common/components/LoaderCircle/Preloader'
 import SwitchRoutes from '../../../common/components/Routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 
-import { Preloader } from './Preloader'
 import { initializeTC } from './startPageReducer'
 
 export function StartPage() {
