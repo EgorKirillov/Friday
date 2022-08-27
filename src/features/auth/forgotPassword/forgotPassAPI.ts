@@ -1,5 +1,5 @@
+import { instance } from '../../../app/instanceAPI'
 import { DEV_VERSION } from '../../../config'
-import { instance } from '../../mainPage/instanceAPI'
 
 export type ForgotDataType = {
   email: string

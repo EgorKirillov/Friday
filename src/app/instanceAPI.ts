@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { DEV_VERSION } from '../../config'
+import { DEV_VERSION } from '../config'
 
 export const baseURL = !DEV_VERSION
   ? 'http://localhost:7542/2.0/'

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 
-import { instance } from '../../mainPage/instanceAPI'
+import { instance } from '../../../app/instanceAPI'
 
 import { RegisterParamsType, RegisterResponseType } from './registerReducer'
 

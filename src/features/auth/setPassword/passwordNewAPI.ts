@@ -1,4 +1,4 @@
-import { instance } from '../../mainPage/instanceAPI'
+import { instance } from '../../../app/instanceAPI'
 
 export type PasswordNewType = {
   password: string

@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 
+import { setStatusLoadingAC } from '../../../app/appStatusReducer'
 import { AppThunk } from '../../../app/store'
-import { setStatusLoadingAC } from '../../mainPage/UI/startPageReducer'
 import { ResponseLoginDataType } from '../login/loginAPI'
 
 import { profileAPI } from './profileAPI'

@@ -12,8 +12,8 @@ import { setUserTC } from './loginReducer'
 
 export const Login = () => {
   const isAuthMe = useAppSelector(state => state.login.isAuthMe)
-  const status = useAppSelector(state => state.startPage.status)
-  const error = useAppSelector(state => state.startPage.error)
+  const status = useAppSelector(state => state.app.status)
+  const error = useAppSelector(state => state.app.error)
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()

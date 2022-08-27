@@ -4,8 +4,8 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
 
-import App from './app/App'
 import { store } from './app/store'
+import App from './app/UI/App'
 // import reportWebVitals from './reportWebVitals'
 import './index.css'
 

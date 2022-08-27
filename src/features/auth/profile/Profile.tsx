@@ -19,7 +19,7 @@ export function Profile() {
   const profileName = useAppSelector<string>(state => state.profile.name)
   const email = useAppSelector<string>(state => state.profile.email)
   const isAuthMe = useAppSelector(state => state.login.isAuthMe)
-  const isInitialised = useAppSelector<boolean>(state => state.startPage.isInitialize)
+  const isInitialised = useAppSelector<boolean>(state => state.app.isInitialize)
   const profileIsLoading = useAppSelector<boolean>(state => state.profile.isLoading)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()

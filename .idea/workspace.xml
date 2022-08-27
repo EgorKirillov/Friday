@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="add component ButtonWithLoader">
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/Preloader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/LoaderCircle/Preloader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" afterDir="false" />
+    <list default="true" id="647a9609-ea81-4d18-8a69-330a27bb9900" name="Changes" comment="refactor rebase preloader">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UI/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UI/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/forgotPassword/forgotPassAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/login/loginReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/profileAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/profileAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/register/registeAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/register/registeAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/setPassword/passwordNewAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/setPassword/passwordNewAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/StartPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UI/StartPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/UI/startPageReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/appStatusReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/mainPage/instanceAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/instanceAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +70,7 @@
     <property name="node.js.selected.package.stylelint" value="D:\it_incubator\friday\node_modules\stylelint" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -62,6 +78,8 @@
       <recent name="D:\it_incubator\friday\src\features\auth\profile" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\it_incubator\friday\src\app" />
+      <recent name="D:\it_incubator\friday\src\app\UI" />
       <recent name="D:\it_incubator\friday\src\common\components\LoaderCircle" />
       <recent name="$PROJECT_DIR$/src/features/mainPage/UI" />
     </key>
@@ -93,7 +111,7 @@
       <updated>1661425183281</updated>
       <workItem from="1661425184866" duration="471000" />
       <workItem from="1661425672390" duration="17107000" />
-      <workItem from="1661597327619" duration="4131000" />
+      <workItem from="1661597327619" duration="5809000" />
     </task>
     <task id="LOCAL-00001" summary="linters setup">
       <created>1661425968135</created>
@@ -214,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661601347491</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="refactor rebase preloader">
+      <created>1661601642034</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1661601642034</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,23 +268,8 @@
     <MESSAGE value="change link" />
     <MESSAGE value="hashrouter" />
     <MESSAGE value="add component ButtonWithLoader" />
-    <option name="LAST_COMMIT_MESSAGE" value="add component ButtonWithLoader" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts</url>
-          <line>186</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/features/auth/profile/profileReducer.ts</url>
-          <line>179</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="refactor rebase preloader" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor rebase preloader" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,8 +1,9 @@
 //initial state
-import { AppThunk } from '../../../app/store'
-import { loginAPI } from '../../auth/login/loginAPI'
-import { setIsAuthMeAC } from '../../auth/login/loginReducer'
-import { setUser } from '../../auth/profile/profileReducer'
+import { loginAPI } from '../features/auth/login/loginAPI'
+import { setIsAuthMeAC } from '../features/auth/login/loginReducer'
+import { setUser } from '../features/auth/profile/profileReducer'
+
+import { AppThunk } from './store'
 
 //constants
 const SET_INITIALIZE = 'SET_INITIALIZE'
@@ -16,9 +17,9 @@ const initialState: InitialStateType = {
 }
 
 // reducer
-export const StartPageReducer = (
+export const appStatusReducer = (
   state: InitialStateType = initialState,
-  action: StartPageActionType
+  action: AppStatusActionType
 ) => {
   switch (action.type) {
     case SET_INITIALIZE:
@@ -86,4 +87,4 @@ type setIsInitializeTypeAC = ReturnType<typeof setIsInitializeAC>
 type setStatusLoadingTypeAC = ReturnType<typeof setStatusLoadingAC>
 type setErrorTypeAC = ReturnType<typeof setErrorAC>
 
-export type StartPageActionType = setIsInitializeTypeAC | setStatusLoadingTypeAC | setErrorTypeAC
+export type AppStatusActionType = setIsInitializeTypeAC | setStatusLoadingTypeAC | setErrorTypeAC

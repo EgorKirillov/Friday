@@ -1,5 +1,5 @@
+import { setErrorAC, setStatusLoadingAC } from '../../../app/appStatusReducer'
 import { AppThunk } from '../../../app/store'
-import { setErrorAC, setStatusLoadingAC } from '../../mainPage/UI/startPageReducer'
 import { setUser } from '../profile/profileReducer'
 
 import { loginAPI, LoginDataType } from './loginAPI'
