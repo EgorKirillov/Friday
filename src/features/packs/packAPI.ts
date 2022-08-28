@@ -19,7 +19,7 @@ export const packAPI = {
   },
 }
 
-type PackType = {
+export type PackType = {
   _id: string
   user_id: string
   user_name?: string
@@ -42,7 +42,7 @@ type NewPackType = {
   deckCover?: string // не обязателен
   private?: boolean // если не отправить будет false
 }
-type UpdatedPackType = {
+export type UpdatedPackType = {
   _id: number
   user_name?: string
   private?: boolean
