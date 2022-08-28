@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { Resolver, SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
@@ -14,6 +14,20 @@ type ForgotInputs = {
   email: string
 }
 
+const resolver: Resolver<ForgotInputs> = async values => {
+  return {
+    values: values.email ? values : {},
+    errors: !values.email
+      ? {
+          email: {
+            type: 'required',
+            message: 'This is required.',
+          },
+        }
+      : {},
+  }
+}
+
 export const PasswordRecoveryPage = () => {
   const loading = useAppSelector(state => state.app.status)
   const isLoading = loading === 'loading'
@@ -21,13 +35,15 @@ export const PasswordRecoveryPage = () => {
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
-  } = useForm<ForgotInputs>()
+  } = useForm<ForgotInputs>({ resolver })
 
   const onSubmit: SubmitHandler<ForgotInputs> = data => {
+    console.log(data)
     dispatch(sendEmail(data.email))
   }
 
@@ -46,7 +62,7 @@ export const PasswordRecoveryPage = () => {
           defaultValue="nya-admin@nya.nya"
           {...register('email', { required: true, maxLength: 100 })}
         />
-        <div className={s.error}>{errors.email && <span>This field is required</span>}</div>
+        <div className={s.error}>{errors.email && errors.email.message}</div>
         <div className={s.discription}>
           <p>Enter your email address and we will send you further instructions </p>
         </div>

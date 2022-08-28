@@ -33,7 +33,6 @@ export const sendEmail =
   (email: string): AppThunk =>
   async dispatch => {
     try {
-      dispatch(setSuccess(false))
       dispatch(setStatusLoading('loading'))
       await ForgotAPI.forgot(email)
 
@@ -47,11 +46,7 @@ export const sendEmail =
 
 // types
 type SetSuccessType = ReturnType<typeof setSuccess>
-// type SetErrorType = ReturnType<typeof setError>
 type SetEmailType = ReturnType<typeof setEmail>
 
-export type ForgotPasswordActionsType =
-  | SetSuccessType
-  // | SetErrorType
-  | SetEmailType
+export type ForgotPasswordActionsType = SetSuccessType | SetEmailType
 type InitialStateType = typeof initialState
