@@ -74,8 +74,8 @@ export type InitialStateType = {
 }
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
-type SetIsInitializeTypeAC = ReturnType<typeof setIsInitialize>
-type SetStatusLoadingTypeAC = ReturnType<typeof setStatusLoading>
-type SetErrorTypeAC = ReturnType<typeof setError>
+type SetIsInitializeType = ReturnType<typeof setIsInitialize>
+type SetStatusLoadingType = ReturnType<typeof setStatusLoading>
+type SetErrorType = ReturnType<typeof setError>
 
-export type AppStatusActionType = SetIsInitializeTypeAC | SetStatusLoadingTypeAC | SetErrorTypeAC
+export type AppStatusActionType = SetIsInitializeType | SetStatusLoadingType | SetErrorType
