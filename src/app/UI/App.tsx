@@ -7,7 +7,7 @@ import { DevHeader } from '../../common/components/devHeader/DevHeader'
 import { Header } from '../../common/components/header/Header'
 import { Preloader } from '../../common/components/loaderCircle/Preloader'
 import { SwitchRoutes } from '../../common/components/routing/SwitchRoutes'
-import { ToastMesssage } from '../../common/components/toast/ToastMesssage'
+import { ToastMessage } from '../../common/components/toast/ToastMessage'
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks'
 import { initializeApp } from '../appStatusReducer'
 
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <ToastMesssage />
+      <ToastMessage />
       <DevHeader />
       <Header />
       {status === 'loading' && <LinearProgress color="inherit" />}
