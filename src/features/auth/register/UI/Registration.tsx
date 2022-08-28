@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import SuperButton from '../../../../common/components/superButton/SuperButton'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { registerTC, setRegisterErrorAC } from '../registerReducer'
+import { registerTC, setIsRegister, setRegisterError } from '../registerReducer'
 
 import style from './registation.module.css'
 
@@ -42,7 +42,7 @@ export function Registration() {
 
         dispatch(registerTC(res))
       } else {
-        dispatch(setRegisterErrorAC('Passwords must match'))
+        dispatch(setRegisterError('Passwords must match'))
       }
     }
   }
@@ -51,7 +51,8 @@ export function Registration() {
     if (isRegistered) {
       setTimeout(() => {
         navigate(PATH.LOGIN)
-      }, 6000)
+        dispatch(setIsRegister(false))
+      }, 2000)
     }
   }, [isRegistered])
 
