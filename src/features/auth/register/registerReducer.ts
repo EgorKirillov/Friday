@@ -1,9 +1,10 @@
 import axios, { AxiosError } from 'axios'
-import { Dispatch } from 'redux'
+
+import { AppThunk } from '../../../app/store'
 
 import { authAPI } from './registeAPI'
 
-const initialState: InitialStateType = {
+const initialState = {
   isRegistered: false,
   isLoading: false,
   error: '',
@@ -28,55 +29,52 @@ export const registerReducer = (
     }
   }
 }
-
-export const registerAC = (isRegistered: boolean) =>
+//action creators
+export const setIsRegister = (isRegistered: boolean) =>
   ({ type: 'register/SET-IS-REGISTER', isRegistered } as const)
-export const setIsLoadingAC = (isLoading: boolean) =>
+export const setIsLoading = (isLoading: boolean) =>
   ({ type: 'register/SET-IS-LOADING', isLoading } as const)
-export const setRegisterErrorAC = (error: string) =>
-  ({ type: 'register/SET-ERROR', error } as const)
+export const setRegisterError = (error: string) => ({ type: 'register/SET-ERROR', error } as const)
 
-// thunks
+// thunk creators
 export const registerTC =
-  (data: RegisterParamsType) => (dispatch: Dispatch<RegisterActionsType>) => {
-    dispatch(setIsLoadingAC(true))
+  (data: RegisterParamsType): AppThunk =>
+  dispatch => {
+    dispatch(setIsLoading(true))
     authAPI
       .register(data)
       .then(res => {
         if (!res.data.error) {
-          dispatch(registerAC(true))
-          dispatch(setRegisterErrorAC(''))
+          dispatch(setIsRegister(true))
+          dispatch(setRegisterError(''))
         } else {
-          dispatch(registerAC(false))
-          dispatch(setRegisterErrorAC(res.data.error))
+          dispatch(setIsRegister(false))
+          dispatch(setRegisterError(res.data.error))
         }
       })
       .catch(error => {
-        dispatch(registerAC(false))
+        dispatch(setIsRegister(false))
         const err = error as Error | AxiosError<{ error: string }>
 
         if (axios.isAxiosError(err)) {
           const error = err.response?.data ? err.response.data.error : err.message
 
-          dispatch(setRegisterErrorAC(error))
+          dispatch(setRegisterError(error))
         } else {
-          dispatch(setRegisterErrorAC(`Native error ${err.message}`))
+          dispatch(setRegisterError(`Native error ${err.message}`))
         }
       })
-      .finally(() => dispatch(setIsLoadingAC(false)))
+      .finally(() => dispatch(setIsLoading(false)))
   }
 
 // types
-type InitialStateType = {
-  isRegistered: boolean
-  isLoading: boolean
-  error: string
-}
-type SetIsRegisterActionType = ReturnType<typeof registerAC>
-type SetIsLoadingType = ReturnType<typeof setIsLoadingAC>
-type SetRegisterErrorType = ReturnType<typeof setRegisterErrorAC>
+type InitialStateType = typeof initialState
 
-export type RegisterActionsType = SetIsRegisterActionType | SetIsLoadingType | SetRegisterErrorType
+type SetIsRegisterType = ReturnType<typeof setIsRegister>
+type SetIsLoadingType = ReturnType<typeof setIsLoading>
+type SetRegisterErrorType = ReturnType<typeof setRegisterError>
+
+export type RegisterActionsType = SetIsRegisterType | SetIsLoadingType | SetRegisterErrorType
 
 export type RegisterParamsType = {
   email: string
