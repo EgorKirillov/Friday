@@ -12,8 +12,8 @@ export const profileAPI = {
 }
 
 export type ChangeProfileDataType = {
-  name: string
-  avatar: string
+  name?: string
+  avatar?: string
 }
 export type ProfileType = {
   _id: string

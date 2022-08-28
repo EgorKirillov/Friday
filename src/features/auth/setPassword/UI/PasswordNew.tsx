@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { setError } from '../../../../app/appStatusReducer'
 import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { setError, setNewPassword } from '../passwordNewReducer'
+import { setNewPassword, setSuccess } from '../passwordNewReducer'
 
 import s from './PasswordNew.module.css'
 
@@ -17,14 +18,17 @@ type NewPassInputs = {
 }
 
 export function PasswordNew() {
+  const loading = useAppSelector(state => state.app.status)
+  const error = useAppSelector(state => state.app.error)
+  const success = useAppSelector(state => state.newPass.success)
+
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const isLoading = useAppSelector(state => state.newPass.isLoading)
-  const error = useAppSelector(state => state.newPass.error)
-  const success = useAppSelector(state => state.newPass.success)
+
   const [inputType, setInputType] = useState<string>('password')
   const { token } = useParams()
 
+  const isLoading = loading === 'loading'
   const {
     register,
     handleSubmit,
@@ -45,12 +49,12 @@ export function PasswordNew() {
 
   useEffect(() => {
     if (success) {
+      setSuccess(false)
       setTimeout(() => {
         navigate(PATH.LOGIN)
       }, 1000)
     }
   }, [success])
-  // if (isLoading) return <div>.крутилка.</div>
 
   return (
     <div className={s.conteiner}>
@@ -84,7 +88,6 @@ export function PasswordNew() {
           <div style={{ color: 'green' }}>password accepted</div>
         ) : (
           <ButtonWithLoader name={'Create new password'} isLoading={isLoading} type={'submit'} />
-          // <SuperButton type={'submit'}>Create new password</SuperButton>
         )}
       </form>
     </div>
