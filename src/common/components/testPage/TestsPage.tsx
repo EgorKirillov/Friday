@@ -2,11 +2,12 @@ import React from 'react'
 
 import { toast } from 'react-toastify'
 
+import { PackTable } from '../../../features/packs/packTable/UI/packTable'
 import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
 import SuperButton from '../superButton/SuperButton'
 import SuperCheckbox from '../superCheckbox/SuperCheckbox'
 import SuperInputText from '../superInputText/SuperInputText'
-import { ToastMesssage } from '../toast/ToastMesssage'
+import { ToastMessage } from '../toast/ToastMessage'
 
 export function TastsPage() {
   return (
@@ -32,7 +33,10 @@ export function TastsPage() {
         <button onClick={() => toast.info('info')}>info</button>
         <button onClick={() => toast.warn('warning')}>warning</button>
         <button onClick={() => toast.error('error')}>error</button>
-        <ToastMesssage />
+        <ToastMessage />
+      </div>
+      <div>
+        <PackTable />
       </div>
     </div>
   )
