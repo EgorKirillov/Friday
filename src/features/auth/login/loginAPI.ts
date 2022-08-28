@@ -1,16 +1,17 @@
 import { AxiosResponse } from 'axios'
 
 import { instance } from '../../../app/instanceAPI'
+import { ProfileType } from '../profile/profileAPI'
 
 export const loginAPI = {
   login(data: LoginDataType) {
-    return instance.post<LoginDataType, AxiosResponse<ResponseLoginDataType>>('/auth/login', data)
+    return instance.post<LoginDataType, AxiosResponse<ProfileType>>('/auth/login', data)
   },
   logout() {
-    return instance.delete<{}, AxiosResponse<ResponseLogoutDataType>>('/auth/me')
+    return instance.delete<ProfileType>('/auth/me')
   },
   autMe() {
-    return instance.post<{}, AxiosResponse<ResponseLoginDataType>>('/auth/me')
+    return instance.post<ProfileType>('/auth/me')
   },
 }
 
@@ -19,23 +20,24 @@ export type LoginDataType = {
   password: string
   rememberMe: boolean
 }
-export type ResponseLoginDataType = {
-  _id: string
-  email: string
-  name: string
-  avatar: string | null
-  publicCardPacksCount: number
-
-  created: Date
-  updated: Date
-  isAdmin: boolean
-  verified: boolean // подтвердил ли почту
-  rememberMe: boolean
-
-  error?: string
-}
+// type ResponseLoginDataType = ProfileType
+//   {
+//   _id: string
+//   email: string
+//   name: string
+//   avatar: string | null
+//   publicCardPacksCount: number
+//
+//   created: Date
+//   updated: Date
+//   isAdmin: boolean
+//   verified: boolean // подтвердил ли почту
+//   rememberMe: boolean
+//
+//   error?: string
+// }
 
 export type ResponseLogoutDataType = {
-  info: 'logOut success —ฅ/ᐠ.̫ .ᐟฅ—'
+  info: string
   error: string
 }

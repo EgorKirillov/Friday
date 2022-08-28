@@ -2,29 +2,10 @@ import axios, { AxiosError } from 'axios'
 
 import { setStatusLoading } from '../../../app/appStatusReducer'
 import { AppThunk } from '../../../app/store'
-import { ResponseLoginDataType } from '../login/loginAPI'
 
-import { profileAPI } from './profileAPI'
+import { profileAPI, ProfileType } from './profileAPI'
 
-const initialState = {
-  isLoading: false,
-  //добавить аватарку
-
-  _id: '',
-  email: '',
-  name: '',
-  avatar: null,
-  publicCardPacksCount: null,
-  // количество колод
-
-  created: null,
-  updated: null,
-  isAdmin: false,
-  verified: false, // подтвердил ли почту
-  rememberMe: false,
-
-  error: '',
-}
+const initialState = {} as ProfileType & { isLoading: false }
 
 export const profileReducer = (
   state: InitialStateProfileType = initialState,
@@ -66,7 +47,7 @@ export const setIsLoading = (isLoading: boolean) =>
 export const setError = (error: string) => ({ type: 'profile/SET-ERROR', error } as const)
 export const setName = (name: string) => ({ type: 'profile/SET-NAME', name } as const)
 export const setEmail = (email: string) => ({ type: 'profile/SET-EMAIL', email } as const)
-export const setUser = (data: ResponseLoginDataType) => {
+export const setUser = (data: ProfileType) => {
   return { type: 'profile/SET-USER', payload: data } as const
 }
 
@@ -117,22 +98,6 @@ export type ProfileActionsType =
   | SetEmailType
   | SetUserType
 
-type InitialStateProfileType = {
+type InitialStateProfileType = ProfileType & {
   isLoading: boolean
-  //добавить аватарку
-
-  _id: string
-  email: string
-  name: string
-  avatar: null | string
-  publicCardPacksCount: null | number
-  // количество колод
-
-  created: Date | null
-  updated: Date | null
-  isAdmin: boolean
-  verified: boolean // подтвердил ли почту
-  rememberMe: boolean
-
-  error?: null | string
 }
