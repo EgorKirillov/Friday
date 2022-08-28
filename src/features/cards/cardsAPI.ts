@@ -1,6 +1,6 @@
 import { instance } from '../../app/instanceAPI'
 
-export const packAPI = {
+export const cardsAPI = {
   getCards() {
     return instance.get<GetCardsResponseType>('/cards/pack')
   },
