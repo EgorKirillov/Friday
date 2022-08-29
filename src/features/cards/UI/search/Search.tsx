@@ -25,7 +25,7 @@ export const Search = () => {
 
   return (
     <div className={style.searchContainer}>
-      <div className={style.name}>Search</div>
+      <div className={style.label}>Search</div>
       <OutlinedInput
         value={title}
         onChange={onChangeText}
