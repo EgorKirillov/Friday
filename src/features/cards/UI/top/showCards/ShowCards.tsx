@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useAppDispatch } from '../../../../common/hooks/hooks'
+import { useAppDispatch } from '../../../../../common/hooks/hooks'
 
 import style from './ShowCards.module.css'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import resetIcon from '../../../../assets/img/Filter-Remove.svg'
-import { useAppDispatch } from '../../../../common/hooks/hooks'
+import resetIcon from '../../../../../assets/img/Filter-Remove.svg'
+import { useAppDispatch } from '../../../../../common/hooks/hooks'
 
 import style from './FilterRemove.module.css'
 

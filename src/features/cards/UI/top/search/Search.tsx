@@ -2,8 +2,8 @@ import React, { ChangeEvent, useState } from 'react'
 
 import { InputAdornment, OutlinedInput } from '@mui/material'
 
-import MagnifyingGlass from '../../../../assets/img/MagnifyingGlass.svg'
-import { useAppDispatch } from '../../../../common/hooks/hooks'
+import MagnifyingGlass from '../../../../../assets/img/MagnifyingGlass.svg'
+import { useAppDispatch } from '../../../../../common/hooks/hooks'
 
 import style from './Search.module.css'
 

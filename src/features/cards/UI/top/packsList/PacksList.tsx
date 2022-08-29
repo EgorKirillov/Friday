@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useAppDispatch } from '../../../../common/hooks/hooks'
+import { useAppDispatch } from '../../../../../common/hooks/hooks'
 import { DoubleSlider } from '../doubleSlider/DoubleSlider'
 import { FilterRemove } from '../filterRemove/FilterRemove'
 import { Search } from '../search/Search'

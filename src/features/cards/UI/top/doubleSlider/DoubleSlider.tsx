@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Box, Slider } from '@mui/material'
 
-import { useAppDispatch } from '../../../../common/hooks/hooks'
+import { useAppDispatch } from '../../../../../common/hooks/hooks'
 
 import style from './DoubleSlider.module.css'
 
