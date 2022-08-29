@@ -1,7 +1,7 @@
 import { instance } from '../../app/instanceAPI'
 
 export const packAPI = {
-  getPacks(param: QueryParameterType) {
+  getPacks(param: QueryParameterPackType) {
     return instance.get<GetPacksResponseType>(`/cards/pack`, { params: param })
   },
 
@@ -82,7 +82,7 @@ type UpdatePackResponseType = {
   tokenDeathTime?: number
 }
 
-export type QueryParameterType = {
+export type QueryParameterPackType = {
   packName: string
   min: number
   max: number

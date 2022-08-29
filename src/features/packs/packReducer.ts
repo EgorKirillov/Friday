@@ -6,7 +6,7 @@ import {
   GetPacksResponseType,
   packAPI,
   PackType,
-  QueryParameterType,
+  QueryParameterPackType,
   UpdatedPackType,
 } from './packAPI'
 
@@ -35,13 +35,13 @@ export const packsReducer = (
 
 // actions
 export const setPacks = (data: PackType[]) => ({ type: 'pack/SET-PACKS', payload: data } as const)
-export const setQueryParams = (data: QueryParameterType) =>
+export const setQueryParams = (data: QueryParameterPackType) =>
   ({ type: 'pack/SET-QUERY-PARAMS', payload: data } as const)
 
 // thunks
 
 export const loadPacks =
-  (param: QueryParameterType): AppThunk =>
+  (param: QueryParameterPackType): AppThunk =>
   async dispatch => {
     try {
       dispatch(setStatusLoading('loading'))
@@ -55,7 +55,7 @@ export const loadPacks =
   }
 
 export const updatePack =
-  (updatedPack: UpdatedPackType, param: QueryParameterType): AppThunk =>
+  (updatedPack: UpdatedPackType, param: QueryParameterPackType): AppThunk =>
   async dispatch => {
     try {
       dispatch(setStatusLoading('loading'))
@@ -70,7 +70,7 @@ export const updatePack =
   }
 
 export const deletePack =
-  (idPack: string, param: QueryParameterType): AppThunk =>
+  (idPack: string, param: QueryParameterPackType): AppThunk =>
   async dispatch => {
     try {
       dispatch(setStatusLoading('loading'))
@@ -88,5 +88,5 @@ export const deletePack =
 export type PacksActionsType = ReturnType<typeof setPacks> | ReturnType<typeof setQueryParams>
 
 export type InitialStatePackType = GetPacksResponseType & {
-  queryParams: QueryParameterType
+  queryParams: QueryParameterPackType
 }
