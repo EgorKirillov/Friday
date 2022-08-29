@@ -2,11 +2,22 @@ import { setStatusLoading } from '../../app/appStatusReducer'
 import { AppThunk } from '../../app/store'
 import { handleError } from '../../common/utils/handleError'
 
-import { packAPI, PackType, UpdatedPackType } from './packAPI'
+import {
+  GetPacksResponseType,
+  packAPI,
+  PackType,
+  QueryParameterType,
+  UpdatedPackType,
+} from './packAPI'
 
-const initialState = {
-  packs: [] as PackType[],
-}
+const initialState: InitialStatePackType = {} as InitialStatePackType
+// {cardPacks: [] as PackType[],
+//   cardPacksTotalCount: 0,
+//   maxCardsCount: 0,
+//   minCardsCount: 0,
+//   page: 0,
+//   pageCount: 0,
+//   queryParams: {} as QueryParameterType,}
 
 export const packsReducer = (
   state: InitialStatePackType = initialState,
@@ -14,60 +25,68 @@ export const packsReducer = (
 ): InitialStatePackType => {
   switch (action.type) {
     case 'pack/SET-PACKS':
-      return { ...state, packs: action.payload }
+      return { ...state, cardPacks: [...action.payload] }
+    case 'pack/SET-QUERY-PARAMS':
+      return { ...state, queryParams: { ...action.payload } }
     default:
       return state
   }
 }
 
 // actions
-export const setPacks = (data: PackType[]) => {
-  return { type: 'pack/SET-PACKS', payload: data } as const
-}
+export const setPacks = (data: PackType[]) => ({ type: 'pack/SET-PACKS', payload: data } as const)
+export const setQueryParams = (data: QueryParameterType) =>
+  ({ type: 'pack/SET-QUERY-PARAMS', payload: data } as const)
 
 // thunks
-export const loadPacks = (): AppThunk => async dispatch => {
-  try {
-    dispatch(setStatusLoading('loading'))
-    const res = await packAPI.getPacks()
 
-    dispatch(setPacks(res.data.cardPacks))
-
-    dispatch(setStatusLoading('succeeded'))
-  } catch (e) {
-    handleError(e, dispatch)
-  }
-}
-export const updatePack =
-  (updatedPack: UpdatedPackType): AppThunk =>
+export const loadPacks =
+  (param: QueryParameterType): AppThunk =>
   async dispatch => {
     try {
       dispatch(setStatusLoading('loading'))
-      const res = await packAPI.updatePack(updatedPack)
+      const res = await packAPI.getPacks(param)
 
+      dispatch(setPacks(res.data.cardPacks))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
     }
   }
 
-// export const updateProfile =
-//   (data: ChangeProfileDataType): AppThunk =>
-//   async dispatch => {
-//     try {
-//       dispatch(setStatusLoading('loading'))
-//       const res = await profileAPI.update(data)
-//
-//       dispatch(setUser(res.data.updatedUser))
-//     } catch (e) {
-//       handleError(e, dispatch)
-//     } finally {
-//       dispatch(setStatusLoading('idle'))
-//     }
-//   }
+export const updatePack =
+  (updatedPack: UpdatedPackType, param: QueryParameterType): AppThunk =>
+  async dispatch => {
+    try {
+      dispatch(setStatusLoading('loading'))
+      await packAPI.updatePack(updatedPack)
+      const res = await packAPI.getPacks(param)
+
+      dispatch(setPacks(res.data.cardPacks))
+      dispatch(setStatusLoading('succeeded'))
+    } catch (e) {
+      handleError(e, dispatch)
+    }
+  }
+
+export const deletePack =
+  (idPack: string, param: QueryParameterType): AppThunk =>
+  async dispatch => {
+    try {
+      dispatch(setStatusLoading('loading'))
+      await packAPI.deletePack(idPack)
+      const res = await packAPI.getPacks(param)
+
+      dispatch(setPacks(res.data.cardPacks))
+      dispatch(setStatusLoading('succeeded'))
+    } catch (e) {
+      handleError(e, dispatch)
+    }
+  }
 
 // types
-export type PacksActionsType = ReturnType<typeof setPacks>
-export type InitialStatePackType = {
-  packs: PackType[]
+export type PacksActionsType = ReturnType<typeof setPacks> | ReturnType<typeof setQueryParams>
+
+export type InitialStatePackType = GetPacksResponseType & {
+  queryParams: QueryParameterType
 }
