@@ -13,7 +13,6 @@ import style from './Login.module.css'
 export const Login = () => {
   const isAuthMe = useAppSelector(state => state.login.isAuthMe)
   const status = useAppSelector(state => state.app.status)
-  const error = useAppSelector(state => state.app.error)
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
@@ -56,11 +55,6 @@ export const Login = () => {
             />
             <hr />
           </div>
-
-          {/*{error?.email && <p>{errors.email.message}</p>}*/}
-          {/*<div style={{ color: 'red' }}>{error}</div>*/}
-          {error}
-
           <div className={style.loginInputForm}>
             <div className={style.loginLabel}>
               <label>Password</label>
