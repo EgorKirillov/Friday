@@ -1,0 +1,25 @@
+.showCardsBox{
+ display: flex;
+}
+
+.cards{
+    width: 196px;
+    height: 36px;
+
+    border: 1px solid #757575;
+    border-radius: 5px;
+}
+
+.activeCards{
+    background-color: #366EFF;
+}
+
+.label {
+    margin-bottom: 8px;
+
+    font-weight: 500;
+}
+
+.showCardsContainer .label{
+    text-align: left;
+}
