@@ -1,0 +1,13 @@
+.searchContainer{
+text-align: left;
+}
+.name {
+    margin-bottom: 8px;
+
+    font-weight: 500;
+}
+
+.input{
+    width: 413px;
+    height: 36px;
+}
