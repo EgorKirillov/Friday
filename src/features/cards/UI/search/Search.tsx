@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 
 import { InputAdornment, OutlinedInput } from '@mui/material'
 
-import icon from '../../../../assets/img/MagnifyingGlass.svg'
+import MagnifyingGlass from '../../../../assets/img/MagnifyingGlass.svg'
 import { useAppDispatch } from '../../../../common/hooks/hooks'
 
 import style from './Search.module.css'
@@ -17,7 +17,7 @@ export const Search = () => {
     setTitle(e.currentTarget.value)
     clearTimeout(timerId)
     const id = +setTimeout(() => {
-      // dispatch()
+      // dispatch(....(title))
     }, 1000)
 
     setTimerId(id)
@@ -33,7 +33,7 @@ export const Search = () => {
         placeholder="Provide your text"
         startAdornment={
           <InputAdornment position="start">
-            <img src={icon} alt="magnifier icon" />
+            <img src={MagnifyingGlass} alt="magnifier icon" />
           </InputAdornment>
         }
       />
