@@ -6,6 +6,7 @@ import {
   cardsAPI,
   CardType,
   GetCardsResponseType,
+  NewCardType,
   QueryParameterCardsType,
   UpdatedCardType,
 } from './cardsAPI'
@@ -83,6 +84,20 @@ export const deletePack =
     try {
       dispatch(setStatusLoading('loading'))
       await cardsAPI.deleteCard(idCard)
+      const res = await cardsAPI.getCards(param)
+
+      dispatch(setCards(res.data.cards))
+      dispatch(setStatusLoading('succeeded'))
+    } catch (e) {
+      handleError(e, dispatch)
+    }
+  }
+export const createCard =
+  (newCard: NewCardType, param: QueryParameterCardsType): AppThunk =>
+  async dispatch => {
+    try {
+      dispatch(setStatusLoading('loading'))
+      await cardsAPI.createCard(newCard)
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data.cards))

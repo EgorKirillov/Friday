@@ -38,7 +38,7 @@ export type PackType = {
   more_id?: string
   __v?: number
 }
-type NewPackType = {
+export type NewPackType = {
   name?: string // если не отправить будет no Name
   deckCover?: string // не обязателен
   private?: boolean // если не отправить будет false

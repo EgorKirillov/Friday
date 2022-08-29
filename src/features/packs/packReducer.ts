@@ -4,6 +4,7 @@ import { handleError } from '../../common/utils/handleError'
 
 import {
   GetPacksResponseType,
+  NewPackType,
   packAPI,
   PackType,
   QueryParameterPackType,
@@ -84,6 +85,20 @@ export const deletePack =
     }
   }
 
+export const createPack =
+  (newPack: NewPackType, param: QueryParameterPackType): AppThunk =>
+  async dispatch => {
+    try {
+      dispatch(setStatusLoading('loading'))
+      await packAPI.createPack(newPack)
+      const res = await packAPI.getPacks(param)
+
+      dispatch(setPacks(res.data.cardPacks))
+      dispatch(setStatusLoading('succeeded'))
+    } catch (e) {
+      handleError(e, dispatch)
+    }
+  }
 // types
 export type PacksActionsType = ReturnType<typeof setPacks> | ReturnType<typeof setQueryParams>
 
