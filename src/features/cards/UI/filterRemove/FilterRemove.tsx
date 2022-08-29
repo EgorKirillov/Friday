@@ -14,8 +14,10 @@ export const FilterRemove = () => {
   }
 
   return (
-    <div className={style.filterRemoveContainer} onClick={onClickHandlerFilterRemove}>
-      <img src={resetIcon} alt="reset icon" />
+    <div className={style.filterRemoveContainer}>
+      <div className={style.filterRemoveBox} onClick={onClickHandlerFilterRemove}>
+        <img src={resetIcon} alt="reset icon" />
+      </div>
     </div>
   )
 }

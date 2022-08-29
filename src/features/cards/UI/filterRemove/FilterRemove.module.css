@@ -1,4 +1,9 @@
-.filterRemoveContainer {
+.filterRemoveContainer{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.filterRemoveBox {
     width: 36px;
     height: 36px;
 
