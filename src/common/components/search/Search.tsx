@@ -1,18 +1,18 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import InputAdornment from '@mui/material/InputAdornment/InputAdornment'
 import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput'
 
-import MagnifyingGlass from '../../../../../assets/img/MagnifyingGlass.svg'
-import { useAppDispatch } from '../../../../../common/hooks/hooks'
-import { setQueryParams } from '../../../../packs/packReducer'
+import MagnifyingGlass from '../../../assets/img/MagnifyingGlass.svg'
 
 import style from './Search.module.css'
+type PropsType = {
+  callback: (val: string) => void
+  startValue: string
+}
 
-export const Search = () => {
-  const dispatch = useAppDispatch()
-
-  const [title, setTitle] = useState('')
+export const Search = ({ callback, startValue }: PropsType) => {
+  const [title, setTitle] = useState<string | undefined>(startValue)
   const [timerId, setTimerId] = useState(0)
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -21,12 +21,17 @@ export const Search = () => {
 
     clearTimeout(timerId)
     const id = +setTimeout(() => {
-      dispatch(setQueryParams({ packName: val }))
-      // dispatch(....(title))
+      callback(val)
     }, 1000)
 
     setTimerId(id)
   }
+
+  useEffect(() => {
+    setTitle(startValue)
+
+    return clearTimeout(timerId)
+  }, [startValue])
 
   return (
     <div className={style.searchContainer}>

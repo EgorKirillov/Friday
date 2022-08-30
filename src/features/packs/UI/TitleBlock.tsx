@@ -2,7 +2,7 @@ import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
+import { ButtonWithLoader } from '../../../common/components/buttonWithLoader/ButtonWithLoader'
 
 import s from './TitleBlock.module.css'
 

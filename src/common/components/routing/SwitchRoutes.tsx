@@ -7,7 +7,7 @@ import { Login } from '../../../features/auth/login/UI/Login'
 import { Profile } from '../../../features/auth/profile/UI/Profile'
 import { Registration } from '../../../features/auth/register/UI/Registration'
 import { PasswordNew } from '../../../features/auth/setPassword/UI/PasswordNew'
-import { PacksPage } from '../../../features/cards/UI/top/PacksPage'
+import { PacksPage } from '../../../features/packs/UI/PacksPage'
 import Error404Page from '../pageNotFound/Error404Page'
 import { TastsPage } from '../testPage/TestsPage'
 

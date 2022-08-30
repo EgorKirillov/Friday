@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { Box, Slider } from '@mui/material'
 
-import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
-import { setQueryParams } from '../../../../packs/packReducer'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { setQueryParams } from '../../packReducer'
 
 import style from './DoubleSlider.module.css'
 
@@ -20,16 +20,11 @@ export const DoubleSlider = () => {
     setValue(val)
     clearTimeout(timerId)
     const id = +setTimeout(() => {
-      dispatch(setQueryParams({ min: val[0], max: val[1] })) // проверить чтобы работали запросы
-      // dispatch(....(value))
+      dispatch(setQueryParams({ min: val[0], max: val[1] }))
     }, 1000)
 
     setTimerId(id)
   }
-
-  // useEffect(() => {
-  //   setValue([minValue, maxValue])
-  // }, [minValue, minValue])
 
   return (
     <div className={style.sliderContainer}>
@@ -38,7 +33,7 @@ export const DoubleSlider = () => {
         <div className={style.value}>{value[0]}</div>
         <Box sx={{ width: 155 }} className={style.slider}>
           <Slider
-            getAriaLabel={() => 'Temperature range'}
+            getAriaLabel={() => 'Cards count range'}
             value={value}
             onChange={handleChange}
             valueLabelDisplay="auto"
