@@ -24,7 +24,7 @@ export const Paginator = () => {
   return (
     <div className={style.paginatorContainer}>
       <Stack spacing={1}>
-        <Pagination count={10} shape="rounded" />
+        <Pagination count={10} shape="rounded" /> {/*count указать то число приходит с серва */}
       </Stack>
       <div className={style.selectBlock}>
         <span className={style.span}>Show</span>
