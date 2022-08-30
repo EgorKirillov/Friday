@@ -9,7 +9,7 @@ import { Registration } from '../../../features/auth/register/UI/Registration'
 import { PasswordNew } from '../../../features/auth/setPassword/UI/PasswordNew'
 import { PacksPage } from '../../../features/packs/UI/PacksPage'
 import Error404Page from '../pageNotFound/Error404Page'
-import { TastsPage } from '../testPage/TestsPage'
+import { TestsPage } from '../testPage/TestsPage'
 
 export const PATH = {
   LOGIN: '/login', //логинизация
@@ -32,7 +32,7 @@ export const SwitchRoutes = () => {
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.RECOVERY_PASSWORD} element={<PasswordRecovery />} />
         <Route path={PATH.NEW_PASSWORD} element={<PasswordNew />} />
-        <Route path={PATH.TESTS} element={<TastsPage />} />
+        <Route path={PATH.TESTS} element={<TestsPage />} />
         <Route path={PATH.PACKS} element={<PacksPage />} />
         <Route path={'/*'} element={<Error404Page />} />
       </Routes>

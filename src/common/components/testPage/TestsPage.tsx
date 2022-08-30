@@ -9,7 +9,7 @@ import SuperCheckbox from '../superCheckbox/SuperCheckbox'
 import SuperInputText from '../superInputText/SuperInputText'
 import { ToastMessage } from '../toast/ToastMessage'
 
-export function TastsPage() {
+export function TestsPage() {
   return (
     <div>
       test page
