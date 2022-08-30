@@ -37,7 +37,6 @@ const rootReducer = combineReducers({
   register: registerReducer,
   forgotPass: forgotPassReducer,
   newPass: passwordNewReducer,
-  // startPage: appStatusReducer,
   app: appStatusReducer,
   pack: packsReducer,
   cards: cardsReducer,

@@ -1,0 +1,16 @@
+.filterRemoveContainer{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.filterRemoveBox {
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid #757575;
+    border-radius: 5px;
+}
+
+.filterRemoveContainer img{
+    margin-top: 6px
+}
