@@ -83,13 +83,13 @@ type UpdatePackResponseType = {
 }
 
 export type QueryParameterPackType = {
-  packName: string
-  min: number
-  max: number
-  sortPacks: SortPacksType
-  page: number
-  pageCount: number
-  user_id: string
+  packName?: string
+  min?: number
+  max?: number
+  sortPacks?: SortPacksType
+  page?: number
+  pageCount?: number
+  user_id?: string
 }
 
 type SortPacksType =
