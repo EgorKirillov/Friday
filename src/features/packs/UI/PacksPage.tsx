@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { Paginator } from '../../../common/components/paginator/Paginator'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { loadPacks, setQueryParams } from '../packReducer'
+import { PackTableContainer } from '../packTable/UI/packTableConteiner'
 
 import { FilterBlock } from './FilterBlock'
 import { TitleBlock } from './TitleBlock'
@@ -57,6 +58,7 @@ export const PacksPage = () => {
       />
       <FilterBlock />
       {renderData}
+      <PackTableContainer />
       <Paginator
         pagesCount={totalPacksPagesCount}
         countPerPage={packsPerPage}
