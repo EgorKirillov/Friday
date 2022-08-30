@@ -1,0 +1,17 @@
+.paginatorContainer{
+  display: flex;
+
+  padding: 60px;
+}
+.selectBlock{
+  display: flex;
+
+  margin-left: 50px;
+}
+/*span {*/
+/*  line-height: 50px;*/
+/*}*/
+
+.span {
+  line-height: 50px;
+}
