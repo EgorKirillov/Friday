@@ -37,6 +37,9 @@ export const DevHeader = () => {
       <NavLink className={s.link} to={PATH.PROFILE}>
         profile{' '}
       </NavLink>
+      <NavLink className={s.link} to={PATH.PACKS}>
+        packs{' '}
+      </NavLink>
     </div>
   )
 }

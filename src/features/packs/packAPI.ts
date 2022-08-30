@@ -1,9 +1,10 @@
 import { instance } from '../../app/instanceAPI'
 
 export const packAPI = {
-  getPacks() {
-    return instance.get<GetPacksResponseType>('/cards/pack')
+  getPacks(param: QueryParameterPackType) {
+    return instance.get<GetPacksResponseType>(`/cards/pack`, { params: param })
   },
+
   createPack(newPack: NewPackType) {
     const data = { cardsPack: newPack }
 
@@ -26,8 +27,8 @@ export type PackType = {
   private?: boolean
   name: string
   path?: string
-  grade?: number
-  shots?: number
+  grade?: number //оценка 0..5
+  shots?: number // количество попыток обучения
   deckCover?: string
   cardsCount: number
   type?: string
@@ -37,13 +38,13 @@ export type PackType = {
   more_id?: string
   __v?: number
 }
-type NewPackType = {
+export type NewPackType = {
   name?: string // если не отправить будет no Name
   deckCover?: string // не обязателен
   private?: boolean // если не отправить будет false
 }
 export type UpdatedPackType = {
-  _id: number
+  _id: string
   user_name?: string
   private?: boolean
   name?: string
@@ -54,7 +55,7 @@ export type UpdatedPackType = {
   type?: string
 }
 
-type GetPacksResponseType = {
+export type GetPacksResponseType = {
   cardPacks: PackType[]
   cardPacksTotalCount: number
   maxCardsCount: number
@@ -80,3 +81,23 @@ type UpdatePackResponseType = {
   token?: string
   tokenDeathTime?: number
 }
+
+export type QueryParameterPackType = {
+  packName?: string
+  min?: number
+  max?: number
+  sortPacks?: SortPacksType
+  page?: number
+  pageCount?: number
+  user_id?: string
+}
+
+type SortPacksType =
+  | '0name'
+  | '1name'
+  | '0cardsCount'
+  | '1cardsCount'
+  | '0created'
+  | '1created'
+  | '0updated'
+  | '1updated'

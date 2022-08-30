@@ -1,13 +1,22 @@
 import React, { useState } from 'react'
 
-import { useAppDispatch } from '../../../../../common/hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
+import { setQueryParams } from '../../../../packs/packReducer'
 
 import style from './ShowCards.module.css'
 
 export const ShowCards = () => {
   const dispatch = useAppDispatch()
-  const [cards, setCards] = useState('All')
-  const onClickHandler = (value: string) => {
+  const [cards, setCards] = useState<'All' | 'My'>('All')
+
+  const myID = useAppSelector(state => state.profile._id)
+
+  const onClickHandler = (value: 'All' | 'My') => {
+    if (value === 'My') {
+      dispatch(setQueryParams({ user_id: myID }))
+    } else {
+      dispatch(setQueryParams({ user_id: undefined })) // проверить чтобы работали запросы
+    }
     setCards(value)
     //dispatch()
   }

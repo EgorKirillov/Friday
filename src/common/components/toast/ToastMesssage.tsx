@@ -16,6 +16,7 @@ export const ToastMesssage = () => {
       theme={'colored'}
       pauseOnFocusLoss
       pauseOnHover
+      style={{ width: 'auto' }}
     />
   )
 }

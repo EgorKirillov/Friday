@@ -1,16 +1,16 @@
 import { instance } from '../../app/instanceAPI'
 
 export const cardsAPI = {
-  getCards() {
-    return instance.get<GetCardsResponseType>('/cards/pack')
+  getCards(param: QueryParameterCardsType) {
+    return instance.get<GetCardsResponseType>('/cards/pack', { params: param })
   },
   createCard(newCard: NewCardType) {
     const data = { card: newCard }
 
     return instance.post<CreateCardResponseType>('/cards/pack', data)
   },
-  deleteCard(idPack: string) {
-    return instance.delete<DeleteCardResponseType>(`/cards/pack/?id=${idPack}`)
+  deleteCard(idCard: string) {
+    return instance.delete<DeleteCardResponseType>(`/cards/pack/?id=${idCard}`)
   },
   updateCard(updatedCard: UpdatedCardType) {
     const data = { card: updatedCard }
@@ -20,7 +20,7 @@ export const cardsAPI = {
 }
 
 //types
-type CardType = {
+export type CardType = {
   _id: string
   cardsPack_id: string
   user_id: string
@@ -40,7 +40,7 @@ type CardType = {
   updated: Date
   __v: number
 }
-type NewCardType = {
+export type NewCardType = {
   cardsPack_id: string
   question?: string
   answer?: string
@@ -51,7 +51,7 @@ type NewCardType = {
   questionVideo?: string
   answerVideo?: string
 }
-type UpdatedCardType = {
+export type UpdatedCardType = {
   _id: number
   question?: string
   answer?: string
@@ -64,7 +64,18 @@ type UpdatedCardType = {
   comments?: string
   type?: string
 }
-type GetCardsResponseType = {
+export type QueryParameterCardsType = {
+  cardsPack_id: string
+  cardAnswer?: string // не обязательно
+  cardQuestion?: string // не обязательно
+  min?: number // не обязательно
+  max?: number // не обязательно
+  sortCards?: SortCardsType // не обязательно
+  page?: number // не обязательно
+  pageCount?: number // не обязательно
+}
+
+export type GetCardsResponseType = {
   cards: CardType[]
   packUserId: string
   packName: string
@@ -95,3 +106,13 @@ type UpdatecardResponseType = {
   token: string
   tokenDeathTime: number
 }
+
+type SortCardsType =
+  | '0answer'
+  | '1answer'
+  | '0question'
+  | '1question'
+  | '0updated'
+  | '1updated'
+  | '0grade'
+  | '1grade'

@@ -1,9 +1,11 @@
 import React, { ChangeEvent, useState } from 'react'
 
-import { InputAdornment, OutlinedInput } from '@mui/material'
+import InputAdornment from '@mui/material/InputAdornment/InputAdornment'
+import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput'
 
 import MagnifyingGlass from '../../../../../assets/img/MagnifyingGlass.svg'
 import { useAppDispatch } from '../../../../../common/hooks/hooks'
+import { setQueryParams } from '../../../../packs/packReducer'
 
 import style from './Search.module.css'
 
@@ -15,8 +17,11 @@ export const Search = () => {
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTitle(e.currentTarget.value)
+    const val = e.currentTarget.value
+
     clearTimeout(timerId)
     const id = +setTimeout(() => {
+      dispatch(setQueryParams({ packName: val }))
       // dispatch(....(title))
     }, 1000)
 

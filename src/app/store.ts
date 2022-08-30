@@ -12,6 +12,7 @@ import {
   PasswordNewActionsType,
   passwordNewReducer,
 } from '../features/auth/setPassword/passwordNewReducer'
+import { CardsActionsType, cardsReducer } from '../features/cards/cardReducer'
 import { PacksActionsType, packsReducer } from '../features/packs/packReducer'
 
 import { AppStatusActionType, appStatusReducer } from './appStatusReducer'
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   newPass: passwordNewReducer,
   app: appStatusReducer,
   pack: packsReducer,
+  cards: cardsReducer,
 })
 
 export const store = legacy_createStore(
@@ -58,6 +60,7 @@ export type AppActionType =
   | RegisterActionsType
   | AppStatusActionType
   | PacksActionsType
+  | CardsActionsType
 
 // Dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppActionType>
