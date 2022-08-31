@@ -9,9 +9,10 @@ import style from './Search.module.css'
 type PropsType = {
   callback: (val: string) => void
   startValue: string
+  titleSearch?: string
 }
 
-export const Search = ({ callback, startValue }: PropsType) => {
+export const Search = ({ callback, startValue, titleSearch }: PropsType) => {
   const [title, setTitle] = useState<string | undefined>(startValue)
   const [timerId, setTimerId] = useState(0)
 
@@ -35,7 +36,7 @@ export const Search = ({ callback, startValue }: PropsType) => {
 
   return (
     <div className={style.searchContainer}>
-      <div className={style.label}>Search</div>
+      <div className={style.label}>{titleSearch ? titleSearch : 'Search'}</div>
       <OutlinedInput
         value={title}
         onChange={onChangeText}
