@@ -48,6 +48,7 @@ export const setIsLoggedOutTC = (): AppThunk => async dispatch => {
   try {
     dispatch(setStatusLoading('loading'))
     await loginAPI.logout()
+
     dispatch(cleanProfile())
     dispatch(setIsAuthMeAC(false))
     dispatch(setStatusLoading('succeeded'))
