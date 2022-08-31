@@ -1,7 +1,7 @@
 import { setStatusLoading } from '../../../app/appStatusReducer'
 import { AppThunk } from '../../../app/store'
 import { handleError } from '../../../common/utils/handleError'
-import { setUser } from '../profile/profileReducer'
+import { cleanProfile, setUser } from '../profile/profileReducer'
 
 import { loginAPI, LoginDataType } from './loginAPI'
 
@@ -48,7 +48,7 @@ export const setIsLoggedOutTC = (): AppThunk => async dispatch => {
   try {
     dispatch(setStatusLoading('loading'))
     await loginAPI.logout()
-
+    dispatch(cleanProfile())
     dispatch(setIsAuthMeAC(false))
     dispatch(setStatusLoading('succeeded'))
   } catch (e) {
