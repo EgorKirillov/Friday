@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 
 import logoutIcon from '../../../../assets/img/logInOut_Icon.svg'
 import profileIcon from '../../../../assets/img/profile_Icon.svg'
-import noAvatarIcon from '../../../../assets/img/unauthorized_user_icon.svg'
 import { setIsLoggedOutTC } from '../../../../features/auth/login/loginReducer'
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
 import { BasicMenu } from '../../basicMenu/BasicMenu'
@@ -48,7 +47,7 @@ export const BlockBasicMenu = () => {
       <div className={style.name}>{name ? name : 'Unauthorized user'}</div>
       <div className={style.blockBasicMenu}>
         <BasicMenu
-          label={<img src={avatar ? avatar : noAvatarIcon} alt="avatar" />}
+          label={<img src={avatar ? avatar : profileIcon} alt="avatar" />}
           items={arrButton}
           style={{ margin: '8px 0 0 -50px' }}
         />
