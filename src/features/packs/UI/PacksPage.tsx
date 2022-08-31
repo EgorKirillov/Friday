@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import { Paginator } from '../../../common/components/paginator/Paginator'
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
@@ -15,31 +14,32 @@ import { FilterBlock } from './FilterBlock'
 import { TitleBlock } from './TitleBlock'
 
 export const PacksPage = () => {
-  const dispatch = useAppDispatch()
+  const isAuth = useAppSelector(state => state.login.isAuthMe)
+
   const data = useAppSelector(state => state.pack.cardPacks)
   const page = useAppSelector(state => state.pack.page)
   const packsPerPage = useAppSelector(state => state.pack.pageCount)
   const totalPacksCount = useAppSelector(state => state.pack.cardPacksTotalCount)
-  const navigate = useNavigate()
-  const param = useAppSelector(state => state.pack.queryParams)
-
+  const packQueryParam = useAppSelector(state => state.pack.queryParams)
   const totalPacksPagesCount = Math.ceil(totalPacksCount / packsPerPage)
 
-  const addNewPackHandler = () => {
-    const index = new Date().getSeconds()
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-    dispatch(createPack({ name: `пачка-пачка ${index}` }, { ...param, page: 1 }))
-    toast.info('создать пачку')
+  const addNewPackHandler = () => {
+    const newName = `pack name ${new Date().getSeconds()}` // generate different value
+
+    dispatch(createPack({ name: newName }, { ...packQueryParam, page: 1 })) // go to first page list, maybe need reset param?
   }
 
-  const deletePackHandler = (id: string) => {
-    dispatch(deletePack(id, { ...param, page: 1 }))
-    toast.info('удалить пачку')
+  const deletePackHandler = (packId: string) => {
+    dispatch(deletePack(packId, { ...packQueryParam }))
   }
 
   const changeCurrentPage = (newPage: number) => {
     dispatch(setQueryParams({ page: newPage }))
   }
+
   const changePackPerPage = (newPackPerPage: number) => {
     dispatch(setQueryParams({ pageCount: newPackPerPage }))
   }
@@ -47,30 +47,39 @@ export const PacksPage = () => {
     // if queryParams sort '^'(up) --> make sort 'v'(down)
     // else all another case  --> make sort '^'(up)
     const value: SortPacksType =
-      !!param && param.sortPacks === `1${columnName}` ? `0${columnName}` : `1${columnName}`
+      !!packQueryParam && packQueryParam.sortPacks === `1${columnName}`
+        ? `0${columnName}`
+        : `1${columnName}`
 
     dispatch(setQueryParams({ sortPacks: value }))
   }
+
+  //временно по клику переход на карты
   const onClickPack = (packId: string) => {
     dispatch(setQueryParamsCards({ cardsPack_id: packId }))
     navigate(PATH.CARDS)
   }
 
+  //временно по двойному клику
+
   const renderData = data.map(pack => {
     return (
       <div key={pack._id}>
-        <div onClick={() => onClickPack(pack._id)}>
-          {pack.user_id} {pack._id} {pack.name} {pack.cardsCount} {pack.created}
+        <div style={{ textAlign: 'left' }} onClick={() => onClickPack(pack._id)}>
+          {`USERID: ${pack.user_id}  <-> PACKID: ${pack._id}
+           <-> PACKNAME:${pack.name}  <-> CARDSCOUNT: ${pack.cardsCount}   <-> DATACREATE:${pack.created}`}
         </div>
       </div>
     )
   })
 
   useEffect(() => {
-    if (param) dispatch(loadPacks(param))
-    toast(JSON.stringify(param))
-    toast(page)
-  }, [param])
+    if (packQueryParam) dispatch(loadPacks(packQueryParam))
+  }, [])
+
+  useEffect(() => {
+    if (!isAuth) navigate(PATH.LOGIN)
+  }, [isAuth])
 
   return (
     <div>
@@ -78,16 +87,17 @@ export const PacksPage = () => {
         title={'Pack list'}
         buttonName={'Add new pack'}
         buttonCallback={addNewPackHandler}
-        // link={PATH.PACKS}
-        // linkName={'Back to pack list'}
       />
       <FilterBlock />
-      <button onClick={() => sort('name')}>sort 1 colunm</button>
-      <button onClick={() => sort('cardsCount')}>sort 2 colunm</button>
-      <button onClick={() => sort('updated')}>sort 3 colunm</button>
-      <button onClick={() => sort('user_name')}>sort 4 colunm</button>
+
+      <button onClick={() => sort('name')}>sort name</button>
+      <button onClick={() => sort('cardsCount')}>sort count</button>
+      <button onClick={() => sort('updated')}>sort update</button>
+      <button onClick={() => sort('user_name')}>sort user Name</button>
+
       {renderData}
       <PackTableContainer />
+
       <Paginator
         pagesCount={totalPacksPagesCount}
         countPerPage={packsPerPage}

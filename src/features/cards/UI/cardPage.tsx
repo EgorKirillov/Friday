@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import { Paginator } from '../../../common/components/paginator/Paginator'
+import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/TitleBlock'
 import { createCard, deleteCard, loadCards, setQueryParamsCards } from '../cardReducer'
@@ -85,8 +86,8 @@ export const CardsPage = () => {
         title={'Card list'}
         buttonName={'Add new card'}
         buttonCallback={addNewCardHandler}
-        // link={PATH.PACKS}
-        // linkName={'Back to pack list'}
+        link={PATH.PACKS}
+        linkName={'Back to pack list'}
       />
       {/*<FilterBlock />*/}
       {/*<button onClick={() => sort('name')}>sort 1 colunm</button>*/}
