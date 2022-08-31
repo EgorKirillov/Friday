@@ -1,10 +1,11 @@
+import { toast } from 'react-toastify'
+
 import { setStatusLoading } from '../../app/appStatusReducer'
 import { AppThunk } from '../../app/store'
 import { handleError } from '../../common/utils/handleError'
 
 import {
   cardsAPI,
-  CardType,
   GetCardsResponseType,
   NewCardType,
   QueryParameterCardsType,
@@ -12,7 +13,8 @@ import {
 } from './cardsAPI'
 
 const initialState: InitialStateCardsType = {} as InitialStateCardsType
-// cards: CardType[]
+
+// cards: [] as CardType[],
 // packUserId: string
 // packName: string
 // packPrivate: boolean
@@ -24,9 +26,7 @@ const initialState: InitialStateCardsType = {} as InitialStateCardsType
 // cardsTotalCount: number
 // minGrade: number
 // maxGrade: number
-// token: string
-// tokenDeathTime: number
-// queryParams: QueryParameterCardsType
+// queryParams: {} as QueryParameterCardsType
 
 export const cardsReducer = (
   state: InitialStateCardsType = initialState,
@@ -34,7 +34,23 @@ export const cardsReducer = (
 ): InitialStateCardsType => {
   switch (action.type) {
     case 'pack/SET-CARDS':
-      return { ...state, cards: [...action.payload] }
+      return {
+        ...state,
+        ...action.payload,
+        cards: [...action.payload.cards],
+        // cards: [...action.payload.cards],
+        // packUserId: action.payload.packUserId,
+        // packName: action.payload.packName,
+        // packPrivate: action.payload.packPrivate,
+        // packDeckCover: action.payload.packDeckCover,
+        // packCreated: action.payload.packCreated,
+        // packUpdated: action.payload.packUpdated,
+        // page: action.payload.page,
+        // pageCount: action.payload.pageCount,
+        // cardsTotalCount: action.payload.cardsTotalCount,
+        // minGrade: action.payload.minGrade,
+        // maxGrade: action.payload.maxGrade,
+      }
     case 'pack/SET-QUERY-PARAMS-CARDS':
       return { ...state, queryParams: { ...action.payload } }
     default:
@@ -43,7 +59,8 @@ export const cardsReducer = (
 }
 
 // actions
-export const setCards = (data: CardType[]) => ({ type: 'pack/SET-CARDS', payload: data } as const)
+export const setCards = (data: GetCardsResponseType) =>
+  ({ type: 'pack/SET-CARDS', payload: data } as const)
 export const setQueryParamsCards = (data: QueryParameterCardsType) =>
   ({ type: 'pack/SET-QUERY-PARAMS-CARDS', payload: data } as const)
 
@@ -56,7 +73,7 @@ export const loadCards =
       dispatch(setStatusLoading('loading'))
       const res = await cardsAPI.getCards(param)
 
-      dispatch(setCards(res.data.cards))
+      dispatch(setCards(res.data))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -71,14 +88,14 @@ export const updateCard =
       await cardsAPI.updateCard(updatedCard)
       const res = await cardsAPI.getCards(param)
 
-      dispatch(setCards(res.data.cards))
+      dispatch(setCards(res.data))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
     }
   }
 
-export const deletePack =
+export const deleteCard =
   (idCard: string, param: QueryParameterCardsType): AppThunk =>
   async dispatch => {
     try {
@@ -86,7 +103,7 @@ export const deletePack =
       await cardsAPI.deleteCard(idCard)
       const res = await cardsAPI.getCards(param)
 
-      dispatch(setCards(res.data.cards))
+      dispatch(setCards(res.data))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -97,10 +114,12 @@ export const createCard =
   async dispatch => {
     try {
       dispatch(setStatusLoading('loading'))
+      toast(JSON.stringify(newCard))
       await cardsAPI.createCard(newCard)
+
       const res = await cardsAPI.getCards(param)
 
-      dispatch(setCards(res.data.cards))
+      dispatch(setCards(res.data))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)

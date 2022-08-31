@@ -92,12 +92,16 @@ export type QueryParameterPackType = {
   user_id?: string
 }
 
-type SortPacksType =
-  | '0name'
-  | '1name'
-  | '0cardsCount'
-  | '1cardsCount'
-  | '0created'
-  | '1created'
-  | '0updated'
-  | '1updated'
+// type SortPacksType =
+//   | '0name'
+//   | '1name'
+//   | '0cardsCount'
+//   | '1cardsCount'
+//   | '0user_name'
+//   | '1user_name'
+//   | '0updated'
+//   | '1updated'
+
+export type ColumnSortPacksName = 'name' | 'cardsCount' | 'user_name' | 'updated'
+
+export type SortPacksType = `0${ColumnSortPacksName}` | `1${ColumnSortPacksName}`
