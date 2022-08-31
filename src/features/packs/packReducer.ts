@@ -88,7 +88,7 @@ export const updatePack =
   }
 
 export const deletePack =
-  (idPack: string, param: QueryParameterPackType): AppThunk =>
+  (idPack: string, param: QueryParameterPackType = {}): AppThunk =>
   async dispatch => {
     try {
       dispatch(setStatusLoading('loading'))
@@ -103,7 +103,7 @@ export const deletePack =
   }
 
 export const createPack =
-  (newPack: NewPackType, param: QueryParameterPackType): AppThunk =>
+  (newPack: NewPackType, param: QueryParameterPackType = {}): AppThunk =>
   async dispatch => {
     try {
       dispatch(setStatusLoading('loading'))

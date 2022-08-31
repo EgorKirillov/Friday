@@ -4,7 +4,8 @@ import { toast } from 'react-toastify'
 
 import { Paginator } from '../../../common/components/paginator/Paginator'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { loadPacks, setQueryParams } from '../packReducer'
+import { ColumnSortPacksName, SortPacksType } from '../packAPI'
+import { createPack, deletePack, loadPacks, setQueryParams } from '../packReducer'
 import { PackTableContainer } from '../packTable/UI/packTableConteiner'
 
 import { FilterBlock } from './FilterBlock'
@@ -22,17 +23,16 @@ export const PacksPage = () => {
   const totalPacksPagesCount = Math.ceil(totalPacksCount / packsPerPage)
 
   const addNewPackHandler = () => {
+    const index = new Date().getSeconds()
+
+    dispatch(createPack({ name: `пачка-пачка ${index}` }, { ...param, page: 1 }))
     toast.info('создать пачку')
   }
-  const renderData = data.map(pack => {
-    return (
-      <div key={pack._id}>
-        <>
-          {pack.user_id} {pack.name} {pack.cardsCount} {pack.created}
-        </>
-      </div>
-    )
-  })
+
+  const deletePackHandler = (id: string) => {
+    dispatch(deletePack(id, { ...param, page: 1 }))
+    toast.info('удалить пачку')
+  }
 
   const changeCurrentPage = (newPage: number) => {
     dispatch(setQueryParams({ page: newPage }))
@@ -40,6 +40,24 @@ export const PacksPage = () => {
   const changePackPerPage = (newPackPerPage: number) => {
     dispatch(setQueryParams({ pageCount: newPackPerPage }))
   }
+  const sort = (columnName: ColumnSortPacksName) => {
+    // if queryParams sort '^'(up) --> make sort 'v'(down)
+    // else all another case  --> make sort '^'(up)
+    const value: SortPacksType =
+      !!param && param.sortPacks === `1${columnName}` ? `0${columnName}` : `1${columnName}`
+
+    dispatch(setQueryParams({ sortPacks: value }))
+  }
+
+  const renderData = data.map(pack => {
+    return (
+      <div key={pack._id}>
+        <div onClick={() => deletePackHandler(pack._id)}>
+          {pack.user_id} {pack.name} {pack.cardsCount} {pack.created}
+        </div>
+      </div>
+    )
+  })
 
   useEffect(() => {
     if (param) dispatch(loadPacks(param))
@@ -57,6 +75,10 @@ export const PacksPage = () => {
         // linkName={'Back to pack list'}
       />
       <FilterBlock />
+      <button onClick={() => sort('name')}>sort 1 colunm</button>
+      <button onClick={() => sort('cardsCount')}>sort 2 colunm</button>
+      <button onClick={() => sort('updated')}>sort 3 colunm</button>
+      <button onClick={() => sort('user_name')}>sort 4 colunm</button>
       {renderData}
       <PackTableContainer />
       <Paginator
