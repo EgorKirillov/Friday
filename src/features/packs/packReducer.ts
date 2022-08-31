@@ -31,13 +31,15 @@ export const packsReducer = (
     case 'pack/SET-PACKS':
       return {
         ...state,
+        ...action.payload,
         cardPacks: [...action.payload.cardPacks],
-        cardPacksTotalCount: action.payload.cardPacksTotalCount,
-        maxCardsCount: action.payload.maxCardsCount,
-        minCardsCount: action.payload.minCardsCount,
-        page: action.payload.page,
-        pageCount: action.payload.pageCount,
       }
+    //   cardPacksTotalCount: action.payload.cardPacksTotalCount,
+    //   maxCardsCount: action.payload.maxCardsCount,
+    //   minCardsCount: action.payload.minCardsCount,
+    //   page: action.payload.page,
+    //   pageCount: action.payload.pageCount,
+    // }
     case 'pack/SET-QUERY-PARAMS': {
       const testQuery = { ...state.queryParams, ...action.payload }
 

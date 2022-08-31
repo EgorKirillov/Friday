@@ -75,7 +75,7 @@ export const PacksPage = () => {
 
   useEffect(() => {
     if (packQueryParam) dispatch(loadPacks(packQueryParam))
-  }, [])
+  }, [packQueryParam])
 
   useEffect(() => {
     if (!isAuth) navigate(PATH.LOGIN)
