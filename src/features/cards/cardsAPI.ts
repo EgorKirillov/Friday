@@ -2,20 +2,20 @@ import { instance } from '../../app/instanceAPI'
 
 export const cardsAPI = {
   getCards(param: QueryParameterCardsType) {
-    return instance.get<GetCardsResponseType>('/cards/pack', { params: param })
+    return instance.get<GetCardsResponseType>('/cards/card', { params: param })
   },
   createCard(newCard: NewCardType) {
     const data = { card: newCard }
 
-    return instance.post<CreateCardResponseType>('/cards/pack', data)
+    return instance.post<CreateCardResponseType>('/cards/card', data)
   },
   deleteCard(idCard: string) {
-    return instance.delete<DeleteCardResponseType>(`/cards/pack/?id=${idCard}`)
+    return instance.delete<DeleteCardResponseType>(`/cards/card/?id=${idCard}`)
   },
   updateCard(updatedCard: UpdatedCardType) {
     const data = { card: updatedCard }
 
-    return instance.put<UpdatecardResponseType>(`/cards/pack`, data)
+    return instance.put<UpdatecardResponseType>(`/cards/card`, data)
   },
 }
 
@@ -88,8 +88,8 @@ export type GetCardsResponseType = {
   cardsTotalCount: number
   minGrade: number
   maxGrade: number
-  token: string
-  tokenDeathTime: number
+  token?: string
+  tokenDeathTime?: number
 }
 type CreateCardResponseType = {
   newCard: CardType

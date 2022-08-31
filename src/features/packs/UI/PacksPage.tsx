@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
 
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { Paginator } from '../../../common/components/paginator/Paginator'
+import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+import { setQueryParamsCards } from '../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../packAPI'
 import { createPack, deletePack, loadPacks, setQueryParams } from '../packReducer'
 import { PackTableContainer } from '../packTable/UI/packTableConteiner'
@@ -17,7 +20,7 @@ export const PacksPage = () => {
   const page = useAppSelector(state => state.pack.page)
   const packsPerPage = useAppSelector(state => state.pack.pageCount)
   const totalPacksCount = useAppSelector(state => state.pack.cardPacksTotalCount)
-
+  const navigate = useNavigate()
   const param = useAppSelector(state => state.pack.queryParams)
 
   const totalPacksPagesCount = Math.ceil(totalPacksCount / packsPerPage)
@@ -48,12 +51,16 @@ export const PacksPage = () => {
 
     dispatch(setQueryParams({ sortPacks: value }))
   }
+  const onClickPack = (packId: string) => {
+    dispatch(setQueryParamsCards({ cardsPack_id: packId }))
+    navigate(PATH.CARDS)
+  }
 
   const renderData = data.map(pack => {
     return (
       <div key={pack._id}>
-        <div onClick={() => deletePackHandler(pack._id)}>
-          {pack.user_id} {pack.name} {pack.cardsCount} {pack.created}
+        <div onClick={() => onClickPack(pack._id)}>
+          {pack.user_id} {pack._id} {pack.name} {pack.cardsCount} {pack.created}
         </div>
       </div>
     )
