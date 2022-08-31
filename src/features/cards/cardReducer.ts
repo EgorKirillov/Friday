@@ -13,7 +13,8 @@ import {
 } from './cardsAPI'
 
 const initialState: InitialStateCardsType = {} as InitialStateCardsType
-// cards: CardType[]
+
+// cards: [] as CardType[],
 // packUserId: string
 // packName: string
 // packPrivate: boolean
@@ -25,9 +26,7 @@ const initialState: InitialStateCardsType = {} as InitialStateCardsType
 // cardsTotalCount: number
 // minGrade: number
 // maxGrade: number
-// token: string
-// tokenDeathTime: number
-// queryParams: QueryParameterCardsType
+// queryParams: {} as QueryParameterCardsType
 
 export const cardsReducer = (
   state: InitialStateCardsType = initialState,
@@ -37,18 +36,20 @@ export const cardsReducer = (
     case 'pack/SET-CARDS':
       return {
         ...state,
+        ...action.payload,
         cards: [...action.payload.cards],
-        packUserId: action.payload.packUserId,
-        packName: action.payload.packName,
-        packPrivate: action.payload.packPrivate,
-        packDeckCover: action.payload.packDeckCover,
-        packCreated: action.payload.packCreated,
-        packUpdated: action.payload.packUpdated,
-        page: action.payload.page,
-        pageCount: action.payload.pageCount,
-        cardsTotalCount: action.payload.cardsTotalCount,
-        minGrade: action.payload.minGrade,
-        maxGrade: action.payload.maxGrade,
+        // cards: [...action.payload.cards],
+        // packUserId: action.payload.packUserId,
+        // packName: action.payload.packName,
+        // packPrivate: action.payload.packPrivate,
+        // packDeckCover: action.payload.packDeckCover,
+        // packCreated: action.payload.packCreated,
+        // packUpdated: action.payload.packUpdated,
+        // page: action.payload.page,
+        // pageCount: action.payload.pageCount,
+        // cardsTotalCount: action.payload.cardsTotalCount,
+        // minGrade: action.payload.minGrade,
+        // maxGrade: action.payload.maxGrade,
       }
     case 'pack/SET-QUERY-PARAMS-CARDS':
       return { ...state, queryParams: { ...action.payload } }
