@@ -16,6 +16,9 @@ export const profileReducer = (
         ...state,
         ...action.payload,
       }
+    case 'profile/CLEAN_PROFILE': {
+      return {} as ProfileType
+    }
     default:
       return state
   }
@@ -25,6 +28,8 @@ export const profileReducer = (
 export const setUser = (data: ProfileType) => {
   return { type: 'profile/SET-USER', payload: data } as const
 }
+
+export const cleanProfile = () => ({ type: 'profile/CLEAN_PROFILE' } as const)
 
 // thunks
 export const updateProfile =
@@ -43,4 +48,4 @@ export const updateProfile =
   }
 
 // types
-export type ProfileActionsType = ReturnType<typeof setUser>
+export type ProfileActionsType = ReturnType<typeof setUser> | ReturnType<typeof cleanProfile>
