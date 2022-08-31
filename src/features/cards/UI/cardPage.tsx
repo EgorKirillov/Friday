@@ -17,6 +17,9 @@ export const CardsPage = () => {
   const data = useAppSelector(state => state.cards.cards)
   const dispatch = useAppDispatch()
 
+  const userId = useAppSelector(state => state.profile._id)
+  const packId = useAppSelector(state => state.cards.packUserId)
+  const isMyPack: boolean = userId === packId
   const page = useAppSelector(state => state.cards.page)
   const packsPerPage = useAppSelector(state => state.cards.pageCount)
   const totalPacksCount = useAppSelector(state => state.cards.cardsTotalCount)
@@ -43,6 +46,10 @@ export const CardsPage = () => {
     }
 
     dispatch(createCard(newCard, queryParams))
+  }
+
+  const learnPackHandler = () => {
+    toast.info('learn this card')
   }
 
   const renderData = data ? (
@@ -84,8 +91,8 @@ export const CardsPage = () => {
     <div>
       <TitleBlock
         title={'Card list'}
-        buttonName={'Add new card'}
-        buttonCallback={addNewCardHandler}
+        buttonName={isMyPack ? 'Add new card' : 'learn pack'}
+        buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
         link={PATH.PACKS}
         linkName={'Back to pack list'}
       />
