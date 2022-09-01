@@ -6,8 +6,13 @@
   /*box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);*/
 }
 .tableRow {
-  width: 80%;
+  width: 90%;
   height: 48px;
 
   background: #dedede;
+}
+.buttonFilter {
+  text-decoration: none;
+
+  border: none;
 }

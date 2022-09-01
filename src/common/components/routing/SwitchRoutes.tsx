@@ -11,7 +11,7 @@ import { CardsPage } from '../../../features/cards/UI/cardPage'
 import { PacksPage } from '../../../features/packs/UI/PacksPage'
 import s from '../../container.module.css'
 import Error404Page from '../pageNotFound/Error404Page'
-import { TastsPage } from '../testPage/TestsPage'
+import { TestsPage } from '../testPage/TestsPage'
 
 export const PATH = {
   LOGIN: '/login', //логинизация
@@ -35,7 +35,7 @@ export const SwitchRoutes = () => {
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.RECOVERY_PASSWORD} element={<PasswordRecovery />} />
         <Route path={PATH.NEW_PASSWORD} element={<PasswordNew />} />
-        <Route path={PATH.TESTS} element={<TastsPage />} />
+        <Route path={PATH.TESTS} element={<TestsPage />} />
         <Route path={PATH.PACKS} element={<PacksPage />} />
         <Route path={PATH.CARDS} element={<CardsPage />} />
         <Route path={'/*'} element={<Error404Page />} />
