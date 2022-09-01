@@ -5,39 +5,40 @@ import { toast } from 'react-toastify'
 import { ButtonWithLoader } from '../../../common/components/buttonWithLoader/ButtonWithLoader'
 import { Paginator } from '../../../common/components/paginator/Paginator'
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
-import { Search } from '../../../common/components/search/Search'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { FilterBlock } from '../../packs/UI/FilterBlock'
 import { TitleBlock } from '../../packs/UI/TitleBlock'
 import { createCard, deleteCard, loadCards, setQueryParamsCards } from '../cardReducer'
 import { NewCardType } from '../cardsAPI'
 
-// import { FilterBlock } from './FilterBlock'
-// import { TitleBlock } from './TitleBlock'
+import { BackLink } from './BackLink'
+import s from './cardPage.module.css'
+import { SearchBlock } from './SearchBlock'
 
 export const CardsPage = () => {
   const loading = useAppSelector(state => state.app.status)
   const isLoading: boolean = loading === 'loading'
+
   const queryParams = useAppSelector(state => state.cards.queryParams)
   const data = useAppSelector(state => state.cards.cards)
-  const dispatch = useAppDispatch()
 
   const userId = useAppSelector(state => state.profile._id)
-  const packId = useAppSelector(state => state.cards.packUserId)
-  const isMyPack: boolean = userId === packId
+  const packUserId = useAppSelector(state => state.cards.packUserId)
+  const isMyPack: boolean = userId === packUserId
+
+  const dispatch = useAppDispatch()
+
   const page = useAppSelector(state => state.cards.page)
   const packsPerPage = useAppSelector(state => state.cards.pageCount)
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
 
   const totalCardsPagesCount = Math.ceil(totalCardsCount / packsPerPage)
-  const startSearchValAnswer = queryParams.cardAnswer
-  const startSearchValQuestion = queryParams.cardQuestion
+
   const deleteCardHandler = (id: string) => {
     dispatch(deleteCard(id, { ...queryParams, page: 1 }))
     toast.warn(`карта удалена ${id}`)
   }
   const notEmptyPack: boolean =
-    totalCardsCount === 0 && !!queryParams && !!queryParams.cardAnswer && !!queryParams.cardQuestion
+    totalCardsCount === 0 && !!queryParams.cardAnswer && !!queryParams.cardQuestion
   const notFound: boolean =
     !!queryParams &&
     (!!queryParams.cardAnswer || !!queryParams.cardQuestion) &&
@@ -59,79 +60,40 @@ export const CardsPage = () => {
     dispatch(createCard(newCard, queryParams))
   }
 
-  const setSearchNameAnswer = (val: string) => {
-    dispatch(setQueryParamsCards({ ...queryParams, cardAnswer: val }))
-  }
-
-  const setSearchNameQuestion = (val: string) => {
-    dispatch(setQueryParamsCards({ ...queryParams, cardQuestion: val }))
-  }
-
   const learnPackHandler = () => {
     toast.info('learn this card')
   }
 
-  const renderData = data ? (
-    data.map(card => {
-      return (
-        <div key={card._id}>
-          <div onClick={() => deleteCardHandler(card._id)}>
-            <>
-              {card._id} {card.question} {card.answer} {card.updated} {card.grade}
-            </>
+  const renderData = data
+    ? data.map(card => {
+        return (
+          <div key={card._id} onClick={() => deleteCardHandler(card._id)}>
+            {`${card._id} ${card.question} ${card.answer} ${card.updated} ${card.grade}`}
           </div>
-        </div>
-      )
-    })
-  ) : (
-    <div>dd</div>
-  )
-
-  // const addNewCardHandler = () => {
-  //   const index = new Date().getSeconds()
-  //
-  //   dispatch(
-  //     createCard(
-  //       { cardsPack_id:  question: `question ${index}`, answer: `answer ${index + 1}` },
-  //       { ...queryParams, page: 1 }
-  //     )
-  //   )
-  //   toast.info('создать пачку')
-  // }
+        )
+      })
+    : null
 
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
-    else toast.warn('нет ID')
+    else toast.warn(' useEffect нет queryParams')
     toast(JSON.stringify(queryParams))
-    console.log(queryParams.cardsPack_id)
   }, [queryParams])
 
   return (
-    <div>
+    <div className={s.container}>
+      <BackLink link={PATH.PACKS} linkName={'<- Back to pack list'} />
+      {isMyPack ? 'моя пачка' : 'НЕ моя пачка'}
+
       <TitleBlock
         title={'Card list'}
         hideButton={totalCardsCount === 0}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
-        link={PATH.PACKS}
-        linkName={'Back to pack list'}
       />
-      <Search
-        callback={setSearchNameQuestion}
-        startValue={startSearchValQuestion ? startSearchValQuestion : ''}
-        titleSearch={'Search by qustions'}
-      />
-      <Search
-        callback={setSearchNameAnswer}
-        startValue={startSearchValAnswer ? startSearchValAnswer : ''}
-        titleSearch={'Search by answer'}
-      />
+      <SearchBlock />
 
-      {/*<button onClick={() => sort('name')}>sort 1 colunm</button>*/}
-      {/*<button onClick={() => sort('cardsCount')}>sort 2 colunm</button>*/}
-      {/*<button onClick={() => sort('updated')}>sort 3 colunm</button>*/}
-      {/*<button onClick={() => sort('user_name')}>sort 4 colunm</button>*/}
-      {notEmptyPack && (
+      {!notEmptyPack && (
         <div>
           <div>This pack is empty. Click add new card to fill this pack</div>
           <ButtonWithLoader
@@ -141,9 +103,11 @@ export const CardsPage = () => {
           />
         </div>
       )}
+
       {notFound && <div>Not found</div>}
       {renderData}
       {/*<PackTableContainer />*/}
+
       <Paginator
         pagesCount={totalCardsPagesCount}
         countPerPage={packsPerPage}
