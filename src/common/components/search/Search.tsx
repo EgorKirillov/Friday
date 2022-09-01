@@ -10,9 +10,10 @@ type PropsType = {
   callback: (val: string) => void
   startValue: string
   titleSearch?: string
+  disabled?: boolean
 }
 
-export const Search = ({ callback, startValue, titleSearch }: PropsType) => {
+export const Search = ({ callback, startValue, titleSearch, disabled = false }: PropsType) => {
   const [title, setTitle] = useState<string | undefined>(startValue)
   const [timerId, setTimerId] = useState(0)
 
@@ -38,6 +39,7 @@ export const Search = ({ callback, startValue, titleSearch }: PropsType) => {
     <div className={style.searchContainer}>
       <div className={style.label}>{titleSearch ? titleSearch : 'Search'}</div>
       <OutlinedInput
+        disabled={disabled}
         value={title}
         onChange={onChangeText}
         className={style.input}
