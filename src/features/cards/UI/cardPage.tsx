@@ -1,18 +1,13 @@
 import React, { useEffect } from 'react'
 
-import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { Paginator } from '../../../common/components/paginator/Paginator'
+import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { TitleBlock } from '../../packs/UI/TitleBlock'
-import {
-  clearCardsState,
-  createCard,
-  deleteCard,
-  loadCards,
-  setQueryParamsCards,
-} from '../cardReducer'
+import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
+import { createCard, deleteCard, loadCards, setQueryParamsCards } from '../cardReducer'
 import { NewCardType } from '../cardsAPI'
 
 import { BackLink } from './backLink/BackLink'
@@ -22,29 +17,28 @@ import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
 import { SearchBlock } from './searchBlock/SearchBlock'
 
 export const CardsPage = () => {
-  const loading = useAppSelector(state => state.app.status)
-  const isLoading: boolean = loading === 'loading'
+  const isAuth = useAppSelector(state => state.login.isAuthMe)
 
   const queryParams = useAppSelector(state => state.cards.queryParams)
-  const data = useAppSelector(state => state.cards.cards)
   const titlePack = useAppSelector(state => state.cards.packName)
 
   const userId = useAppSelector(state => state.profile._id)
   const packUserId = useAppSelector(state => state.cards.packUserId)
   const isMyPack: boolean = userId === packUserId
 
-  const dispatch = useAppDispatch()
-
   const page = useAppSelector(state => state.cards.page)
   const packsPerPage = useAppSelector(state => state.cards.pageCount)
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
-
   const totalCardsPagesCount = Math.ceil(totalCardsCount / packsPerPage)
+
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const deleteCardHandler = (id: string) => {
     dispatch(deleteCard(id, { ...queryParams, page: 1 }))
     toast.warn(`карта удалена ${id}`)
   }
+
   const packIsEmpty: boolean =
     totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
 
@@ -54,6 +48,7 @@ export const CardsPage = () => {
   const changeCurrentPage = (newPage: number) => {
     dispatch(setQueryParamsCards({ ...queryParams, page: newPage }))
   }
+
   const changePackPerPage = (newPackPerPage: number) => {
     dispatch(setQueryParamsCards({ ...queryParams, pageCount: newPackPerPage }))
   }
@@ -61,8 +56,8 @@ export const CardsPage = () => {
   const addNewCardHandler = () => {
     const newCard: NewCardType = {
       cardsPack_id: queryParams.cardsPack_id,
-      question: 'qqq',
-      answer: 'aaa',
+      question: 'q123qq',
+      answer: 'aa1a',
     }
 
     dispatch(createCard(newCard, queryParams))
@@ -72,48 +67,42 @@ export const CardsPage = () => {
     toast.info('learn this card')
   }
 
-  const renderData = data
-    ? data.map(card => {
-        return (
-          <div key={card._id} onClick={() => deleteCardHandler(card._id)}>
-            {`${card._id} ${card.question} ${card.answer} ${card.updated} ${card.grade}`}
-          </div>
-        )
-      })
-    : null
+  // const renderData = data ? (
+  //   data.map(card => {
+  //     return (
+  //       <div key={card._id} onClick={() => deleteCardHandler(card._id)}>
+  //         {`${card._id} ${card.question} ${card.answer} ${card.updated} ${card.grade}`}
+  //       </div>
+  //     )
+  //   })
+  // ) : (
+  //   <div>ddd</div>
+  // )
+
+  const menuuuuuuuuuuu = () => {
+    alert('Maks')
+  }
 
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
     else toast.warn(' useEffect нет queryParams')
     toast(JSON.stringify(queryParams))
 
-    return () => {
-      dispatch(clearCardsState())
-    }
+    // return () => {
+    //   dispatch(clearCardsState())
+    // }
   }, [queryParams])
+  useEffect(() => {
+    if (!isAuth) navigate(PATH.LOGIN)
+  }, [isAuth])
 
   return (
     <div className={s.container}>
       <BackLink />
 
-      {/*<div>{isMyPack ? 'моя пачка кнопка ADD' : 'НЕ моя пачка кнопка LEARN'}</div>
-      <div>
-        {totalCardsCount === 0 ? 'нет данных для отображения кнопку убрать' : 'есть что отображать'}
-      </div>
-      <div>
-        {!!queryParams.cardAnswer || !!queryParams.cardQuestion ? 'идет поиск' : 'поиск не идет'}
-      </div>
-
-      {totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion && (
-        <div>задизэбл поиска , показать кнопку добавить карту</div>
-      )}
-
-      {totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion) && (
-        <div>поиск активен, NOT FOUND, кнопку очистить фильтh</div>
-      )}*/}
-
       <TitleBlock
         title={titlePack}
+        callbackTitle={menuuuuuuuuuuu}
         buttonVisability={totalCardsCount === 0 ? 'hidden' : 'visible'}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
@@ -124,11 +113,8 @@ export const CardsPage = () => {
       {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
 
       {notFound && <NotFoundCards />}
-      {isLoading ? (
-        <CircularProgress style={{ margin: '0 auto', paddingTop: '30px' }} />
-      ) : (
-        renderData
-      )}
+
+      {/*{renderData}*/}
 
       {/*<PackTableContainer />*/}
 

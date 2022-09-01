@@ -34,6 +34,7 @@ export function TestsPage() {
         <button onClick={() => toast.error('error')}>error</button>
         <ToastMessage />
       </div>
+      <div>{/*<PackTable />*/}</div>
     </div>
   )
 }

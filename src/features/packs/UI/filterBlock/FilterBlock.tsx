@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { FilterRemove } from '../../../common/components/filterRemove/FilterRemove'
-import { Search } from '../../../common/components/search/Search'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { setQueryParams } from '../packReducer'
+import { FilterRemove } from '../../../../common/components/filterRemove/FilterRemove'
+import { Search } from '../../../../common/components/search/Search'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { setQueryParams } from '../../packReducer'
 
 import { DoubleSlider } from './doubleSlider/DoubleSlider'
 import s from './FilterBlock.module.css'

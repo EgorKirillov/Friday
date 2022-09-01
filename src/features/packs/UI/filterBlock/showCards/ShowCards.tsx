@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { setQueryParams } from '../../packReducer'
+import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
+import { setQueryParams } from '../../../packReducer'
 
 import style from './ShowCards.module.css'
 

@@ -5,22 +5,20 @@ import { useNavigate } from 'react-router-dom'
 import { Paginator } from '../../../common/components/paginator/Paginator'
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { setQueryParamsCards } from '../../cards/cardReducer'
-import { ColumnSortPacksName, SortPacksType } from '../packAPI'
-import { createPack, deletePack, loadPacks, setQueryParams } from '../packReducer'
-import { PackTableContainer } from '../packTable/UI/packTableConteiner'
+import { createPack, loadPacks, setQueryParams } from '../packReducer'
 
-import { FilterBlock } from './FilterBlock'
-import { TitleBlock } from './TitleBlock'
+import { FilterBlock } from './filterBlock/FilterBlock'
+import { PackTableContainer } from './packTable/packTableConteiner'
+import { TitleBlock } from './titleBlock/TitleBlock'
 
 export const PacksPage = () => {
   const isAuth = useAppSelector(state => state.login.isAuthMe)
 
-  const data = useAppSelector(state => state.pack.cardPacks)
+  const packQueryParam = useAppSelector(state => state.pack.queryParams)
+
   const page = useAppSelector(state => state.pack.page)
   const packsPerPage = useAppSelector(state => state.pack.pageCount)
   const totalPacksCount = useAppSelector(state => state.pack.cardPacksTotalCount)
-  const packQueryParam = useAppSelector(state => state.pack.queryParams)
   const totalPacksPagesCount = Math.ceil(totalPacksCount / packsPerPage)
 
   const dispatch = useAppDispatch()
@@ -32,46 +30,13 @@ export const PacksPage = () => {
     dispatch(createPack({ name: newName }, { ...packQueryParam, page: 1 })) // go to first page list, maybe need reset param?
   }
 
-  const deletePackHandler = (packId: string) => {
-    dispatch(deletePack(packId, { ...packQueryParam }))
-  }
-
   const changeCurrentPage = (newPage: number) => {
     dispatch(setQueryParams({ page: newPage }))
   }
 
   const changePackPerPage = (newPackPerPage: number) => {
-    dispatch(setQueryParams({ pageCount: newPackPerPage }))
+    dispatch(setQueryParams({ pageCount: newPackPerPage, page: 1 }))
   }
-  const sort = (columnName: ColumnSortPacksName) => {
-    // if queryParams sort '^'(up) --> make sort 'v'(down)
-    // else all another case  --> make sort '^'(up)
-    const value: SortPacksType =
-      !!packQueryParam && packQueryParam.sortPacks === `1${columnName}`
-        ? `0${columnName}`
-        : `1${columnName}`
-
-    dispatch(setQueryParams({ sortPacks: value }))
-  }
-
-  //временно по клику переход на карты
-  const onClickPack = (packId: string) => {
-    dispatch(setQueryParamsCards({ cardsPack_id: packId }))
-    navigate(PATH.CARDS)
-  }
-
-  //временно по двойному клику
-
-  const renderData = data.map(pack => {
-    return (
-      <div key={pack._id}>
-        <div style={{ textAlign: 'left' }} onClick={() => onClickPack(pack._id)}>
-          {`USERID: ${pack.user_id}  <-> PACKID: ${pack._id}
-           <-> PACKNAME:${pack.name}  <-> CARDSCOUNT: ${pack.cardsCount}   <-> DATACREATE:${pack.created}`}
-        </div>
-      </div>
-    )
-  })
 
   useEffect(() => {
     if (packQueryParam) dispatch(loadPacks(packQueryParam))
@@ -89,14 +54,7 @@ export const PacksPage = () => {
         buttonCallback={addNewPackHandler}
       />
       <FilterBlock />
-      <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'space-around' }}>
-        <button onClick={() => sort('name')}>sort name</button>
-        <button onClick={() => sort('cardsCount')}>sort count</button>
-        <button onClick={() => sort('updated')}>sort update</button>
-        <button onClick={() => sort('user_name')}>sort user Name</button>
-      </div>
 
-      {renderData}
       <PackTableContainer />
 
       <Paginator

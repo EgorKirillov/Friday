@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { Box, Slider } from '@mui/material'
 
-import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { setQueryParams } from '../../packReducer'
+import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
+import { setQueryParams } from '../../../packReducer'
 
 import style from './DoubleSlider.module.css'
 
