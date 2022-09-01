@@ -27,7 +27,7 @@ export const ButtonWithLoader = ({
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Box sx={{ m: 1, position: 'relative' }}>
+      <Box sx={{ m: 1, position: 'relative', margin: '0' }}>
         <Button
           variant="contained"
           disabled={isLoading}
@@ -45,8 +45,8 @@ export const ButtonWithLoader = ({
               position: 'absolute',
               top: '50%',
               left: '50%',
-              marginTop: '-12px',
-              marginLeft: '-12px',
+              // marginTop: '-12px',
+              // marginLeft: '-12px',
             }}
           />
         )}

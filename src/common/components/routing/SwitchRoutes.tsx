@@ -9,6 +9,7 @@ import { Registration } from '../../../features/auth/register/UI/Registration'
 import { PasswordNew } from '../../../features/auth/setPassword/UI/PasswordNew'
 import { CardsPage } from '../../../features/cards/UI/cardPage'
 import { PacksPage } from '../../../features/packs/UI/PacksPage'
+import s from '../../container.module.css'
 import Error404Page from '../pageNotFound/Error404Page'
 import { TastsPage } from '../testPage/TestsPage'
 
@@ -26,7 +27,7 @@ export const PATH = {
 
 export const SwitchRoutes = () => {
   return (
-    <div>
+    <div className={s.container}>
       <Routes>
         <Route path={'/'} element={<PacksPage />} />
         <Route path={PATH.LOGIN} element={<Login />} />

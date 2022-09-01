@@ -3,7 +3,5 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: end;
-  justify-content: space-evenly;
-
-  border: 1px solid black;
+  justify-content: space-between;
 }

@@ -1,8 +1,6 @@
 .paginatorContainer{
   display: flex;
   align-items: baseline;
-
-  padding: 60px;
 }
 .selectBlock{
   display: flex;

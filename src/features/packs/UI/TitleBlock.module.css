@@ -1,11 +1,6 @@
 .title {
     display: flex;
     flex-wrap: nowrap;
-    /*align-content: space-around;*/
     align-items: center;
-    justify-content: space-around;
-
-    /*min-width: 1000px;*/
-
-    border: 1px solid black;
+    justify-content: space-between;
 }

@@ -89,11 +89,12 @@ export const PacksPage = () => {
         buttonCallback={addNewPackHandler}
       />
       <FilterBlock />
-
-      <button onClick={() => sort('name')}>sort name</button>
-      <button onClick={() => sort('cardsCount')}>sort count</button>
-      <button onClick={() => sort('updated')}>sort update</button>
-      <button onClick={() => sort('user_name')}>sort user Name</button>
+      <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'space-around' }}>
+        <button onClick={() => sort('name')}>sort name</button>
+        <button onClick={() => sort('cardsCount')}>sort count</button>
+        <button onClick={() => sort('updated')}>sort update</button>
+        <button onClick={() => sort('user_name')}>sort user Name</button>
+      </div>
 
       {renderData}
       <PackTableContainer />
