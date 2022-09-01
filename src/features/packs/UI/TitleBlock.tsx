@@ -9,13 +9,21 @@ import s from './TitleBlock.module.css'
 
 type PropsType = {
   title: string
-  buttonName: string
-  buttonCallback: () => void
+  buttonName?: string
+  buttonCallback?: () => void
+  buttonVisability?: 'hidden' | 'visible'
   link?: string
   linkName?: string
 }
 
-export const TitleBlock = ({ title, buttonName, buttonCallback, link, linkName }: PropsType) => {
+export const TitleBlock = ({
+  title,
+  buttonName,
+  buttonCallback,
+  link,
+  linkName,
+  buttonVisability = 'visible',
+}: PropsType) => {
   const loading = useAppSelector(state => state.app.status)
   const isLoading = loading === 'loading'
 
@@ -26,7 +34,13 @@ export const TitleBlock = ({ title, buttonName, buttonCallback, link, linkName }
           {link && linkName && <NavLink to={link}>{linkName}</NavLink>}
           <h2>{title}</h2>
         </div>
-        <ButtonWithLoader name={buttonName} onClick={buttonCallback} isLoading={isLoading} />
+
+        <ButtonWithLoader
+          name={buttonName}
+          onClick={buttonCallback}
+          isLoading={isLoading}
+          visibility={buttonVisability}
+        />
       </div>
     </div>
   )

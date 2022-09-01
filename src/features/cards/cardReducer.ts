@@ -53,6 +53,8 @@ export const cardsReducer = (
       }
     case 'pack/SET-QUERY-PARAMS-CARDS':
       return { ...state, queryParams: { ...action.payload } }
+    case 'pack/CLEAR-STATE':
+      return {} as InitialStateCardsType
     default:
       return state
   }
@@ -63,6 +65,7 @@ export const setCards = (data: GetCardsResponseType) =>
   ({ type: 'pack/SET-CARDS', payload: data } as const)
 export const setQueryParamsCards = (data: QueryParameterCardsType) =>
   ({ type: 'pack/SET-QUERY-PARAMS-CARDS', payload: data } as const)
+export const clearCardsState = () => ({ type: 'pack/CLEAR-STATE' } as const)
 
 // thunks
 
@@ -127,7 +130,10 @@ export const createCard =
   }
 
 // types
-export type CardsActionsType = ReturnType<typeof setCards> | ReturnType<typeof setQueryParamsCards>
+export type CardsActionsType =
+  | ReturnType<typeof setCards>
+  | ReturnType<typeof setQueryParamsCards>
+  | ReturnType<typeof clearCardsState>
 
 export type InitialStateCardsType = GetCardsResponseType & {
   queryParams: QueryParameterCardsType

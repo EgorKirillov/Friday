@@ -12,6 +12,7 @@ type PropsType = {
   isLoading?: boolean
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset' | undefined
+  visibility?: 'hidden' | 'visible'
 }
 
 export const ButtonWithLoader = ({
@@ -20,14 +21,22 @@ export const ButtonWithLoader = ({
   isLoading = false,
   onClick = () => {},
   type = 'button',
+  visibility = 'visible',
 }: PropsType) => {
   const handleButtonClick = () => {
     onClick()
   }
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Box sx={{ m: 1, position: 'relative', margin: '0' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        visibility: visibility,
+      }}
+    >
+      <Box sx={{ m: 1, position: 'relative' }}>
         <Button
           variant="contained"
           disabled={isLoading}
