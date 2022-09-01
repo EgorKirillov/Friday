@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Search } from '../../../common/components/search/Search'
-import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { setQueryParamsCards } from '../cardReducer'
+import { Search } from '../../../../common/components/search/Search'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { setQueryParamsCards } from '../../cardReducer'
 
 import s from './SearchBlock.module.css'
 

@@ -3,9 +3,7 @@ import React, { useEffect } from 'react'
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
 import { toast } from 'react-toastify'
 
-import { ButtonWithLoader } from '../../../common/components/buttonWithLoader/ButtonWithLoader'
 import { Paginator } from '../../../common/components/paginator/Paginator'
-import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/TitleBlock'
 import {
@@ -17,9 +15,11 @@ import {
 } from '../cardReducer'
 import { NewCardType } from '../cardsAPI'
 
-import { BackLink } from './BackLink'
+import { BackLink } from './backLink/BackLink'
 import s from './cardPage.module.css'
-import { SearchBlock } from './SearchBlock'
+import { NotFoundCards } from './notFoundCards/notFoundCards'
+import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
+import { SearchBlock } from './searchBlock/SearchBlock'
 
 export const CardsPage = () => {
   const loading = useAppSelector(state => state.app.status)
@@ -68,10 +68,6 @@ export const CardsPage = () => {
     dispatch(createCard(newCard, queryParams))
   }
 
-  const clearCardsHandler = () => {
-    dispatch(clearCardsState())
-  }
-
   const learnPackHandler = () => {
     toast.info('learn this card')
   }
@@ -90,17 +86,17 @@ export const CardsPage = () => {
     if (queryParams) dispatch(loadCards(queryParams))
     else toast.warn(' useEffect нет queryParams')
     toast(JSON.stringify(queryParams))
+
+    return () => {
+      dispatch(clearCardsState())
+    }
   }, [queryParams])
 
   return (
     <div className={s.container}>
-      <BackLink
-        link={PATH.PACKS}
-        linkName={!isLoading ? '<- Back to pack list' : ''}
-        clickCallback={clearCardsHandler}
-      />
+      <BackLink />
 
-      <div>{isMyPack ? 'моя пачка кнопка ADD' : 'НЕ моя пачка кнопка LEARN'}</div>
+      {/*<div>{isMyPack ? 'моя пачка кнопка ADD' : 'НЕ моя пачка кнопка LEARN'}</div>
       <div>
         {totalCardsCount === 0 ? 'нет данных для отображения кнопку убрать' : 'есть что отображать'}
       </div>
@@ -114,32 +110,26 @@ export const CardsPage = () => {
 
       {totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion) && (
         <div>поиск активен, NOT FOUND, кнопку очистить фильтh</div>
-      )}
+      )}*/}
+
       <TitleBlock
         title={titlePack}
-        hideButton={totalCardsCount === 0}
+        buttonVisability={totalCardsCount === 0 ? 'hidden' : 'visible'}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
       />
+
       <SearchBlock />
 
-      {packIsEmpty && (
-        <div>
-          <div>This pack is empty. Click add new card to fill this pack</div>
-          <ButtonWithLoader
-            name={'add new card'}
-            isLoading={isLoading}
-            onClick={addNewCardHandler}
-          />
-        </div>
-      )}
+      {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
 
-      {notFound && <div>Not found</div>}
+      {notFound && <NotFoundCards />}
       {isLoading ? (
         <CircularProgress style={{ margin: '0 auto', paddingTop: '30px' }} />
       ) : (
         renderData
       )}
+
       {/*<PackTableContainer />*/}
 
       <Paginator

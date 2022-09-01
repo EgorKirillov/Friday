@@ -11,7 +11,7 @@ type PropsType = {
   title: string
   buttonName?: string
   buttonCallback?: () => void
-  hideButton?: boolean
+  buttonVisability?: 'hidden' | 'visible'
   link?: string
   linkName?: string
 }
@@ -22,7 +22,7 @@ export const TitleBlock = ({
   buttonCallback,
   link,
   linkName,
-  hideButton = false,
+  buttonVisability = 'visible',
 }: PropsType) => {
   const loading = useAppSelector(state => state.app.status)
   const isLoading = loading === 'loading'
@@ -34,9 +34,13 @@ export const TitleBlock = ({
           {link && linkName && <NavLink to={link}>{linkName}</NavLink>}
           <h2>{title}</h2>
         </div>
-        {hideButton || (
-          <ButtonWithLoader name={buttonName} onClick={buttonCallback} isLoading={isLoading} />
-        )}
+
+        <ButtonWithLoader
+          name={buttonName}
+          onClick={buttonCallback}
+          isLoading={isLoading}
+          visibility={buttonVisability}
+        />
       </div>
     </div>
   )
