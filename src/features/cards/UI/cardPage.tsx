@@ -7,11 +7,18 @@ import { Paginator } from '../../../common/components/paginator/Paginator'
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
-import { createCard, deleteCard, loadCards, setQueryParamsCards } from '../cardReducer'
+import {
+  clearCardsState,
+  createCard,
+  deleteCard,
+  loadCards,
+  setQueryParamsCards,
+} from '../cardReducer'
 import { NewCardType } from '../cardsAPI'
 
 import { BackLink } from './backLink/BackLink'
 import s from './cardPage.module.css'
+import { CardTableContainer } from './cardsTable/cardTableConteiner'
 import { NotFoundCards } from './notFoundCards/notFoundCards'
 import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
 import { SearchBlock } from './searchBlock/SearchBlock'
@@ -30,6 +37,7 @@ export const CardsPage = () => {
   const packsPerPage = useAppSelector(state => state.cards.pageCount)
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
   const totalCardsPagesCount = Math.ceil(totalCardsCount / packsPerPage)
+  const data = useAppSelector(state => state.cards.cards)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -67,17 +75,17 @@ export const CardsPage = () => {
     toast.info('learn this card')
   }
 
-  // const renderData = data ? (
-  //   data.map(card => {
-  //     return (
-  //       <div key={card._id} onClick={() => deleteCardHandler(card._id)}>
-  //         {`${card._id} ${card.question} ${card.answer} ${card.updated} ${card.grade}`}
-  //       </div>
-  //     )
-  //   })
-  // ) : (
-  //   <div>ddd</div>
-  // )
+  const renderData = data ? (
+    data.map(card => {
+      return (
+        <div key={card._id} onClick={() => deleteCardHandler(card._id)}>
+          {`${card._id} ${card.question} ${card.answer} ${card.updated} ${card.grade}`}
+        </div>
+      )
+    })
+  ) : (
+    <div>ddd</div>
+  )
 
   const menuuuuuuuuuuu = () => {
     alert('Maks')
@@ -88,13 +96,13 @@ export const CardsPage = () => {
     else toast.warn(' useEffect нет queryParams')
     toast(JSON.stringify(queryParams))
 
-    // return () => {
-    //   dispatch(clearCardsState())
-    // }
+    return () => {
+      dispatch(clearCardsState())
+    }
   }, [queryParams])
-  useEffect(() => {
-    if (!isAuth) navigate(PATH.LOGIN)
-  }, [isAuth])
+  // useEffect(() => {
+  //   if (!isAuth) navigate(PATH.LOGIN)
+  // }, [isAuth])
 
   return (
     <div className={s.container}>
@@ -108,15 +116,15 @@ export const CardsPage = () => {
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
       />
 
-      <SearchBlock />
+      {/*<SearchBlock />*/}
 
       {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
 
       {notFound && <NotFoundCards />}
 
-      {/*{renderData}*/}
+      {renderData}
 
-      {/*<PackTableContainer />*/}
+      <CardTableContainer />
 
       <Paginator
         pagesCount={totalCardsPagesCount}
