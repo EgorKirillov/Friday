@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
 import { toast } from 'react-toastify'
 
 import { ButtonWithLoader } from '../../../common/components/buttonWithLoader/ButtonWithLoader'
@@ -7,7 +8,13 @@ import { Paginator } from '../../../common/components/paginator/Paginator'
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/TitleBlock'
-import { createCard, deleteCard, loadCards, setQueryParamsCards } from '../cardReducer'
+import {
+  clearCardsState,
+  createCard,
+  deleteCard,
+  loadCards,
+  setQueryParamsCards,
+} from '../cardReducer'
 import { NewCardType } from '../cardsAPI'
 
 import { BackLink } from './BackLink'
@@ -20,6 +27,7 @@ export const CardsPage = () => {
 
   const queryParams = useAppSelector(state => state.cards.queryParams)
   const data = useAppSelector(state => state.cards.cards)
+  const titlePack = useAppSelector(state => state.cards.packName)
 
   const userId = useAppSelector(state => state.profile._id)
   const packUserId = useAppSelector(state => state.cards.packUserId)
@@ -37,12 +45,12 @@ export const CardsPage = () => {
     dispatch(deleteCard(id, { ...queryParams, page: 1 }))
     toast.warn(`карта удалена ${id}`)
   }
-  const notEmptyPack: boolean =
-    totalCardsCount === 0 && !!queryParams.cardAnswer && !!queryParams.cardQuestion
+  const packIsEmpty: boolean =
+    totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
+
   const notFound: boolean =
-    !!queryParams &&
-    (!!queryParams.cardAnswer || !!queryParams.cardQuestion) &&
-    totalCardsCount === 0
+    totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
+
   const changeCurrentPage = (newPage: number) => {
     dispatch(setQueryParamsCards({ ...queryParams, page: newPage }))
   }
@@ -58,6 +66,10 @@ export const CardsPage = () => {
     }
 
     dispatch(createCard(newCard, queryParams))
+  }
+
+  const clearCardsHandler = () => {
+    dispatch(clearCardsState())
   }
 
   const learnPackHandler = () => {
@@ -82,18 +94,36 @@ export const CardsPage = () => {
 
   return (
     <div className={s.container}>
-      <BackLink link={PATH.PACKS} linkName={'<- Back to pack list'} />
-      {isMyPack ? 'моя пачка' : 'НЕ моя пачка'}
+      <BackLink
+        link={PATH.PACKS}
+        linkName={!isLoading ? '<- Back to pack list' : ''}
+        clickCallback={clearCardsHandler}
+      />
 
+      <div>{isMyPack ? 'моя пачка кнопка ADD' : 'НЕ моя пачка кнопка LEARN'}</div>
+      <div>
+        {totalCardsCount === 0 ? 'нет данных для отображения кнопку убрать' : 'есть что отображать'}
+      </div>
+      <div>
+        {!!queryParams.cardAnswer || !!queryParams.cardQuestion ? 'идет поиск' : 'поиск не идет'}
+      </div>
+
+      {totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion && (
+        <div>задизэбл поиска , показать кнопку добавить карту</div>
+      )}
+
+      {totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion) && (
+        <div>поиск активен, NOT FOUND, кнопку очистить фильтh</div>
+      )}
       <TitleBlock
-        title={'Card list'}
+        title={titlePack}
         hideButton={totalCardsCount === 0}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
       />
       <SearchBlock />
 
-      {!notEmptyPack && (
+      {packIsEmpty && (
         <div>
           <div>This pack is empty. Click add new card to fill this pack</div>
           <ButtonWithLoader
@@ -105,7 +135,11 @@ export const CardsPage = () => {
       )}
 
       {notFound && <div>Not found</div>}
-      {renderData}
+      {isLoading ? (
+        <CircularProgress style={{ margin: '0 auto', paddingTop: '30px' }} />
+      ) : (
+        renderData
+      )}
       {/*<PackTableContainer />*/}
 
       <Paginator

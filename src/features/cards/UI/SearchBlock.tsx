@@ -11,6 +11,9 @@ export const SearchBlock = () => {
   const answer = queryParams.cardAnswer
   const question = queryParams.cardQuestion
   const dispatch = useAppDispatch()
+  const totalCountCards = useAppSelector(state => state.cards.cardsTotalCount)
+
+  const noData = totalCountCards === 0 && !answer && !question
 
   const setSearchParamAnswer = (val: string) => {
     const cardAnswer = val.trim() === '' ? undefined : val
@@ -30,11 +33,13 @@ export const SearchBlock = () => {
         callback={setSearchParamQuestion}
         startValue={question ? question : ''}
         titleSearch={'Search by question'}
+        disabled={noData}
       />
       <Search
         callback={setSearchParamAnswer}
         startValue={answer ? answer : ''}
         titleSearch={'Search by answer'}
+        disabled={noData}
       />
     </div>
   )
