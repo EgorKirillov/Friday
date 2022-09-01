@@ -2,7 +2,6 @@ import React from 'react'
 
 import { toast } from 'react-toastify'
 
-import { PackTable } from '../../../features/packs/packTable/UI/packTable'
 import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
 import SuperButton from '../superButton/SuperButton'
 import SuperCheckbox from '../superCheckbox/SuperCheckbox'
@@ -34,9 +33,6 @@ export function TestsPage() {
         <button onClick={() => toast.warn('warning')}>warning</button>
         <button onClick={() => toast.error('error')}>error</button>
         <ToastMessage />
-      </div>
-      <div>
-        <PackTable />
       </div>
     </div>
   )

@@ -7,62 +7,85 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import { toast } from 'react-toastify'
+
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
+import { setQueryParams } from '../../packReducer'
 
 import style from './packTable.module.css'
 
-export const rowsPackTable = (
-  name: string,
-  cardsCount: number,
-  updated: string,
-  CreatedBy: string,
-  Actions: any
-) => {
-  return {
-    name: name,
-    cards: cardsCount,
-    updated: updated,
-    CreatedBy: CreatedBy,
-    Actions: Actions,
-  }
+type PropsTableType = {
+  children: React.ReactNode
+  columnsName: ColumnsNameType[]
+  // data: React.ReactNode[]
+}
+type ColumnsNameType = {
+  key: ColumnSortPacksName
+  label: string
+  isSortable: boolean
 }
 
-const rows = [
-  rowsPackTable('Pack name', 10, '18.03.2020', 'Ivan Ivanov', 'some actions'),
-  rowsPackTable('Pack name2', 10, '18.03.2020', 'Ivan Ivanov', 'some actions'),
-  rowsPackTable('Pack name3', 10, '18.03.2020', 'Ivan Ivanov', 'some actions'),
-  rowsPackTable('Pack name4', 10, '18.03.2020', 'Ivan Ivanov', 'some actions'),
-  rowsPackTable('Pack name5', 10, '18.03.2020', 'Ivan Ivanov', 'some actions'),
-  rowsPackTable('Pack name6', 10, '18.03.2020', 'Ivan Ivanov', 'some actions'),
-  rowsPackTable('Pack name7', 10, '18.03.2020', 'Ivan Ivanov', 'some actions'),
-]
+export const PackTable = (props: PropsTableType) => {
+  const dispatch = useAppDispatch()
+  const packQueryParam = useAppSelector(state => state.pack.queryParams)
+  const columns = props.columnsName.map((columnName, index) => {
+    const onClickColumnsHandler = () => {
+      if (packQueryParam) {
+        console.log(packQueryParam.sortPacks)
+        const value: SortPacksType =
+          packQueryParam.sortPacks === `1${columnName.key}`
+            ? `0${columnName.key}`
+            : `1${columnName.key}`
 
-export const PackTable = () => {
+        dispatch(setQueryParams({ sortPacks: value }))
+      }
+
+      toast.info(index)
+    }
+    let name = columnName.label
+
+    if (
+      columnName.isSortable &&
+      !!packQueryParam &&
+      packQueryParam.sortPacks === `0${columnName.key}`
+    ) {
+      name += '▼'
+    } else if (
+      columnName.isSortable &&
+      !!packQueryParam &&
+      packQueryParam.sortPacks === `1${columnName.key}`
+    ) {
+      name += '▲'
+    }
+    // columnName.label +
+    // (
+    //   columnName.isSortable &&
+    //   !!packQueryParam &&
+    //   packQueryParam.sortPacks === `1${columnName.key}` &&
+    //   '▼'
+    // )+(
+    //   columnName.isSortable &&
+    //     !!packQueryParam &&
+    //     packQueryParam.sortPacks === `0${columnName.key}` &&
+    //     '▲'
+    // )
+
+    return (
+      <TableCell key={columnName.key} align={'right'} onClick={onClickColumnsHandler}>
+        {name}
+      </TableCell>
+    )
+  })
+
   return (
     <div className={style.pactTableWrapper}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
-            <TableRow className={style.tableRow}>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Cards</TableCell>
-              <TableCell align="right">Last Update</TableCell>
-              <TableCell align="right">Created by</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
+            <TableRow className={style.tableRow}>{columns}</TableRow>
           </TableHead>
-          <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.cards}</TableCell>
-                <TableCell align="right">{row.updated}</TableCell>
-                <TableCell align="right">{row.CreatedBy}</TableCell>
-                <TableCell align="center">{row.Actions}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          <TableBody>{props.children}</TableBody>
         </Table>
       </TableContainer>
     </div>
