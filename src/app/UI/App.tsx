@@ -21,13 +21,17 @@ const App = () => {
     dispatch(initializeApp())
   }, [])
 
+  if (!isInitialize) {
+    return <Preloader />
+  }
+
   return (
     <div className="App">
       <ToastMessage />
       <DevHeader />
       <Header />
       {status === 'loading' && <LinearProgress color="inherit" />}
-      {!isInitialize ? <Preloader /> : <SwitchRoutes />}
+      <SwitchRoutes />
     </div>
   )
 }

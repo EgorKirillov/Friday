@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import s from '../../setPassword/UI/PasswordNew.module.css'
 import { LoginDataType } from '../loginAPI'
 import { setUserTC } from '../loginReducer'
 
@@ -16,6 +19,8 @@ export const Login = () => {
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
+
+  const [inputType, setInputType] = useState<string>('password')
   const {
     register,
     handleSubmit,
@@ -31,6 +36,10 @@ export const Login = () => {
   }
   const onClickNavigateRegistration = () => {
     navigate(PATH.REGISTRATION)
+  }
+
+  const togglePasswordViewType = () => {
+    setInputType(inputType === 'password' ? 'text' : 'password')
   }
 
   if (isAuthMe) {
@@ -62,8 +71,14 @@ export const Login = () => {
             <input
               {...register('password')}
               placeholder="Password"
-              type={'password'}
+              type={inputType === 'password' ? 'password' : ''}
               disabled={status === 'loading'}
+            />
+            <FontAwesomeIcon
+              className={s.eye}
+              onClick={togglePasswordViewType}
+              icon={faEye}
+              title={inputType === 'password' ? 'see password' : 'hide password'}
             />
             <hr />
           </div>

@@ -6,12 +6,16 @@
     width: 196px;
     height: 36px;
 
+    line-height: 36px;
+
     border: 1px solid #757575;
     border-radius: 5px;
 }
 
 .activeCards{
-    background-color: #366EFF;
+    color:white;
+
+    background-color: #1976d2;
 }
 
 .label {
