@@ -24,6 +24,8 @@ import { SearchBlock } from './searchBlock/SearchBlock'
 export const CardsPage = () => {
   const queryParams = useAppSelector(state => state.cards.queryParams)
   const titlePack = useAppSelector(state => state.cards.packName)
+  const loading = useAppSelector(state => state.app.status)
+  const isLoading = loading === 'loading'
 
   const userId = useAppSelector(state => state.profile._id)
   const packUserId = useAppSelector(state => state.cards.packUserId)
@@ -76,10 +78,6 @@ export const CardsPage = () => {
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
     // toast(JSON.stringify(queryParams))     // dev help
-
-    return () => {
-      dispatch(clearCardsState())
-    }
   }, [queryParams])
   // useEffect(() => {
   //   if (!isAuth) navigate(PATH.LOGIN)
@@ -99,11 +97,13 @@ export const CardsPage = () => {
 
       <SearchBlock />
 
-      {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
-
-      {notFound && <NotFoundCards />}
-
       <CardTableContainer />
+
+      {!isLoading && packIsEmpty && (
+        <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />
+      )}
+
+      {!isLoading && notFound && <NotFoundCards />}
 
       <Paginator
         pagesCount={totalCardsPagesCount}
