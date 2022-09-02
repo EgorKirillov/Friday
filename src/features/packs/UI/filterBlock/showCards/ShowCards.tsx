@@ -8,6 +8,7 @@ import style from './ShowCards.module.css'
 export const ShowCards = () => {
   const dispatch = useAppDispatch()
   const [cards, setCards] = useState<'All' | 'My'>('All')
+  const status = useAppSelector(state => state.app.status)
 
   const myID = useAppSelector(state => state.profile._id)
 
@@ -25,18 +26,20 @@ export const ShowCards = () => {
     <div className={style.showCardsContainer}>
       <div className={style.label}>Show packs cards</div>
       <div className={style.showCardsBox}>
-        <div
+        <button
+          disabled={status === 'loading'}
           className={`${style.cards} ${cards === 'My' ? style.activeCards : ''}`}
           onClick={() => onClickHandler('My')}
         >
           My
-        </div>
-        <div
+        </button>
+        <button
+          disabled={status === 'loading'}
           className={`${style.cards} ${cards === 'All' ? style.activeCards : ''}`}
           onClick={() => onClickHandler('All')}
         >
           All
-        </div>
+        </button>
       </div>
     </div>
   )
