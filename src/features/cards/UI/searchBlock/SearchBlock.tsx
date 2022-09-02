@@ -8,8 +8,8 @@ import s from './SearchBlock.module.css'
 
 export const SearchBlock = () => {
   const queryParams = useAppSelector(state => state.cards.queryParams)
-  const answer = queryParams.cardAnswer
-  const question = queryParams.cardQuestion
+  const answer = queryParams ? queryParams.cardAnswer : undefined
+  const question = queryParams ? queryParams.cardQuestion : undefined
 
   const totalCountCards = useAppSelector(state => state.cards.cardsTotalCount)
   const noData = totalCountCards === 0 && !answer && !question

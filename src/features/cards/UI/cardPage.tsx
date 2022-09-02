@@ -81,14 +81,7 @@ export const CardsPage = () => {
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
     // toast(JSON.stringify(queryParams))     // dev help
-
-    return () => {
-      dispatch(clearCardsState())
-    }
   }, [queryParams])
-  // useEffect(() => {
-  //   if (!isAuth) navigate(PATH.LOGIN)
-  // }, [isAuth])
 
   return (
     <div className={s.container}>
@@ -104,11 +97,11 @@ export const CardsPage = () => {
 
       <SearchBlock />
 
+      <CardTableContainer />
+
       {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
 
       {notFound && <NotFoundCards />}
-
-      <CardTableContainer />
 
       <Paginator
         pagesCount={totalCardsPagesCount}
