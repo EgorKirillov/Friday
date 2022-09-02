@@ -58,6 +58,7 @@ export const PackTableContainer = () => {
       navigate(PATH.CARDS)
     }
     const itMyPack: boolean = idUser === el.user_id
+    const updateDate = new Date(el.updated).toLocaleString('ru')
 
     return (
       <TableRow
@@ -70,7 +71,7 @@ export const PackTableContainer = () => {
         </TableCell>
 
         <TableCell align="right">{el.cardsCount}</TableCell>
-        <TableCell align="right">{el.updated}</TableCell>
+        <TableCell align="right">{updateDate}</TableCell>
         <TableCell align="right">{el.user_name}</TableCell>
         <TableCell align="center">
           <img src={teacherIcon} width={'auto'} alt="" onClick={onClickTeacher} />
