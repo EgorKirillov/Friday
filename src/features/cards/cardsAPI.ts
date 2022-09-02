@@ -1,4 +1,5 @@
 import { instance } from '../../app/instanceAPI'
+import { ColumnSortPacksName } from '../packs/packAPI'
 
 export const cardsAPI = {
   getCards(param: QueryParameterCardsType) {
@@ -37,7 +38,7 @@ export type CardType = {
   rating: number
   more_id: Date
   created: Date
-  updated: Date
+  updated: string
   __v: number
 }
 export type NewCardType = {
@@ -107,12 +108,15 @@ type UpdatecardResponseType = {
   tokenDeathTime: number
 }
 
-type SortCardsType =
-  | '0answer'
-  | '1answer'
-  | '0question'
-  | '1question'
-  | '0updated'
-  | '1updated'
-  | '0grade'
-  | '1grade'
+// type SortCardsType =
+//     | '0answer'
+//     | '1answer'
+//     | '0question'
+//     | '1question'
+//     | '0updated'
+//     | '1updated'
+//     | '0grade'
+//     | '1grade'
+
+export type ColumnSortCardsName = 'answer' | 'question' | 'updated' | 'grade'
+export type SortCardsType = `0${ColumnSortCardsName}` | `1${ColumnSortCardsName}`
