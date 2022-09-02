@@ -59,11 +59,13 @@ export const TitleBlock = ({
         <div style={{ display: 'flex' }}>
           <h2 onClick={callbackTitle}>{title}</h2>
           <div style={{ lineHeight: '68px' }}>
-            <BasicMenu
-              label={isMyPack ? <img src={ovalIcon} alt="ovalIcon" /> : undefined}
-              items={arrButton}
-              style={{ margin: '8px 0 0 -50px' }}
-            />
+            {isMyPack && (
+              <BasicMenu
+                label={<img src={ovalIcon} alt="ovalIcon" />}
+                items={arrButton}
+                style={{ margin: '8px 0 0 -50px' }}
+              />
+            )}
           </div>
         </div>
 
