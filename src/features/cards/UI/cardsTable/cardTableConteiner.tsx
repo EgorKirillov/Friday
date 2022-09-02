@@ -9,7 +9,8 @@ import { toast } from 'react-toastify'
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { ColumnSortCardsName } from '../../cardsAPI'
+import { setQueryParamsCards } from '../../cardReducer'
+import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
 
 import { CardTable } from './cardTable'
 
@@ -33,10 +34,10 @@ export const CardTableContainer = () => {
     // if queryParams sort '^'(up) --> make sort 'v'(down)
     // else all another case  --> make sort '^'(up)
 
-    const value: any =
+    const value: SortCardsType =
       !!cardQueryParam && cardQueryParam.sortCards === `1${name}` ? `0${name}` : `1${name}`
 
-    // dispatch(setQueryParamsCards({ sortCards: value }))
+    dispatch(setQueryParamsCards({ ...cardQueryParam, sortCards: value }))
   }
 
   const rows =

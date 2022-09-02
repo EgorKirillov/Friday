@@ -75,18 +75,6 @@ export const CardsPage = () => {
     toast.info('learn this card')
   }
 
-  const renderData = data ? (
-    data.map(card => {
-      return (
-        <div key={card._id} onClick={() => deleteCardHandler(card._id)}>
-          {`${card._id} ${card.question} ${card.answer} ${card.updated} ${card.grade}`}
-        </div>
-      )
-    })
-  ) : (
-    <div>ddd</div>
-  )
-
   const menuuuuuuuuuuu = () => {
     alert('Maks')
   }
@@ -116,13 +104,11 @@ export const CardsPage = () => {
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
       />
 
-      {/*<SearchBlock />*/}
+      <SearchBlock />
 
       {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
 
       {notFound && <NotFoundCards />}
-
-      {renderData}
 
       <CardTableContainer />
 
