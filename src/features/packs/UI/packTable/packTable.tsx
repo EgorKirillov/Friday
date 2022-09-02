@@ -25,10 +25,12 @@ type ColumnsNameType = {
 
 export const PackTable = (props: PropsTableType) => {
   const packQueryParam = useAppSelector(state => state.pack.queryParams)
+  const loading = useAppSelector(state => state.app.status)
+  const isLoading = loading === 'loading'
 
   const columns = props.columnsName.map(columnName => {
     const onClickColumnsHandler = () => {
-      if (packQueryParam && columnName.isSortable) props.sortCallback(columnName.key)
+      if (packQueryParam && columnName.isSortable && !isLoading) props.sortCallback(columnName.key)
     }
 
     let name = columnName.label
