@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { Paginator } from '../../../common/components/paginator/Paginator'
-import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
 import {
@@ -24,8 +22,6 @@ import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
 import { SearchBlock } from './searchBlock/SearchBlock'
 
 export const CardsPage = () => {
-  const isAuth = useAppSelector(state => state.login.isAuthMe)
-
   const queryParams = useAppSelector(state => state.cards.queryParams)
   const titlePack = useAppSelector(state => state.cards.packName)
 
@@ -39,7 +35,6 @@ export const CardsPage = () => {
   const totalCardsPagesCount = Math.ceil(totalCardsCount / packsPerPage)
 
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const deleteCardHandler = (id: string) => {
     dispatch(deleteCard(id, { ...queryParams, page: 1 }))
@@ -74,10 +69,6 @@ export const CardsPage = () => {
     toast.info('learn this card')
   }
 
-  const menuuuuuuuuuuu = () => {
-    alert('Maks')
-  }
-
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
     // toast(JSON.stringify(queryParams))     // dev help
@@ -96,7 +87,7 @@ export const CardsPage = () => {
 
       <TitleBlock
         title={titlePack}
-        callbackTitle={menuuuuuuuuuuu}
+        isMyPack={isMyPack}
         buttonVisability={totalCardsCount === 0 ? 'hidden' : 'visible'}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
