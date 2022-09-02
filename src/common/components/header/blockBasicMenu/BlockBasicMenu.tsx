@@ -41,7 +41,7 @@ export const BlockBasicMenu = () => {
     <ButtonBasicMenu icon={logoutIcon} name="Logout" callBack={onClickHandlerNavigateToLogout} />
   )
 
-  const arrButton = [buttonProfile, isAuth ? buttonLogout : buttonLogin]
+  const arrButton = [isAuth && buttonProfile, isAuth ? buttonLogout : buttonLogin]
 
   return (
     <div className={style.headerBlockNameAndAva}>
