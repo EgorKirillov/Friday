@@ -65,17 +65,51 @@ export const PackTableContainer = () => {
         onClick={() => onClickPack(el._id)}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
       >
-        <TableCell component="th" scope="row">
+        <TableCell
+          component="th"
+          scope="row"
+          style={{
+            width: '350px',
+            border: '1px solid red',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
           {el.name}
         </TableCell>
-
-        <TableCell align="right">{el.cardsCount}</TableCell>
-        <TableCell align="right">{el.updated}</TableCell>
-        <TableCell align="right">{el.user_name}</TableCell>
-        <TableCell align="center">
-          <img src={teacherIcon} width={'auto'} alt="" onClick={onClickTeacher} />
-          {itMyPack && <img src={deleteIcon} width={'auto'} alt="" onClick={onClickDelete} />}
-          {itMyPack && <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />}
+        <TableCell align="left" style={{ width: '50px', border: '1px solid green' }}>
+          {el.cardsCount}
+        </TableCell>
+        <TableCell align="left" style={{ width: '300px', border: '1px solid blue' }}>
+          {el.updated}
+        </TableCell>
+        <TableCell align="left" style={{ width: '200px', border: '1px solid black' }}>
+          {el.user_name}
+        </TableCell>
+        <TableCell align="left">
+          <img
+            src={teacherIcon}
+            alt=""
+            onClick={onClickTeacher}
+            style={{ margin: '0 5px', width: 'auto' }}
+          />
+          {itMyPack && (
+            <img
+              src={deleteIcon}
+              alt=""
+              onClick={onClickDelete}
+              style={{ margin: '0 5px', width: 'auto' }}
+            />
+          )}
+          {itMyPack && (
+            <img
+              src={editIcon}
+              alt=""
+              onClick={onClickEdit}
+              style={{ margin: '0 5px', width: 'auto' }}
+            />
+          )}
         </TableCell>
       </TableRow>
     )
