@@ -29,7 +29,7 @@ const App = () => {
   return (
     <div className="App">
       <ToastMessage />
-      <DevHeader />
+      {/*<DevHeader />*/}
       <Header />
       <LinearProgress color="inherit" sx={{ visibility: isLoading ? 'visible' : 'hidden' }} />
       <SwitchRoutes />
