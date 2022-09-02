@@ -25,6 +25,8 @@ import { SearchBlock } from './searchBlock/SearchBlock'
 
 export const CardsPage = () => {
   const isAuth = useAppSelector(state => state.login.isAuthMe)
+  const loading = useAppSelector(state => state.app.status)
+  const isLoading = loading === 'loading'
 
   const queryParams = useAppSelector(state => state.cards.queryParams)
   const titlePack = useAppSelector(state => state.cards.packName)
@@ -99,9 +101,11 @@ export const CardsPage = () => {
 
       <CardTableContainer />
 
-      {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
+      {!isLoading && packIsEmpty && (
+        <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />
+      )}
 
-      {notFound && <NotFoundCards />}
+      {!isLoading && notFound && <NotFoundCards />}
 
       <Paginator
         pagesCount={totalCardsPagesCount}
