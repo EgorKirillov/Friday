@@ -66,28 +66,57 @@ export const PackTableContainer = () => {
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
       >
         <TableCell
-          component="th"
+          component="td"
           scope="row"
           style={{
+            // width: '100%',
+            minWidth: '30%',
+            // maxWidth: '30%',
+            maxWidth: '350px',
+            // minWidth: '350px',
+            // width: '350px',
+            border: '1px solid red',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            boxSizing: 'border-box',
+          }}
+        >
+          {el.name}
+        </TableCell>
+        <TableCell
+          align="left"
+          style={{ width: '10%', border: '1px solid green', boxSizing: 'border-box' }}
+        >
+          {el.cardsCount}
+        </TableCell>
+        <TableCell
+          align="left"
+          style={{ width: '30%', border: '1px solid blue', boxSizing: 'border-box' }}
+        >
+          {el.updated}
+        </TableCell>
+        <TableCell
+          align="left"
+          style={{
             width: '350px',
+            maxWidth: '350px',
+            border: '1px solid black',
+            boxSizing: 'border-box',
+          }}
+        >
+          {el.user_name}
+        </TableCell>
+        <TableCell
+          align="left"
+          style={{
+            width: '10%',
             border: '1px solid red',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
           }}
         >
-          {el.name}
-        </TableCell>
-        <TableCell align="left" style={{ width: '50px', border: '1px solid green' }}>
-          {el.cardsCount}
-        </TableCell>
-        <TableCell align="left" style={{ width: '300px', border: '1px solid blue' }}>
-          {el.updated}
-        </TableCell>
-        <TableCell align="left" style={{ width: '200px', border: '1px solid black' }}>
-          {el.user_name}
-        </TableCell>
-        <TableCell align="left">
           <img
             src={teacherIcon}
             alt=""
