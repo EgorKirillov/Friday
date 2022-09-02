@@ -29,7 +29,7 @@ export const SwitchRoutes = () => {
   return (
     <div className={s.container}>
       <Routes>
-        <Route path={'/'} element={<PacksPage />} />
+        <Route path={'/'} element={<Login />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
