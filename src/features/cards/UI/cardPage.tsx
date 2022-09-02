@@ -5,13 +5,7 @@ import { toast } from 'react-toastify'
 import { Paginator } from '../../../common/components/paginator/Paginator'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
-import {
-  clearCardsState,
-  createCard,
-  deleteCard,
-  loadCards,
-  setQueryParamsCards,
-} from '../cardReducer'
+import { createCard, deleteCard, loadCards, setQueryParamsCards } from '../cardReducer'
 import { NewCardType } from '../cardsAPI'
 
 import { BackLink } from './backLink/BackLink'
@@ -71,10 +65,6 @@ export const CardsPage = () => {
     toast.info('learn this card')
   }
 
-  const menuuuuuuuuuuu = () => {
-    alert('Maks')
-  }
-
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
     // toast(JSON.stringify(queryParams))     // dev help
@@ -89,7 +79,7 @@ export const CardsPage = () => {
 
       <TitleBlock
         title={titlePack}
-        callbackTitle={menuuuuuuuuuuu}
+        isMyPack={isMyPack}
         buttonVisability={totalCardsCount === 0 ? 'hidden' : 'visible'}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}

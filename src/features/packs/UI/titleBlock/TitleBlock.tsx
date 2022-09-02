@@ -60,7 +60,7 @@ export const TitleBlock = ({
           <h2 onClick={callbackTitle}>{title}</h2>
           <div style={{ lineHeight: '68px' }}>
             <BasicMenu
-              label={isMyPack && <img src={ovalIcon} alt="ovalIcon" />}
+              label={isMyPack ? <img src={ovalIcon} alt="ovalIcon" /> : undefined}
               items={arrButton}
               style={{ margin: '8px 0 0 -50px' }}
             />
