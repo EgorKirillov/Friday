@@ -13,6 +13,7 @@ import { initializeApp } from '../appStatusReducer'
 
 const App = () => {
   const status = useAppSelector(state => state.app.status)
+  const isLoading: boolean = status === 'loading'
   const isInitialize = useAppSelector(state => state.app.isInitialize)
 
   const dispatch = useAppDispatch()
@@ -30,7 +31,7 @@ const App = () => {
       <ToastMessage />
       <DevHeader />
       <Header />
-      {status === 'loading' && <LinearProgress color="inherit" />}
+      <LinearProgress color="inherit" sx={{ visibility: isLoading ? 'visible' : 'hidden' }} />
       <SwitchRoutes />
     </div>
   )
