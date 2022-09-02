@@ -3,7 +3,6 @@ import React from 'react'
 import Rating from '@mui/material/Rating/Rating'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import deleteIcon from '../../../../assets/svg/Delete.svg'
@@ -20,7 +19,6 @@ export const CardTableContainer = () => {
   const cardQueryParam = useAppSelector(state => state.cards.queryParams)
 
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const columnName = [
     { key: 'question' as ColumnSortCardsName, label: 'Question', isSortable: false },
@@ -51,6 +49,7 @@ export const CardTableContainer = () => {
       }
 
       const itMyPack: boolean = idUser === el.user_id
+      const updateDate = new Date(el.updated).toLocaleString('ru')
 
       return (
         <TableRow key={el._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -59,7 +58,7 @@ export const CardTableContainer = () => {
           </TableCell>
 
           <TableCell align="right">{el.answer}</TableCell>
-          <TableCell align="right">{el.updated}</TableCell>
+          <TableCell align="right">{updateDate}</TableCell>
           <TableCell align="right">
             <Rating name="read-only" value={el.grade} readOnly />
           </TableCell>

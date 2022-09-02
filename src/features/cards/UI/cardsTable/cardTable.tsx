@@ -25,6 +25,8 @@ type ColumnsNameType = {
 
 export const CardTable = (props: PropsTableType) => {
   const cardQueryParam = useAppSelector(state => state.cards.queryParams)
+  const loading = useAppSelector(state => state.app.status)
+  const isLoading = loading === 'loading'
 
   const columns = props.columnsName.map(columnName => {
     const onClickColumnsHandler = () => {
@@ -33,7 +35,7 @@ export const CardTable = (props: PropsTableType) => {
 
     let name = columnName.label
 
-    if (columnName.isSortable && !!cardQueryParam) {
+    if (columnName.isSortable && !!cardQueryParam && !isLoading) {
       if (cardQueryParam.sortCards === `0${columnName.key}`) name += '▼'
       else if (cardQueryParam.sortCards === `1${columnName.key}`) name += '▲'
     }

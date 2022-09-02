@@ -69,6 +69,10 @@ export const CardsPage = () => {
     toast.info('learn this card')
   }
 
+  const menuuuuuuuuuuu = () => {
+    alert('Maks')
+  }
+
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
     // toast(JSON.stringify(queryParams))     // dev help
@@ -87,7 +91,7 @@ export const CardsPage = () => {
 
       <TitleBlock
         title={titlePack}
-        isMyPack={isMyPack}
+        callbackTitle={menuuuuuuuuuuu}
         buttonVisability={totalCardsCount === 0 ? 'hidden' : 'visible'}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}

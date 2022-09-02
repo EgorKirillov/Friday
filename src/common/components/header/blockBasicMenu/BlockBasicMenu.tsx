@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import logoutIcon from '../../../../assets/img/logInOut_Icon.svg'
 import profileIcon from '../../../../assets/img/profile_Icon.svg'
-import { setIsLoggedOutTC } from '../../../../features/auth/login/loginReducer'
+import { setIsAuthMeAC, setIsLoggedOutTC } from '../../../../features/auth/login/loginReducer'
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
 import { BasicMenu } from '../../basicMenu/BasicMenu'
 import { ButtonBasicMenu } from '../../basicMenu/buttonProfile/ButtonBasicMenu'
@@ -27,6 +27,7 @@ export const BlockBasicMenu = () => {
   }
   const onClickHandlerNavigateToLogout = () => {
     navigate(PATH.LOGIN)
+    dispatch(setIsAuthMeAC(false))
     dispatch(setIsLoggedOutTC())
   }
 
@@ -40,7 +41,7 @@ export const BlockBasicMenu = () => {
     <ButtonBasicMenu icon={logoutIcon} name="Logout" callBack={onClickHandlerNavigateToLogout} />
   )
 
-  const arrButton = [buttonProfile, isAuth ? buttonLogout : buttonLogin]
+  const arrButton = [isAuth && buttonProfile, isAuth ? buttonLogout : buttonLogin]
 
   return (
     <div className={style.headerBlockNameAndAva}>
