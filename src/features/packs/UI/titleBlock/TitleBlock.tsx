@@ -1,7 +1,6 @@
 import React from 'react'
 
-import PendingIcon from '@mui/icons-material/Pending'
-
+import ovalIcon from '../../../../assets/img/Group 1400.svg'
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import learnIcon from '../../../../assets/svg/teacher.svg'
@@ -61,7 +60,7 @@ export const TitleBlock = ({
           <h2 onClick={callbackTitle}>{title}</h2>
           <div style={{ lineHeight: '68px' }}>
             <BasicMenu
-              label={isMyPack && <PendingIcon />}
+              label={isMyPack && <img src={ovalIcon} alt="ovalIcon" />}
               items={arrButton}
               style={{ margin: '8px 0 0 -50px' }}
             />
