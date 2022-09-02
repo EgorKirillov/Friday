@@ -40,9 +40,9 @@ export const DevHeader = () => {
       <NavLink className={s.link} to={PATH.PACKS}>
         packs{' '}
       </NavLink>
-      <NavLink className={s.link} to={PATH.CARDS}>
-        cards{' '}
-      </NavLink>
+      {/*<NavLink className={s.link} to={PATH.CARDS}>*/}
+      {/*  cards{' '}*/}
+      {/*</NavLink>*/}
     </div>
   )
 }

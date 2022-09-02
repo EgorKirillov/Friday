@@ -33,9 +33,9 @@ export const PackTableContainer = () => {
   ]
   const sort = (val: string) => {
     const name = val as ColumnSortPacksName
+
     // if queryParams sort '^'(up) --> make sort 'v'(down)
     // else all another case  --> make sort '^'(up)
-
     const value: SortPacksType =
       !!packQueryParam && packQueryParam.sortPacks === `1${name}` ? `0${name}` : `1${name}`
 

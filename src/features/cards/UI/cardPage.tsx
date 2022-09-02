@@ -37,7 +37,6 @@ export const CardsPage = () => {
   const packsPerPage = useAppSelector(state => state.cards.pageCount)
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
   const totalCardsPagesCount = Math.ceil(totalCardsCount / packsPerPage)
-  const data = useAppSelector(state => state.cards.cards)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -81,8 +80,7 @@ export const CardsPage = () => {
 
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
-    else toast.warn(' useEffect нет queryParams')
-    toast(JSON.stringify(queryParams))
+    // toast(JSON.stringify(queryParams))     // dev help
 
     return () => {
       dispatch(clearCardsState())

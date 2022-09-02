@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify'
-
 import { setStatusLoading } from '../../app/appStatusReducer'
 import { AppThunk } from '../../app/store'
 import { handleError } from '../../common/utils/handleError'
@@ -29,22 +27,8 @@ export const packsReducer = (
 ): InitialStatePackType => {
   switch (action.type) {
     case 'pack/SET-PACKS':
-      return {
-        ...state,
-        ...action.payload,
-        cardPacks: [...action.payload.cardPacks],
-      }
-    //   cardPacksTotalCount: action.payload.cardPacksTotalCount,
-    //   maxCardsCount: action.payload.maxCardsCount,
-    //   minCardsCount: action.payload.minCardsCount,
-    //   page: action.payload.page,
-    //   pageCount: action.payload.pageCount,
-    // }
+      return { ...state, ...action.payload, cardPacks: [...action.payload.cardPacks] }
     case 'pack/SET-QUERY-PARAMS': {
-      const testQuery = { ...state.queryParams, ...action.payload }
-
-      toast.info(JSON.stringify(testQuery))
-
       return { ...state, queryParams: { ...state.queryParams, ...action.payload } }
     }
     default:
@@ -55,11 +39,11 @@ export const packsReducer = (
 // actions
 export const setPacks = (data: InitialStatePackType) =>
   ({ type: 'pack/SET-PACKS', payload: data } as const)
+
 export const setQueryParams = (data: QueryParameterPackType) =>
   ({ type: 'pack/SET-QUERY-PARAMS', payload: data } as const)
 
 // thunks
-
 export const loadPacks =
   (param: QueryParameterPackType): AppThunk =>
   async dispatch => {
@@ -118,6 +102,7 @@ export const createPack =
       handleError(e, dispatch)
     }
   }
+
 // types
 export type PacksActionsType = ReturnType<typeof setPacks> | ReturnType<typeof setQueryParams>
 

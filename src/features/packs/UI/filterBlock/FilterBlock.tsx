@@ -27,7 +27,9 @@ export const FilterBlock = () => {
       <Search callback={setSearchName} startValue={startSearchVal ? startSearchVal : ''} />
 
       <ShowCards />
+
       <DoubleSlider />
+
       <FilterRemove callback={clearFilter} />
     </div>
   )

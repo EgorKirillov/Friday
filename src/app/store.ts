@@ -43,7 +43,6 @@ const rootReducer = combineReducers({
 })
 
 export const store = legacy_createStore(
-  // export const store = legacy_createStore(
   rootReducer,
   compose(applyMiddleware(thunk), composeEnhancers())
 )
@@ -62,9 +61,8 @@ export type AppActionType =
   | PacksActionsType
   | CardsActionsType
 
-// Dispatch
+// типизация Dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppActionType>
-// export const useAppDispatch: () => AppDispatch = useDispatch
 
 // типизация Thunk Action для всего объекта
 export type AppThunk<ReturnType = void> = ThunkAction<

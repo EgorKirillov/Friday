@@ -4,22 +4,18 @@ export const packAPI = {
   getPacks(param: QueryParameterPackType) {
     return instance.get<GetPacksResponseType>(`/cards/pack`, { params: param })
   },
-
   createPack(newPack: NewPackType) {
-    const data = { cardsPack: newPack }
-
-    return instance.post<CreatePackResponseType>('/cards/pack', data)
+    return instance.post<CreatePackResponseType>('/cards/pack', { cardsPack: newPack })
   },
   deletePack(idPack: string) {
     return instance.delete<DeletePackResponseType>(`/cards/pack/?id=${idPack}`)
   },
   updatePack(updatedPack: UpdatedPackType) {
-    const data = { cardsPack: updatedPack }
-
-    return instance.put<UpdatePackResponseType>(`/cards/pack`, data)
+    return instance.put<UpdatePackResponseType>(`/cards/pack`, { cardsPack: updatedPack })
   },
 }
 
+//types
 export type PackType = {
   _id: string
   user_id: string
@@ -38,11 +34,13 @@ export type PackType = {
   more_id?: string
   __v?: number
 }
+
 export type NewPackType = {
   name?: string // если не отправить будет no Name
   deckCover?: string // не обязателен
   private?: boolean // если не отправить будет false
 }
+
 export type UpdatedPackType = {
   _id: string
   user_name?: string
@@ -55,6 +53,21 @@ export type UpdatedPackType = {
   type?: string
 }
 
+export type QueryParameterPackType = {
+  packName?: string
+  min?: number
+  max?: number
+  sortPacks?: SortPacksType
+  page?: number
+  pageCount?: number
+  user_id?: string
+}
+
+export type ColumnSortPacksName = 'name' | 'cardsCount' | 'user_name' | 'updated'
+
+export type SortPacksType = `0${ColumnSortPacksName}` | `1${ColumnSortPacksName}`
+
+//response types
 export type GetPacksResponseType = {
   cardPacks: PackType[]
   cardPacksTotalCount: number
@@ -65,11 +78,13 @@ export type GetPacksResponseType = {
   token?: string
   tokenDeathTime?: number
 }
+
 type CreatePackResponseType = {
   newCardsPack: PackType
   token?: string
   tokenDeathTime?: number
 }
+
 type DeletePackResponseType = {
   deletedCardsPack: PackType
   token?: string
@@ -81,27 +96,3 @@ type UpdatePackResponseType = {
   token?: string
   tokenDeathTime?: number
 }
-
-export type QueryParameterPackType = {
-  packName?: string
-  min?: number
-  max?: number
-  sortPacks?: SortPacksType
-  page?: number
-  pageCount?: number
-  user_id?: string
-}
-
-// type SortPacksType =
-//   | '0name'
-//   | '1name'
-//   | '0cardsCount'
-//   | '1cardsCount'
-//   | '0user_name'
-//   | '1user_name'
-//   | '0updated'
-//   | '1updated'
-
-export type ColumnSortPacksName = 'name' | 'cardsCount' | 'user_name' | 'updated'
-
-export type SortPacksType = `0${ColumnSortPacksName}` | `1${ColumnSortPacksName}`

@@ -12,12 +12,12 @@ export const BackLink = () => {
 
   const dispatch = useAppDispatch()
 
+  // проверить работу в useEffect return, возможно удалить
   const clearCardsHandler = () => {
     dispatch(clearCardsState())
   }
 
   return (
-    // <div className={.backLinkBlock}>
     <div
       style={{
         padding: '5px 0 0 5px',

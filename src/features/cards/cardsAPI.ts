@@ -1,22 +1,17 @@
 import { instance } from '../../app/instanceAPI'
-import { ColumnSortPacksName } from '../packs/packAPI'
 
 export const cardsAPI = {
   getCards(param: QueryParameterCardsType) {
     return instance.get<GetCardsResponseType>('/cards/card', { params: param })
   },
   createCard(newCard: NewCardType) {
-    const data = { card: newCard }
-
-    return instance.post<CreateCardResponseType>('/cards/card', data)
+    return instance.post<CreateCardResponseType>('/cards/card', { card: newCard })
   },
   deleteCard(idCard: string) {
     return instance.delete<DeleteCardResponseType>(`/cards/card/?id=${idCard}`)
   },
   updateCard(updatedCard: UpdatedCardType) {
-    const data = { card: updatedCard }
-
-    return instance.put<UpdatecardResponseType>(`/cards/card`, data)
+    return instance.put<UpdatecardResponseType>(`/cards/card`, { card: updatedCard })
   },
 }
 
@@ -41,6 +36,7 @@ export type CardType = {
   updated: string
   __v: number
 }
+
 export type NewCardType = {
   cardsPack_id: string
   question?: string
@@ -52,6 +48,7 @@ export type NewCardType = {
   questionVideo?: string
   answerVideo?: string
 }
+
 export type UpdatedCardType = {
   _id: number
   question?: string
@@ -65,8 +62,9 @@ export type UpdatedCardType = {
   comments?: string
   type?: string
 }
+
 export type QueryParameterCardsType = {
-  cardsPack_id: string
+  cardsPack_id: string // ОБЯЗАТЕЛЬНОЕ!!!
   cardAnswer?: string // не обязательно
   cardQuestion?: string // не обязательно
   min?: number // не обязательно
@@ -76,6 +74,11 @@ export type QueryParameterCardsType = {
   pageCount?: number // не обязательно
 }
 
+export type ColumnSortCardsName = 'answer' | 'question' | 'updated' | 'grade'
+
+export type SortCardsType = `0${ColumnSortCardsName}` | `1${ColumnSortCardsName}`
+
+//Response Types
 export type GetCardsResponseType = {
   cards: CardType[]
   packUserId: string
@@ -92,31 +95,21 @@ export type GetCardsResponseType = {
   token?: string
   tokenDeathTime?: number
 }
+
 type CreateCardResponseType = {
   newCard: CardType
   token: string
   tokenDeathTime: number
 }
+
 type DeleteCardResponseType = {
   deletedCard: CardType
   token: string
   tokenDeathTime: number
 }
+
 type UpdatecardResponseType = {
   updatedCard: CardType
   token: string
   tokenDeathTime: number
 }
-
-// type SortCardsType =
-//     | '0answer'
-//     | '1answer'
-//     | '0question'
-//     | '1question'
-//     | '0updated'
-//     | '1updated'
-//     | '0grade'
-//     | '1grade'
-
-export type ColumnSortCardsName = 'answer' | 'question' | 'updated' | 'grade'
-export type SortCardsType = `0${ColumnSortCardsName}` | `1${ColumnSortCardsName}`

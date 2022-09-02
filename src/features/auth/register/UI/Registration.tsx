@@ -21,7 +21,8 @@ export function Registration() {
   const navigate = useNavigate()
   const isRegistered = useAppSelector(state => state.register.isRegistered) // зарегестрированы мы или нет
   const errorMessage = useAppSelector(state => state.register.error)
-  const isLoading = useAppSelector(state => state.register.isLoading)
+  const loadingStatus = useAppSelector(state => state.app.status)
+  const isLoading = loadingStatus === 'loading'
 
   const {
     register,
@@ -50,8 +51,8 @@ export function Registration() {
   useEffect(() => {
     if (isRegistered) {
       setTimeout(() => {
-        navigate(PATH.LOGIN)
         dispatch(setIsRegister(false))
+        navigate(PATH.LOGIN)
       }, 2000)
     }
   }, [isRegistered])

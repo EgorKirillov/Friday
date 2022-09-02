@@ -14,20 +14,6 @@ import {
 
 const initialState: InitialStateCardsType = {} as InitialStateCardsType
 
-// cards: [] as CardType[],
-// packUserId: string
-// packName: string
-// packPrivate: boolean
-// packDeckCover: string
-// packCreated: Date
-// packUpdated: Date
-// page: number
-// pageCount: number
-// cardsTotalCount: number
-// minGrade: number
-// maxGrade: number
-// queryParams: {} as QueryParameterCardsType
-
 export const cardsReducer = (
   state: InitialStateCardsType = initialState,
   action: CardsActionsType
@@ -38,18 +24,6 @@ export const cardsReducer = (
         ...state,
         ...action.payload,
         cards: [...action.payload.cards],
-        // cards: [...action.payload.cards],
-        // packUserId: action.payload.packUserId,
-        // packName: action.payload.packName,
-        // packPrivate: action.payload.packPrivate,
-        // packDeckCover: action.payload.packDeckCover,
-        // packCreated: action.payload.packCreated,
-        // packUpdated: action.payload.packUpdated,
-        // page: action.payload.page,
-        // pageCount: action.payload.pageCount,
-        // cardsTotalCount: action.payload.cardsTotalCount,
-        // minGrade: action.payload.minGrade,
-        // maxGrade: action.payload.maxGrade,
       }
     case 'pack/SET-QUERY-PARAMS-CARDS':
       return { ...state, queryParams: { ...action.payload } }
@@ -68,7 +42,6 @@ export const setQueryParamsCards = (data: QueryParameterCardsType) =>
 export const clearCardsState = () => ({ type: 'pack/CLEAR-STATE' } as const)
 
 // thunks
-
 export const loadCards =
   (param: QueryParameterCardsType): AppThunk =>
   async dispatch => {
@@ -112,6 +85,7 @@ export const deleteCard =
       handleError(e, dispatch)
     }
   }
+
 export const createCard =
   (newCard: NewCardType, param: QueryParameterCardsType): AppThunk =>
   async dispatch => {

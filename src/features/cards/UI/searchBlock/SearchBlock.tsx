@@ -10,10 +10,11 @@ export const SearchBlock = () => {
   const queryParams = useAppSelector(state => state.cards.queryParams)
   const answer = queryParams.cardAnswer
   const question = queryParams.cardQuestion
-  const dispatch = useAppDispatch()
-  const totalCountCards = useAppSelector(state => state.cards.cardsTotalCount)
 
+  const totalCountCards = useAppSelector(state => state.cards.cardsTotalCount)
   const noData = totalCountCards === 0 && !answer && !question
+
+  const dispatch = useAppDispatch()
 
   const setSearchParamAnswer = (val: string) => {
     const cardAnswer = val.trim() === '' ? undefined : val

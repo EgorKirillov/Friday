@@ -43,7 +43,7 @@ export const Login = () => {
   }
 
   if (isAuthMe) {
-    return <Navigate to={'/profile'} />
+    return <Navigate to={PATH.PACKS} />
   }
 
   return (
