@@ -1,16 +1,23 @@
 {
   "files": {
-    "main.css": "/Friday/static/css/main.f94a84c8.css",
-    "main.js": "/Friday/static/js/main.86119280.js",
+    "main.css": "/Friday/static/css/main.6df48639.css",
+    "main.js": "/Friday/static/js/main.3119ddf7.js",
     "static/media/avatar.jpg": "/Friday/static/media/avatar.8abaf8eb819810eba196.jpg",
     "static/media/itIncubatorLOGO.png": "/Friday/static/media/itIncubatorLOGO.1b4c94fff68583c25478.png",
+    "static/media/Filter-Remove.svg": "/Friday/static/media/Filter-Remove.3d63a989d310532a812c82da24271d9d.svg",
+    "static/media/Delete.svg": "/Friday/static/media/Delete.5074d598f7a8970a63dfa17b33aebe95.svg",
+    "static/media/Edit.svg": "/Friday/static/media/Edit.22b87cfecc031e713e076cd779cde7e3.svg",
     "static/media/emailSend.svg": "/Friday/static/media/emailSend.bf58807e72b22a8c615ed00c72c514f3.svg",
+    "static/media/teacher.svg": "/Friday/static/media/teacher.61316ef9f9bb14acdf57faf399645aeb.svg",
+    "static/media/MagnifyingGlass.svg": "/Friday/static/media/MagnifyingGlass.f161824b0f966009030ecc36ea634309.svg",
     "index.html": "/Friday/index.html",
-    "main.f94a84c8.css.map": "/Friday/static/css/main.f94a84c8.css.map",
-    "main.86119280.js.map": "/Friday/static/js/main.86119280.js.map"
+    "static/media/logInOut_Icon.svg": "/Friday/static/media/logInOut_Icon.7fd70e5af0ddf6981e08aae9c81edc26.svg",
+    "static/media/profile_Icon.svg": "/Friday/static/media/profile_Icon.80fa9754947dabe414f5181c7b26bc2c.svg",
+    "main.6df48639.css.map": "/Friday/static/css/main.6df48639.css.map",
+    "main.3119ddf7.js.map": "/Friday/static/js/main.3119ddf7.js.map"
   },
   "entrypoints": [
-    "static/css/main.f94a84c8.css",
-    "static/js/main.86119280.js"
+    "static/css/main.6df48639.css",
+    "static/js/main.3119ddf7.js"
   ]
 }
