@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { Paginator } from '../../../common/components/paginator/Paginator'
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { createPack, loadPacks, setQueryParams } from '../packReducer'
+import { createPack, loadPacks } from '../packReducer'
 
 import { FilterBlock } from './filterBlock/FilterBlock'
+import { PackPaginator } from './packPaginator/packPaginator'
 import { PackTableContainer } from './packTable/packTableConteiner'
 import { TitleBlock } from './titleBlock/TitleBlock'
 
@@ -16,11 +16,6 @@ export const PacksPage = () => {
 
   const packQueryParam = useAppSelector(state => state.pack.queryParams)
 
-  const page = useAppSelector(state => state.pack.page)
-  const packsPerPage = useAppSelector(state => state.pack.pageCount)
-  const totalPacksCount = useAppSelector(state => state.pack.cardPacksTotalCount)
-  const totalPacksPagesCount = Math.ceil(totalPacksCount / packsPerPage)
-
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -28,14 +23,6 @@ export const PacksPage = () => {
     const newName = `pack name ${new Date().getSeconds()}` // generate different value
 
     dispatch(createPack({ name: newName })) // go to first page list, maybe need reset param?
-  }
-
-  const changeCurrentPage = (newPage: number) => {
-    dispatch(setQueryParams({ page: newPage }))
-  }
-
-  const changePackPerPage = (newPackPerPage: number) => {
-    dispatch(setQueryParams({ pageCount: newPackPerPage, page: 1 }))
   }
 
   useEffect(() => {
@@ -57,13 +44,7 @@ export const PacksPage = () => {
 
       <PackTableContainer />
 
-      <Paginator
-        pagesCount={totalPacksPagesCount}
-        countPerPage={packsPerPage}
-        currentPage={page}
-        callbackCurrent={changeCurrentPage}
-        callbackCurrentPerPage={changePackPerPage}
-      />
+      <PackPaginator />
     </div>
   )
 }

@@ -6,13 +6,28 @@ import { handleError } from '../../common/utils/handleError'
 
 import {
   cardsAPI,
+  CardType,
   GetCardsResponseType,
   NewCardType,
   QueryParameterCardsType,
   UpdatedCardType,
 } from './cardsAPI'
 
-const initialState: InitialStateCardsType = {} as InitialStateCardsType
+const initialState: InitialStateCardsType = {
+  cards: [] as CardType[],
+  packUserId: '',
+  packName: '',
+  packPrivate: false,
+  packDeckCover: '',
+  packCreated: '',
+  packUpdated: '',
+  page: 1,
+  pageCount: 1,
+  cardsTotalCount: 1,
+  minGrade: 0,
+  maxGrade: 0,
+  queryParams: {} as QueryParameterCardsType,
+}
 
 export const cardsReducer = (
   state: InitialStateCardsType = initialState,

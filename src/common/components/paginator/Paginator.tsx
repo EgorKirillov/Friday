@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import { Stack } from '@mui/material'
 import Pagination from '@mui/material/Pagination'
@@ -15,32 +15,23 @@ type PropsType = {
 }
 
 export const Paginator = (props: PropsType) => {
-  const [page, setPage] = useState(props.currentPage)
-
   const handleChangePage = (event: ChangeEvent<unknown>, newPage: number) => {
-    setPage(newPage)
     props.callbackCurrent(newPage)
   }
 
   const changeCardPerPage = (value: string) => {
-    let number = +value
-
-    props.callbackCurrentPerPage(number)
+    props.callbackCurrentPerPage(+value)
   }
-
-  useEffect(() => {
-    setPage(props.currentPage)
-  }, [props.currentPage])
 
   return (
     <div className={style.paginatorContainer}>
       <Stack spacing={1}>
         <Pagination
           count={props.pagesCount}
-          page={page}
+          page={props.currentPage}
           shape="rounded"
           onChange={handleChangePage}
-        />{' '}
+        />
       </Stack>
       <div className={style.selectBlock}>
         <span className={style.span}>Show</span>
