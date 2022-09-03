@@ -1,0 +1,12 @@
+.content {
+    margin: 30px 5px;
+}
+
+.buttonsBlock {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkBox {
+    margin: 30px 5px;
+}
