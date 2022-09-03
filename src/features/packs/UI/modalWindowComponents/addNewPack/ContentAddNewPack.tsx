@@ -6,7 +6,7 @@ import { ModalCheckBox } from '../../../../../common/components/modalWindow/moda
 import { ModalWindowInput } from '../../../../../common/components/modalWindow/modalWindowInput/ModalWindowInput'
 import style from '../../../../../common/components/modalWindow/style/StylePacks.module.css'
 
-export const AddNewPack = () => {
+export const ContentAddNewPack = () => {
   const [name, setName] = useState('')
   const [checked, setChecked] = useState(false)
 
@@ -17,7 +17,7 @@ export const AddNewPack = () => {
         <ModalCheckBox checked={checked} setChecked={setChecked} />
       </div>
       <div className={style.buttonsBlock}>
-        <CancelButton />
+        {/*<CancelButton />*/}
         <SaveButton />
       </div>
     </div>
