@@ -2,7 +2,12 @@ import React from 'react'
 
 import { toast } from 'react-toastify'
 
+import { DeleteCard } from '../../../features/cards/UI/modalWindowComponents/deleteCard/DeleteCard'
+import { AddNewPack } from '../../../features/packs/UI/modalWindowComponents/addNewPack/AddNewPack'
+import { DeletePack } from '../../../features/packs/UI/modalWindowComponents/deletePack/DeletePack'
+import { EditPack } from '../../../features/packs/UI/modalWindowComponents/editPack/EditPack'
 import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
+import { ModalWindow } from '../modalWindow/ModalWindow'
 import SuperButton from '../superButton/SuperButton'
 import SuperCheckbox from '../superCheckbox/SuperCheckbox'
 import SuperInputText from '../superInputText/SuperInputText'
@@ -34,7 +39,20 @@ export function TestsPage() {
         <button onClick={() => toast.error('error')}>error</button>
         <ToastMessage />
       </div>
-      <div>{/*<PackTable />*/}</div>
+      <div>
+        <ModalWindow title={'Delete Pack'} name={'Delete Pack'}>
+          <DeletePack />
+        </ModalWindow>
+        <ModalWindow title={'Delete Card'} name={'Delete Card'}>
+          <DeleteCard />
+        </ModalWindow>
+        <ModalWindow name={'Edit Pack'} title={'Edit Pack'}>
+          <EditPack />
+        </ModalWindow>
+        <ModalWindow name={'Add New Pack'} title={'Add New Pack'}>
+          <AddNewPack />
+        </ModalWindow>
+      </div>
     </div>
   )
 }
