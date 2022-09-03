@@ -1,0 +1,23 @@
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 400px;
+    padding: 36px;
+
+    background-color: white;
+    border-radius: 2px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.title {
+    height: 60px;
+}
