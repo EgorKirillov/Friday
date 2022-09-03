@@ -14,7 +14,7 @@ export const BackLink = () => {
 
   // проверить работу в useEffect return, возможно удалить
   const clearCardsHandler = () => {
-    dispatch(clearCardsState())
+    // dispatch(clearCardsState())
   }
 
   return (
