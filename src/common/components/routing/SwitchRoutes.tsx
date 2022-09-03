@@ -8,6 +8,7 @@ import { Profile } from '../../../features/auth/profile/UI/Profile'
 import { Registration } from '../../../features/auth/register/UI/Registration'
 import { PasswordNew } from '../../../features/auth/setPassword/UI/PasswordNew'
 import { CardsPage } from '../../../features/cards/UI/cardPage'
+import { LearnPack } from '../../../features/learn/UI/learnPage'
 import { PacksPage } from '../../../features/packs/UI/PacksPage'
 import s from '../../container.module.css'
 import Error404Page from '../pageNotFound/Error404Page'
@@ -23,6 +24,7 @@ export const PATH = {
   TESTS: '/tests', //тестовая -отобразить / продемонстрировать все SuperКопмоненты
   PACKS: '/packs',
   CARDS: '/cards',
+  LEARN: '/learn',
 }
 
 export const SwitchRoutes = () => {
@@ -38,6 +40,7 @@ export const SwitchRoutes = () => {
         <Route path={PATH.TESTS} element={<TestsPage />} />
         <Route path={PATH.PACKS} element={<PacksPage />} />
         <Route path={PATH.CARDS} element={<CardsPage />} />
+        <Route path={PATH.LEARN} element={<LearnPack />} />
         <Route path={'/*'} element={<Error404Page />} />
       </Routes>
     </div>
