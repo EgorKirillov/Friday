@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 
 import { toast } from 'react-toastify'
 
-import { Paginator } from '../../../common/components/paginator/Paginator'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
-import { createCard, deleteCard, loadCards, setQueryParamsCards } from '../cardReducer'
+import { createCard, deleteCard, loadCards } from '../cardReducer'
 import { NewCardType } from '../cardsAPI'
 
 import { BackLink } from './backLink/BackLink'
 import s from './cardPage.module.css'
+import { CardsPaginator } from './cardsPaginator/cardsPaginator'
 import { CardTableContainer } from './cardsTable/cardTableConteiner'
 import { NotFoundCards } from './notFoundCards/notFoundCards'
 import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
@@ -24,11 +24,7 @@ export const CardsPage = () => {
   const userId = useAppSelector(state => state.profile._id)
   const packUserId = useAppSelector(state => state.cards.packUserId)
   const isMyPack: boolean = userId === packUserId
-
-  const page = useAppSelector(state => state.cards.page)
-  const packsPerPage = useAppSelector(state => state.cards.pageCount)
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
-  const totalCardsPagesCount = Math.ceil(totalCardsCount / packsPerPage)
 
   const dispatch = useAppDispatch()
 
@@ -42,14 +38,6 @@ export const CardsPage = () => {
 
   const notFound: boolean =
     totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
-
-  const changeCurrentPage = (newPage: number) => {
-    dispatch(setQueryParamsCards({ ...queryParams, page: newPage }))
-  }
-
-  const changePackPerPage = (newPackPerPage: number) => {
-    dispatch(setQueryParamsCards({ ...queryParams, pageCount: newPackPerPage }))
-  }
 
   const addNewCardHandler = () => {
     const newCard: NewCardType = {
@@ -95,13 +83,7 @@ export const CardsPage = () => {
 
       {!isLoading && notFound && <NotFoundCards />}
 
-      <Paginator
-        pagesCount={totalCardsPagesCount}
-        countPerPage={packsPerPage}
-        currentPage={page}
-        callbackCurrent={changeCurrentPage}
-        callbackCurrentPerPage={changePackPerPage}
-      />
+      <CardsPaginator />
     </div>
   )
 }
