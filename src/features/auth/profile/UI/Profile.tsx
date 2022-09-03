@@ -10,6 +10,7 @@ import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader
 import { EditableSpan } from '../../../../common/components/editableSpan/EditableSpan'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { BackLink } from '../../../cards/UI/backLink/BackLink'
 import { setIsLoggedOutTC } from '../../login/loginReducer'
 import { updateProfile } from '../profileReducer'
 
@@ -57,47 +58,50 @@ export function Profile() {
   }, [isAuthMe])
 
   return (
-    <div className={s.container}>
-      <div className={s.title}> It-incubator</div>
-      <h2 className={s.title}>Personal Infomation</h2>
-      <div>
-        <div className={s.avatarContainer}>
-          <img
-            className={s.avatar}
-            src={srcAvatar}
-            alt=""
-            onError={onImageError}
-            onLoad={onImageLoad}
-          />
-          {/*доделать добавление*/}
-          {/*<FontAwesomeIcon*/}
-          {/*  className={s.eye}*/}
-          {/*  onClick={addPhoto}*/}
-          {/*  icon={faCamera}*/}
-          {/*  title={'change avatar'}*/}
-          {/*/>*/}
-        </div>
-
+    <>
+      <BackLink />
+      <div className={s.container}>
+        <div className={s.title}> It-incubator</div>
+        <h2 className={s.title}>Personal Infomation</h2>
         <div>
-          <div className={s.minititle}>Nickname</div>
-          {/*не нравиться, надо доделать*/}
-          <EditableSpan
-            value={profileName}
-            onChange={name => changeNameHandler(name)}
-            disableEditMode={isLoadind}
-          />
+          <div className={s.avatarContainer}>
+            <img
+              className={s.avatar}
+              src={srcAvatar}
+              alt=""
+              onError={onImageError}
+              onLoad={onImageLoad}
+            />
+            {/*доделать добавление*/}
+            {/*<FontAwesomeIcon*/}
+            {/*  className={s.eye}*/}
+            {/*  onClick={addPhoto}*/}
+            {/*  icon={faCamera}*/}
+            {/*  title={'change avatar'}*/}
+            {/*/>*/}
+          </div>
 
-          <div className={s.minititle}>e-mail</div>
-          <div>{email}</div>
-        </div>
-        <div>
-          <ButtonWithLoader
-            onClick={logoutButtonHandler}
-            name={'logout я пшел'}
-            isLoading={isLoadind}
-          />
+          <div>
+            <div className={s.minititle}>Nickname</div>
+            {/*не нравиться, надо доделать*/}
+            <EditableSpan
+              value={profileName}
+              onChange={name => changeNameHandler(name)}
+              disableEditMode={isLoadind}
+            />
+
+            <div className={s.minititle}>e-mail</div>
+            <div>{email}</div>
+          </div>
+          <div>
+            <ButtonWithLoader
+              onClick={logoutButtonHandler}
+              name={'logout я пшел'}
+              isLoading={isLoadind}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
