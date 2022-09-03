@@ -85,8 +85,8 @@ export type GetCardsResponseType = {
   packName: string
   packPrivate: boolean
   packDeckCover: string
-  packCreated: Date
-  packUpdated: Date
+  packCreated: string //Date
+  packUpdated: string //Date
   page: number
   pageCount: number
   cardsTotalCount: number
