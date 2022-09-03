@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { toast } from 'react-toastify'
 
-import { DeleteCard } from '../../../features/cards/UI/modalWindowComponents/deleteCard/DeleteCard'
-import { AddNewPack } from '../../../features/packs/UI/modalWindowComponents/addNewPack/AddNewPack'
-import { DeletePack } from '../../../features/packs/UI/modalWindowComponents/deletePack/DeletePack'
-import { EditPack } from '../../../features/packs/UI/modalWindowComponents/editPack/EditPack'
+import deleteIcon from '../../../assets/svg/Delete.svg'
 import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
-import { ModalWindow } from '../modalWindow/ModalWindow'
+import { DeleteCard } from '../modalWindow/DeleteCard'
 import SuperButton from '../superButton/SuperButton'
 import SuperCheckbox from '../superCheckbox/SuperCheckbox'
 import SuperInputText from '../superInputText/SuperInputText'
 import { ToastMessage } from '../toast/ToastMessage'
 
+const Img = () => {
+  return <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} />
+}
+
 export function TestsPage() {
+  // const array = [<ContentAddNewPack key={'1'} />, <Img key={'2'} />]
+
+  const [open, setOpen] = useState(false)
+
   return (
     <div>
       test page
@@ -40,19 +45,9 @@ export function TestsPage() {
         <ToastMessage />
       </div>
       <div>
-        <ModalWindow title={'Delete Pack'} name={'Delete Pack'}>
-          <DeletePack />
-        </ModalWindow>
-        <ModalWindow title={'Delete Card'} name={'Delete Card'}>
-          <DeleteCard />
-        </ModalWindow>
-        <ModalWindow name={'Edit Pack'} title={'Edit Pack'}>
-          <EditPack />
-        </ModalWindow>
-        <ModalWindow name={'Add New Pack'} title={'Add New Pack'}>
-          <AddNewPack />
-        </ModalWindow>
+        <DeleteCard />
       </div>
+      <div></div>
     </div>
   )
 }
