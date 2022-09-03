@@ -27,7 +27,7 @@ export const PacksPage = () => {
   const addNewPackHandler = () => {
     const newName = `pack name ${new Date().getSeconds()}` // generate different value
 
-    dispatch(createPack({ name: newName }, { ...packQueryParam, page: 1 })) // go to first page list, maybe need reset param?
+    dispatch(createPack({ name: newName })) // go to first page list, maybe need reset param?
   }
 
   const changeCurrentPage = (newPage: number) => {

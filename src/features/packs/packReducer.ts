@@ -64,8 +64,8 @@ export const updatePack =
     try {
       dispatch(setStatusLoading('loading'))
       await packAPI.updatePack(updatedPack)
-      const param = getState().pack.queryParams as QueryParameterPackType
-      const res = await packAPI.getPacks(param)
+      const param = getState().pack.queryParams
+      const res = await packAPI.getPacks(param ? param : {})
 
       dispatch(setPacks(res.data))
       dispatch(setStatusLoading('succeeded'))
@@ -75,12 +75,13 @@ export const updatePack =
   }
 
 export const deletePack =
-  (idPack: string, param: QueryParameterPackType = {}): AppThunk =>
-  async dispatch => {
+  (idPack: string): AppThunk =>
+  async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
       await packAPI.deletePack(idPack)
-      const res = await packAPI.getPacks(param)
+      const param = getState().pack.queryParams
+      const res = await packAPI.getPacks(param ? param : {})
 
       dispatch(setPacks(res.data))
       dispatch(setStatusLoading('succeeded'))
@@ -90,12 +91,13 @@ export const deletePack =
   }
 
 export const createPack =
-  (newPack: NewPackType, param: QueryParameterPackType = {}): AppThunk =>
-  async dispatch => {
+  (newPack: NewPackType): AppThunk =>
+  async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
       await packAPI.createPack(newPack)
-      const res = await packAPI.getPacks(param)
+      const param = getState().pack.queryParams
+      const res = await packAPI.getPacks(param ? param : {})
 
       dispatch(setPacks(res.data))
       dispatch(setStatusLoading('succeeded'))
