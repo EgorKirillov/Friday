@@ -1,28 +1,25 @@
-import React, { FC, ReactNode, useState } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 import Typography from '@mui/material/Typography'
 
 import style from './ModalWindow.module.css'
 
 type PropsType = {
-  name: string
   title: string
+  onClose: () => void
+  open: boolean
   children: ReactNode
 }
 
-export const ModalWindow: FC<PropsType> = ({ title, children, name }) => {
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
-
-  const onClickHandlerCloseModalWindow = () => setOpen(false)
+export const ModalWindow: FC<PropsType> = ({ title, children, open, onClose }) => {
+  // const [open, setOpen] = useState(false) // переносим в контейнерную компоненту
+  // const handleOpen = () => setOpen(true) //  переносим в контейнерную компоненту
+  const handleClose = () => onClose()
 
   return (
     <div>
-      <Button onClick={handleOpen}>{name}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,7 +34,7 @@ export const ModalWindow: FC<PropsType> = ({ title, children, name }) => {
               </Typography>
             </div>
             <div>
-              <button onClick={onClickHandlerCloseModalWindow}>X</button>
+              <button onClick={handleClose}>X</button>
             </div>
           </div>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
