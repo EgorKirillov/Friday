@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
@@ -58,16 +58,17 @@ export const PackTableContainer = () => {
       navigate(PATH.CARDS)
     }
     const itMyPack: boolean = idUser === el.user_id
+    const dateUpdate =
+      new Date(el.updated).toLocaleDateString('ru-RU') +
+      ' ' +
+      new Date(el.updated).toLocaleTimeString()
 
     return (
-      <TableRow
-        key={el._id}
-        onClick={() => onClickPack(el._id)}
-        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-      >
+      <TableRow key={el._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
         <TableCell
           component="td"
           scope="row"
+          onClick={() => onClickPack(el._id)}
           style={{
             // width: '100%',
             minWidth: '30%',
@@ -94,7 +95,7 @@ export const PackTableContainer = () => {
           align="left"
           style={{ width: '30%', border: '1px solid blue', boxSizing: 'border-box' }}
         >
-          {el.updated}
+          {dateUpdate}
         </TableCell>
         <TableCell
           align="left"
