@@ -12,7 +12,7 @@ type PropsType = {
 
 export const ModalWindowInput = (props: PropsType) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.setName(event.target.value)
+    props.setName(event.currentTarget.value)
   }
 
   return (
