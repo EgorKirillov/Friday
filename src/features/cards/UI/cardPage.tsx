@@ -33,7 +33,7 @@ export const CardsPage = () => {
   const dispatch = useAppDispatch()
 
   const deleteCardHandler = (id: string) => {
-    dispatch(deleteCard(id, { ...queryParams, page: 1 }))
+    dispatch(deleteCard(id))
     toast.warn(`карта удалена ${id}`)
   }
 
@@ -58,7 +58,7 @@ export const CardsPage = () => {
       answer: 'aa1a',
     }
 
-    dispatch(createCard(newCard, queryParams))
+    dispatch(createCard(newCard))
   }
 
   const learnPackHandler = () => {

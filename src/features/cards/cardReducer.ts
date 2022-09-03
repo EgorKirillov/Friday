@@ -57,11 +57,12 @@ export const loadCards =
   }
 
 export const updateCard =
-  (updatedCard: UpdatedCardType, param: QueryParameterCardsType): AppThunk =>
-  async dispatch => {
+  (updatedCard: UpdatedCardType): AppThunk =>
+  async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
       await cardsAPI.updateCard(updatedCard)
+      const param = getState().cards.queryParams
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
@@ -72,11 +73,12 @@ export const updateCard =
   }
 
 export const deleteCard =
-  (idCard: string, param: QueryParameterCardsType): AppThunk =>
-  async dispatch => {
+  (idCard: string): AppThunk =>
+  async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
       await cardsAPI.deleteCard(idCard)
+      const param = getState().cards.queryParams
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
@@ -87,13 +89,13 @@ export const deleteCard =
   }
 
 export const createCard =
-  (newCard: NewCardType, param: QueryParameterCardsType): AppThunk =>
-  async dispatch => {
+  (newCard: NewCardType): AppThunk =>
+  async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
       toast(JSON.stringify(newCard))
       await cardsAPI.createCard(newCard)
-
+      const param = getState().cards.queryParams // maybe  { ...getState().cards.queryParams, page: 1 }
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
