@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
@@ -6,13 +6,17 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import deleteIcon from '../../../../assets/svg/Delete.svg'
+import editIcon from '../../../../assets/svg/Edit.svg'
 import teacherIcon from '../../../../assets/svg/teacher.svg'
+import { ModalWindow } from '../../../../common/components/modalWindow/ModalWindow'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
 import { setQueryParams } from '../../packReducer'
 import { UpdatePack } from '../updatePack/updatePack'
+import { ContentAddNewPack } from '../modalWindowComponents/addNewPack/ContentAddNewPack'
+import { ContentDeletePack } from '../modalWindowComponents/deletePack/ContentDeletePack'
 
 import { PackTable } from './packTable'
 
@@ -43,9 +47,7 @@ export const PackTableContainer = () => {
   }
 
   const rows = data.map(el => {
-    const onClickDelete = () => {
-      toast.info(`delete ${el._id}`)
-    }
+    const onClickDelete = () => {}
 
     const onClickTeacher = () => {
       toast.info(`teach ${el._id}`)
@@ -122,14 +124,8 @@ export const PackTableContainer = () => {
             onClick={onClickTeacher}
             style={{ margin: '0 5px', width: 'auto' }}
           />
-          {itMyPack && (
-            <img
-              src={deleteIcon}
-              alt=""
-              onClick={onClickDelete}
-              style={{ margin: '0 5px', width: 'auto' }}
-            />
-          )}
+          {itMyPack && <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} />}
+
           {itMyPack && <UpdatePack idPack={el._id} />}
         </TableCell>
       </TableRow>

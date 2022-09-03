@@ -4,7 +4,7 @@ import { CancelButton } from '../../../../../common/components/modalWindow/modal
 import { DeleteButton } from '../../../../../common/components/modalWindow/modalWindowButtons/deleteButton/DeleteButton'
 import style from '../../../../../common/components/modalWindow/style/StylePacks.module.css'
 
-export const DeletePack = () => {
+export const ContentDeletePack = () => {
   return (
     <div>
       <div className={style.content}>
@@ -14,7 +14,7 @@ export const DeletePack = () => {
         <p>All cards will be deleted.</p>
       </div>
       <div className={style.buttonsBlock}>
-        <CancelButton />
+        {/*<CancelButton />*/}
         <DeleteButton />
       </div>
     </div>

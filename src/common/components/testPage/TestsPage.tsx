@@ -3,6 +3,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 
 import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
+import { ModalWindow } from '../modalWindow/ModalWindow'
 import SuperButton from '../superButton/SuperButton'
 import SuperCheckbox from '../superCheckbox/SuperCheckbox'
 import SuperInputText from '../superInputText/SuperInputText'
