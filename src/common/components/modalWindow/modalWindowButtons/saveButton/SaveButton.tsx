@@ -2,10 +2,15 @@ import React from 'react'
 
 import style from './SaveButton.module.css'
 
-export const SaveButton = () => {
+type PropsType = {
+  saveNewName: () => void
+}
+export const SaveButton = (props: PropsType) => {
   return (
     <>
-      <button className={style.saveButton}>Save</button>
+      <button className={style.saveButton} onClick={props.saveNewName}>
+        Save
+      </button>
     </>
   )
 }
