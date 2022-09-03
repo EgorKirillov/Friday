@@ -49,7 +49,10 @@ export const CardTableContainer = () => {
       }
 
       const itMyPack: boolean = idUser === el.user_id
-      const updateDate = new Date(el.updated).toLocaleString('ru')
+      const updateDate =
+        new Date(el.updated).toLocaleDateString('ru-RU') +
+        ' ' +
+        new Date(el.updated).toLocaleTimeString()
 
       return (
         <TableRow key={el._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

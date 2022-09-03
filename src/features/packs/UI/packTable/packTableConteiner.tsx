@@ -58,7 +58,7 @@ export const PackTableContainer = () => {
       navigate(PATH.CARDS)
     }
     const itMyPack: boolean = idUser === el.user_id
-    const dateUpdate =
+    const updateDate =
       new Date(el.updated).toLocaleDateString('ru-RU') +
       ' ' +
       new Date(el.updated).toLocaleTimeString()
@@ -95,7 +95,7 @@ export const PackTableContainer = () => {
           align="left"
           style={{ width: '30%', border: '1px solid blue', boxSizing: 'border-box' }}
         >
-          {dateUpdate}
+          {updateDate}
         </TableCell>
         <TableCell
           align="left"
