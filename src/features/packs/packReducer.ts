@@ -19,7 +19,7 @@ const initialState: InitialStatePackType = {
   page: 0,
   pageCount: 0,
   queryParams: {} as QueryParameterPackType,
-} as InitialStatePackType
+}
 
 export const packsReducer = (
   state: InitialStatePackType = initialState,
@@ -59,11 +59,12 @@ export const loadPacks =
   }
 
 export const updatePack =
-  (updatedPack: UpdatedPackType, param: QueryParameterPackType): AppThunk =>
-  async dispatch => {
+  (updatedPack: UpdatedPackType): AppThunk =>
+  async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
       await packAPI.updatePack(updatedPack)
+      const param = getState().pack.queryParams as QueryParameterPackType
       const res = await packAPI.getPacks(param)
 
       dispatch(setPacks(res.data))
