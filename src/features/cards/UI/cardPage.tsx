@@ -55,7 +55,7 @@ export const CardsPage = () => {
 
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
-    // toast(JSON.stringify(queryParams))     // dev help
+    toast(JSON.stringify(queryParams)) // dev help
   }, [queryParams])
   // useEffect(() => {
   //   if (!isAuth) navigate(PATH.LOGIN)
