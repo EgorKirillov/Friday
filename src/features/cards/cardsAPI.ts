@@ -13,6 +13,9 @@ export const cardsAPI = {
   updateCard(updatedCard: UpdatedCardType) {
     return instance.put<UpdatecardResponseType>(`/cards/card`, { card: updatedCard })
   },
+  gradeCard(grade: number, card_id: string) {
+    return instance.put<updatedGradeResponseType>(`/cards/grade`, { grade, card_id })
+  },
 }
 
 //types
@@ -63,6 +66,19 @@ export type UpdatedCardType = {
   type?: string
 }
 
+export type GradedCardType = {
+  _id: string
+  cardsPack_id: string
+  card_id: string
+  user_id: string
+  grade: number
+  shots: number
+  more_id: string
+  created: string
+  updated: string
+  __v: number
+}
+
 export type QueryParameterCardsType = {
   cardsPack_id: string // ОБЯЗАТЕЛЬНОЕ!!!
   cardAnswer?: string // не обязательно
@@ -110,6 +126,12 @@ type DeleteCardResponseType = {
 
 type UpdatecardResponseType = {
   updatedCard: CardType
+  token: string
+  tokenDeathTime: number
+}
+
+type updatedGradeResponseType = {
+  updatedGrade: GradedCardType
   token: string
   tokenDeathTime: number
 }
