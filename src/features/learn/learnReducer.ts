@@ -1,23 +1,29 @@
 import { CardType } from '../cards/cardsAPI'
-import { PackType } from '../packs/packAPI'
 
-const initialState: InitialStateLearnType = {} as InitialStateLearnType
+const initialState: InitialStateLearnType = {
+  card: {} as CardType,
+  cardGradeIsComplite: false,
+}
 
 export const learnReducer = (
   state: InitialStateLearnType = initialState,
   action: LearnActionsType
 ): InitialStateLearnType => {
   switch (action.type) {
-    case 'learn/SET-PACK':
-      return { ...state, cards: [...action.payload] }
-
+    case 'learn/SET-CARD':
+      return { ...state, card: { ...action.payload } }
+    case 'learn/SET-CARD-GRADE-IS-COMPLITE':
+      return { ...state, cardGradeIsComplite: action.cardGradeIsComplite }
     default:
       return state
   }
 }
 
 // actions
-export const setCards = (data: CardType[]) => ({ type: 'learn/SET-PACK', payload: data } as const)
+export const setCard = (data: CardType) => ({ type: 'learn/SET-CARD', payload: data } as const)
+export const setLearningComplite = (cardGradeIsComplite: boolean) =>
+  ({ type: 'learn/SET-CARD-GRADE-IS-COMPLITE', cardGradeIsComplite } as const)
+
 //
 // export const setQueryParams = (data: QueryParameterPackType) =>
 //   ({ type: 'pack/SET-QUERY-PARAMS', payload: data } as const)
@@ -86,8 +92,9 @@ export const setCards = (data: CardType[]) => ({ type: 'learn/SET-PACK', payload
 //   }
 
 // types
-export type LearnActionsType = ReturnType<typeof setCards>
+export type LearnActionsType = ReturnType<typeof setCard> | ReturnType<typeof setLearningComplite>
 
 export type InitialStateLearnType = {
-  cards: CardType[]
+  card: CardType
+  cardGradeIsComplite: boolean
 }
