@@ -1,24 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { toast } from 'react-toastify'
 
-import deleteIcon from '../../../assets/svg/Delete.svg'
+import { DeleteCard } from '../../../features/cards/UI/modalWindowComponents/deleteCard/DeleteCard'
 import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
-import { DeleteCard } from '../modalWindow/DeleteCard'
 import SuperButton from '../superButton/SuperButton'
 import SuperCheckbox from '../superCheckbox/SuperCheckbox'
 import SuperInputText from '../superInputText/SuperInputText'
 import { ToastMessage } from '../toast/ToastMessage'
 
-const Img = () => {
-  return <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} />
+const vv = () => {
+  alert('aaa')
 }
 
 export function TestsPage() {
-  // const array = [<ContentAddNewPack key={'1'} />, <Img key={'2'} />]
-
-  const [open, setOpen] = useState(false)
-
   return (
     <div>
       test page
@@ -43,9 +38,6 @@ export function TestsPage() {
         <button onClick={() => toast.warn('warning')}>warning</button>
         <button onClick={() => toast.error('error')}>error</button>
         <ToastMessage />
-      </div>
-      <div>
-        <DeleteCard />
       </div>
       <div></div>
     </div>
