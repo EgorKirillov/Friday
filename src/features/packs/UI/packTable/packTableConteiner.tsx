@@ -5,17 +5,14 @@ import TableRow from '@mui/material/TableRow'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import teacherIcon from '../../../../assets/svg/teacher.svg'
-import { ModalWindow } from '../../../../common/components/modalWindow/ModalWindow'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
-import { setQueryParams } from '../../packReducer'
-import { ContentAddNewPack } from '../modalWindowComponents/addNewPack/ContentAddNewPack'
-import { ContentDeletePack } from '../modalWindowComponents/deletePack/ContentDeletePack'
+import { deletePack, setQueryParams } from '../../packReducer'
+import { DeletePack } from '../modalWindowComponents/deletePack/DeletePack'
 
 import { PackTable } from './packTable'
 
@@ -46,7 +43,10 @@ export const PackTableContainer = () => {
   }
 
   const rows = data.map(el => {
-    const onClickDelete = () => {}
+    const onClickDelete = () => {
+      dispatch(deletePack(el._id))
+      toast.info(`delete ${el._id}`)
+    }
     const onClickEdit = () => {
       toast.info(`edit ${el._id}`)
     }
@@ -119,21 +119,23 @@ export const PackTableContainer = () => {
             textOverflow: 'ellipsis',
           }}
         >
-          <img
-            src={teacherIcon}
-            alt=""
-            onClick={onClickTeacher}
-            style={{ margin: '0 5px', width: 'auto' }}
-          />
-          {itMyPack && <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} />}
-          {itMyPack && (
+          <div style={{ display: 'flex' }}>
             <img
-              src={editIcon}
+              src={teacherIcon}
               alt=""
-              onClick={onClickEdit}
+              onClick={onClickTeacher}
               style={{ margin: '0 5px', width: 'auto' }}
             />
-          )}
+            {itMyPack && <DeletePack callBack={onClickDelete} name={el.name} />}
+            {itMyPack && (
+              <img
+                src={editIcon}
+                alt=""
+                onClick={onClickEdit}
+                style={{ margin: '0 5px', width: 'auto' }}
+              />
+            )}
+          </div>
         </TableCell>
       </TableRow>
     )
