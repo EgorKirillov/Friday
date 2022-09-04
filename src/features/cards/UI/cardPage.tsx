@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
 import { createCard, deleteCard, loadCards } from '../cardReducer'
@@ -27,6 +29,7 @@ export const CardsPage = () => {
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
 
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const deleteCardHandler = (id: string) => {
     dispatch(deleteCard(id))
@@ -51,6 +54,7 @@ export const CardsPage = () => {
 
   const learnPackHandler = () => {
     toast.info('learn this card')
+    navigate(PATH.LEARN)
   }
 
   useEffect(() => {
