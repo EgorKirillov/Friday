@@ -13,6 +13,7 @@ import {
   passwordNewReducer,
 } from '../features/auth/setPassword/passwordNewReducer'
 import { CardsActionsType, cardsReducer } from '../features/cards/cardReducer'
+import { LearnActionsType, learnReducer } from '../features/learn/learnReducer'
 import { PacksActionsType, packsReducer } from '../features/packs/packReducer'
 
 import { AppStatusActionType, appStatusReducer } from './appStatusReducer'
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   app: appStatusReducer,
   pack: packsReducer,
   cards: cardsReducer,
+  learn: learnReducer,
 })
 
 export const store = legacy_createStore(
@@ -60,6 +62,7 @@ export type AppActionType =
   | AppStatusActionType
   | PacksActionsType
   | CardsActionsType
+  | LearnActionsType
 
 // типизация Dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppActionType>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import { Paginator } from '../../../../common/components/paginator/Paginator'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
@@ -12,13 +12,19 @@ export const PackPaginator = () => {
 
   const dispatch = useAppDispatch()
 
-  const changeCurrentPage = (newPage: number) => {
-    dispatch(setQueryParams({ page: newPage }))
-  }
+  const changeCurrentPage = useCallback(
+    (newPage: number) => {
+      dispatch(setQueryParams({ page: newPage }))
+    },
+    [dispatch]
+  )
 
-  const changePackPerPage = (newPackPerPage: number) => {
-    dispatch(setQueryParams({ pageCount: newPackPerPage, page: 1 }))
-  }
+  const changePackPerPage = useCallback(
+    (newPackPerPage: number) => {
+      dispatch(setQueryParams({ pageCount: newPackPerPage, page: 1 }))
+    },
+    [dispatch]
+  )
 
   return (
     <Paginator
