@@ -9,7 +9,7 @@ import editIcon from '../../../../assets/svg/Edit.svg'
 import teacherIcon from '../../../../assets/svg/teacher.svg'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { setQueryParamsCards } from '../../../cards/cardReducer'
+import { loadCards, setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
 import { deletePack, setQueryParams } from '../../packReducer'
 import { DeletePack } from '../modalWindowComponents/deletePack/DeletePack'
@@ -51,7 +51,9 @@ export const PackTableContainer = () => {
       toast.info(`edit ${el._id}`)
     }
     const onClickTeacher = () => {
-      toast.info(`teach ${el._id}`)
+      toast.info(`teach ${el._id} count ${el.cardsCount}`)
+      dispatch(loadCards({ cardsPack_id: el._id, pageCount: el.cardsCount }))
+      navigate(PATH.LEARN)
     }
 
     const onClickPack = (packId: string) => {

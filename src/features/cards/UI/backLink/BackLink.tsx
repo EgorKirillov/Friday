@@ -3,19 +3,14 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
-import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { clearCardsState } from '../../cardReducer'
+import { useAppSelector } from '../../../../common/hooks/hooks'
+type PropsType = {
+  callback?: () => void
+}
 
-export const BackLink = () => {
+export const BackLink = (props: PropsType) => {
   const loading = useAppSelector(state => state.app.status)
   const isLoading: boolean = loading === 'loading'
-
-  const dispatch = useAppDispatch()
-
-  // проверить работу в useEffect return, возможно удалить
-  const clearCardsHandler = () => {
-    dispatch(clearCardsState())
-  }
 
   return (
     <div
@@ -25,7 +20,7 @@ export const BackLink = () => {
         visibility: isLoading ? 'hidden' : 'visible',
       }}
     >
-      <NavLink to={PATH.PACKS} onClick={clearCardsHandler}>
+      <NavLink to={PATH.PACKS} onClick={props.callback}>
         {`<- Back to pack list`}
       </NavLink>
     </div>
