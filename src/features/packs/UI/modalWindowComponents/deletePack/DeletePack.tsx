@@ -19,7 +19,7 @@ export const DeletePack = (props: PropsType) => {
   return (
     <div>
       <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} onClick={openModal} />
-      <ModalWindow title={'Delete Card'} open={open} onClose={closeModal}>
+      <ModalWindow title={'Delete Pack'} open={open} onClose={closeModal}>
         <ContentDeletePack close={closeModal} callBack={props.callBack} name={props.name} />
       </ModalWindow>
     </div>
