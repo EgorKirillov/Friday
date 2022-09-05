@@ -17,10 +17,11 @@ export const PackIsEmpty = ({
     <div>
       <div>This pack is empty. {isMyPack && <span>add new card to fill this pack</span>}</div>
       <ButtonWithLoader
-        name={'add new card'}
+        name={'Add new card'}
         isLoading={isLoading}
         onClick={callback}
         visibility={isMyPack ? 'visible' : 'hidden'}
+        styleButton={'defaultButton'}
       />
     </div>
   )
