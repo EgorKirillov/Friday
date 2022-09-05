@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 import { FormControlLabel, RadioGroup } from '@mui/material'
 import FormControl from '@mui/material/FormControl/FormControl'
@@ -7,33 +7,39 @@ import Radio from '@mui/material/Radio'
 import { toast } from 'react-toastify'
 import { v1 } from 'uuid'
 
-import { setError } from '../../../app/appStatusReducer'
 import { ButtonWithLoader } from '../../../common/components/buttonWithLoader/ButtonWithLoader'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
+import { getCardFromArray } from '../../../common/utils/getCardfromArray'
 import { BackLink } from '../../cards/UI/backLink/BackLink'
+import { gradeCard, setCard, setShowAnswer } from '../learnReducer'
 
-import { Answer } from './answer/answer'
 import s from './learnPage.module.css'
-import { Question } from './question/question'
 
 export const LearnPack = () => {
   const cards = useAppSelector(state => state.cards.cards)
+  const card = useAppSelector(state => state.learn.card)
+
   const packName = useAppSelector(state => state.cards.packName)
-  const cardsLenght = cards.length
-  const card = cards[0]
+
+  const showAnswer = useAppSelector(state => state.learn.showAnswer)
+
   const [ratingValue, setRatingValue] = useState<number>(0)
-  const [showAnswer, setShowAnswer] = useState<boolean>(false)
+
   const dispatch = useAppDispatch()
+
   const showAnswerHandler = () => {
-    setShowAnswer(true)
+    dispatch(setShowAnswer(true))
     toast('show answer')
   }
+
   const showNextHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (ratingValue === 0) {
       toast.error('make choise')
-    } else setShowAnswer(false)
+    } else {
+      dispatch(gradeCard(ratingValue, card._id))
+    }
     toast('next ' + ratingValue)
   }
   const rating = [
@@ -58,6 +64,14 @@ export const LearnPack = () => {
       />
     )
   })
+
+  useEffect(() => {
+    if (!showAnswer) {
+      const newCard = getCardFromArray(cards)
+
+      dispatch(setCard(newCard))
+    }
+  }, [showAnswer])
 
   return (
     <>
@@ -98,9 +112,6 @@ export const LearnPack = () => {
         ) : (
           <ButtonWithLoader name={'Show answer'} onClick={showAnswerHandler} />
         )}
-        {/*<Question />*/}
-        {/*<Answer />*/}
-        {/*<ButtonWithLoader name={'Next'} onClick={showNextHandler} />*/}
       </div>
     </>
   )
