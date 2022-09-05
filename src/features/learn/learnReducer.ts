@@ -18,6 +18,8 @@ export const learnReducer = (
       return { ...state, card: { ...action.payload } }
     case 'learn/SET-SHOW-ANSWER':
       return { ...state, showAnswer: action.showAnswer }
+    case 'learn/CLEAR-LEARN':
+      return initialState
     default:
       return state
   }
@@ -27,6 +29,7 @@ export const learnReducer = (
 export const setCard = (data: CardType) => ({ type: 'learn/SET-CARD', payload: data } as const)
 export const setShowAnswer = (showAnswer: boolean) =>
   ({ type: 'learn/SET-SHOW-ANSWER', showAnswer } as const)
+export const clearLearnState = () => ({ type: 'learn/CLEAR-LEARN' } as const)
 
 // thunks
 
@@ -53,7 +56,10 @@ export const gradeCard =
   }
 
 // types
-export type LearnActionsType = ReturnType<typeof setCard> | ReturnType<typeof setShowAnswer>
+export type LearnActionsType =
+  | ReturnType<typeof setCard>
+  | ReturnType<typeof setShowAnswer>
+  | ReturnType<typeof clearLearnState>
 
 export type InitialStateLearnType = {
   card: CardType

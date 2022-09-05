@@ -4,7 +4,7 @@ import { ButtonWithLoader } from '../../../common/components/buttonWithLoader/Bu
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { getCardFromArray } from '../../../common/utils/getCardfromArray'
 import { BackLink } from '../../cards/UI/backLink/BackLink'
-import { gradeCard, setCard, setShowAnswer } from '../learnReducer'
+import { clearLearnState, gradeCard, setCard, setShowAnswer } from '../learnReducer'
 
 import { Answer } from './answer/answer'
 import s from './learnPage.module.css'
@@ -19,6 +19,10 @@ export const LearnPack = () => {
   const showAnswer = useAppSelector(state => state.learn.showAnswer)
 
   const dispatch = useAppDispatch()
+
+  const clearState = useCallback(() => {
+    dispatch(clearLearnState())
+  }, [dispatch])
 
   const showAnswerHandler = useCallback(() => {
     dispatch(setShowAnswer(true))
@@ -37,7 +41,7 @@ export const LearnPack = () => {
 
   return (
     <>
-      <BackLink />
+      <BackLink callback={clearState} />
 
       <h2 className={s.title}>Learn {packName}</h2>
 
