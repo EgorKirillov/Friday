@@ -54,6 +54,7 @@ export const CardsPage = () => {
 
   const learnPackHandler = () => {
     toast.info('learn this card')
+    dispatch(loadCards({ cardsPack_id: queryParams.cardsPack_id, pageCount: totalCardsCount }))
     navigate(PATH.LEARN)
   }
 
