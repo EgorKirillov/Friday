@@ -14,9 +14,9 @@ export const ShowCards = () => {
 
   const onClickHandler = (value: 'All' | 'My') => {
     if (value === 'My') {
-      dispatch(setQueryParams({ user_id: myID }))
+      dispatch(setQueryParams({ user_id: myID, min: undefined, max: undefined }))
     } else {
-      dispatch(setQueryParams({ user_id: undefined })) // проверить чтобы работали запросы
+      dispatch(setQueryParams({ user_id: undefined, min: undefined, max: undefined }))
     }
     setCards(value)
     //dispatch()

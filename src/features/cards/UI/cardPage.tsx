@@ -40,7 +40,6 @@ export const CardsPage = () => {
   const addNewCardHandler = () => dispatch(changeCardModalStatus('modalCreate', true))
 
   const learnPackHandler = () => {
-    toast.info('learn this card')
     dispatch(loadCards({ cardsPack_id: queryParams.cardsPack_id, pageCount: totalCardsCount }))
     navigate(PATH.LEARN)
   }

@@ -5,8 +5,6 @@ type PropsType = {
 }
 
 export const Question = memo((props: PropsType) => {
-  console.log('render question')
-
   return (
     <>
       <div>
