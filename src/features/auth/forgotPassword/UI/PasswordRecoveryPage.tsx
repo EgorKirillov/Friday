@@ -43,7 +43,6 @@ export const PasswordRecoveryPage = () => {
   } = useForm<ForgotInputs>({ resolver })
 
   const onSubmit: SubmitHandler<ForgotInputs> = data => {
-    console.log(data)
     dispatch(sendEmail(data.email))
   }
 

@@ -5,11 +5,12 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import { toast } from 'react-toastify'
 
+import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { DeletePack } from '../../../packs/UI/modalWindowComponents/deletePack/DeletePack'
-import { deleteCard, setQueryParamsCards } from '../../cardReducer'
+import { changeCardModalStatus, setQueryParamsCards } from '../../cardReducer'
 import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
+import { DeleteCard } from '../modalWindowComponents/deleteCard/DeleteCard'
 
 import { CardTable } from './cardTable'
 
@@ -42,10 +43,8 @@ export const CardTableContainer = () => {
   const rows =
     data &&
     data.map(el => {
-      const onClickDelete = () => {
-        dispatch(deleteCard(el._id))
-        toast.info(`delete ${el.cardsPack_id}`)
-      }
+      const onClickDelete = () => dispatch(changeCardModalStatus('modalDelete', true))
+
       const onClickEdit = () => {
         toast.info(`edit ${el.cardsPack_id}`)
       }
@@ -55,8 +54,6 @@ export const CardTableContainer = () => {
         new Date(el.updated).toLocaleDateString('ru-RU') +
         ' ' +
         new Date(el.updated).toLocaleTimeString()
-
-      console.log(status)
 
       return (
         <TableRow key={el._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -71,7 +68,20 @@ export const CardTableContainer = () => {
           </TableCell>
           <TableCell align="center">
             <div style={{ display: 'flex' }}>
-              {itMyPack && <DeletePack callBack={onClickDelete} name={el.question} />}
+              {itMyPack && (
+                <>
+                  <img
+                    src={deleteIcon}
+                    alt=""
+                    style={{ margin: '0 5px', width: 'auto' }}
+                    onClick={onClickDelete}
+                  />
+                  <DeleteCard key={el._id} idCard={el._id} />
+                </>
+              )}
+
+              {/*{itMyPack && <DeletePack callBack={onClickDelete} name={el.question} />}*/}
+
               {itMyPack && <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />}
             </div>
           </TableCell>

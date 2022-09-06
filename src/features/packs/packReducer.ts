@@ -19,6 +19,9 @@ const initialState: InitialStatePackType = {
   page: 0,
   pageCount: 0,
   queryParams: {} as QueryParameterPackType,
+  modalEdit: false,
+  modalCreate: false,
+  modalDelete: false,
 }
 
 export const packsReducer = (
@@ -31,6 +34,8 @@ export const packsReducer = (
     case 'pack/SET-QUERY-PARAMS': {
       return { ...state, queryParams: { ...state.queryParams, ...action.payload } }
     }
+    case 'pack/CHANGE-MODAL-STATUS':
+      return { ...state, [action.modalName]: action.value }
     default:
       return state
   }
@@ -42,6 +47,11 @@ export const setPacks = (data: InitialStatePackType) =>
 
 export const setQueryParams = (data: QueryParameterPackType) =>
   ({ type: 'pack/SET-QUERY-PARAMS', payload: data } as const)
+
+export const changePackModalStatus = (
+  modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
+  value: boolean
+) => ({ type: 'pack/CHANGE-MODAL-STATUS', modalName, value } as const)
 
 // thunks
 export const loadPacks =
@@ -107,8 +117,14 @@ export const createPack =
   }
 
 // types
-export type PacksActionsType = ReturnType<typeof setPacks> | ReturnType<typeof setQueryParams>
+export type PacksActionsType =
+  | ReturnType<typeof setPacks>
+  | ReturnType<typeof setQueryParams>
+  | ReturnType<typeof changePackModalStatus>
 
 export type InitialStatePackType = GetPacksResponseType & {
   queryParams?: QueryParameterPackType
+  modalEdit?: boolean
+  modalCreate?: boolean
+  modalDelete?: boolean
 }

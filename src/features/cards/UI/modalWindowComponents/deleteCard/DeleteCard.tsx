@@ -1,30 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import deleteIcon from '../../../../../assets/svg/Delete.svg'
 import { ModalWindow } from '../../../../../common/components/modalWindow/ModalWindow'
+import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
+import { changeCardModalStatus, deleteCard } from '../../../cardReducer'
 
 import { ContentDeleteCard } from './ContentDeleteCard'
 
 type PropsType = {
-  callBack: () => void
-  namePack: string | undefined
+  callBack?: () => void
+  name?: string
+  idCard: string
 }
 
 export const DeleteCard = (props: PropsType) => {
-  const [open, setOpen] = useState(false)
+  const open = useAppSelector(state => state.cards.modalDelete)
 
-  const openModal = () => setOpen(true)
-  const closeModal = () => setOpen(false)
+  const dispatch = useAppDispatch()
+
+  const closeModal = () => dispatch(changeCardModalStatus('modalDelete', false))
+
+  const deleteCardHandler = () => dispatch(deleteCard(props.idCard))
 
   return (
     <div>
-      <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} onClick={openModal} />
-      <ModalWindow title={'Delete Card'} open={open} onClose={closeModal}>
-        <ContentDeleteCard
-          onClose={closeModal}
-          callBack={props.callBack}
-          namePack={props.namePack}
-        />
+      <ModalWindow title={'Delete Card'} open={!!open} onClose={closeModal}>
+        <ContentDeleteCard onClose={closeModal} callBack={deleteCardHandler} name={props.name} />
       </ModalWindow>
     </div>
   )

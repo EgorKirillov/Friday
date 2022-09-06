@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Box, Slider } from '@mui/material'
 
@@ -25,6 +25,16 @@ export const DoubleSlider = () => {
 
     setTimerId(id)
   }
+
+  // useEffect(() => {
+  //   if (value[0] < minValue || value[1] > maxValue) {
+  //     setValue([minValue, maxValue])
+  //   }
+  // }, [minValue, maxValue])
+
+  useEffect(() => {
+    setValue([minValue, maxValue])
+  }, [minValue, maxValue])
 
   return (
     <div className={style.sliderContainer}>

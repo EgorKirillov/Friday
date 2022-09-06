@@ -26,6 +26,9 @@ const initialState: InitialStateCardsType = {
   cardsTotalCount: 1,
   minGrade: 0,
   maxGrade: 0,
+  modalEdit: false,
+  modalCreate: false,
+  modalDelete: false,
   queryParams: {} as QueryParameterCardsType,
 }
 
@@ -34,7 +37,7 @@ export const cardsReducer = (
   action: CardsActionsType
 ): InitialStateCardsType => {
   switch (action.type) {
-    case 'pack/SET-CARDS':
+    case 'card/SET-CARDS':
       return {
         ...state,
         ...action.payload,
@@ -47,10 +50,12 @@ export const cardsReducer = (
           card._id === action.cardID ? { ...card, grade: action.grade, shots: action.shots } : card
         ),
       }
-    case 'pack/SET-QUERY-PARAMS-CARDS':
+    case 'card/SET-QUERY-PARAMS-CARDS':
       return { ...state, queryParams: { ...action.payload } }
     case 'pack/CLEAR-STATE':
       return {} as InitialStateCardsType
+    case 'card/CHANGE-MODAL-STATUS':
+      return { ...state, [action.modalName]: action.value }
     default:
       return state
   }
@@ -58,12 +63,16 @@ export const cardsReducer = (
 
 // actions
 export const setCards = (data: GetCardsResponseType) =>
-  ({ type: 'pack/SET-CARDS', payload: data } as const)
+  ({ type: 'card/SET-CARDS', payload: data } as const)
 export const setQueryParamsCards = (data: QueryParameterCardsType) =>
-  ({ type: 'pack/SET-QUERY-PARAMS-CARDS', payload: data } as const)
+  ({ type: 'card/SET-QUERY-PARAMS-CARDS', payload: data } as const)
 export const clearCardsState = () => ({ type: 'pack/CLEAR-STATE' } as const)
 export const updateCardGrade = (cardID: string, grade: number, shots: number) =>
   ({ type: 'card/UPDATE-CARD-GRADE', cardID, grade, shots } as const)
+export const changeCardModalStatus = (
+  modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
+  value: boolean
+) => ({ type: 'card/CHANGE-MODAL-STATUS', modalName, value } as const)
 
 // thunks
 export const loadCards =
@@ -106,6 +115,7 @@ export const deleteCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(changeCardModalStatus('modalDelete', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -123,6 +133,7 @@ export const createCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(changeCardModalStatus('modalCreate', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -135,7 +146,11 @@ export type CardsActionsType =
   | ReturnType<typeof setQueryParamsCards>
   | ReturnType<typeof clearCardsState>
   | ReturnType<typeof updateCardGrade>
+  | ReturnType<typeof changeCardModalStatus>
 
 export type InitialStateCardsType = GetCardsResponseType & {
   queryParams: QueryParameterCardsType
+  modalEdit?: boolean
+  modalCreate?: boolean
+  modalDelete?: boolean
 }
