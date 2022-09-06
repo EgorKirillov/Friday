@@ -26,6 +26,9 @@ const initialState: InitialStateCardsType = {
   cardsTotalCount: 1,
   minGrade: 0,
   maxGrade: 0,
+  modalEdit: false,
+  modalCreate: false,
+  modalDelete: false,
   queryParams: {} as QueryParameterCardsType,
 }
 
@@ -51,6 +54,8 @@ export const cardsReducer = (
       return { ...state, queryParams: { ...action.payload } }
     case 'pack/CLEAR-STATE':
       return {} as InitialStateCardsType
+    case 'card/CHANGE-MODAL-STATUS':
+      return { ...state, [action.modalName]: action.value }
     default:
       return state
   }
@@ -64,6 +69,10 @@ export const setQueryParamsCards = (data: QueryParameterCardsType) =>
 export const clearCardsState = () => ({ type: 'pack/CLEAR-STATE' } as const)
 export const updateCardGrade = (cardID: string, grade: number, shots: number) =>
   ({ type: 'card/UPDATE-CARD-GRADE', cardID, grade, shots } as const)
+export const changeCardModalStatus = (
+  modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
+  value: boolean
+) => ({ type: 'card/CHANGE-MODAL-STATUS', modalName, value } as const)
 
 // thunks
 export const loadCards =
@@ -135,7 +144,11 @@ export type CardsActionsType =
   | ReturnType<typeof setQueryParamsCards>
   | ReturnType<typeof clearCardsState>
   | ReturnType<typeof updateCardGrade>
+  | ReturnType<typeof changeCardModalStatus>
 
 export type InitialStateCardsType = GetCardsResponseType & {
   queryParams: QueryParameterCardsType
+  modalEdit?: boolean
+  modalCreate?: boolean
+  modalDelete?: boolean
 }
