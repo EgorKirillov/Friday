@@ -31,11 +31,6 @@ export const CardsPage = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const deleteCardHandler = (id: string) => {
-    dispatch(deleteCard(id))
-    toast.warn(`карта удалена ${id}`)
-  }
-
   const packIsEmpty: boolean =
     totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
 
@@ -53,7 +48,6 @@ export const CardsPage = () => {
   }
 
   const learnPackHandler = () => {
-    toast.info('learn this card')
     dispatch(loadCards({ cardsPack_id: queryParams.cardsPack_id, pageCount: totalCardsCount }))
     navigate(PATH.LEARN)
   }

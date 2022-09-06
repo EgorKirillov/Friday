@@ -15,7 +15,6 @@ type PropsType = {
 }
 
 export const Paginator = memo((props: PropsType) => {
-  console.log(props.currentPage)
   const handleChangePage = (event: ChangeEvent<unknown>, newPage: number) => {
     props.callbackCurrent(newPage)
   }
@@ -23,8 +22,6 @@ export const Paginator = memo((props: PropsType) => {
   const changeCardPerPage = (value: string) => {
     props.callbackCurrentPerPage(+value)
   }
-
-  console.log('paginator')
 
   return (
     <div className={style.paginatorContainer}>
