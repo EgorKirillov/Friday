@@ -8,9 +8,9 @@ export const CardsPaginator = () => {
   const queryParams = useAppSelector(state => state.cards.queryParams)
 
   const pageCard = useAppSelector(state => state.cards.page)
-  const packsPerPage = useAppSelector(state => state.cards.pageCount)
+  const cardsPerPage = useAppSelector(state => state.cards.pageCount)
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
-  const totalCardsPagesCount = Math.ceil(totalCardsCount / packsPerPage)
+  const totalCardsPagesCount = Math.ceil(totalCardsCount / cardsPerPage)
 
   const dispatch = useAppDispatch()
 
@@ -18,20 +18,20 @@ export const CardsPaginator = () => {
     (newPage: number) => {
       dispatch(setQueryParamsCards({ ...queryParams, page: newPage }))
     },
-    [dispatch]
+    [dispatch, queryParams]
   )
 
   const changePackPerPage = useCallback(
     (newPackPerPage: number) => {
       dispatch(setQueryParamsCards({ ...queryParams, pageCount: newPackPerPage, page: 1 }))
     },
-    [dispatch]
+    [dispatch, queryParams]
   )
 
   return (
     <Paginator
       pagesCount={totalCardsPagesCount}
-      countPerPage={packsPerPage}
+      countPerPage={cardsPerPage}
       currentPage={pageCard ? pageCard : 1}
       callbackCurrent={changeCurrentPage}
       callbackCurrentPerPage={changePackPerPage}
