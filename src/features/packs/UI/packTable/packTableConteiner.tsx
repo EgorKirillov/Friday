@@ -5,14 +5,14 @@ import TableRow from '@mui/material/TableRow'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import teacherIcon from '../../../../assets/svg/teacher.svg'
-import { ModalWindow } from '../../../../common/components/modalWindow/ModalWindow'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { setQueryParamsCards } from '../../../cards/cardReducer'
+import { loadCards, setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
+import { deletePack, setQueryParams } from '../../packReducer'
+import { DeletePack } from '../modalWindowComponents/deletePack/DeletePack'
 import { setQueryParams } from '../../packReducer'
 import { UpdatePack } from '../updatePack/updatePack'
 import { ContentAddNewPack } from '../modalWindowComponents/addNewPack/ContentAddNewPack'
@@ -47,10 +47,17 @@ export const PackTableContainer = () => {
   }
 
   const rows = data.map(el => {
-    const onClickDelete = () => {}
-
+    const onClickDelete = () => {
+      dispatch(deletePack(el._id))
+      toast.info(`delete ${el._id}`)
+    }
+    const onClickEdit = () => {
+      toast.info(`edit ${el._id}`)
+    }
     const onClickTeacher = () => {
-      toast.info(`teach ${el._id}`)
+      toast.info(`teach ${el._id} count ${el.cardsCount}`)
+      dispatch(loadCards({ cardsPack_id: el._id, pageCount: el.cardsCount }))
+      navigate(PATH.LEARN)
     }
 
     const onClickPack = (packId: string) => {
@@ -118,15 +125,16 @@ export const PackTableContainer = () => {
             textOverflow: 'ellipsis',
           }}
         >
-          <img
-            src={teacherIcon}
-            alt=""
-            onClick={onClickTeacher}
-            style={{ margin: '0 5px', width: 'auto' }}
-          />
-          {itMyPack && <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} />}
-
-          {itMyPack && <UpdatePack idPack={el._id} />}
+          <div style={{ display: 'flex' }}>
+            <img
+              src={teacherIcon}
+              alt=""
+              onClick={onClickTeacher}
+              style={{ margin: '0 5px', width: 'auto' }}
+            />
+            {itMyPack && <DeletePack callBack={onClickDelete} name={el.name} />}
+              {itMyPack && <UpdatePack idPack={el._id} />}
+          </div>
         </TableCell>
       </TableRow>
     )

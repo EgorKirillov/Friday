@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { ButtonWithLoader } from '../../../../../common/components/buttonWithLoader/ButtonWithLoader'
-import { CancelButton } from '../../../../../common/components/modalWindow/modalWindowButtons/cancelButton/CancelButton'
 import style from '../../../../../common/components/modalWindow/style/StylePacks.module.css'
 
 type PropsType = {
   onClose: () => void
-  callBack?: () => void
+  callBack: () => void
+  namePack: string | undefined
 }
 
 export const ContentDeleteCard = (props: PropsType) => {
@@ -14,14 +14,13 @@ export const ContentDeleteCard = (props: PropsType) => {
     <div>
       <div className={style.content}>
         <p>
-          Do you really want to remove <b>Card Name</b>?
+          Do you really want to remove <b>{props.namePack}</b>?
         </p>
         <p>All cards will be deleted.</p>
       </div>
       <div className={style.buttonsBlock}>
-        <CancelButton callBack={props.onClose} />
-        {/*<DeleteButton />*/}
-        <ButtonWithLoader name={'Delete'} />
+        <ButtonWithLoader name={'Cancel'} styleButton={'cancel'} onClick={props.onClose} />
+        <ButtonWithLoader name={'Delete'} styleButton={'delete'} onClick={props.callBack} />
       </div>
     </div>
   )

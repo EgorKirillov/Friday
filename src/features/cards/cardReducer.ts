@@ -40,6 +40,13 @@ export const cardsReducer = (
         ...action.payload,
         cards: [...action.payload.cards],
       }
+    case 'card/UPDATE-CARD-GRADE':
+      return {
+        ...state,
+        cards: state.cards.map(card =>
+          card._id === action.cardID ? { ...card, grade: action.grade, shots: action.shots } : card
+        ),
+      }
     case 'pack/SET-QUERY-PARAMS-CARDS':
       return { ...state, queryParams: { ...action.payload } }
     case 'pack/CLEAR-STATE':
@@ -55,6 +62,8 @@ export const setCards = (data: GetCardsResponseType) =>
 export const setQueryParamsCards = (data: QueryParameterCardsType) =>
   ({ type: 'pack/SET-QUERY-PARAMS-CARDS', payload: data } as const)
 export const clearCardsState = () => ({ type: 'pack/CLEAR-STATE' } as const)
+export const updateCardGrade = (cardID: string, grade: number, shots: number) =>
+  ({ type: 'card/UPDATE-CARD-GRADE', cardID, grade, shots } as const)
 
 // thunks
 export const loadCards =
@@ -125,6 +134,7 @@ export type CardsActionsType =
   | ReturnType<typeof setCards>
   | ReturnType<typeof setQueryParamsCards>
   | ReturnType<typeof clearCardsState>
+  | ReturnType<typeof updateCardGrade>
 
 export type InitialStateCardsType = GetCardsResponseType & {
   queryParams: QueryParameterCardsType

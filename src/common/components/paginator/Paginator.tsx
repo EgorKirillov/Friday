@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, memo } from 'react'
 
 import { Stack } from '@mui/material'
 import Pagination from '@mui/material/Pagination'
@@ -14,7 +14,8 @@ type PropsType = {
   callbackCurrentPerPage: (countPerPage: number) => void
 }
 
-export const Paginator = (props: PropsType) => {
+export const Paginator = memo((props: PropsType) => {
+  console.log(props.currentPage)
   const handleChangePage = (event: ChangeEvent<unknown>, newPage: number) => {
     props.callbackCurrent(newPage)
   }
@@ -22,6 +23,8 @@ export const Paginator = (props: PropsType) => {
   const changeCardPerPage = (value: string) => {
     props.callbackCurrentPerPage(+value)
   }
+
+  console.log('paginator')
 
   return (
     <div className={style.paginatorContainer}>
@@ -40,4 +43,4 @@ export const Paginator = (props: PropsType) => {
       </div>
     </div>
   )
-}
+})

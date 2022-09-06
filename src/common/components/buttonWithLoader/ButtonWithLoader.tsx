@@ -1,9 +1,11 @@
-import * as React from 'react'
+import React from 'react'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
-import { green } from '@mui/material/colors'
+import { grey } from '@mui/material/colors'
+
+import style from './ButtonWithLoader.module.css'
 
 type PropsType = {
   size?: 'small' | 'medium' | 'large'
@@ -13,6 +15,7 @@ type PropsType = {
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset' | undefined
   visibility?: 'hidden' | 'visible'
+  styleButton?: 'defaultButton' | 'delete' | 'cancel' | 'save'
 }
 
 export const ButtonWithLoader = ({
@@ -22,9 +25,36 @@ export const ButtonWithLoader = ({
   onClick = () => {},
   type = 'button',
   visibility = 'visible',
+  styleButton = undefined,
 }: PropsType) => {
   const handleButtonClick = () => {
     onClick()
+  }
+
+  const styleButtons = () => {
+    if (isLoading) {
+      // eslint-disable-next-line no-constant-condition
+      if (styleButton === 'delete' || styleButton === 'cancel' || styleButton === 'save') {
+        return style.disabledButtonModalWindow
+      }
+      // eslint-disable-next-line no-constant-condition
+      if (styleButton === 'defaultButton') {
+        return style.disabledDefaultButton
+      }
+    }
+    if (styleButton === 'delete') {
+      return style.deleteButton
+    }
+
+    if (styleButton === 'cancel') {
+      return style.cancelButton
+    }
+    if (styleButton === 'save') {
+      return style.saveButton
+    }
+    if (styleButton === 'defaultButton') {
+      return style.defaultButton
+    }
   }
 
   return (
@@ -38,6 +68,7 @@ export const ButtonWithLoader = ({
     >
       <Box sx={{ m: 1, position: 'relative' }}>
         <Button
+          className={styleButtons()}
           variant="contained"
           disabled={isLoading}
           onClick={handleButtonClick}
@@ -50,12 +81,12 @@ export const ButtonWithLoader = ({
           <CircularProgress
             size={24}
             sx={{
-              color: green[500],
+              color: grey[500],
               position: 'absolute',
               top: '50%',
               left: '50%',
-              // marginTop: '-12px',
-              // marginLeft: '-12px',
+              marginTop: '-12px',
+              marginLeft: '-12px',
             }}
           />
         )}

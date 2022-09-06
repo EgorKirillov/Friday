@@ -7,7 +7,7 @@ import learnIcon from '../../../../assets/svg/teacher.svg'
 import { BasicMenu } from '../../../../common/components/basicMenu/BasicMenu'
 import { ButtonBasicMenu } from '../../../../common/components/basicMenu/buttonProfile/ButtonBasicMenu'
 import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
-import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { useAppSelector } from '../../../../common/hooks/hooks'
 
 import s from './TitleBlock.module.css'
 
@@ -30,8 +30,6 @@ export const TitleBlock = ({
 }: PropsType) => {
   const loading = useAppSelector(state => state.app.status)
   const isLoading = loading === 'loading'
-
-  const dispatch = useAppDispatch()
 
   const onClickHandlerEdit = () => {
     alert('Edit!')
@@ -71,6 +69,7 @@ export const TitleBlock = ({
 
         <ButtonWithLoader
           name={buttonName}
+          styleButton={'defaultButton'}
           onClick={buttonCallback}
           isLoading={isLoading}
           visibility={buttonVisability}

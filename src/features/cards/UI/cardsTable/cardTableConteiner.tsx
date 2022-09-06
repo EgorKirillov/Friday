@@ -5,10 +5,10 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import { toast } from 'react-toastify'
 
-import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { setQueryParamsCards } from '../../cardReducer'
+import { DeletePack } from '../../../packs/UI/modalWindowComponents/deletePack/DeletePack'
+import { deleteCard, setQueryParamsCards } from '../../cardReducer'
 import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
 
 import { CardTable } from './cardTable'
@@ -17,6 +17,7 @@ export const CardTableContainer = () => {
   const data = useAppSelector(state => state.cards.cards)
   const idUser = useAppSelector(state => state.profile._id)
   const cardQueryParam = useAppSelector(state => state.cards.queryParams)
+  const status = useAppSelector(state => state.app.status)
 
   const dispatch = useAppDispatch()
 
@@ -42,6 +43,7 @@ export const CardTableContainer = () => {
     data &&
     data.map(el => {
       const onClickDelete = () => {
+        dispatch(deleteCard(el._id))
         toast.info(`delete ${el.cardsPack_id}`)
       }
       const onClickEdit = () => {
@@ -53,6 +55,8 @@ export const CardTableContainer = () => {
         new Date(el.updated).toLocaleDateString('ru-RU') +
         ' ' +
         new Date(el.updated).toLocaleTimeString()
+
+      console.log(status)
 
       return (
         <TableRow key={el._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -66,8 +70,10 @@ export const CardTableContainer = () => {
             <Rating name="read-only" value={el.grade} readOnly />
           </TableCell>
           <TableCell align="center">
-            {itMyPack && <img src={deleteIcon} width={'auto'} alt="" onClick={onClickDelete} />}
-            {itMyPack && <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />}
+            <div style={{ display: 'flex' }}>
+              {itMyPack && <DeletePack callBack={onClickDelete} name={el.question} />}
+              {itMyPack && <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />}
+            </div>
           </TableCell>
         </TableRow>
       )
