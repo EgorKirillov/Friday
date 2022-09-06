@@ -5,8 +5,8 @@ import style from '../../../../../common/components/modalWindow/style/StylePacks
 
 type PropsType = {
   onClose: () => void
-  callBack: () => void
-  namePack: string | undefined
+  callBack?: () => void
+  name?: string
 }
 
 export const ContentDeleteCard = (props: PropsType) => {
@@ -14,7 +14,7 @@ export const ContentDeleteCard = (props: PropsType) => {
     <div>
       <div className={style.content}>
         <p>
-          Do you really want to remove <b>{props.namePack}</b>?
+          Do you really want to remove <b>{props.name}</b>?
         </p>
         <p>All cards will be deleted.</p>
       </div>

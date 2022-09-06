@@ -115,6 +115,7 @@ export const deleteCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(changeCardModalStatus('modalDelete', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
