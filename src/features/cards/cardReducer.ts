@@ -133,6 +133,7 @@ export const createCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(changeCardModalStatus('modalCreate', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)

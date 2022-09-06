@@ -6,13 +6,13 @@ import { toast } from 'react-toastify'
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
-import { createCard, deleteCard, loadCards } from '../cardReducer'
-import { NewCardType } from '../cardsAPI'
+import { changeCardModalStatus, loadCards } from '../cardReducer'
 
 import { BackLink } from './backLink/BackLink'
 import s from './cardPage.module.css'
 import { CardsPaginator } from './cardsPaginator/cardsPaginator'
 import { CardTableContainer } from './cardsTable/cardTableConteiner'
+import { CreateCard } from './modalWindowComponents/createCard/createCard'
 import { NotFoundCards } from './notFoundCards/notFoundCards'
 import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
 import { SearchBlock } from './searchBlock/SearchBlock'
@@ -31,26 +31,13 @@ export const CardsPage = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const deleteCardHandler = (id: string) => {
-    dispatch(deleteCard(id))
-    toast.warn(`карта удалена ${id}`)
-  }
-
   const packIsEmpty: boolean =
     totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
 
   const notFound: boolean =
     totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
 
-  const addNewCardHandler = () => {
-    const newCard: NewCardType = {
-      cardsPack_id: queryParams.cardsPack_id,
-      question: 'q123qq',
-      answer: 'aa1a',
-    }
-
-    dispatch(createCard(newCard))
-  }
+  const addNewCardHandler = () => dispatch(changeCardModalStatus('modalCreate', true))
 
   const learnPackHandler = () => {
     toast.info('learn this card')
@@ -89,6 +76,7 @@ export const CardsPage = () => {
       {!isLoading && notFound && <NotFoundCards />}
 
       <CardsPaginator />
+      <CreateCard key={queryParams.cardsPack_id} idPack={queryParams.cardsPack_id} />
     </div>
   )
 }
