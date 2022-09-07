@@ -30,6 +30,9 @@ const initialState: InitialStateCardsType = {
   modalCreate: false,
   modalDelete: false,
   queryParams: {} as QueryParameterCardsType,
+  oldQuestion: '',
+  oldAnswer: '',
+  idEditCard: '',
 }
 
 export const cardsReducer = (
@@ -56,6 +59,13 @@ export const cardsReducer = (
       return {} as InitialStateCardsType
     case 'card/CHANGE-MODAL-STATUS':
       return { ...state, [action.modalName]: action.value }
+    case 'card/SET-CARD-DATA':
+      return {
+        ...state,
+        idEditCard: action.idEditCard,
+        oldQuestion: action.oldQuestion,
+        oldAnswer: action.oldAnswer,
+      }
     default:
       return state
   }
@@ -73,6 +83,8 @@ export const changeCardModalStatus = (
   modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
   value: boolean
 ) => ({ type: 'card/CHANGE-MODAL-STATUS', modalName, value } as const)
+export const setCardData = (idEditCard: string, oldQuestion: string, oldAnswer: string) =>
+  ({ type: 'card/SET-CARD-DATA', idEditCard, oldQuestion, oldAnswer } as const)
 
 // thunks
 export const loadCards =
@@ -99,6 +111,7 @@ export const updateCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(changeCardModalStatus('modalEdit', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -147,10 +160,14 @@ export type CardsActionsType =
   | ReturnType<typeof clearCardsState>
   | ReturnType<typeof updateCardGrade>
   | ReturnType<typeof changeCardModalStatus>
+  | ReturnType<typeof setCardData>
 
 export type InitialStateCardsType = GetCardsResponseType & {
   queryParams: QueryParameterCardsType
   modalEdit?: boolean
   modalCreate?: boolean
   modalDelete?: boolean
+  oldQuestion: string
+  oldAnswer: string
+  idEditCard: string
 }

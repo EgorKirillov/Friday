@@ -13,6 +13,7 @@ import s from './cardPage.module.css'
 import { CardsPaginator } from './cardsPaginator/cardsPaginator'
 import { CardTableContainer } from './cardsTable/cardTableConteiner'
 import { CreateCard } from './modalWindowComponents/createCard/createCard'
+import { UpdateCard } from './modalWindowComponents/updateCard/updateCard'
 import { NotFoundCards } from './notFoundCards/notFoundCards'
 import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
 import { SearchBlock } from './searchBlock/SearchBlock'
@@ -25,6 +26,7 @@ export const CardsPage = () => {
 
   const userId = useAppSelector(state => state.profile._id)
   const packUserId = useAppSelector(state => state.cards.packUserId)
+
   const isMyPack: boolean = userId === packUserId
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
 
@@ -76,6 +78,7 @@ export const CardsPage = () => {
 
       <CardsPaginator />
       <CreateCard key={queryParams.cardsPack_id} idPack={queryParams.cardsPack_id} />
+      <UpdateCard />
     </div>
   )
 }

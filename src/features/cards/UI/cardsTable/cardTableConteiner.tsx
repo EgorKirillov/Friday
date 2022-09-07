@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { changeCardModalStatus, setQueryParamsCards } from '../../cardReducer'
+import { changeCardModalStatus, setCardData, setQueryParamsCards } from '../../cardReducer'
 import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
 import { DeleteCard } from '../modalWindowComponents/deleteCard/DeleteCard'
 
@@ -18,7 +18,6 @@ export const CardTableContainer = () => {
   const data = useAppSelector(state => state.cards.cards)
   const idUser = useAppSelector(state => state.profile._id)
   const cardQueryParam = useAppSelector(state => state.cards.queryParams)
-  const status = useAppSelector(state => state.app.status)
 
   const dispatch = useAppDispatch()
 
@@ -26,7 +25,7 @@ export const CardTableContainer = () => {
     { key: 'question' as ColumnSortCardsName, label: 'Question', isSortable: false },
     { key: 'answer' as ColumnSortCardsName, label: 'Answer', isSortable: false },
     { key: 'updated' as ColumnSortCardsName, label: 'Last Update', isSortable: true },
-    { key: 'grade' as ColumnSortCardsName, label: 'Crade', isSortable: true },
+    { key: 'grade' as ColumnSortCardsName, label: 'Grade', isSortable: true },
     { key: 'actions' as ColumnSortCardsName, label: '', isSortable: false },
   ]
   const sort = (val: string) => {
@@ -46,6 +45,9 @@ export const CardTableContainer = () => {
       const onClickDelete = () => dispatch(changeCardModalStatus('modalDelete', true))
 
       const onClickEdit = () => {
+        dispatch(changeCardModalStatus('modalEdit', true))
+        dispatch(setCardData(el._id, el.question, el.answer))
+        toast.info(`see ${el._id}`)
         toast.info(`edit ${el.cardsPack_id}`)
       }
 
@@ -79,10 +81,11 @@ export const CardTableContainer = () => {
                   <DeleteCard key={el._id} idCard={el._id} />
                 </>
               )}
-
-              {/*{itMyPack && <DeletePack callBack={onClickDelete} name={el.question} />}*/}
-
-              {itMyPack && <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />}
+              {itMyPack && (
+                <>
+                  <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />
+                </>
+              )}
             </div>
           </TableCell>
         </TableRow>
