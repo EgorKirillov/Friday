@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import { CancelButton } from '../../../../../common/components/modalWindow/modalWindowButtons/cancelButton/CancelButton'
-import { SaveButton } from '../../../../../common/components/modalWindow/modalWindowButtons/saveButton/SaveButton'
 import { ModalCheckBox } from '../../../../../common/components/modalWindow/modalWindowChackBox/modalWindowCheckBox'
 import { ModalWindowInput } from '../../../../../common/components/modalWindow/modalWindowInput/ModalWindowInput'
 import style from '../../../../../common/components/modalWindow/style/StylePacks.module.css'
@@ -18,7 +16,7 @@ export const ContentAddNewPack = () => {
       </div>
       <div className={style.buttonsBlock}>
         {/*<CancelButton />*/}
-        <SaveButton />
+        {/*<SaveButton />*/}
       </div>
     </div>
   )
