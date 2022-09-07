@@ -1,49 +1,39 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { toast } from 'react-toastify'
-
-import editIcon from '../../../../assets/svg/Edit.svg'
 import { ModalWindow } from '../../../../common/components/modalWindow/ModalWindow'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { updatePack } from '../../packReducer'
-import { EditPack } from '../modalWindowComponents/editPack/EditPack'
+import { changePackModalStatus, updatePack } from '../../packReducer'
+import { ContentEditPack } from '../modalWindowComponents/editPack/contentEditPack'
 
-type UpdatePackType = {
-  idPack: string
-}
-export const UpdatePack = (props: UpdatePackType) => {
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+export const UpdatePack = () => {
+  const open = useAppSelector(state => state.pack.modalEdit)
+  const idPack = useAppSelector(state => state.pack.idEditPack)
+  const oldName = useAppSelector(state => state.pack.oldName)
+
+  const closeModal = () => dispatch(changePackModalStatus('modalEdit', false))
 
   const dispatch = useAppDispatch()
-  const status = useAppSelector(state => state.app.status)
-  const name = useAppSelector(
-    state => state.pack.cardPacks.filter(pack => pack._id === props.idPack)[0].name
-  )
-  const onClickEdit = () => {
-    toast.info(`edit ${props.idPack}`)
-    toast.info(`${name}`)
-    handleOpen()
-  }
-  const saveNewName = (newName: string, checked: boolean) => {
-    const updatedPack = {
-      _id: props.idPack,
-      private: checked,
-      name: newName,
-    }
 
-    dispatch(updatePack(updatedPack))
-    if (status === 'succeeded') {
-      handleClose()
+  const saveNewName = (newName: string, checked: boolean) => {
+    if (idPack) {
+      const updatedPack = {
+        _id: idPack,
+        private: checked,
+        name: newName,
+      }
+
+      dispatch(updatePack(updatedPack))
     }
   }
 
   return (
     <div>
-      <img src={editIcon} alt="" onClick={onClickEdit} style={{ margin: '0 5px', width: 'auto' }} />
-      <ModalWindow title={'Edit pack'} open={open} onClose={handleClose}>
-        <EditPack name={name} saveNewName={saveNewName} />
+      <ModalWindow title={'Edit pack'} open={!!open} onClose={closeModal}>
+        <ContentEditPack
+          name={oldName ? oldName : ''}
+          handleClose={closeModal}
+          saveNewName={saveNewName}
+        />
       </ModalWindow>
     </div>
   )

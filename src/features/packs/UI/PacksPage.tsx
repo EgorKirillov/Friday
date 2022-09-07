@@ -10,6 +10,7 @@ import { FilterBlock } from './filterBlock/FilterBlock'
 import { PackPaginator } from './packPaginator/packPaginator'
 import { PackTableContainer } from './packTable/packTableConteiner'
 import { TitleBlock } from './titleBlock/TitleBlock'
+import { UpdatePack } from './updatePack/updatePack'
 
 export const PacksPage = () => {
   const isAuth = useAppSelector(state => state.login.isAuthMe)
@@ -41,10 +42,9 @@ export const PacksPage = () => {
         buttonCallback={addNewPackHandler}
       />
       <FilterBlock />
-
       <PackTableContainer />
-
       <PackPaginator />
+      <UpdatePack />{' '}
     </div>
   )
 }

@@ -11,12 +11,8 @@ import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { loadCards, setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
-import { deletePack, setQueryParams } from '../../packReducer'
+import { changePackModalStatus, deletePack, setPackData, setQueryParams } from '../../packReducer'
 import { DeletePack } from '../modalWindowComponents/deletePack/DeletePack'
-import { setQueryParams } from '../../packReducer'
-import { UpdatePack } from '../updatePack/updatePack'
-import { ContentAddNewPack } from '../modalWindowComponents/addNewPack/ContentAddNewPack'
-import { ContentDeletePack } from '../modalWindowComponents/deletePack/ContentDeletePack'
 
 import { PackTable } from './packTable'
 
@@ -52,7 +48,8 @@ export const PackTableContainer = () => {
       toast.info(`delete ${el._id}`)
     }
     const onClickEdit = () => {
-      toast.info(`edit ${el._id}`)
+      dispatch(setPackData(el._id, el.name))
+      dispatch(changePackModalStatus('modalEdit', true))
     }
     const onClickTeacher = () => {
       toast.info(`teach ${el._id} count ${el.cardsCount}`)
@@ -133,7 +130,17 @@ export const PackTableContainer = () => {
               style={{ margin: '0 5px', width: 'auto' }}
             />
             {itMyPack && <DeletePack callBack={onClickDelete} name={el.name} />}
-              {itMyPack && <UpdatePack idPack={el._id} />}
+
+            {itMyPack && (
+              <>
+                <img
+                  src={editIcon}
+                  alt=""
+                  onClick={onClickEdit}
+                  style={{ margin: '0 5px', width: 'auto' }}
+                />
+              </>
+            )}
           </div>
         </TableCell>
       </TableRow>

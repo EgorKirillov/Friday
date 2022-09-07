@@ -22,6 +22,8 @@ const initialState: InitialStatePackType = {
   modalEdit: false,
   modalCreate: false,
   modalDelete: false,
+  idEditPack: '',
+  oldName: '',
 }
 
 export const packsReducer = (
@@ -36,6 +38,8 @@ export const packsReducer = (
     }
     case 'pack/CHANGE-MODAL-STATUS':
       return { ...state, [action.modalName]: action.value }
+    case 'pack/SET-PACK-DATA':
+      return { ...state, idEditPack: action.idEditPack, oldName: action.oldName }
     default:
       return state
   }
@@ -52,6 +56,8 @@ export const changePackModalStatus = (
   modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
   value: boolean
 ) => ({ type: 'pack/CHANGE-MODAL-STATUS', modalName, value } as const)
+export const setPackData = (idEditPack: string, oldName: string) =>
+  ({ type: 'pack/SET-PACK-DATA', idEditPack, oldName } as const)
 
 // thunks
 export const loadPacks =
@@ -78,6 +84,7 @@ export const updatePack =
       const res = await packAPI.getPacks(param ? param : {})
 
       dispatch(setPacks(res.data))
+      dispatch(changePackModalStatus('modalEdit', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -121,10 +128,13 @@ export type PacksActionsType =
   | ReturnType<typeof setPacks>
   | ReturnType<typeof setQueryParams>
   | ReturnType<typeof changePackModalStatus>
+  | ReturnType<typeof setPackData>
 
 export type InitialStatePackType = GetPacksResponseType & {
   queryParams?: QueryParameterPackType
   modalEdit?: boolean
   modalCreate?: boolean
   modalDelete?: boolean
+  idEditPack?: string
+  oldName?: string
 }
