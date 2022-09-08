@@ -65,17 +65,64 @@ export const CardTableContainer = () => {
 
       return (
         <TableRow key={el._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-          <TableCell component="th" scope="row">
+          <TableCell
+            component="th"
+            scope="row"
+            style={{
+              minWidth: '30%',
+              maxWidth: '350px',
+              // border: '1px solid red',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              boxSizing: 'border-box',
+            }}
+          >
             {el.question}
           </TableCell>
 
-          <TableCell align="right">{el.answer}</TableCell>
-          <TableCell align="right">{updateDate}</TableCell>
-          <TableCell align="right">
+          <TableCell
+            align="left"
+            style={{
+              width: '10%',
+              // border: '1px solid green',
+              boxSizing: 'border-box',
+            }}
+          >
+            {el.answer}
+          </TableCell>
+          <TableCell
+            align="left"
+            style={{
+              width: '30%',
+              // border: '1px solid blue',
+              boxSizing: 'border-box',
+            }}
+          >
+            {updateDate}
+          </TableCell>
+          <TableCell
+            align="left"
+            style={{
+              width: '350px',
+              maxWidth: '350px',
+              // border: '1px solid black',
+              boxSizing: 'border-box',
+            }}
+          >
             <Rating name="half-rating-read" value={el.grade} precision={0.25} readOnly />
             {/*<Rating name="read-only" value={el.grade} precision={0.25} readOnly />*/}
           </TableCell>
-          <TableCell align="center">
+          <TableCell
+            align="left"
+            style={{
+              width: '10%',
+              // border: '1px solid red',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
             <div style={{ display: 'flex' }}>
               {itMyPack && (
                 <>
