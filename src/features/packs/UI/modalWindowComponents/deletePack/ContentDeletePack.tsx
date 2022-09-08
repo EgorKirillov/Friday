@@ -7,11 +7,12 @@ import { useAppSelector } from '../../../../../common/hooks/hooks'
 type PropsType = {
   close: () => void
   callBack?: () => void
-  name: string
+  name?: string
 }
 
 export const ContentDeletePack = (props: PropsType) => {
   const status = useAppSelector(state => state.app.status)
+  const isLoading = status === 'loading'
 
   return (
     <div>
@@ -26,13 +27,13 @@ export const ContentDeletePack = (props: PropsType) => {
           name={'Cancel'}
           styleButton={'cancel'}
           onClick={props.close}
-          isLoading={status === 'loading'}
+          isLoading={isLoading}
         />
         <ButtonWithLoader
           name={'Delete'}
           styleButton={'delete'}
           onClick={props.callBack}
-          isLoading={status === 'loading'}
+          isLoading={isLoading}
         />
       </div>
     </div>
