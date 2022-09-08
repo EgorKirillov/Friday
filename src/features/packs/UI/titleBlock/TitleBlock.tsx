@@ -7,7 +7,8 @@ import learnIcon from '../../../../assets/svg/teacher.svg'
 import { BasicMenu } from '../../../../common/components/basicMenu/BasicMenu'
 import { ButtonBasicMenu } from '../../../../common/components/basicMenu/buttonProfile/ButtonBasicMenu'
 import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
-import { useAppSelector } from '../../../../common/hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { changePackModalStatus, setPackData } from '../../packReducer'
 
 import s from './TitleBlock.module.css'
 
@@ -15,6 +16,7 @@ type PropsType = {
   title: string
   buttonName?: string
   buttonCallback?: () => void
+  packId?: string
   isMyPack?: boolean
   buttonVisability?: 'hidden' | 'visible'
   callbackTitle?: () => void
@@ -25,14 +27,20 @@ export const TitleBlock = ({
   buttonName,
   buttonCallback,
   isMyPack,
+  packId,
   buttonVisability = 'visible',
   callbackTitle,
 }: PropsType) => {
   const loading = useAppSelector(state => state.app.status)
   const isLoading = loading === 'loading'
 
+  const dispatch = useAppDispatch()
+
   const onClickHandlerEdit = () => {
-    alert('Edit!')
+    dispatch(changePackModalStatus('modalEdit', true))
+    if (packId) {
+      dispatch(setPackData(packId, title))
+    }
   }
   const onClickHandlerDelete = () => {
     alert('Delete!')
@@ -41,6 +49,8 @@ export const TitleBlock = ({
     alert('Learn!')
   }
 
+  console.log(packId)
+  console.log(title)
   const buttonEdit = <ButtonBasicMenu icon={editIcon} name="Edit" callBack={onClickHandlerEdit} />
   const buttonDelete = (
     <ButtonBasicMenu icon={deleteIcon} name="Delete" callBack={onClickHandlerDelete} />

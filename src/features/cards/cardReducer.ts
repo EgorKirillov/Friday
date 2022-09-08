@@ -111,6 +111,7 @@ export const updateCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(setCardData('', '', ''))
       dispatch(changeCardModalStatus('modalEdit', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {

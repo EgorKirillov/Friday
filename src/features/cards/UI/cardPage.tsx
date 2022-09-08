@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
+import { UpdatePack } from '../../packs/UI/updatePack/updatePack'
 import { changeCardModalStatus, loadCards } from '../cardReducer'
 
 import { BackLink } from './backLink/BackLink'
@@ -26,6 +26,7 @@ export const CardsPage = () => {
 
   const userId = useAppSelector(state => state.profile._id)
   const packUserId = useAppSelector(state => state.cards.packUserId)
+  const packId = useAppSelector(state => state.pack.cardPacks)[0]._id
 
   const isMyPack: boolean = userId === packUserId
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
@@ -48,7 +49,6 @@ export const CardsPage = () => {
 
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
-    toast(JSON.stringify(queryParams)) // dev help
   }, [queryParams])
   // useEffect(() => {
   //   if (!isAuth) navigate(PATH.LOGIN)
@@ -61,6 +61,7 @@ export const CardsPage = () => {
       <TitleBlock
         title={titlePack}
         isMyPack={isMyPack}
+        packId={packId}
         buttonVisability={totalCardsCount === 0 ? 'hidden' : 'visible'}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
@@ -68,7 +69,7 @@ export const CardsPage = () => {
 
       <SearchBlock />
 
-      <CardTableContainer />
+      {totalCardsCount !== 0 && <CardTableContainer />}
 
       {!isLoading && packIsEmpty && (
         <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />
@@ -79,6 +80,7 @@ export const CardsPage = () => {
       <CardsPaginator />
       <CreateCard key={queryParams.cardsPack_id} idPack={queryParams.cardsPack_id} />
       <UpdateCard />
+      <UpdatePack />
     </div>
   )
 }

@@ -14,7 +14,7 @@ import { UpdatePack } from './updatePack/updatePack'
 
 export const PacksPage = () => {
   const isAuth = useAppSelector(state => state.login.isAuthMe)
-
+  const packsCount = useAppSelector(state => state.pack.cardPacksTotalCount)
   const packQueryParam = useAppSelector(state => state.pack.queryParams)
 
   const dispatch = useAppDispatch()
@@ -42,9 +42,9 @@ export const PacksPage = () => {
         buttonCallback={addNewPackHandler}
       />
       <FilterBlock />
-      <PackTableContainer />
+      {packsCount !== 0 && <PackTableContainer />}
       <PackPaginator />
-      <UpdatePack />{' '}
+      <UpdatePack />
     </div>
   )
 }

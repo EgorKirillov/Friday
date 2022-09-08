@@ -3,7 +3,6 @@ import React from 'react'
 import Rating from '@mui/material/Rating/Rating'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
-import { toast } from 'react-toastify'
 
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
@@ -47,8 +46,6 @@ export const CardTableContainer = () => {
       const onClickEdit = () => {
         dispatch(changeCardModalStatus('modalEdit', true))
         dispatch(setCardData(el._id, el.question, el.answer))
-        toast.info(`see ${el._id}`)
-        toast.info(`edit ${el.cardsPack_id}`)
       }
 
       const itMyPack: boolean = idUser === el.user_id
