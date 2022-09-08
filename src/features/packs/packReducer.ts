@@ -22,6 +22,8 @@ const initialState: InitialStatePackType = {
   modalEdit: false,
   modalCreate: false,
   modalDelete: false,
+  tempIdCard: '',
+  packName: '',
 }
 
 export const packsReducer = (
@@ -36,6 +38,10 @@ export const packsReducer = (
     }
     case 'pack/CHANGE-MODAL-STATUS':
       return { ...state, [action.modalName]: action.value }
+    case 'pack/SET-ID-PACK':
+      return { ...state, tempIdCard: action.idPack }
+    case 'pack/SET-PACK-NAME':
+      return { ...state, packName: action.packName }
     default:
       return state
   }
@@ -52,6 +58,9 @@ export const changePackModalStatus = (
   modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
   value: boolean
 ) => ({ type: 'pack/CHANGE-MODAL-STATUS', modalName, value } as const)
+
+export const setIdPack = (idPack: string) => ({ type: 'pack/SET-ID-PACK', idPack } as const)
+export const setNamePack = (packName: string) => ({ type: 'pack/SET-PACK-NAME', packName } as const)
 
 // thunks
 export const loadPacks =
@@ -85,7 +94,7 @@ export const updatePack =
   }
 
 export const deletePack =
-  (idPack: string): AppThunk =>
+  (idPack: string, navigate: any): AppThunk =>
   async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
@@ -94,7 +103,9 @@ export const deletePack =
       const res = await packAPI.getPacks(param ? param : {})
 
       dispatch(setPacks(res.data))
+      dispatch(changePackModalStatus('modalDelete', false))
       dispatch(setStatusLoading('succeeded'))
+      navigate()
     } catch (e) {
       handleError(e, dispatch)
     }
@@ -110,6 +121,7 @@ export const createPack =
       const res = await packAPI.getPacks(param ? param : {})
 
       dispatch(setPacks(res.data))
+      dispatch(changePackModalStatus('modalCreate', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -121,10 +133,14 @@ export type PacksActionsType =
   | ReturnType<typeof setPacks>
   | ReturnType<typeof setQueryParams>
   | ReturnType<typeof changePackModalStatus>
+  | ReturnType<typeof setNamePack>
+  | ReturnType<typeof setIdPack>
 
 export type InitialStatePackType = GetPacksResponseType & {
   queryParams?: QueryParameterPackType
   modalEdit?: boolean
   modalCreate?: boolean
   modalDelete?: boolean
+  tempIdCard?: string
+  packName?: string
 }
