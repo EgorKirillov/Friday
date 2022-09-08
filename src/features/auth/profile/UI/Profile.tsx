@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { faCamera } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
 
 import { setError } from '../../../../app/appStatusReducer'
-import noAvatar from '../../../../assets/img/avatar.jpg'
+import noAvatar from '../../../../assets/img/profile_Icon.svg'
 import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
 import { EditableSpan } from '../../../../common/components/editableSpan/EditableSpan'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
@@ -22,25 +20,12 @@ export function Profile() {
   const avatar = useAppSelector(state => state.profile.avatar)
   const isAuthMe = useAppSelector(state => state.login.isAuthMe)
   const loadingStatus = useAppSelector(state => state.app.status)
-  const isLoadind = loadingStatus === 'loading'
+  const isLoading = loadingStatus === 'loading'
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [srcAvatar, setSrcAvatar] = useState<any>(noAvatar)
-
-  const addPhoto = () => {
-    dispatch(
-      updateProfile({
-        avatar:
-          'https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true',
-      })
-    )
-  }
 
   const onImageError = () => {
     dispatch(setError('ошибка загрузки аватара'))
-  }
-  const onImageLoad = () => {
-    setSrcAvatar(avatar)
   }
 
   const changeNameHandler = (name: string) => {
@@ -67,10 +52,9 @@ export function Profile() {
           <div className={s.avatarContainer}>
             <img
               className={s.avatar}
-              src={srcAvatar}
-              alt=""
+              src={avatar ? avatar : noAvatar}
+              alt="avatar"
               onError={onImageError}
-              onLoad={onImageLoad}
             />
             {/*доделать добавление*/}
             {/*<FontAwesomeIcon*/}
@@ -87,18 +71,14 @@ export function Profile() {
             <EditableSpan
               value={profileName}
               onChange={name => changeNameHandler(name)}
-              disableEditMode={isLoadind}
+              disableEditMode={isLoading}
             />
 
             <div className={s.minititle}>e-mail</div>
             <div>{email}</div>
           </div>
           <div>
-            <ButtonWithLoader
-              onClick={logoutButtonHandler}
-              name={'logout я пшел'}
-              isLoading={isLoadind}
-            />
+            <ButtonWithLoader onClick={logoutButtonHandler} name={'logout'} isLoading={isLoading} />
           </div>
         </div>
       </div>

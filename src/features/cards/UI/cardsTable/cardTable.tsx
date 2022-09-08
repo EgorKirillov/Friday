@@ -41,7 +41,7 @@ export const CardTable = (props: PropsTableType) => {
     }
 
     return (
-      <TableCell key={columnName.key} align={'right'} onClick={onClickColumnsHandler}>
+      <TableCell key={columnName.key} align={'left'} onClick={onClickColumnsHandler}>
         {name}
       </TableCell>
     )

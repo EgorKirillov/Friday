@@ -42,7 +42,7 @@ export const ContentCreatePack = (props: PropsType) => {
           <FormControl variant="standard" style={{ width: '98%' }}>
             <TextField
               label={'Name Pack'}
-              variant="filled"
+              variant="standard"
               focused
               value={namePack}
               onChange={handleChangeNamePack}
