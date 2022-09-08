@@ -3,7 +3,6 @@ import React from 'react'
 import Rating from '@mui/material/Rating/Rating'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
-import { toast } from 'react-toastify'
 
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
@@ -14,6 +13,7 @@ import {
   setIdCard,
   setQueryParamsCards,
 } from '../../cardReducer'
+import { changeCardModalStatus, setCardData, setQueryParamsCards } from '../../cardReducer'
 import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
 
 import { CardTable } from './cardTable'
@@ -29,7 +29,7 @@ export const CardTableContainer = () => {
     { key: 'question' as ColumnSortCardsName, label: 'Question', isSortable: false },
     { key: 'answer' as ColumnSortCardsName, label: 'Answer', isSortable: false },
     { key: 'updated' as ColumnSortCardsName, label: 'Last Update', isSortable: true },
-    { key: 'grade' as ColumnSortCardsName, label: 'Crade', isSortable: true },
+    { key: 'grade' as ColumnSortCardsName, label: 'Grade', isSortable: true },
     { key: 'actions' as ColumnSortCardsName, label: '', isSortable: false },
   ]
   const sort = (val: string) => {
@@ -53,7 +53,8 @@ export const CardTableContainer = () => {
     data &&
     data.map(el => {
       const onClickEdit = () => {
-        toast.info(`edit ${el.cardsPack_id}`)
+        dispatch(changeCardModalStatus('modalEdit', true))
+        dispatch(setCardData(el._id, el.question, el.answer))
       }
 
       const itMyPack: boolean = idUser === el.user_id
@@ -85,7 +86,11 @@ export const CardTableContainer = () => {
                   />
                 </>
               )}
-              {itMyPack && <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />}
+              {itMyPack && (
+                <>
+                  <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />
+                </>
+              )}
             </div>
           </TableCell>
         </TableRow>

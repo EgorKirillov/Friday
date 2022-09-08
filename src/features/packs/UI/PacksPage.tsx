@@ -12,10 +12,11 @@ import { DeletePack } from './modalWindowComponents/deletePack/DeletePack'
 import { PackPaginator } from './packPaginator/packPaginator'
 import { PackTableContainer } from './packTable/packTableConteiner'
 import { TitleBlock } from './titleBlock/TitleBlock'
+import { UpdatePack } from './updatePack/updatePack'
 
 export const PacksPage = () => {
   const isAuth = useAppSelector(state => state.login.isAuthMe)
-
+  const packsCount = useAppSelector(state => state.pack.cardPacksTotalCount)
   const packQueryParam = useAppSelector(state => state.pack.queryParams)
 
   const dispatch = useAppDispatch()
@@ -41,11 +42,11 @@ export const PacksPage = () => {
         buttonCallback={addNewPackHandler}
       />
       <FilterBlock />
-
-      <PackTableContainer />
-
+      {packsCount !== 0 && <PackTableContainer />}
       <PackPaginator />
 
+     //modals
+      <UpdatePack />
       <CreatePack />
       <DeletePack />
     </div>

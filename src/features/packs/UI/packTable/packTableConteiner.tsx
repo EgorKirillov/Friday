@@ -12,7 +12,8 @@ import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { loadCards, setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
-import { changePackModalStatus, setIdPack, setNamePack, setQueryParams } from '../../packReducer'
+import { changePackModalStatus, setIdPack, setNamePack, deletePack, setPackData, setQueryParams } from '../../packReducer'
+import { DeletePack } from '../modalWindowComponents/deletePack/DeletePack'
 
 import { PackTable } from './packTable'
 
@@ -49,7 +50,8 @@ export const PackTableContainer = () => {
       dispatch(setNamePack(el.name))
     }
     const onClickEdit = () => {
-      toast.info(`edit ${el._id}`)
+      dispatch(setPackData(el._id, el.name))
+      dispatch(changePackModalStatus('modalEdit', true))
     }
     const onClickTeacher = () => {
       toast.info(`teach ${el._id} count ${el.cardsCount}`)
@@ -139,11 +141,11 @@ export const PackTableContainer = () => {
             )}
             {itMyPack && (
               <img
-                src={editIcon}
-                alt=""
-                onClick={onClickEdit}
-                style={{ margin: '0 5px', width: 'auto' }}
-              />
+                  src={editIcon}
+                  alt=""
+                  onClick={onClickEdit}
+                  style={{ margin: '0 5px', width: 'auto' }}
+                />
             )}
           </div>
         </TableCell>

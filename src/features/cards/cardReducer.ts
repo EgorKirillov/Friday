@@ -30,6 +30,9 @@ const initialState: InitialStateCardsType = {
   queryParams: {} as QueryParameterCardsType,
   tempIdCard: '',
   cardName: '',
+  oldQuestion: '',
+  oldAnswer: '',
+  idEditCard: '',
 }
 
 export const cardsReducer = (
@@ -60,6 +63,13 @@ export const cardsReducer = (
       return { ...state, tempIdCard: action.cardID }
     case 'pack/SET-CARD-NAME':
       return { ...state, cardName: action.cardName }
+    case 'card/SET-CARD-DATA':
+      return {
+        ...state,
+        idEditCard: action.idEditCard,
+        oldQuestion: action.oldQuestion,
+        oldAnswer: action.oldAnswer,
+      }
     default:
       return state
   }
@@ -77,6 +87,8 @@ export const changeCardModalStatus = (
   modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
   value: boolean
 ) => ({ type: 'card/CHANGE-MODAL-STATUS', modalName, value } as const)
+export const setCardData = (idEditCard: string, oldQuestion: string, oldAnswer: string) =>
+  ({ type: 'card/SET-CARD-DATA', idEditCard, oldQuestion, oldAnswer } as const)
 export const setIdCard = (cardID: string) => ({ type: 'pack/SET-ID-CARD', cardID } as const)
 export const setQuestionCard = (cardName: string) =>
   ({ type: 'pack/SET-CARD-NAME', cardName } as const)
@@ -106,6 +118,8 @@ export const updateCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(setCardData('', '', ''))
+      dispatch(changeCardModalStatus('modalEdit', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -154,6 +168,7 @@ export type CardsActionsType =
   | ReturnType<typeof clearCardsState>
   | ReturnType<typeof updateCardGrade>
   | ReturnType<typeof changeCardModalStatus>
+  | ReturnType<typeof setCardData>
   | ReturnType<typeof setIdCard>
   | ReturnType<typeof setQuestionCard>
 
@@ -164,4 +179,7 @@ export type InitialStateCardsType = GetCardsResponseType & {
   modalDelete?: boolean
   tempIdCard: string
   cardName: string
+  oldQuestion: string
+  oldAnswer: string
+  idEditCard: string
 }

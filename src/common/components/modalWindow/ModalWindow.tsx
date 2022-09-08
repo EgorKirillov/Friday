@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react'
+import React, { FC, ReactNode, useState } from 'react'
 
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 import Typography from '@mui/material/Typography'
 

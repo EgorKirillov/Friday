@@ -53,7 +53,7 @@ export type NewCardType = {
 }
 
 export type UpdatedCardType = {
-  _id: number
+  _id: string
   question?: string
   answer?: string
   grade?: number
