@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { DeletePack } from '../../packs/UI/modalWindowComponents/deletePack/DeletePack'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
 import { UpdatePack } from '../../packs/UI/updatePack/updatePack'
-import { changeCardModalStatus, loadCards } from '../cardReducer'
+import { changeCardModalStatus, clearCardsState, loadCards } from '../cardReducer'
 
 import { BackLink } from './backLink/BackLink'
 import s from './cardPage.module.css'
@@ -43,6 +43,10 @@ export const CardsPage = () => {
   const notFound: boolean =
     totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
 
+  const clearCardStateHandler = () => {
+    dispatch(clearCardsState())
+  }
+
   const addNewCardHandler = () => dispatch(changeCardModalStatus('modalCreate', true))
 
   const learnPackHandler = () => {
@@ -60,7 +64,7 @@ export const CardsPage = () => {
 
   return (
     <div className={s.container}>
-      <BackLink />
+      <BackLink callback={clearCardStateHandler} />
 
       <TitleBlock
         title={titlePack}
