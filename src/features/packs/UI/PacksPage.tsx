@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { changePackModalStatus, loadPacks } from '../packReducer'
+import { NotFoundResult } from '../../cards/UI/notFoundCards/notFoundResult'
+import { changePackModalStatus, loadPacks, setQueryParams } from '../packReducer'
 
 import { FilterBlock } from './filterBlock/FilterBlock'
 import { CreatePack } from './modalWindowComponents/createPack/CreatePack'
@@ -15,6 +16,8 @@ import { TitleBlock } from './titleBlock/TitleBlock'
 import { UpdatePack } from './updatePack/updatePack'
 
 export const PacksPage = () => {
+  const loading = useAppSelector(state => state.app.status)
+  const isLoading = loading === 'loading'
   const isAuth = useAppSelector(state => state.login.isAuthMe)
   const packsCount = useAppSelector(state => state.pack.cardPacksTotalCount)
   const packQueryParam = useAppSelector(state => state.pack.queryParams)
@@ -22,8 +25,23 @@ export const PacksPage = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
+  const notFound: boolean = !isLoading && packsCount === 0 && !!packQueryParam
+
   const addNewPackHandler = () => {
     dispatch(changePackModalStatus('modalCreate', true))
+  }
+
+  const clearFilterHandler = () => {
+    dispatch(
+      setQueryParams({
+        user_id: undefined,
+        max: undefined,
+        min: undefined,
+        packName: undefined,
+        page: 1,
+        pageCount: 4,
+      })
+    )
   }
 
   useEffect(() => {
@@ -41,9 +59,18 @@ export const PacksPage = () => {
         buttonName={'Add new pack'}
         buttonCallback={addNewPackHandler}
       />
-      <FilterBlock />
+      <FilterBlock clearFilter={clearFilterHandler} />
       {packsCount !== 0 && <PackTableContainer />}
-      <PackPaginator />
+
+      {notFound && (
+        <NotFoundResult
+          isLoading={isLoading}
+          buttonName={'clear filter'}
+          buttonCallback={clearFilterHandler}
+        />
+      )}
+
+      {!notFound && <PackPaginator />}
 
       {/*modals*/}
       <UpdatePack />

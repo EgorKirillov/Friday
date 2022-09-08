@@ -9,15 +9,11 @@ import { DoubleSlider } from './doubleSlider/DoubleSlider'
 import s from './FilterBlock.module.css'
 import { ShowCards } from './showCards/ShowCards'
 
-export const FilterBlock = () => {
+export const FilterBlock = ({ clearFilter }: { clearFilter: () => void }) => {
   const dispatch = useAppDispatch()
 
   const startSearchVal = useAppSelector(state => state.pack.queryParams?.packName)
-  const clearFilter = () => {
-    dispatch(
-      setQueryParams({ user_id: undefined, max: undefined, min: undefined, packName: undefined })
-    )
-  }
+
   const setSearchName = (val: string) => {
     dispatch(setQueryParams({ packName: val }))
   }
