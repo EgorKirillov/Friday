@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom'
 
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
-import { createPack, loadPacks } from '../packReducer'
+import { changePackModalStatus, loadPacks } from '../packReducer'
 
 import { FilterBlock } from './filterBlock/FilterBlock'
+import { CreatePack } from './modalWindowComponents/createPack/CreatePack'
+import { DeletePack } from './modalWindowComponents/deletePack/DeletePack'
 import { PackPaginator } from './packPaginator/packPaginator'
 import { PackTableContainer } from './packTable/packTableConteiner'
 import { TitleBlock } from './titleBlock/TitleBlock'
@@ -20,9 +22,7 @@ export const PacksPage = () => {
   const navigate = useNavigate()
 
   const addNewPackHandler = () => {
-    const newName = `pack name ${new Date().getSeconds()}` // generate different value
-
-    dispatch(createPack({ name: newName })) // go to first page list, maybe need reset param?
+    dispatch(changePackModalStatus('modalCreate', true))
   }
 
   useEffect(() => {
@@ -45,6 +45,9 @@ export const PacksPage = () => {
       <PackTableContainer />
 
       <PackPaginator />
+
+      <CreatePack />
+      <DeletePack />
     </div>
   )
 }
