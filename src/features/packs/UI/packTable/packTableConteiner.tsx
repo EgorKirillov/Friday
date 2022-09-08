@@ -81,13 +81,9 @@ export const PackTableContainer = () => {
           scope="row"
           onClick={() => onClickPack(el._id)}
           style={{
-            // width: '100%',
             minWidth: '30%',
-            // maxWidth: '30%',
             maxWidth: '350px',
-            // minWidth: '350px',
-            // width: '350px',
-            border: '1px solid red',
+            // border: '1px solid red',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -98,13 +94,21 @@ export const PackTableContainer = () => {
         </TableCell>
         <TableCell
           align="left"
-          style={{ width: '10%', border: '1px solid green', boxSizing: 'border-box' }}
+          style={{
+            width: '10%',
+            // border: '1px solid green',
+            boxSizing: 'border-box',
+          }}
         >
           {el.cardsCount}
         </TableCell>
         <TableCell
           align="left"
-          style={{ width: '30%', border: '1px solid blue', boxSizing: 'border-box' }}
+          style={{
+            width: '30%',
+            // border: '1px solid blue',
+            boxSizing: 'border-box',
+          }}
         >
           {updateDate}
         </TableCell>
@@ -113,7 +117,7 @@ export const PackTableContainer = () => {
           style={{
             width: '350px',
             maxWidth: '350px',
-            border: '1px solid black',
+            // border: '1px solid black',
             boxSizing: 'border-box',
           }}
         >
@@ -123,7 +127,7 @@ export const PackTableContainer = () => {
           align="left"
           style={{
             width: '10%',
-            border: '1px solid red',
+            // border: '1px solid red',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
