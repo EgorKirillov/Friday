@@ -72,7 +72,8 @@ export const CardTableContainer = () => {
           <TableCell align="right">{el.answer}</TableCell>
           <TableCell align="right">{updateDate}</TableCell>
           <TableCell align="right">
-            <Rating name="read-only" value={el.grade} readOnly />
+            <Rating name="half-rating-read" value={el.grade} precision={0.25} readOnly />
+            {/*<Rating name="read-only" value={el.grade} precision={0.25} readOnly />*/}
           </TableCell>
           <TableCell align="center">
             <div style={{ display: 'flex' }}>
