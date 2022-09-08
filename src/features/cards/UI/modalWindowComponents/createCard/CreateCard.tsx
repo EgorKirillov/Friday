@@ -4,7 +4,7 @@ import { ModalWindow } from '../../../../../common/components/modalWindow/ModalW
 import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
 import { changeCardModalStatus, createCard } from '../../../cardReducer'
 
-import { ContentCreateCard } from './contentCreateCard'
+import { ContentCreateCard } from './ContentCreateCard'
 
 type PropsType = {
   idPack: string
