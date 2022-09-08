@@ -5,14 +5,14 @@ import TableRow from '@mui/material/TableRow'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import teacherIcon from '../../../../assets/svg/teacher.svg'
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { loadCards, setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
-import { deletePack, setQueryParams } from '../../packReducer'
-import { DeletePack } from '../modalWindowComponents/deletePack/DeletePack'
+import { changePackModalStatus, setIdPack, setNamePack, setQueryParams } from '../../packReducer'
 
 import { PackTable } from './packTable'
 
@@ -43,9 +43,10 @@ export const PackTableContainer = () => {
   }
 
   const rows = data.map(el => {
-    const onClickDelete = () => {
-      dispatch(deletePack(el._id))
-      toast.info(`delete ${el._id}`)
+    const onClickOpenModalWindowDeletePackHandler = (el: { _id: string; name: string }) => {
+      dispatch(changePackModalStatus('modalDelete', true))
+      dispatch(setIdPack(el._id))
+      dispatch(setNamePack(el.name))
     }
     const onClickEdit = () => {
       toast.info(`edit ${el._id}`)
@@ -128,7 +129,14 @@ export const PackTableContainer = () => {
               onClick={onClickTeacher}
               style={{ margin: '0 5px', width: 'auto' }}
             />
-            {itMyPack && <DeletePack callBack={onClickDelete} name={el.name} />}
+            {itMyPack && (
+              <img
+                src={deleteIcon}
+                alt=""
+                onClick={() => onClickOpenModalWindowDeletePackHandler(el)}
+                style={{ margin: '0 5px', width: 'auto' }}
+              />
+            )}
             {itMyPack && (
               <img
                 src={editIcon}
