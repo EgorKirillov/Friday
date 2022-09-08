@@ -25,7 +25,7 @@ export const ButtonWithLoader = ({
   onClick = () => {},
   type = 'button',
   visibility = 'visible',
-  styleButton = undefined,
+  styleButton = 'defaultButton',
 }: PropsType) => {
   const handleButtonClick = () => {
     onClick()
@@ -57,6 +57,12 @@ export const ButtonWithLoader = ({
     }
   }
 
+  const isLoader = () => {
+    if (styleButton === 'defaultButton' || styleButton === 'save' || styleButton === 'delete') {
+      return true
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -77,7 +83,8 @@ export const ButtonWithLoader = ({
         >
           {name}
         </Button>
-        {isLoading && (
+
+        {isLoader() && isLoading && (
           <CircularProgress
             size={24}
             sx={{
