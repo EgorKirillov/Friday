@@ -28,7 +28,11 @@
 .error {
     color: red;
 }
+.eye {
+    margin-left: -20px;
 
+    font-size: 90%;
+}
 .registerInputForm input {
     width: 80%;
 

@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useEffect, useState } from 'react'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -22,7 +24,11 @@ export function Registration() {
   const isRegistered = useAppSelector(state => state.register.isRegistered) // зарегестрированы мы или нет
   const errorMessage = useAppSelector(state => state.register.error)
   const loadingStatus = useAppSelector(state => state.app.status)
-  const isLoading = loadingStatus === 'loading'
+  const status = useAppSelector(state => state.app.status)
+  // const isLoading = loadingStatus === 'loading'
+
+  const [inputPassword1Type, setInputPassword1Type] = useState<string>('password')
+  const [inputPassword2Type, setInputPassword2Type] = useState<string>('password')
 
   const {
     register,
@@ -36,6 +42,12 @@ export function Registration() {
     },
   })
 
+  const togglePassword1ViewType = () => {
+    setInputPassword1Type(inputPassword1Type === 'password' ? 'text' : 'password')
+  }
+  const togglePassword2ViewType = () => {
+    setInputPassword2Type(inputPassword2Type === 'password' ? 'text' : 'password')
+  }
   const onSubmit: SubmitHandler<RegistrationType> = data => {
     if (data.email && data.password1 && data.password2) {
       if (data.password1 === data.password2) {
@@ -83,12 +95,18 @@ export function Registration() {
                 },
               })}
               placeholder="password"
-              type={'password'}
+              type={inputPassword1Type === 'password' ? 'password' : ''}
+              disabled={status === 'loading'}
+            />
+            <FontAwesomeIcon
+                className={style.eye}
+                onClick={togglePassword1ViewType}
+                icon={faEye}
+                title={inputPassword1Type === 'password' ? 'see password' : 'hide password'}
             />
             <hr />
           </div>
           {errors.password1 && <p>{errors.password1.message}</p>}
-          {/*{errors.password1 && <p>This field is required</p>}*/}
 
           <div className={style.registerInputForm}>
             <div className={style.registerLabel}>
@@ -97,7 +115,14 @@ export function Registration() {
             <input
               {...register('password2', { required: true, minLength: 8 })}
               placeholder="confirm password"
-              type={'password'}
+              type={inputPassword2Type === 'password' ? 'password' : ''}
+              disabled={status === 'loading'}
+            />
+            <FontAwesomeIcon
+                className={style.eye}
+                onClick={togglePassword2ViewType}
+                icon={faEye}
+                title={inputPassword2Type === 'password' ? 'see password' : 'hide password'}
             />
             <hr />
           </div>
@@ -105,10 +130,17 @@ export function Registration() {
           <div className={style.error}> {errorMessage && <div>{errorMessage}</div>}</div>
 
           <div>
-            {isLoading ? <div>КРУТИЛКА</div> : isRegistered && <div>Вы зарегистрированы </div>}
-            <SuperButton className={style.button} type="submit">
-              Sing Up
-            </SuperButton>
+            {/*{isLoading ? <div>КРУТИЛКА</div> : isRegistered && <div>Вы зарегистрированы </div>}*/}
+            {isRegistered && <div>Вы зарегистрированы </div>}
+            {/*<SuperButton className={style.button} type="submit" disabled={status === 'loading' ? true ? ''}>*/}
+            {/*  Sing Up*/}
+            {/*</SuperButton>*/}
+            <input
+                className={status !== 'loading' ? style.button : style.buttonDisabled}
+                type="submit"
+                value={'Sign Up'}
+                disabled={status === 'loading'}
+            />
           </div>
 
           <div>Already have an account?</div>
