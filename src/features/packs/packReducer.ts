@@ -1,6 +1,7 @@
 import { setStatusLoading } from '../../app/appStatusReducer'
 import { AppThunk } from '../../app/store'
 import { handleError } from '../../common/utils/handleError'
+import { loadCards } from '../cards/cardReducer'
 
 import {
   GetPacksResponseType,
@@ -81,10 +82,15 @@ export const updatePack =
       dispatch(setStatusLoading('loading'))
       await packAPI.updatePack(updatedPack)
       const param = getState().pack.queryParams
+      const paramCard = getState().cards.queryParams
       const res = await packAPI.getPacks(param ? param : {})
 
+      if (paramCard.cardsPack_id) {
+        dispatch(loadCards(paramCard))
+      }
       dispatch(setPacks(res.data))
       dispatch(changePackModalStatus('modalEdit', false))
+      dispatch(setPackData('', ''))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)

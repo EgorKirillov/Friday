@@ -49,8 +49,6 @@ export const TitleBlock = ({
     alert('Learn!')
   }
 
-  console.log(packId)
-  console.log(title)
   const buttonEdit = <ButtonBasicMenu icon={editIcon} name="Edit" callBack={onClickHandlerEdit} />
   const buttonDelete = (
     <ButtonBasicMenu icon={deleteIcon} name="Delete" callBack={onClickHandlerDelete} />
