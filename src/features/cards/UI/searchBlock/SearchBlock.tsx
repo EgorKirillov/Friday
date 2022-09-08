@@ -36,6 +36,7 @@ export const SearchBlock = () => {
         titleSearch={'Search by question'}
         disabled={noData}
       />
+
       <Search
         callback={setSearchParamAnswer}
         startValue={answer ? answer : ''}

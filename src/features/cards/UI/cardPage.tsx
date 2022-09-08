@@ -43,10 +43,10 @@ export const CardsPage = () => {
   const navigate = useNavigate()
 
   const packIsEmpty: boolean =
-    totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
+    !isLoading && totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
 
   const notFound: boolean =
-    totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
+    !isLoading && totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
 
   const clearCardStateHandler = () => {
     dispatch(clearCardsState())
@@ -86,15 +86,13 @@ export const CardsPage = () => {
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
       />
 
-      <SearchBlock />
+      {packIsEmpty || <SearchBlock />}
 
       {totalCardsCount !== 0 && <CardTableContainer />}
 
-      {!isLoading && packIsEmpty && (
-        <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />
-      )}
+      {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
 
-      {!isLoading && notFound && (
+      {notFound && (
         <NotFoundResult
           isLoading={isLoading}
           buttonName={'clear filter'}
@@ -102,7 +100,7 @@ export const CardsPage = () => {
         />
       )}
 
-      <CardsPaginator />
+      {!packIsEmpty && !notFound && <CardsPaginator />}
 
       {/*//модалки*/}
       <DeletePack />
