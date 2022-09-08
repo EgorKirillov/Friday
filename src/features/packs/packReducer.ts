@@ -94,7 +94,7 @@ export const updatePack =
   }
 
 export const deletePack =
-  (idPack: string, navigate: any): AppThunk =>
+  (idPack: string, navigate: () => void): AppThunk =>
   async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
