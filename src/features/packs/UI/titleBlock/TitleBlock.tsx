@@ -8,7 +8,7 @@ import { BasicMenu } from '../../../../common/components/basicMenu/BasicMenu'
 import { ButtonBasicMenu } from '../../../../common/components/basicMenu/buttonProfile/ButtonBasicMenu'
 import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { changePackModalStatus, setIdPack, setPackData } from '../../packReducer'
+import { changePackModalStatus, setIdPack, setNamePack, setPackData } from '../../packReducer'
 
 import s from './TitleBlock.module.css'
 
@@ -40,20 +40,17 @@ export const TitleBlock = ({
 
   const dispatch = useAppDispatch()
 
-  // const onClickHandlerEdit = () => {}
-  // const onClickOpenModalWindowDeletePackHandler = () => {
-  //   dispatch(changePackModalStatus('modalDelete', true))
-  //   dispatch(setIdPack(idPack))
-  //   dispatch(setNamePack(namePack))
+  const onClickOpenModalWindowDeletePackHandler = () => {
+    dispatch(changePackModalStatus('modalDelete', true))
+    dispatch(setIdPack(idPack))
+    dispatch(setNamePack(namePack))
+  }
 
   const onClickHandlerEdit = () => {
     dispatch(changePackModalStatus('modalEdit', true))
     if (packId) {
       dispatch(setPackData(packId, title))
     }
-  }
-  const onClickHandlerDelete = () => {
-    alert('Delete!')
   }
   const onClickHandlerLearn = () => {}
 

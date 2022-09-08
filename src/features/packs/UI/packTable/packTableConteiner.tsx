@@ -12,8 +12,13 @@ import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { loadCards, setQueryParamsCards } from '../../../cards/cardReducer'
 import { ColumnSortPacksName, SortPacksType } from '../../packAPI'
-import { changePackModalStatus, setIdPack, setNamePack, deletePack, setPackData, setQueryParams } from '../../packReducer'
-import { DeletePack } from '../modalWindowComponents/deletePack/DeletePack'
+import {
+  changePackModalStatus,
+  setIdPack,
+  setNamePack,
+  setPackData,
+  setQueryParams,
+} from '../../packReducer'
 
 import { PackTable } from './packTable'
 
@@ -141,11 +146,11 @@ export const PackTableContainer = () => {
             )}
             {itMyPack && (
               <img
-                  src={editIcon}
-                  alt=""
-                  onClick={onClickEdit}
-                  style={{ margin: '0 5px', width: 'auto' }}
-                />
+                src={editIcon}
+                alt=""
+                onClick={onClickEdit}
+                style={{ margin: '0 5px', width: 'auto' }}
+              />
             )}
           </div>
         </TableCell>

@@ -12,8 +12,8 @@ import {
   setQuestionCard,
   setIdCard,
   setQueryParamsCards,
+  setCardData,
 } from '../../cardReducer'
-import { changeCardModalStatus, setCardData, setQueryParamsCards } from '../../cardReducer'
 import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
 
 import { CardTable } from './cardTable'

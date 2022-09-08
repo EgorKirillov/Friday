@@ -45,7 +45,7 @@ export const PacksPage = () => {
       {packsCount !== 0 && <PackTableContainer />}
       <PackPaginator />
 
-     //modals
+      {/*modals*/}
       <UpdatePack />
       <CreatePack />
       <DeletePack />

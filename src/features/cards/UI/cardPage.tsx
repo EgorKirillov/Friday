@@ -15,7 +15,6 @@ import { CardsPaginator } from './cardsPaginator/cardsPaginator'
 import { CardTableContainer } from './cardsTable/cardTableConteiner'
 import { CreateCard } from './modalWindowComponents/createCard/CreateCard'
 import { DeleteCard } from './modalWindowComponents/deleteCard/DeleteCard'
-import { CreateCard } from './modalWindowComponents/createCard/createCard'
 import { UpdateCard } from './modalWindowComponents/updateCard/updateCard'
 import { NotFoundCards } from './notFoundCards/notFoundCards'
 import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
@@ -86,11 +85,10 @@ export const CardsPage = () => {
 
       {/*//модалки*/}
       <DeletePack />
-        <DeleteCard cardName={cardName} />
+      <DeleteCard cardName={cardName} />
       <CreateCard key={queryParams.cardsPack_id} idPack={queryParams.cardsPack_id} />
       <UpdateCard />
       <UpdatePack />
-
     </div>
   )
 }
