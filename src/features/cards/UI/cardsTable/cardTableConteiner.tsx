@@ -8,9 +8,13 @@ import { toast } from 'react-toastify'
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
-import { changeCardModalStatus, setQueryParamsCards } from '../../cardReducer'
+import {
+  changeCardModalStatus,
+  setQuestionCard,
+  setIdCard,
+  setQueryParamsCards,
+} from '../../cardReducer'
 import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
-import { DeleteCard } from '../modalWindowComponents/deleteCard/DeleteCard'
 
 import { CardTable } from './cardTable'
 
@@ -18,7 +22,6 @@ export const CardTableContainer = () => {
   const data = useAppSelector(state => state.cards.cards)
   const idUser = useAppSelector(state => state.profile._id)
   const cardQueryParam = useAppSelector(state => state.cards.queryParams)
-  const status = useAppSelector(state => state.app.status)
 
   const dispatch = useAppDispatch()
 
@@ -40,11 +43,15 @@ export const CardTableContainer = () => {
     dispatch(setQueryParamsCards({ ...cardQueryParam, sortCards: value }))
   }
 
+  const onClickDelete = (idCard: string, questionCard: string) => {
+    dispatch(setIdCard(idCard))
+    dispatch(setQuestionCard(questionCard))
+    dispatch(changeCardModalStatus('modalDelete', true))
+  }
+
   const rows =
     data &&
     data.map(el => {
-      const onClickDelete = () => dispatch(changeCardModalStatus('modalDelete', true))
-
       const onClickEdit = () => {
         toast.info(`edit ${el.cardsPack_id}`)
       }
@@ -74,14 +81,10 @@ export const CardTableContainer = () => {
                     src={deleteIcon}
                     alt=""
                     style={{ margin: '0 5px', width: 'auto' }}
-                    onClick={onClickDelete}
+                    onClick={() => onClickDelete(el._id, el.question)}
                   />
-                  <DeleteCard key={el._id} idCard={el._id} />
                 </>
               )}
-
-              {/*{itMyPack && <DeletePack callBack={onClickDelete} name={el.question} />}*/}
-
               {itMyPack && <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />}
             </div>
           </TableCell>
