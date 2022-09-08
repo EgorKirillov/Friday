@@ -7,7 +7,12 @@ import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { DeletePack } from '../../packs/UI/modalWindowComponents/deletePack/DeletePack'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
 import { UpdatePack } from '../../packs/UI/updatePack/updatePack'
-import { changeCardModalStatus, clearCardsState, loadCards } from '../cardReducer'
+import {
+  changeCardModalStatus,
+  clearCardsState,
+  loadCards,
+  setQueryParamsCards,
+} from '../cardReducer'
 
 import { BackLink } from './backLink/BackLink'
 import s from './cardPage.module.css'
@@ -16,7 +21,7 @@ import { CardTableContainer } from './cardsTable/cardTableConteiner'
 import { CreateCard } from './modalWindowComponents/createCard/CreateCard'
 import { DeleteCard } from './modalWindowComponents/deleteCard/DeleteCard'
 import { UpdateCard } from './modalWindowComponents/updateCard/updateCard'
-import { NotFoundCards } from './notFoundCards/notFoundCards'
+import { NotFoundResult } from './notFoundCards/notFoundResult'
 import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
 import { SearchBlock } from './searchBlock/SearchBlock'
 
@@ -45,6 +50,12 @@ export const CardsPage = () => {
 
   const clearCardStateHandler = () => {
     dispatch(clearCardsState())
+  }
+
+  const clearCardFilterHandler = () => {
+    dispatch(
+      setQueryParamsCards({ ...queryParams, cardAnswer: undefined, cardQuestion: undefined })
+    )
   }
 
   const addNewCardHandler = () => dispatch(changeCardModalStatus('modalCreate', true))
@@ -83,7 +94,13 @@ export const CardsPage = () => {
         <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />
       )}
 
-      {!isLoading && notFound && <NotFoundCards />}
+      {!isLoading && notFound && (
+        <NotFoundResult
+          isLoading={isLoading}
+          buttonName={'clear filter'}
+          buttonCallback={clearCardFilterHandler}
+        />
+      )}
 
       <CardsPaginator />
 
