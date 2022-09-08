@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import { PATH } from '../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
@@ -49,7 +48,7 @@ export const CardsPage = () => {
 
   useEffect(() => {
     if (queryParams) dispatch(loadCards(queryParams))
-    toast(JSON.stringify(queryParams)) // dev help
+    // toast(JSON.stringify(queryParams)) // dev help
   }, [queryParams])
 
   return (

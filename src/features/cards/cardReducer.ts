@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify'
-
 import { setStatusLoading } from '../../app/appStatusReducer'
 import { AppThunk } from '../../app/store'
 import { handleError } from '../../common/utils/handleError'
@@ -137,7 +135,6 @@ export const createCard =
   async (dispatch, getState) => {
     try {
       dispatch(setStatusLoading('loading'))
-      toast(JSON.stringify(newCard))
       await cardsAPI.createCard(newCard)
       const param = getState().cards.queryParams // maybe  { ...getState().cards.queryParams, page: 1 }
       const res = await cardsAPI.getCards(param)
