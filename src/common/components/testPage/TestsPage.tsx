@@ -2,16 +2,11 @@ import React from 'react'
 
 import { toast } from 'react-toastify'
 
-import { DeleteCard } from '../../../features/cards/UI/modalWindowComponents/deleteCard/DeleteCard'
 import { ButtonWithLoader } from '../buttonWithLoader/ButtonWithLoader'
 import SuperButton from '../superButton/SuperButton'
 import SuperCheckbox from '../superCheckbox/SuperCheckbox'
 import SuperInputText from '../superInputText/SuperInputText'
 import { ToastMessage } from '../toast/ToastMessage'
-
-const vv = () => {
-  alert('aaa')
-}
 
 export function TestsPage() {
   return (
@@ -39,7 +34,11 @@ export function TestsPage() {
         <button onClick={() => toast.error('error')}>error</button>
         <ToastMessage />
       </div>
-      <div></div>
+      <div>{/*<CreatePack namePack={'Add new pack'} callBack={vv} />*/}</div>
+      <div>
+        <SuperInputText />
+      </div>
+      <div>{/*<CreatePack />*/}</div>
     </div>
   )
 }
