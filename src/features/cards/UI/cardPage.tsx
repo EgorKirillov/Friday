@@ -7,7 +7,12 @@ import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks'
 import { DeletePack } from '../../packs/UI/modalWindowComponents/deletePack/DeletePack'
 import { TitleBlock } from '../../packs/UI/titleBlock/TitleBlock'
 import { UpdatePack } from '../../packs/UI/updatePack/updatePack'
-import { changeCardModalStatus, loadCards } from '../cardReducer'
+import {
+  changeCardModalStatus,
+  clearCardsState,
+  loadCards,
+  setQueryParamsCards,
+} from '../cardReducer'
 
 import { BackLink } from './backLink/BackLink'
 import s from './cardPage.module.css'
@@ -16,7 +21,7 @@ import { CardTableContainer } from './cardsTable/cardTableConteiner'
 import { CreateCard } from './modalWindowComponents/createCard/CreateCard'
 import { DeleteCard } from './modalWindowComponents/deleteCard/DeleteCard'
 import { UpdateCard } from './modalWindowComponents/updateCard/updateCard'
-import { NotFoundCards } from './notFoundCards/notFoundCards'
+import { NotFoundResult } from './notFoundCards/notFoundResult'
 import { PackIsEmpty } from './packIsEmpty/packIsEmpty'
 import { SearchBlock } from './searchBlock/SearchBlock'
 
@@ -38,10 +43,20 @@ export const CardsPage = () => {
   const navigate = useNavigate()
 
   const packIsEmpty: boolean =
-    totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
+    !isLoading && totalCardsCount === 0 && !queryParams.cardAnswer && !queryParams.cardQuestion
 
   const notFound: boolean =
-    totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
+    !isLoading && totalCardsCount === 0 && (!!queryParams.cardAnswer || !!queryParams.cardQuestion)
+
+  const clearCardStateHandler = () => {
+    dispatch(clearCardsState())
+  }
+
+  const clearCardFilterHandler = () => {
+    dispatch(
+      setQueryParamsCards({ ...queryParams, cardAnswer: undefined, cardQuestion: undefined })
+    )
+  }
 
   const addNewCardHandler = () => dispatch(changeCardModalStatus('modalCreate', true))
 
@@ -60,7 +75,7 @@ export const CardsPage = () => {
 
   return (
     <div className={s.container}>
-      <BackLink />
+      <BackLink callback={clearCardStateHandler} />
 
       <TitleBlock
         title={titlePack}
@@ -71,17 +86,21 @@ export const CardsPage = () => {
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
       />
 
-      <SearchBlock />
+      {packIsEmpty || <SearchBlock />}
 
       {totalCardsCount !== 0 && <CardTableContainer />}
 
-      {!isLoading && packIsEmpty && (
-        <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />
+      {packIsEmpty && <PackIsEmpty callback={addNewCardHandler} isMyPack={isMyPack} />}
+
+      {notFound && (
+        <NotFoundResult
+          isLoading={isLoading}
+          buttonName={'clear filter'}
+          buttonCallback={clearCardFilterHandler}
+        />
       )}
 
-      {!isLoading && notFound && <NotFoundCards />}
-
-      <CardsPaginator />
+      {!packIsEmpty && !notFound && <CardsPaginator />}
 
       {/*//модалки*/}
       <DeletePack />

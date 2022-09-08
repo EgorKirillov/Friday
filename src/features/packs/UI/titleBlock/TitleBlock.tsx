@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import ovalIcon from '../../../../assets/img/Group 1400.svg'
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
@@ -7,7 +9,9 @@ import learnIcon from '../../../../assets/svg/teacher.svg'
 import { BasicMenu } from '../../../../common/components/basicMenu/BasicMenu'
 import { ButtonBasicMenu } from '../../../../common/components/basicMenu/buttonProfile/ButtonBasicMenu'
 import { ButtonWithLoader } from '../../../../common/components/buttonWithLoader/ButtonWithLoader'
+import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
+import { loadCards } from '../../../cards/cardReducer'
 import { changePackModalStatus, setIdPack, setNamePack, setPackData } from '../../packReducer'
 
 import s from './TitleBlock.module.css'
@@ -36,9 +40,11 @@ export const TitleBlock = ({
   const isLoading = loading === 'loading'
 
   const idPack = useAppSelector(state => state.cards.queryParams.cardsPack_id)
+  const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
   const namePack = useAppSelector(state => state.cards.packName)
 
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const onClickOpenModalWindowDeletePackHandler = () => {
     dispatch(changePackModalStatus('modalDelete', true))
@@ -52,7 +58,12 @@ export const TitleBlock = ({
       dispatch(setPackData(packId, title))
     }
   }
-  const onClickHandlerLearn = () => {}
+  const onClickHandlerLearn = () => {
+    if (isMyPack) {
+      dispatch(loadCards({ cardsPack_id: idPack, pageCount: totalCardsCount }))
+      navigate(PATH.LEARN)
+    }
+  }
 
   const buttonEdit = <ButtonBasicMenu icon={editIcon} name="Edit" callBack={onClickHandlerEdit} />
   const buttonDelete = (

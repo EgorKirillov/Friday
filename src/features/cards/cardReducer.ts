@@ -55,8 +55,8 @@ export const cardsReducer = (
       }
     case 'card/SET-QUERY-PARAMS-CARDS':
       return { ...state, queryParams: { ...action.payload } }
-    case 'pack/CLEAR-STATE':
-      return {} as InitialStateCardsType
+    case 'card/CLEAR-STATE':
+      return initialState
     case 'card/CHANGE-MODAL-STATUS':
       return { ...state, [action.modalName]: action.value }
     case 'pack/SET-ID-CARD':
@@ -80,7 +80,7 @@ export const setCards = (data: GetCardsResponseType) =>
   ({ type: 'card/SET-CARDS', payload: data } as const)
 export const setQueryParamsCards = (data: QueryParameterCardsType) =>
   ({ type: 'card/SET-QUERY-PARAMS-CARDS', payload: data } as const)
-export const clearCardsState = () => ({ type: 'pack/CLEAR-STATE' } as const)
+export const clearCardsState = () => ({ type: 'card/CLEAR-STATE' } as const)
 export const updateCardGrade = (cardID: string, grade: number, shots: number) =>
   ({ type: 'card/UPDATE-CARD-GRADE', cardID, grade, shots } as const)
 export const changeCardModalStatus = (
