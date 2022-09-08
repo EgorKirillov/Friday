@@ -1,26 +1,39 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import deleteIcon from '../../../../../assets/svg/Delete.svg'
+import { useNavigate } from 'react-router-dom'
+
 import { ModalWindow } from '../../../../../common/components/modalWindow/ModalWindow'
+import { PATH } from '../../../../../common/components/routing/SwitchRoutes'
+import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
+import { changePackModalStatus, deletePack, setIdPack, setNamePack } from '../../../packReducer'
 
 import { ContentDeletePack } from './ContentDeletePack'
 
-type PropsType = {
-  callBack: () => void
-  name: string
-}
+export const DeletePack = () => {
+  const open = useAppSelector(state => state.pack.modalDelete)
+  const idPack = useAppSelector(state => state.pack.tempIdCard)
+  const namePack = useAppSelector(state => state.pack.packName)
 
-export const DeletePack = (props: PropsType) => {
-  const [open, setOpen] = useState(false)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const openModal = () => setOpen(true)
-  const closeModal = () => setOpen(false)
+  const closeModal = () => {
+    dispatch(changePackModalStatus('modalDelete', false))
+    dispatch(setIdPack(''))
+    dispatch(setNamePack(''))
+  }
+
+  const deletePackHandler = () => {
+    if (idPack) {
+      dispatch(deletePack(idPack, () => navigate(PATH.PACKS)))
+    }
+    dispatch(setIdPack(''))
+  }
 
   return (
     <div>
-      <img src={deleteIcon} alt="" style={{ margin: '0 5px', width: 'auto' }} onClick={openModal} />
-      <ModalWindow title={'Delete Pack'} open={open} onClose={closeModal}>
-        <ContentDeletePack close={closeModal} callBack={props.callBack} name={props.name} />
+      <ModalWindow title={'Delete Pack'} open={!!open} onClose={closeModal}>
+        <ContentDeletePack close={closeModal} callBack={deletePackHandler} name={namePack} />
       </ModalWindow>
     </div>
   )
