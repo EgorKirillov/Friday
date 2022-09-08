@@ -72,9 +72,6 @@ export const CardTableContainer = () => {
               minWidth: '30%',
               maxWidth: '350px',
               // border: '1px solid red',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
               boxSizing: 'border-box',
             }}
           >
@@ -84,8 +81,9 @@ export const CardTableContainer = () => {
           <TableCell
             align="left"
             style={{
-              width: '10%',
-              // border: '1px solid green',
+              minWidth: '30%',
+              maxWidth: '550px',
+              // border: '1px solid red',
               boxSizing: 'border-box',
             }}
           >
@@ -94,7 +92,7 @@ export const CardTableContainer = () => {
           <TableCell
             align="left"
             style={{
-              width: '30%',
+              width: '20%',
               // border: '1px solid blue',
               boxSizing: 'border-box',
             }}
@@ -104,8 +102,7 @@ export const CardTableContainer = () => {
           <TableCell
             align="left"
             style={{
-              width: '350px',
-              maxWidth: '350px',
+              width: '20%',
               // border: '1px solid black',
               boxSizing: 'border-box',
             }}
