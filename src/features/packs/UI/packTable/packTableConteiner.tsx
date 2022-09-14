@@ -5,6 +5,7 @@ import TableRow from '@mui/material/TableRow'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import noCover from '../../../../assets/img/no_cover.jpg'
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import teacherIcon from '../../../../assets/svg/teacher.svg'
@@ -31,6 +32,7 @@ export const PackTableContainer = () => {
   const navigate = useNavigate()
 
   const columnName = [
+    { key: 'cover' as ColumnSortPacksName, label: 'Cover', isSortable: false },
     { key: 'name' as ColumnSortPacksName, label: 'Name', isSortable: true },
     { key: 'cardsCount' as ColumnSortPacksName, label: 'Cards', isSortable: true },
     { key: 'updated' as ColumnSortPacksName, label: 'Last Update', isSortable: true },
@@ -74,8 +76,36 @@ export const PackTableContainer = () => {
       ' ' +
       new Date(el.updated).toLocaleTimeString()
 
+    const errorHandler = () => {
+      alert(`${el.name} Кривая картинка`)
+    }
+
     return (
       <TableRow key={el._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+        <TableCell
+          component="td"
+          scope="row"
+          onClick={() => onClickPack(el._id)}
+          style={{
+            minWidth: '30%',
+            maxWidth: '350px',
+            height: '80px',
+            // border: '1px solid red',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            boxSizing: 'border-box',
+          }}
+        >
+          {el.deckCover === '' ||
+          el.deckCover === null ||
+          el.deckCover === undefined ||
+          el.deckCover.substring(0, 11) !== 'data:image/' ? (
+            <img src={noCover} alt="" style={{ width: '100px' }} />
+          ) : (
+            <img src={el.deckCover} alt="" style={{ width: '100px' }} onError={errorHandler} />
+          )}
+        </TableCell>
         <TableCell
           component="td"
           scope="row"

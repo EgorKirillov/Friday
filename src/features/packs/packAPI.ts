@@ -63,7 +63,7 @@ export type QueryParameterPackType = {
   user_id?: string
 }
 
-export type ColumnSortPacksName = 'name' | 'cardsCount' | 'user_name' | 'updated'
+export type ColumnSortPacksName = 'name' | 'cardsCount' | 'user_name' | 'updated' | 'cover'
 
 export type SortPacksType = `0${ColumnSortPacksName}` | `1${ColumnSortPacksName}`
 
