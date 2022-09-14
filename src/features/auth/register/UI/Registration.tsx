@@ -1,8 +1,10 @@
+import React, { useEffect, useState } from 'react'
+
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
+
 import { PATH } from '../../../../common/components/routing/SwitchRoutes'
 import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hooks'
 import { registerTC, setIsRegister, setRegisterError } from '../registerReducer'
