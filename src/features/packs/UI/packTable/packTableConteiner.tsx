@@ -5,7 +5,7 @@ import TableRow from '@mui/material/TableRow'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import noCover from '../../../../assets/img/no_cover.jpg'
+import noCover from '../../../../assets/img/no_cover2.jpg'
 import deleteIcon from '../../../../assets/svg/Delete.svg'
 import editIcon from '../../../../assets/svg/Edit.svg'
 import teacherIcon from '../../../../assets/svg/teacher.svg'
