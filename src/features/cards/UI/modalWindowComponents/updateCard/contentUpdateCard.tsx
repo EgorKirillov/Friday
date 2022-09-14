@@ -46,7 +46,7 @@ export const ContentUpdateCard = (props: PropsType) => {
           <FormControl variant="standard" style={{ width: '98%' }}>
             <TextField
               label={'Question'}
-              variant="filled"
+              variant="standard"
               focused
               value={changeQuestion}
               onChange={handleChangeQuestion}
