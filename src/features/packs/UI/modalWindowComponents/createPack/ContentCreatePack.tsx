@@ -7,14 +7,16 @@ import TextField from '@mui/material/TextField/TextField'
 
 import { ButtonWithLoader } from '../../../../../common/components/buttonWithLoader/ButtonWithLoader'
 import style from '../../../../../common/components/modalWindow/style/StylePacks.module.css'
+import { InputTypeFile } from '../../../../../common/utils/inputTypeFile'
 
 type PropsType = {
   onClose: () => void
-  callBack: (namePack: string, privatePack: boolean) => void
+  callBack: (namePack: string, privatePack: boolean, cover: string) => void
 }
 export const ContentCreatePack = (props: PropsType) => {
   const [namePack, setNamePack] = useState('')
   const [privatePack, setPrivatePack] = useState(false)
+  const [cover, setCover] = useState('')
 
   const handleChangeNamePack = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNamePack(event.target.value)
@@ -23,9 +25,11 @@ export const ContentCreatePack = (props: PropsType) => {
   const handleChangePrivatePack = (event: ChangeEvent<HTMLInputElement>) => {
     setPrivatePack(event.currentTarget.checked)
   }
-
+  const setCoverBase64 = (cover: string) => {
+    setCover(cover)
+  }
   const onClickHandlerSave = () => {
-    props.callBack(namePack, privatePack)
+    props.callBack(namePack, privatePack, cover)
   }
 
   return (
@@ -47,6 +51,9 @@ export const ContentCreatePack = (props: PropsType) => {
               value={namePack}
               onChange={handleChangeNamePack}
             />
+            <div>
+              <InputTypeFile name="download cover" callback={setCoverBase64} /> Download cover
+            </div>
             <div>
               <Checkbox value={privatePack} onChange={handleChangePrivatePack} />
               Private pack

@@ -13,8 +13,8 @@ export const CreatePack = () => {
 
   const closeModal = () => dispatch(changePackModalStatus('modalCreate', false))
 
-  const createCardHandler = (namePack: string, privatePack: boolean) => {
-    const newPack = { name: namePack, deckCover: '', private: privatePack }
+  const createCardHandler = (namePack: string, privatePack: boolean, cover: string) => {
+    const newPack = { name: namePack, deckCover: cover, private: privatePack }
 
     dispatch(createPack(newPack))
   }
