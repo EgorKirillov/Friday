@@ -89,7 +89,7 @@ export const PackTableContainer = () => {
           style={{
             minWidth: '30%',
             maxWidth: '350px',
-            height: '80px',
+            maxHeight: '80px',
             // border: '1px solid red',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
@@ -149,6 +149,9 @@ export const PackTableContainer = () => {
             maxWidth: '350px',
             // border: '1px solid black',
             boxSizing: 'border-box',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
           }}
         >
           {el.user_name}
