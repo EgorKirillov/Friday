@@ -73,6 +73,9 @@ export const CardTableContainer = () => {
               maxWidth: '350px',
               // border: '1px solid red',
               boxSizing: 'border-box',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
           >
             {el.question}
@@ -82,9 +85,12 @@ export const CardTableContainer = () => {
             align="left"
             style={{
               minWidth: '30%',
-              maxWidth: '550px',
+              maxWidth: '350px',
               // border: '1px solid red',
               boxSizing: 'border-box',
+              // whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
           >
             {el.answer}
