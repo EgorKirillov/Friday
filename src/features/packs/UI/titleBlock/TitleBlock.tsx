@@ -22,6 +22,7 @@ type PropsType = {
   buttonName?: string
   buttonCallback?: () => void
   packId?: string
+  deckCover?: string
   isMyPack?: boolean
   buttonVisability?: 'hidden' | 'visible'
   callbackTitle?: () => void
@@ -33,6 +34,7 @@ export const TitleBlock = ({
   buttonCallback,
   isMyPack,
   packId,
+  deckCover,
   buttonVisability = 'visible',
   callbackTitle,
 }: PropsType) => {
@@ -55,7 +57,7 @@ export const TitleBlock = ({
   const onClickHandlerEdit = () => {
     dispatch(changePackModalStatus('modalEdit', true))
     if (packId) {
-      dispatch(setPackData(packId, title))
+      dispatch(setPackData(packId, title, deckCover ? deckCover : ''))
     }
   }
   const onClickHandlerLearn = () => {

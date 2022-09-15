@@ -9,17 +9,19 @@ export const UpdatePack = () => {
   const open = useAppSelector(state => state.pack.modalEdit)
   const idPack = useAppSelector(state => state.pack.idEditPack)
   const oldName = useAppSelector(state => state.pack.oldName)
+  const oldCover = useAppSelector(state => state.pack.oldCover)
 
   const closeModal = () => dispatch(changePackModalStatus('modalEdit', false))
 
   const dispatch = useAppDispatch()
 
-  const saveNewName = (newName: string, checked: boolean) => {
+  const saveNewName = (newName: string, checked: boolean, deckCover: string) => {
     if (idPack) {
       const updatedPack = {
         _id: idPack,
         private: checked,
         name: newName,
+        deckCover: deckCover,
       }
 
       dispatch(updatePack(updatedPack))
@@ -33,6 +35,7 @@ export const UpdatePack = () => {
           name={oldName ? oldName : ''}
           handleClose={closeModal}
           saveNewName={saveNewName}
+          oldCover={oldCover ? oldCover : ''}
         />
       </ModalWindow>
     </div>

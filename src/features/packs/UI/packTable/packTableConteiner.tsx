@@ -57,7 +57,7 @@ export const PackTableContainer = () => {
       dispatch(setNamePack(el.name))
     }
     const onClickEdit = () => {
-      dispatch(setPackData(el._id, el.name))
+      dispatch(setPackData(el._id, el.name, el.deckCover ? el.deckCover : ''))
       dispatch(changePackModalStatus('modalEdit', true))
     }
     const onClickTeacher = () => {
