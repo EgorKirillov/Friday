@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { setError } from '../../../../app/appStatusReducer'
 import noAvatar from '../../../../assets/img/profile_Icon.svg'
@@ -12,6 +13,7 @@ import { BackLink } from '../../../cards/UI/backLink/BackLink'
 import { setIsLoggedOutTC } from '../../login/loginReducer'
 import { updateProfile } from '../profileReducer'
 
+import { AddAvatar } from './AddAvatar/addAvatar'
 import s from './Profile.module.css'
 
 export function Profile() {
@@ -25,6 +27,7 @@ export function Profile() {
   const dispatch = useAppDispatch()
 
   const onImageError = () => {
+    toast('ошибка загрузки аватара')
     dispatch(setError('ошибка загрузки аватара'))
   }
 
@@ -56,13 +59,7 @@ export function Profile() {
               alt="avatar"
               onError={onImageError}
             />
-            {/*доделать добавление*/}
-            {/*<FontAwesomeIcon*/}
-            {/*  className={s.eye}*/}
-            {/*  onClick={addPhoto}*/}
-            {/*  icon={faCamera}*/}
-            {/*  title={'change avatar'}*/}
-            {/*/>*/}
+            <AddAvatar />
           </div>
 
           <div>
