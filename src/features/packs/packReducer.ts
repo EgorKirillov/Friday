@@ -28,6 +28,7 @@ const initialState: InitialStatePackType = {
   idEditPack: '',
   oldName: '',
   oldCover: '',
+  editPrivate: false,
 }
 
 export const packsReducer = (
@@ -52,6 +53,7 @@ export const packsReducer = (
         idEditPack: action.idEditPack,
         oldName: action.oldName,
         oldCover: action.oldCover,
+        editPrivate: action.editPrivate,
       }
     default:
       return state
@@ -69,8 +71,12 @@ export const changePackModalStatus = (
   modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
   value: boolean
 ) => ({ type: 'pack/CHANGE-MODAL-STATUS', modalName, value } as const)
-export const setPackData = (idEditPack: string, oldName: string, oldCover: string) =>
-  ({ type: 'pack/SET-PACK-DATA', idEditPack, oldName, oldCover } as const)
+export const setPackData = (
+  idEditPack: string,
+  oldName: string,
+  oldCover: string,
+  editPrivate: boolean
+) => ({ type: 'pack/SET-PACK-DATA', idEditPack, oldName, oldCover, editPrivate } as const)
 
 export const setIdPack = (idPack: string) => ({ type: 'pack/SET-ID-PACK', idPack } as const)
 export const setNamePack = (packName: string) => ({ type: 'pack/SET-PACK-NAME', packName } as const)
@@ -105,7 +111,7 @@ export const updatePack =
       }
       dispatch(setPacks(res.data))
       dispatch(changePackModalStatus('modalEdit', false))
-      dispatch(setPackData('', '', ''))
+      dispatch(setPackData('', '', '', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
       handleError(e, dispatch)
@@ -166,4 +172,5 @@ export type InitialStatePackType = GetPacksResponseType & {
   tempIdCard?: string
   packName?: string
   oldCover?: string
+  editPrivate?: boolean
 }

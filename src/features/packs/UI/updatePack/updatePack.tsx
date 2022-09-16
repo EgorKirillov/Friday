@@ -10,6 +10,7 @@ export const UpdatePack = () => {
   const idPack = useAppSelector(state => state.pack.idEditPack)
   const oldName = useAppSelector(state => state.pack.oldName)
   const oldCover = useAppSelector(state => state.pack.oldCover)
+  const editPrivate = useAppSelector(state => state.pack.editPrivate)
 
   const closeModal = () => dispatch(changePackModalStatus('modalEdit', false))
 
@@ -35,6 +36,7 @@ export const UpdatePack = () => {
           name={oldName ? oldName : ''}
           handleClose={closeModal}
           saveNewName={saveNewName}
+          checked={!!editPrivate}
           oldCover={oldCover ? oldCover : ''}
         />
       </ModalWindow>

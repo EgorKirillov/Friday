@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import noCover from '../../../../../assets/img/no_cover2.jpg'
 import { ButtonWithLoader } from '../../../../../common/components/buttonWithLoader/ButtonWithLoader'
 import { ModalCheckBox } from '../../../../../common/components/modalWindow/modalWindowChackBox/modalWindowCheckBox'
 import { ModalWindowInput } from '../../../../../common/components/modalWindow/modalWindowInput/ModalWindowInput'
@@ -10,13 +11,14 @@ import { InputTypeFile } from '../../../../../common/utils/inputTypeFile'
 type PropsType = {
   oldCover: string
   name: string
+  checked: boolean
   handleClose: () => void
   saveNewName: (name: string, checked: boolean, deckCover: string) => void
 }
 export const ContentEditPack = (props: PropsType) => {
   const status = useAppSelector(state => state.app.status)
   const [name, setName] = useState(props.name)
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(props.checked)
   const [cover, setCover] = useState(props.oldCover)
 
   const onChangeName = (newName: string) => {
@@ -34,8 +36,18 @@ export const ContentEditPack = (props: PropsType) => {
 
   return (
     <div>
+      {/*<p className={style.cover}>*/}
+      {/*  <img src={cover} alt="cover" height={'150px'} />*/}
+      {/*</p>   */}
       <p className={style.cover}>
-        <img src={cover} alt="cover" height={'150px'} />
+        {cover === '' ||
+        cover === null ||
+        cover === undefined ||
+        cover.substring(0, 11) !== 'data:image/' ? (
+          <img src={noCover} alt="" style={{ height: '150px' }} />
+        ) : (
+          <img src={cover} alt="" style={{ height: '150px' }} />
+        )}
       </p>
       <ModalWindowInput name={name} setName={onChangeName} />
       <div>

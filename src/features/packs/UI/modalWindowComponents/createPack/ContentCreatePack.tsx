@@ -5,6 +5,7 @@ import Box from '@mui/material/Box/Box'
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField/TextField'
 
+import noCover from '../../../../../assets/img/no_cover2.jpg'
 import { ButtonWithLoader } from '../../../../../common/components/buttonWithLoader/ButtonWithLoader'
 import style from '../../../../../common/components/modalWindow/style/StylePacks.module.css'
 import { InputTypeFile } from '../../../../../common/utils/inputTypeFile'
@@ -43,6 +44,13 @@ export const ContentCreatePack = (props: PropsType) => {
           noValidate
           autoComplete="off"
         >
+          <p className={style.cover}>
+            {cover === '' || cover.substring(0, 11) !== 'data:image/' ? (
+              <img src={noCover} alt="" style={{ height: '150px' }} />
+            ) : (
+              <img src={cover} alt="" style={{ height: '150px' }} />
+            )}
+          </p>
           <FormControl variant="standard" style={{ width: '98%' }}>
             <TextField
               label={'Name Pack'}

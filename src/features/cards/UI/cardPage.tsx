@@ -35,6 +35,7 @@ export const CardsPage = () => {
   const packUserId = useAppSelector(state => state.cards.packUserId)
   const packId = useAppSelector(state => state.pack.cardPacks)[0]._id
   const deckCover = useAppSelector(state => state.pack.cardPacks)[0].deckCover
+  const editPrivate = useAppSelector(state => state.pack.cardPacks)[0].private
 
   const isMyPack: boolean = userId === packUserId
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
@@ -83,6 +84,7 @@ export const CardsPage = () => {
         isMyPack={isMyPack}
         packId={packId}
         deckCover={deckCover ? deckCover : ''}
+        editPrivate={!!editPrivate}
         buttonVisability={totalCardsCount === 0 ? 'hidden' : 'visible'}
         buttonName={isMyPack ? 'Add new card' : 'learn pack'}
         buttonCallback={isMyPack ? addNewCardHandler : learnPackHandler}
