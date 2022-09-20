@@ -5,7 +5,6 @@ import { IconButton } from '@mui/material'
 import { toast } from 'react-toastify'
 
 type InputTypeFileType = {
-  name: string
   callback: (file64: string) => void
 }
 export const InputTypeFile = (props: InputTypeFileType) => {
@@ -13,7 +12,7 @@ export const InputTypeFile = (props: InputTypeFileType) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
-      if (file.size < 4000000) {
+      if (file.size < 400000) {
         const reader = new FileReader()
 
         reader.onloadend = () => {
