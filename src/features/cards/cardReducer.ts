@@ -33,6 +33,8 @@ const initialState: InitialStateCardsType = {
   oldQuestion: '',
   oldAnswer: '',
   idEditCard: '',
+  imgQuestion: '',
+  imgAnswer: '',
 }
 
 export const cardsReducer = (
@@ -70,6 +72,13 @@ export const cardsReducer = (
         oldQuestion: action.oldQuestion,
         oldAnswer: action.oldAnswer,
       }
+    case 'card/SET-CARD-IMG':
+      return {
+        ...state,
+        idEditCard: action.idEditCard,
+        imgQuestion: action.imgQuestion,
+        imgAnswer: action.imgAnswer,
+      }
     default:
       return state
   }
@@ -78,20 +87,30 @@ export const cardsReducer = (
 // actions
 export const setCards = (data: GetCardsResponseType) =>
   ({ type: 'card/SET-CARDS', payload: data } as const)
+
 export const setQueryParamsCards = (data: QueryParameterCardsType) =>
   ({ type: 'card/SET-QUERY-PARAMS-CARDS', payload: data } as const)
+
 export const clearCardsState = () => ({ type: 'card/CLEAR-STATE' } as const)
+
 export const updateCardGrade = (cardID: string, grade: number, shots: number) =>
   ({ type: 'card/UPDATE-CARD-GRADE', cardID, grade, shots } as const)
+
 export const changeCardModalStatus = (
   modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
   value: boolean
 ) => ({ type: 'card/CHANGE-MODAL-STATUS', modalName, value } as const)
+
 export const setCardData = (idEditCard: string, oldQuestion: string, oldAnswer: string) =>
   ({ type: 'card/SET-CARD-DATA', idEditCard, oldQuestion, oldAnswer } as const)
+
 export const setIdCard = (cardID: string) => ({ type: 'pack/SET-ID-CARD', cardID } as const)
+
 export const setQuestionCard = (cardName: string) =>
   ({ type: 'pack/SET-CARD-NAME', cardName } as const)
+
+export const setCardImg = (idEditCard: string, imgQuestion: string, imgAnswer: string) =>
+  ({ type: 'card/SET-CARD-IMG', idEditCard, imgQuestion, imgAnswer } as const)
 
 // thunks
 export const loadCards =
@@ -154,6 +173,7 @@ export const createCard =
       const res = await cardsAPI.getCards(param)
 
       dispatch(setCards(res.data))
+      dispatch(setCardImg('', '', ''))
       dispatch(changeCardModalStatus('modalCreate', false))
       dispatch(setStatusLoading('succeeded'))
     } catch (e) {
@@ -171,6 +191,7 @@ export type CardsActionsType =
   | ReturnType<typeof setCardData>
   | ReturnType<typeof setIdCard>
   | ReturnType<typeof setQuestionCard>
+  | ReturnType<typeof setCardImg>
 
 export type InitialStateCardsType = GetCardsResponseType & {
   queryParams: QueryParameterCardsType
@@ -182,4 +203,6 @@ export type InitialStateCardsType = GetCardsResponseType & {
   oldQuestion: string
   oldAnswer: string
   idEditCard: string
+  imgQuestion: string
+  imgAnswer: string
 }
