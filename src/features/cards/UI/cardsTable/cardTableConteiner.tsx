@@ -78,7 +78,11 @@ export const CardTableContainer = () => {
               textOverflow: 'ellipsis',
             }}
           >
-            {el.question}
+            {el.questionImg ? (
+              <img src={el.questionImg} alt="questionImg" style={{ height: '150px' }} />
+            ) : (
+              el.question
+            )}
           </TableCell>
 
           <TableCell
@@ -93,7 +97,11 @@ export const CardTableContainer = () => {
               textOverflow: 'ellipsis',
             }}
           >
-            {el.answer}
+            {el.answerImg ? (
+              <img src={el.answerImg} alt="answerImg" style={{ height: '150px' }} />
+            ) : (
+              el.answer
+            )}
           </TableCell>
           <TableCell
             align="left"
