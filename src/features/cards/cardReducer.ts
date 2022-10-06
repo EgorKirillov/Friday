@@ -109,7 +109,7 @@ export const setIdCard = (cardID: string) => ({ type: 'pack/SET-ID-CARD', cardID
 export const setQuestionCard = (cardName: string) =>
   ({ type: 'pack/SET-CARD-NAME', cardName } as const)
 
-export const setCardImg = (idEditCard: string, imgQuestion: string, imgAnswer: string) =>
+export const setCardImg = (idEditCard: string, imgQuestion: string, imgAnswer?: string) =>
   ({ type: 'card/SET-CARD-IMG', idEditCard, imgQuestion, imgAnswer } as const)
 
 // thunks
@@ -204,5 +204,5 @@ export type InitialStateCardsType = GetCardsResponseType & {
   oldAnswer: string
   idEditCard: string
   imgQuestion: string
-  imgAnswer: string
+  imgAnswer: string | undefined
 }
