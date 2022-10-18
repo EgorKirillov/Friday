@@ -1,0 +1,16 @@
+.coverBox{
+    overflow-y: scroll;
+
+    max-height: 400px;
+}
+
+.dataBox{
+    display: flex;
+    justify-content: space-between;
+
+    line-height: 40px;
+}
+
+.coverBox img{
+    width: 100%;
+}

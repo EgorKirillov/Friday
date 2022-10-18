@@ -13,6 +13,7 @@ import {
   setIdCard,
   setQueryParamsCards,
   setCardData,
+  setCardImg,
 } from '../../cardReducer'
 import { ColumnSortCardsName, SortCardsType } from '../../cardsAPI'
 
@@ -43,9 +44,10 @@ export const CardTableContainer = () => {
     dispatch(setQueryParamsCards({ ...cardQueryParam, sortCards: value }))
   }
 
-  const onClickDelete = (idCard: string, questionCard: string) => {
+  const onClickDelete = (idCard: string, questionCard: string, questionImg: string) => {
     dispatch(setIdCard(idCard))
     dispatch(setQuestionCard(questionCard))
+    dispatch(setCardImg(idCard, questionImg))
     dispatch(changeCardModalStatus('modalDelete', true))
   }
 
@@ -78,7 +80,11 @@ export const CardTableContainer = () => {
               textOverflow: 'ellipsis',
             }}
           >
-            {el.question}
+            {el.questionImg ? (
+              <img src={el.questionImg} alt="questionImg" style={{ maxWidth: '150px' }} />
+            ) : (
+              el.question
+            )}
           </TableCell>
 
           <TableCell
@@ -93,7 +99,11 @@ export const CardTableContainer = () => {
               textOverflow: 'ellipsis',
             }}
           >
-            {el.answer}
+            {el.answerImg ? (
+              <img src={el.answerImg} alt="answerImg" style={{ maxWidth: '150px' }} />
+            ) : (
+              el.answer
+            )}
           </TableCell>
           <TableCell
             align="left"
@@ -133,13 +143,18 @@ export const CardTableContainer = () => {
                     src={deleteIcon}
                     alt=""
                     style={{ margin: '0 5px', width: 'auto' }}
-                    onClick={() => onClickDelete(el._id, el.question)}
+                    onClick={() => onClickDelete(el._id, el.question, el.questionImg)}
                   />
                 </>
               )}
               {itMyPack && (
                 <>
-                  <img src={editIcon} width={'auto'} alt="" onClick={onClickEdit} />
+                  <img
+                    src={editIcon}
+                    style={{ margin: '0 5px', width: 'auto' }}
+                    alt=""
+                    onClick={onClickEdit}
+                  />
                 </>
               )}
             </div>

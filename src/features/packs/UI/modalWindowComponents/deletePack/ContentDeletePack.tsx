@@ -8,6 +8,7 @@ type PropsType = {
   close: () => void
   callBack?: () => void
   name?: string
+  imgPack?: string
 }
 
 export const ContentDeletePack = (props: PropsType) => {
@@ -20,6 +21,11 @@ export const ContentDeletePack = (props: PropsType) => {
         <p>
           Do you really want to remove <b>{props.name}</b>?
         </p>
+        {props.imgPack ? (
+          <div style={{ textAlign: 'center' }}>
+            <img src={props.imgPack} alt="imgPack" style={{ height: '150px' }} />
+          </div>
+        ) : null}
         <p>All cards will be deleted.</p>
       </div>
       <div className={style.buttonsBlock}>

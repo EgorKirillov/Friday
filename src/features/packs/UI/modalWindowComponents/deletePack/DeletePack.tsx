@@ -13,6 +13,7 @@ export const DeletePack = () => {
   const open = useAppSelector(state => state.pack.modalDelete)
   const idPack = useAppSelector(state => state.pack.tempIdCard)
   const namePack = useAppSelector(state => state.pack.packName)
+  const oldCover = useAppSelector(state => state.pack.oldCover)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -33,7 +34,12 @@ export const DeletePack = () => {
   return (
     <div>
       <ModalWindow title={'Delete Pack'} open={!!open} onClose={closeModal}>
-        <ContentDeletePack close={closeModal} callBack={deletePackHandler} name={namePack} />
+        <ContentDeletePack
+          close={closeModal}
+          callBack={deletePackHandler}
+          name={namePack}
+          imgPack={oldCover}
+        />
       </ModalWindow>
     </div>
   )

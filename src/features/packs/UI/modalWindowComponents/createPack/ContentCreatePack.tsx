@@ -52,7 +52,7 @@ export const ContentCreatePack = (props: PropsType) => {
               onChange={handleChangeNamePack}
             />
             <div>
-              <InputTypeFile name="download cover" callback={setCoverBase64} /> Download cover
+              <InputTypeFile callback={setCoverBase64} /> Download cover
             </div>
             <div>
               <Checkbox value={privatePack} onChange={handleChangePrivatePack} />

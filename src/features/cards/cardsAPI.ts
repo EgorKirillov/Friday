@@ -40,8 +40,10 @@ export type CardType = {
   __v: number
 }
 
-export type NewCardType = {
+export type NewCardType = NewCardDataType & {
   cardsPack_id: string
+}
+export type NewCardDataType = {
   question?: string
   answer?: string
   grade?: number

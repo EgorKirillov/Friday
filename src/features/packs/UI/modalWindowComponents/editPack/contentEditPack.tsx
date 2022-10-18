@@ -39,7 +39,7 @@ export const ContentEditPack = (props: PropsType) => {
       </p>
       <ModalWindowInput name={name} setName={onChangeName} />
       <div>
-        <InputTypeFile name="download cover" callback={saveNewCover} /> Download cover
+        <InputTypeFile callback={saveNewCover} /> Download cover
       </div>
       <div className={style.checkBox}>
         <ModalCheckBox checked={checked} setChecked={setChecked} />
