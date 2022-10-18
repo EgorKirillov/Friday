@@ -14,6 +14,9 @@ export const handleError = (error: any, dispatch: Dispatch<AppActionType>) => {
   } else {
     errorMessage = `Native error ${err.message}`
   }
+  if (errorMessage === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
+    errorMessage = 'you are not authorized, please login'
+  }
   dispatch(setError(errorMessage))
   dispatch(setStatusLoading('failed'))
   toast.error(errorMessage)
