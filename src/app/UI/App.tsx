@@ -9,6 +9,7 @@ import { Preloader } from '../../common/components/loaderCircle/Preloader'
 import { SwitchRoutes } from '../../common/components/routing/SwitchRoutes'
 import { ToastMessage } from '../../common/components/toast/ToastMessage'
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks'
+import { DEV_VERSION } from '../../config'
 import { initializeApp } from '../appStatusReducer'
 
 const App = () => {
@@ -29,7 +30,7 @@ const App = () => {
   return (
     <div className="App">
       <ToastMessage />
-      <DevHeader />
+      {DEV_VERSION && <DevHeader />}
       <Header />
       <LinearProgress color="inherit" sx={{ visibility: isLoading ? 'visible' : 'hidden' }} />
       <SwitchRoutes />
