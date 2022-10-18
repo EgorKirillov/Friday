@@ -69,6 +69,7 @@ export const changePackModalStatus = (
   modalName: 'modalEdit' | 'modalCreate' | 'modalDelete',
   value: boolean
 ) => ({ type: 'pack/CHANGE-MODAL-STATUS', modalName, value } as const)
+
 export const setPackData = (idEditPack: string, oldName: string, oldCover: string) =>
   ({ type: 'pack/SET-PACK-DATA', idEditPack, oldName, oldCover } as const)
 

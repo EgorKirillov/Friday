@@ -39,6 +39,7 @@ export const CardsPage = () => {
   const isMyPack: boolean = userId === packUserId
   const totalCardsCount = useAppSelector(state => state.cards.cardsTotalCount)
   const cardName = useAppSelector(state => state.cards.cardName)
+  const imgCard = useAppSelector(state => state.cards.imgQuestion)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -106,7 +107,7 @@ export const CardsPage = () => {
 
       {/*//модалки*/}
       <DeletePack />
-      <DeleteCard cardName={cardName} />
+      <DeleteCard cardName={cardName} imgCard={imgCard} />
       <CreateCard key={queryParams.cardsPack_id} idPack={queryParams.cardsPack_id} />
       <UpdateCard />
       <UpdatePack />

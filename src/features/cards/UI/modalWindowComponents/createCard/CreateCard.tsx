@@ -3,6 +3,7 @@ import React from 'react'
 import { ModalWindow } from '../../../../../common/components/modalWindow/ModalWindow'
 import { useAppDispatch, useAppSelector } from '../../../../../common/hooks/hooks'
 import { changeCardModalStatus, createCard } from '../../../cardReducer'
+import { NewCardDataType, NewCardType } from '../../../cardsAPI'
 
 import { ContentCreateCard } from './ContentCreateCard'
 
@@ -17,8 +18,11 @@ export const CreateCard = (props: PropsType) => {
 
   const closeModal = () => dispatch(changeCardModalStatus('modalCreate', false))
 
-  const createCardHandler = (valueQuestion: string, valueAnswer: string) => {
-    const newCard = { cardsPack_id: props.idPack, answer: valueAnswer, question: valueQuestion }
+  const createCardHandler = (payload: NewCardDataType) => {
+    const newCard: NewCardType = {
+      cardsPack_id: props.idPack,
+      ...payload,
+    }
 
     dispatch(createCard(newCard))
   }
